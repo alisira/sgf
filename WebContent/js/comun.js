@@ -13,6 +13,7 @@ function ObjetoBusqueda (urlListaActua, funcionActua, indiceReq, parametros) {
 	this.parametros=parametros;
 };
 
+
 $(document).ready(function(){
     $("#textoBuscado").keypress(function(evento){
     	if (evento.which == 0 || evento.which == 13 ){
