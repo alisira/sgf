@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="unidad_administradora" >
+  
+	<resultMap id="BaseResultMap" class="sigefirrhh.persistencia.modelo.UnidadAdministradora" >
+		<result column="id_unidad_administradora" property="idUnidadAdministradora" jdbcType="INTEGER" />
+		<result column="ano" property="ano" jdbcType="INTEGER" />
+		<result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />
+		<result column="cod_unidad_administradora" property="codUnidadAdministradora" jdbcType="VARCHAR" />
+		<result column="denominacion" property="denominacion" jdbcType="VARCHAR" />
+		<result column="cod_pagadora" property="codPagadora" jdbcType="VARCHAR" />
+		<result column="vigente" property="vigente" jdbcType="VARCHAR" />
+	</resultMap>
+ 	
+  
+   <select id="buscarUnidadAdministradora" resultMap="BaseResultMap" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
+    
+    select id_unidad_administradora, ano, id_organismo, cod_unidad_administ as cod_unidad_administradora, nombre as denominacion,
+      '' as cod_pagadora, '' as vigente
+    from unidadadministradora
+    where 1=1
+    <isParameterPresent >
+		
+		<isNotNull property="codUnidadAdministradora" prepend=" and cod_unidad_administ IN ">
+			<iterate property="codUnidadAdministradora" open="(" close=")"	conjunction=",">
+				#codUnidadAdministradora[]#
+			</iterate>
+		</isNotNull>
+		<isNotNull property="vigente" prepend=" and vigente IN ">
+			<iterate property="vigente" open="(" close=")"	conjunction=",">
+				#vigente[]#
+			</iterate>
+		</isNotNull>		
+		<isNotNull property="denominacion" prepend="AND">
+			<iterate property="denominacion" open="(" close=")"	conjunction="or" >
+				(nombre ilike ('%' || trim(#denominacion[]#) || '%'))
+			</iterate>
+		</isNotNull>
+		
+	</isParameterPresent>
+    ORDER BY denominacion    
+  </select>
+  
+</sqlMap>

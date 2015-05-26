@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!--
+     This is a blank Struts configuration file with an example
+     welcome action/page and other commented sample elements.
+
+     Struts Validator is configured using the factory defaults
+     and is ready-to-use.
+
+     NOTE: If you have a generator tool to create the corresponding Java classes
+     for you, you could include the details in the "form-bean" declarations.
+     Otherwise, you would only define the "form-bean" element itself, with the
+     corresponding "name" and "type" attributes, as shown here.
+-->
+
+
+<struts-config>
+
+
+<form-beans>
+        <form-bean name="loginForm" type="sigefirrhh.struts.actionForm.LoginForm"/>
+        <form-bean name="BeneficiarioForm" type="sigefirrhh.struts.actionForm.BeneficiarioForm"/>    
+        <form-bean name="UnidadAdministradoraForm" type="sigefirrhh.struts.actionForm.UnidadAdministradoraForm"/>
+        <form-bean name="GastoProyectadoForm" type="sigefirrhh.struts.actionForm.GastoProyectadoForm"/>
+        <form-bean name="CompromisoInicialForm" type="sigefirrhh.struts.actionForm.CompromisoInicialForm"/>
+        <form-bean name="ParametrosBusquedaForm" type="sigefirrhh.struts.actionForm.ParametrosBusquedaForm"/>
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome" path="/Welcome.do"/>
+        <forward name="error" path="/web/html/error.jsp" />
+        <forward name="exito" path="/web/html/exito.html"/>
+    	<forward name="errorConexion" path="/web/html/error_DB.html" />
+    	<forward name="sesionCerrada" path="/web/html/sesion_cerrada.html" />    	
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/Welcome" forward="/bienvenido.jsp"/>
+        <action path="/login" type="sigefirrhh.struts.action.LoginAction" name="loginForm" scope="request" input="/bienvenido.jsp">
+            <forward name="AprobarLogin" path="/menu_principal.jsp"/>
+            <forward name="RechazarLogin" path="/bienvenido.jsp"/>
+            <forward name="errorConexion" path="/html/error_DB.html"/>
+            
+        </action>
+        <action path="/bienvenido" forward="/bienvenido.jsp"/> 
+        
+        <action path="/compromisoInicial" type="sigefirrhh.struts.action.CompromisoInicialAction" parameter="accion" name="CompromisoInicialForm" scope="request" input="/web/compromiso_inicial/compromiso_inicial.jsp">
+            <forward name="apruebaNuevo" path="/web/compromiso_inicial/compromiso_inicial.jsp" />
+            <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
+        </action>
+        
+        <action path="/mantenimientoUnidadAdministradora" type="sigefirrhh.struts.action.MantenimientoUnidadAdministradora" input="/mantenimiento_unidad_administradora.jsp" parameter="accion" name="UnidadAdministradoraForm"  scope="request" >
+           	<forward name="success" path="/procesos/mantenimiento_unidad_administradora.jsp" />
+        </action>
+        
+        <action path="/gastoProyectado" type="sigefirrhh.struts.action.GastoProyectadoAction" name="GastoProyectadoForm" scope="request" input="/gasto_proyectado.jsp">
+            <forward name="AprobarLogin" path="/gasto_proyectado"/>
+        </action>
+        
+        <action path="/buscarExpediente" type="sigefirrhh.struts.action.BuscarExpedienteAction" name="ParametrosBusquedaForm" scope="request" input="/buscar_expediente.jsp">
+            <forward name="exito" path="/buscar_expediente.jsp"/>
+        </action>
+        
+        <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion"  name="ParametrosBusquedaForm" scope="request" >
+            <forward name="aprobarImprimir" path="/web/pdd/pdd.jsp"/>
+        </action>
+        
+
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="sigefirrhh/ibatis/conexion/db/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+
+</struts-config>
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<transactionManager type="JDBC" commitRequired="false">
+	   <dataSource type="JNDI">
+	     <property name="DataSource" value="java:/comp/env/jdbc/DBPoolSigefirrhh"/>	     
+	   </dataSource>
+	</transactionManager>	
+	
+	<sqlMap resource="xml/GastoProyectado.xml"/>
+	<sqlMap resource="xml/UnidadAdministradora.xml"/>
+	<sqlMap resource="xml/Expediente.xml"/>
+	<sqlMap resource="xml/CompromisoInicialDetalle.xml"/>		
+	<sqlMap resource="xml/CompromisoInicial.xml"/>
+	<sqlMap resource="xml/RolOpcion.xml"/>
+	<sqlMap resource="xml/Opcion.xml"/>
+	
+</sqlMapConfig>
+

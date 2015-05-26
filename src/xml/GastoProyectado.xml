@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gasto_proyectado" >
+	
+	<resultMap id="gasto_proyectado" class="sigefirrhh.persistencia.modelo.GastoProyectado" >
+    	<result column="monto" property="monto" jdbcType="DOUBLE" />
+    	<result column="cod_presupuesto" property="codPartida" jdbcType="VARCHAR" />
+    	<result column="descripcion" property="denoPartida" jdbcType="VARCHAR" />
+    	<result column="id_unidad_ejecutora" property="idUel" jdbcType="INTEGER" />
+    	<result column="cod_unidad_ejecutora" property="codUnidadEjecutora" jdbcType="INTEGER" />
+		<result column="nombre" property="denoUnidadEjecutora" jdbcType="VARCHAR" />
+		<result column="categoria_presupuesto" property="codCatePresu" jdbcType="INTEGER" />
+		<result column="id_fuente_financiamiento" property="ff" jdbcType="DOUBLE" />
+		<result column="id_partida_uel_especifica" property="idPartidaUelEspecifica" jdbcType="INTEGER" />
+		<result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />
+    	<result column="id_cuenta_presupuesto" property="idPartida" jdbcType="INTEGER" />	    
+	</resultMap>  
+	
+	<select id="gasto_proyectado" resultMap="gasto_proyectado" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
+		SELECT  sum( 
+			 CASE WHEN f.cod_frecuencia_pago = 1 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 2 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 3 THEN (cf.monto*#quinceCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 4 THEN (cf.monto*#semaCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 5 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 6 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 7 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 8 THEN (cf.monto*#mesesCalcu[0]#)
+			            WHEN f.cod_frecuencia_pago = 9 THEN (cf.monto*#mesesCalcu[0]#)
+			       END )  as monto, 
+			  ctapre.cod_presupuesto, ctapre.descripcion,  uel.id_unidad_ejecutora, uel.cod_unidad_ejecutora, uel.nombre, 
+			  uelesp.categoria_presupuesto, 
+			  pue.id_fuente_financiamiento,
+			  pue.id_partida_uel_especifica, dep.id_organismo, ctapre.id_cuenta_presupuesto
+		from frecuenciapago f,  frecuenciatipopersonal ftp, unidadadministradora uad, administradorauel au, dependencia dep, categoriapersonal catper, 
+		clasificacionpersonal cper, trabajador t, conceptofijo cf, concepto c, tipopersonal tp, 
+		conceptotipopersonal ctp, conceptocuenta ccta, cuentapresupuesto ctapre, partidauelespecifica pue, 
+		unidadejecutora uel, uelespecifica uelesp, accioncentralizada acc right join accionespecifica ace on  ace.id_accion_centralizada = acc.id_accion_centralizada 
+		left join proyecto pro on ace.id_proyecto = pro.id_proyecto
+			where 
+			uelesp.id_accion_especifica = ace.id_accion_especifica
+			and uel.id_unidad_ejecutora = uelesp.id_unidad_ejecutora
+			and pue.id_uel_especifica = uelesp.id_uel_especifica
+			and ctapre.id_cuenta_presupuesto = pue.id_cuenta_presupuesto
+			and ccta.id_cuenta_presupuesto = ctapre.id_cuenta_presupuesto
+			and ccta.id_concepto_tipo_personal = ctp.id_concepto_tipo_personal     
+			and c.id_concepto = ctp.id_concepto
+			and cf.id_concepto_tipo_personal = ctp.id_concepto_tipo_personal
+			AND cf.id_trabajador = t.id_trabajador 
+			and cper.id_clasificacion_personal = tp.id_clasificacion_personal
+			and catper.id_categoria_personal =  cper.id_categoria_personal
+			and t.id_tipo_personal = tp.id_tipo_personal 
+			AND t.id_dependencia = dep.id_dependencia
+			AND dep.id_administradora_uel = au.id_administradora_uel 
+			AND uel.id_unidad_ejecutora = au.id_unidad_ejecutora
+			AND uad.id_unidad_administradora = au.id_unidad_administradora
+			AND tp.id_tipo_personal = ctp.id_tipo_personal
+			AND ftp.id_tipo_personal = tp.id_tipo_personal
+			AND ftp.id_frecuencia_tipo_personal = cf.id_frecuencia_tipo_personal
+			and f.id_frecuencia_pago = ftp.id_frecuencia_pago 		
+		
+		<isNotNull property="cedula" prepend=" and cedula IN ">
+			<iterate property="cedula" open="(" close=")"	conjunction=",">
+				#cedula[]#
+			</iterate>
+		</isNotNull>	
+	
+		<isNotNull property="ano" prepend=" and ace.anio IN ">
+			<iterate property="ano" open="(" close=")"	conjunction=",">
+				#ano[]#
+			</iterate>
+		</isNotNull>
+				
+							
+		<isNotNull property="idDependencia" prepend=" and id_dependencia IN ">
+			<iterate property="idDependencia" open="(" close=")"	conjunction=",">
+				#idDependencia[]#
+			</iterate>
+		</isNotNull>
+		
+		<isNotNull property="codFrecuenPago" prepend=" and f.cod_frecuencia_pago IN ">
+			<iterate property="codFrecuenPago" open="(" close=")"	conjunction=",">
+				#codFrecuenPago[]#
+			</iterate>
+		</isNotNull>
+		
+		group by ctapre.id_cuenta_presupuesto, ctapre.cod_presupuesto, ctapre.descripcion,  uel.id_unidad_ejecutora, uel.cod_unidad_ejecutora, uel.nombre,
+		uelesp.categoria_presupuesto, pue.id_fuente_financiamiento, pue.id_partida_uel_especifica, dep.id_organismo
+		order by  uelesp.categoria_presupuesto,   ctapre.cod_presupuesto
+
+	</select>
+	
+</sqlMap>

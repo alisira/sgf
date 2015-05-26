@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="deta_resumen_nomina" >
+  <resultMap id="BaseResultMap" class="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >
+    
+    <result column="id_compromiso_inicial_detalle" property="idCompromisoInicialDetalle" jdbcType="INTEGER" />
+    <result column="id_compromiso_inicial" property="idCompromisoInicial" jdbcType="INTEGER" />    
+    <result column="id_partida_uel_especifica" property="idPartidaUelEspecifica" jdbcType="INTEGER" />
+    <result column="monto" property="monto" jdbcType="DOUBLE" />
+    <result column="ff" property="ff" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="buscar_compromiso_inicial_detalle" resultMap="BaseResultMap" parameterClass="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >    
+	SELECT id_compromiso_inicial_detalle, id_compromiso_inicial, id_partida_uel_especifica, monto
+  	FROM compromisoinicialdetalle;
+  </select>
+  
+  <statement id="insertar_compromiso_inicial_detalle" parameterClass="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" resultClass="int">
+
+    insert into compromisoinicialdetalle
+    <dynamic prepend="(" >      
+      <isNotNull prepend="," property="idCompromisoInicial" >
+        id_compromiso_inicial
+      </isNotNull>     
+      <isNotNull prepend="," property="idPartidaUelEspecifica" >
+        id_partida_uel_especifica
+      </isNotNull>      
+      <isNotNull prepend="," property="monto" >
+        monto
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >      
+      <isNotNull prepend="," property="idCompromisoInicial" >
+        #idCompromisoInicial:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="idPartidaUelEspecifica" >
+        #idPartidaUelEspecifica:INTEGER#
+      </isNotNull>     
+      <isNotNull prepend="," property="monto" >
+        #monto:DOUBLE#
+      </isNotNull>
+      )
+    </dynamic>
+
+    RETURNING id_compromiso_inicial
+    
+  </statement>
+  
+</sqlMap>

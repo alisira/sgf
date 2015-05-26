@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="public_expediente">
+
+	<resultMap id="ResultMap" class="sigefirrhh.persistencia.modelo.Expediente" >	 
+	   <result column="expediente" property="expediente" jdbcType="INTEGER" />
+	   <result column="ano" property="ano" jdbcType="INTEGER" />
+	   <result column="id_usuario" property="idUsuario" jdbcType="INTEGER" />
+	   <result column="id_proceso" property="idProceso" jdbcType="INTEGER" />
+	   <result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />	   
+	   <result column="estatus" property="estatus" jdbcType="INTEGER" />
+	   <result column="fecha_reg" property="fechaReg" jdbcType="DATE" />
+	   <result column="observacion" property="observacion" jdbcType="VARCHAR" />
+	 </resultMap>
+  
+	<select id="buscarExpediente" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" resultMap="ResultMap">
+    	select * from expediente
+  	</select>
+  
+  <insert id="guardarExpediente" parameterClass="sigefirrhh.persistencia.modelo.Expediente">
+	    <selectKey keyProperty="expediente" resultClass="int">
+			SELECT COALESCE(MAX (expediente), 0) + 1  FROM expediente WHERE ano= #ano:INTEGER#
+		</selectKey>
+		
+	    insert into public.expediente
+	    <dynamic prepend="(">
+	      <isNotNull prepend="," property="expediente">
+	        expediente
+	      </isNotNull>
+	      <isNotNull prepend="," property="ano">
+	        ano
+	      </isNotNull>
+	      <isNotNull prepend="," property="idUsuario">
+	        id_usuario
+	      </isNotNull>
+	      <isNotNull prepend="," property="idProceso">
+	        id_proceso
+	      </isNotNull>	      
+	      <isNotNull prepend="," property="estatus">
+	        estatus
+	      </isNotNull>
+	      <isNotNull prepend="," property="fechaReg">
+	        fecha_reg
+	      </isNotNull>
+	      <isNotNull prepend="," property="idOrganismo">
+	        id_organismo
+	      </isNotNull>
+	      <isNotNull prepend="," property="observacion">
+	        observacion
+	      </isNotNull>
+	      )
+	    </dynamic>
+	    values
+	    <dynamic prepend="(">
+	      <isNotNull prepend="," property="expediente">
+	        #expediente:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="ano">
+	        #ano:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="idUsuario">
+	        #idUsuario:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="idProceso">
+	        #idProceso:INTEGER#
+	      </isNotNull>	      
+	      <isNotNull prepend="," property="estatus">
+	        #estatus:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="fechaReg">
+	        #fechaReg:DATE#
+	      </isNotNull>
+	      <isNotNull prepend="," property="idOrganismo">
+	        #idOrganismo:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="observacion">
+	        #observacion#
+	      </isNotNull>
+	      )
+	    </dynamic>
+  </insert>	
+  
+  
+</sqlMap>

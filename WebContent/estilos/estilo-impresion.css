@@ -1,0 +1,146 @@
+.tablaImpresion{
+	border: 1px; border-style:solid; border-color: #000000;
+	table-layout: fixed;
+}
+
+.tablaImpresionColumAuto{
+	border: 1px; border-style:solid; border-color: #000000;
+}
+
+.tablaImpresionColumFijo{
+	border: 1px; border-style:solid; border-color: #000000; 
+	table-layout: fixed;
+}
+
+.tablaEncabezado {
+	COLOR: rgb(0, 0, 0); 
+	BACKGROUND-COLOR: rgb(233, 233, 243); 
+	FONT-FAMILY: Tahoma,Verdana,Arial,san-serif; 
+	TEXT-ALIGN: center; 
+	FONT-WEIGHT:bold; 
+	FONT-SIZE: 10pt;
+	border: 1px solid rgb(128, 128, 128);
+}
+
+.tablaEncabezado TR{
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 8pt; 
+	COLOR: rgb(0, 0, 0); 
+	FONT-FAMILY: Tahoma,Verdana,Arial,san-serif; 
+	BACKGROUND-COLOR: rgb(233, 233, 243); 
+	TEXT-ALIGN: center
+}                                                                                                                                                      
+
+.tablaEncabezado TD{	 
+	text-align: center;
+	border-left: medium none; 
+	border-top: 1px solid rgb(192, 192, 192); 
+	border-bottom: medium none;
+}
+
+.tablaDetalle { 	
+	background-color: rgb(255, 255, 255);	
+	cursor: pointer;
+	font-family: Tahoma,Verdana,Arial,san-serif;	
+	table-layout: fixed;	
+}
+
+.tablaDetalle TD {
+	FONT-SIZE: 7.5pt; 
+	/*border-bottom: 1px solid #C0C0C0;	
+	border-top: 1px solid #C0C0C0;
+	border-left: 1px solid #C0C0C0;*/
+ 	border: 1px outset #4c88ce;
+	padding: 3px 1px 5px 5px;    
+}
+
+.tablaDetalle #borde_derecho {
+	border-right: 1px solid #C0C0C0;	
+}
+
+.tablaDetalle #detalle_encabezado
+{	 
+	background-color: #E9E9F3;	
+	font-size: 11px;
+    font-weight: bold;    
+    border-top: 1px solid #C0C0C0;
+    text-align: center;         
+}
+
+.tablaDetalle #esq_derecha {
+	background-color: #E9E9F3;	
+	font-size: 11px;
+    font-weight: bold;     
+   	border-top: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0; 	
+    text-align: center;
+}
+
+.tablaDetalle #detalle_estatico
+{	
+	background-color:rgb(255,255,255);
+	height:17px;
+	font-size: 11px;
+    font-weight: normal;
+     
+}
+
+.tablaCintillo {	 
+	BACKGROUND-COLOR: rgb(255, 255, 255); 
+	FONT-FAMILY: Arial,san-serif;	
+	FONT-WEIGHT:bold; 
+	font-size: 16px;
+	border: 0 none;
+}
+
+.tablaCintillo TR{
+	COLOR: rgb(0, 0, 0);
+	text-align: center;
+}
+
+.tablaCintillo td{
+	border: 0 none;
+}
+
+.tablaParametro {
+	COLOR: rgb(0, 0, 0); 
+	BACKGROUND-COLOR: rgb(255, 255, 255); 
+	FONT-FAMILY: Tahoma,Verdana,Arial,san-serif;	
+	FONT-WEIGHT:bold; 
+	FONT-SIZE: 10pt;	
+}
+
+.tablaParametro TR{
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 8pt; 
+	COLOR: rgb(0, 0, 0); 
+	FONT-FAMILY: Tahoma,Verdana,Arial,san-serif;	
+}                                                                                                                                                      
+
+.tablaParametro #titulo{	 
+	color: #666699;     
+    font-weight: bold;
+    padding: 5px;
+    text-align: left;
+    border: 0 none;
+}
+
+.tablaParametro #contenido{	 
+	color: #000000;
+    font-weight: normal;
+    border: 0 none;
+}
+
+.opcionMenu{
+	background-color:rgb(233,233,243);	
+	height:23px;
+	position: absolute;
+	visibility:hidden;
+	width:82px;
+}
+
+.noImprimir{
+	position: relative;
+	visibility:hidden;
+	
+}

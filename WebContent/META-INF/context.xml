@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/sigefirrhh">
+
+<Resource
+            auth="Container"
+            description="DB Connection Pooling"
+            name="jdbc/DBPoolSigefirrhh"
+            type="javax.sql.DataSource"
+            driverClassName="org.postgresql.Driver"
+            password="postgres"
+            maxIdle="15"
+            maxWait="10000"
+            removeAbandoned="true"           
+            removeAbandonedTimeout="300"     
+            logAbandoned="true"              
+            username="postgres"
+            url="jdbc:postgresql://localhost/oncop"
+            maxActive="5"/>
+
+</Context>
