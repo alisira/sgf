@@ -91,20 +91,20 @@
 		
 		<div class="contenedor_div">
 			
-			<div class="contenedor_div_left" style="width: 18%;background: #dddddd none repeat scroll 0 0; border-bottom-left-radius: 10px;border-right: 2px solid #fff;border-top-left-radius: 10px; margin-left: 4px;color: #777777 !important;font-size: 14px;padding: 0px;">
+			<div class="contenedor_div_left" style="width: 23%;background: #dddddd none repeat scroll 0 0; border-bottom-left-radius: 10px;border-right: 2px solid #fff;border-top-left-radius: 10px; margin-left: 4px;color: #777777 !important;font-size: 12px;padding: 0px;">
 				<img style="vertical-align:middle;" width="30" height="30" src="<%=rutaTemp %>/images/user.png">
 				Usuario: <%=((LoginSession)session.getAttribute("loginSession")).getUsuarioObject().getNombres() + " " + ((LoginSession)session.getAttribute("loginSession")).getUsuarioObject().getApellidos() %>
 			</div>
 
-			<div class="contenedor_div_left" style="width: 4%;background: #eeeeee none repeat scroll 0 0; color: #777777 !important;font-size: 14px; padding: 7px; border-right: 2px solid #fff;">
+			<div class="contenedor_div_left" style="width: 6%;background: #eeeeee none repeat scroll 0 0; color: #777777 !important;font-size: 14px; padding: 7px; border-right: 2px solid #fff;">
 				<%=fecha%>
 			</div>
 
-			<div class="contenedor_div_left" style="width:63%;text-align: center; background: #eeeeee none repeat scroll 0 0; font-size: 20px; padding: 3px; border-right: 2px solid #fff;">
+			<div class="contenedor_div_left" style="width:58%;text-align: center; background: #eeeeee none repeat scroll 0 0; font-size: 20px; padding: 4px; border-right: 2px solid #fff;">
 				Sistema de Gesti&oacute;n Financiera de los Recursos Humanos
 			</div>
 			
-			<div class="contenedor_div_left" style="width:12%;text-align: center;background: #dddddd none repeat scroll 0 0;border-bottom-right-radius: 10px;border-top-right-radius: 10px; color: #777777 !important; font-size: 14px; padding: 7px;">
+			<div class="contenedor_div_left" style="width:9%;text-align: center;background: #dddddd none repeat scroll 0 0;border-bottom-right-radius: 10px;border-top-right-radius: 10px; color: #777777 !important; font-size: 14px; padding: 7px;">
 				<jsp:include page="/version.inc" />
 			</div>
 			
