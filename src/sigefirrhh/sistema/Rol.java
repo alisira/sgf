@@ -10,6 +10,7 @@ package sigefirrhh.sistema;
 *	bean="true"
 *	form="true"
 *   title="Roles"
+*
 */
 public class Rol  implements java.io.Serializable {
 	/**
