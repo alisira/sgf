@@ -1,0 +1,5 @@
+//Poner en el request una serie de mensaje sacados del archivos de propiedades
+MessageResources messageResources = getResources(request);
+ActionErrors actionErrors = new ActionErrors();
+actionErrors.add("bienvenido", new ActionMessage("error.missing.key", messageResources.getMessage("label.username"), messageResources.getMessage("label.password")));
+saveErrors(request, actionErrors);

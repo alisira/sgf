@@ -1,0 +1,5 @@
+-- Serializar un formulario osea obtener single=Single2&multiple=Multiple3&check=check1&check=check2
+ 	function showValues() {
+		var str = $( "form" ).serialize();
+		$( "#results" ).text( str );
+	}
