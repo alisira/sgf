@@ -1,0 +1,38 @@
+--Formas de obtener la data de una celda
+	En dos pasos utilizando una variable temporal
+		var celda = $(this.cells[0]);
+        expediente = celda.html();
+        var celda = $(this.cells[4]);
+        proceso = celda.html();
+        
+	En un paso utilizando el DOM
+		this.cells[0].textContent;//Primera columna de la tabla
+    	this.cells[4].textContent;//Columna oculta de la tabla
+    	
+--Recorrer e imprimir las propiedades de cualquier objeto 
+
+	Siendo req el objeto
+	
+	var result = ""; 
+	for (var i in req) { 
+		result += 'ajax' + "." + i + " = " + req[i] + "\n"; 
+	} 
+	
+	alert(req);
+	
+--Recorrer e imprimir las propiedades de un objeto del dom q tenga getattribute
+
+	function inspector(el) {
+		var str ="";
+		for (var i in el){
+			str+= i + ": " + el.getAttribute(i) + "\n"; 
+		}
+		alert(str);
+	}
+	
+	
+--Simular un replaceall ya que la funcion de javascript solo reemplaza una una coincidencia
+
+	do {
+		c = c.replace("<ul>", "<ul class=\"level-1\" style=\"width: 270px;\">");
+	} while (c.indexOf("<ul>") >= 0);

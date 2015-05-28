@@ -1,0 +1,126 @@
+--Funcion para recorrer e imprimir el request header
+private Map<String, String> getHeadersInfo() {
+ 
+	Map<String, String> map = new HashMap<String, String>();
+ 
+	Enumeration headerNames = request.getHeaderNames();
+	while (headerNames.hasMoreElements()) {
+		String key = (String) headerNames.nextElement();
+		String value = request.getHeader(key);
+		map.put(key, value);
+		System.out.println(key + ": " + value);
+	}
+ 
+	return map;
+  }
+
+--Funcion MD5
+public String MD5(String md5) {
+	  try {
+	     java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+	     byte[] array = md.digest(md5.getBytes());
+	     StringBuilder sb = new StringBuilder();
+	     for (int i = 0; i < array.length; ++i) {
+	        sb.append(
+	          Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+	     }
+	      return sb.toString();
+	   } catch (java.security.NoSuchAlgorithmException e) {
+	   }
+	    return null;
+	}
+
+}
+
+--Como recorrer las variables publicas de un objeto x
+Field[] campos = exp.getClass().getFields();
+        //List<Field> lf = exp.getClass().getFields();
+        //System.out.println("uu " + campos.length);        
+        Field properties[] = exp.getClass().getFields();
+        for (int i = 0; i < properties.length; i++) {
+            Field field = properties[i];
+            //field.get(obj)            
+            System.out.println(field.getName() +" > "+field.getType());
+        }
+
+
+--Obtener el nombre del metodo en ejecucion
+	System.out.println(this.getClass().getName() + "1 " + Thread.currentThread().getStackTrace()[1].getMethodName() + " " + hora);
+
+--Obtener los valores de sesion usando el contexto de jsf
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpSession session = (HttpSession)context.getExternalContext().getSession(true); 		
+	this.login2 = ((LoginSession)session.getAttribute("loginSession"));
+
+
+sigefirrhh/base/ubicacion/Pais.jsf
+
+--Clase ejemplo conexion jdbc
+	package sigefirrhh.ibatis.dao;
+
+
+	import java.sql.Connection;
+	import java.sql.PreparedStatement;
+	import java.sql.ResultSet;
+	import java.sql.SQLException;
+	import java.sql.Statement;
+	import java.util.List;
+	import java.util.Map;
+
+	import javax.naming.InitialContext;
+	import javax.sql.DataSource;
+
+	import org.postgresql.util.PSQLException;
+	import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+	import sigefirrhh.ibatis.modelo.CompromisoInicial;
+
+	import com.ibatis.common.jdbc.exception.NestedSQLException;
+
+	public class CompromisoInicialDAOImpl extends SqlMapClientDaoSupport {
+
+		InitialContext cxt = null;
+		DataSource ds = null;
+		Connection conn = null;
+		Statement stmt = null;
+	
+	    	public CompromisoInicialDAOImpl() {
+			super();
+			try{
+		    		this.cxt = new InitialContext();
+		    		this.ds = (DataSource) cxt.lookup( "java:/comp/env/jdbc/DBPoolSigefirrhh" );
+		    		
+		    	}catch (Exception e){
+		    		e.printStackTrace();
+		    	}
+    		}
+	    
+	    public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, Exception, SQLException,NestedSQLException {
+	    	
+	    	int resultado = 0;
+	    	
+	    	if ( ds == null ) {
+	    	   throw new Exception("Data source no encontrado!");
+	    	}else{
+	    		conn = ds.getConnection();
+	    		PreparedStatement ps = conn.prepareStatement("UPDATE compromisoinicial SET estatus=? where expediente= ? and id_organismo= ? and ano= ? ",PreparedStatement.RETURN_GENERATED_KEYS );
+	    		ps.setLong(1, record.getEstatus());
+	    		ps.setLong(2, record.getExpediente());
+	    	    	ps.setLong(3, record.getIdOrganismo());
+	    	    	ps.setLong(4, record.getAno());
+
+	    		ps.execute();
+	    		//ps.executeUpdate();
+
+	    		ResultSet rs = ps.getGeneratedKeys();
+	    		rs.next();
+			resultado = rs.getInt(1);
+	    		conn.close();
+	    		
+	    	}    	
+
+	  	   	return resultado;  	
+	    }
+	    
+	}
+

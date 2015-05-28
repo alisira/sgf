@@ -1,0 +1,10 @@
+/*  GIT
+
+Error:en la consola al intentar hacer push git push -u origin master
+
+"error: src refspec master does not match any."
+
+Solucion:hacer commit
+
+git commit -m 'initial commit'
+git push origin master

@@ -1,0 +1,29 @@
+Estilos
+
+Cambiar color al ul principal
+	ul.mnmenu
+
+Tamaño de la letra de todos los objetos
+	ul.mnmenu li
+
+Altura de la fila de todos los objetos
+	ul.mnmenu li.level-0 {min-height: 21px;}
+
+Width y color de todos los ul
+	ul.mnmenu li.level-0 ul{}
+
+Width de los li hover
+	ul.mnmenu li.level-0 li.middle
+
+Color de los li hover
+	ul.mnmenu li.level-0 li:hover{
+
+
+Base de datos
+	Columna RUTA: se refiere al uri que va a llamar el menu que puede ser un jsf en el caso de jsf y un .do en el caso de struts
+	Columna URI: se refiere a la pagina jsp que contiene la aplicacion llamada segun ruta y que se evalua para determinar si tiene permiso en el caso de jsf sera la misma, en struts son diferentes dado que en la ruta es un action y en uri es un jsp
+
+FAQ
+	En caso que no aparezcan las opciones en el orden correcto se debe verificar la permisologia segun el orden jerarquico	
+
+
