@@ -43,6 +43,7 @@
         <form-bean name="UnidadAdministradoraForm" type="sigefirrhh.struts.actionForm.UnidadAdministradoraForm"/>
         <form-bean name="GastoProyectadoForm" type="sigefirrhh.struts.actionForm.GastoProyectadoForm"/>
         <form-bean name="CompromisoInicialForm" type="sigefirrhh.struts.actionForm.CompromisoInicialForm"/>
+        <form-bean name="RegularizacionCompromisoForm" type="sigefirrhh.struts.actionForm.RegularizacionCompromisoForm"/>
         <form-bean name="ParametrosBusquedaForm" type="sigefirrhh.struts.actionForm.ParametrosBusquedaForm"/>
     </form-beans>
     
@@ -55,7 +56,7 @@
         <forward name="error" path="/web/html/error.jsp" />
         <forward name="exito" path="/web/html/exito.html"/>
     	<forward name="errorConexion" path="/web/html/error_DB.html" />
-    	<forward name="sesionCerrada" path="/web/html/sesion_cerrada.html" />    	
+    	<forward name="sesionCerrada" path="/error.html" />    	
     </global-forwards>
 
     <action-mappings>
@@ -72,6 +73,12 @@
             <forward name="apruebaNuevo" path="/web/compromiso_inicial/compromiso_inicial.jsp" />
             <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
         </action>
+        
+        <action path="/regularizacionCompromiso" type="sigefirrhh.struts.action.RegularizacionCompromisoAction" parameter="accion" name="CompromisoInicialForm" scope="request" input="/web/regularizacion_compromiso/regularizacion_compromiso.jsp">
+            <forward name="apruebaNuevo" path="/web/regularizacion_compromiso/regularizacion_compromiso.jsp" />
+            <forward name="apruebaGuardar" path="/web/regularizacion_compromiso/reporte_regularizacion_compromiso.jsp" redirect="true"/>
+        </action>
+        
         
         <action path="/mantenimientoUnidadAdministradora" type="sigefirrhh.struts.action.MantenimientoUnidadAdministradora" input="/mantenimiento_unidad_administradora.jsp" parameter="accion" name="UnidadAdministradoraForm"  scope="request" >
            	<forward name="success" path="/procesos/mantenimiento_unidad_administradora.jsp" />
