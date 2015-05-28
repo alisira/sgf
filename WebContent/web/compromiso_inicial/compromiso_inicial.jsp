@@ -86,7 +86,7 @@
 	                
 	                <div class="conte_div_left" style="width: 40%; height: 34px;">
 	                    <label class="conte_label">Tipo de Documento </label>
-						<html:select name="CompromisoInicialForm" property="idTipoDocumento" tabindex="0" style="width: 215px;" styleId="idTipoDocumento">
+						<html:select name="CompromisoInicialForm" property="idTipoDocumento" tabindex="0" style="width: 235px;" styleId="idTipoDocumento">
 							<html:option value="">Seleccionar Tipo de Documento</html:option>
 							<logic:iterate name="TipoDocumentos" id="td">
 								<option	value=<bean:write name="td" property="codigo"/>>

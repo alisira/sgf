@@ -134,9 +134,11 @@ ul.mnmenu li.level-0 li hr{
     height:1px;
 }
 
+/*
 input, select, textarea, button {
-    font: 13px Helvetica, arial, freesans, clean, sans-serif;
+    /*font: 13px Helvetica, arial, freesans, clean, sans-serif;
     line-height: 1.4;
+    
 }
 div.content{
     margin:5px;
@@ -169,4 +171,4 @@ div.content{
 }
 div.copyright {
     margin:100px 0 0 0;
-}
+}*/
