@@ -8,30 +8,37 @@
 <%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
-{
+
 	String rutaTemp = null;
 	
 	if ((LoginSession)session.getAttribute("loginSession")!=null){
 	
+		System.out.println("marca1");
 		if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
+			System.out.println("marca2");
 			response.sendRedirect("/sigefirrhh/error.html");
-		}else{
-			ValidadorSesion vs = new ValidadorSesion();
-			HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
-			boolean temp = vs.validarPermiso(httpServletRequest);			
-			//System.out.println("Resultado:" + temp);
 			
-			if (!temp){
-				
-				response.sendRedirect("/sigefirrhh/sinpermiso.jsp");
-
+			if (session.getAttribute("ReguComproBean")!=null){
+				response.sendRedirect("/sigefirrhh/error.html");
+			
 			}else{
-				%>
-				<jsp:include page="/inc/top.jsp" />
-
-<%
-				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
-				//System.out.println(request.getRequestURI());
+				ValidadorSesion vs = new ValidadorSesion();
+				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
+				boolean temp = vs.validarPermiso(httpServletRequest);			
+				System.out.println("Resultado:" + temp);
+				
+				if (!temp){
+					
+					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");
+	
+				}else{
+					%>
+					<jsp:include page="/inc/top.jsp" />
+	
+	<%
+					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
+					//System.out.println(request.getRequestURI());
+				}
 			}
 		}
 		
@@ -39,27 +46,28 @@
 		response.sendRedirect("/sigefirrhh/error.html");
 	}
 
+	System.out.println("marca9");
+ 	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
+
+	
 %>
 
 		<title> Registro de Compromiso Inicial</title>
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>
-		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>		
-
-<% } %>	
+		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>
 
 
 		<div id="fondo_opaco" style="position: absolute; top: 0px; left: 0px; width: 903px; height: 553px; display: none; opacity: 0.70; z-index: 9; background-color: #111111;">
 		</div>
 	
-		<%@include file="../unidad_administradora/buscar_unidad_administradora.jsp" %>
-		
+		<jsp:include page="../unidad_administradora/buscar_unidad_administradora.jsp" />
 	
 		<div id="pagina" align="center" >
 		
 			<div id="contenido"  style="width:960px">	
 			
 			<html:form action="/compromisoInicial" method="post"> <!-- <form id="resumenNominaInicial" name="resumenNominaInicial" action="" method="post"> -->
-				<%@include file="origen_presupuestario.jsp" %>	
+				
 				<input name="idTipoFondo" id="idTipoFondo" value="1" type="hidden">
 				<input name="ff" id="ff" value="1" type="hidden">				
 				<input name="tablavacia" id="tablavacia" value="SI" type="hidden">
@@ -182,4 +190,7 @@
 		</div>
 	</body>
 </html>
+<%
+}
+%>
 
