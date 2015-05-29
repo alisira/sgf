@@ -10,12 +10,11 @@
 <% 
 
 	String rutaTemp = null;
-	
-	if ((LoginSession)session.getAttribute("loginSession")!=null){
-	
-		System.out.println("marca1");
-		if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
-			System.out.println("marca2");
+System.out.println("marca1");
+	if ((LoginSession)session.getAttribute("loginSession")!=null){	
+		System.out.println("marca2");	
+		if (!((LoginSession)session.getAttribute("loginSession")).isValid() ) {
+			System.out.println("marca3");
 			response.sendRedirect("/sigefirrhh/error.html");
 			
 			if (session.getAttribute("ReguComproBean")!=null){
@@ -25,7 +24,7 @@
 				ValidadorSesion vs = new ValidadorSesion();
 				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
 				boolean temp = vs.validarPermiso(httpServletRequest);			
-				System.out.println("Resultado:" + temp);
+				//System.out.println("Resultado:" + temp);
 				
 				if (!temp){
 					
@@ -45,14 +44,12 @@
 	}else{
 		response.sendRedirect("/sigefirrhh/error.html");
 	}
-
-	System.out.println("marca9");
+	
  	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
-
 	
 %>
 
-		<title> Registro de Compromiso Inicial</title>
+		
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>
 		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>
 

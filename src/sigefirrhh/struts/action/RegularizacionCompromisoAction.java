@@ -75,6 +75,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					tipoDocumentos.add(new TipoDocumento(2, "Oficio"));
 					request.setAttribute("TipoDocumentos", tipoDocumentos);
 					request.setAttribute("ano", ano);
+					request.setAttribute("titulo", "Regularizacion de Compromiso");
 					
 			        ///System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 					//Se inicializan y se montan en el request todos los bean que necesita la vista
