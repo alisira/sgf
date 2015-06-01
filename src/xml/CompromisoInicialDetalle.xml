@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="deta_resumen_nomina" >
-  <resultMap id="CompromisoInicialDetalle" class="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >
+  <resultMap id="CompromisoInicialDetalle" class="sigefirrhh.persistencia.modelo.CompromisoInicialDetalle" >
     
     <result column="id_compromiso_inicial_detalle" property="idCompromisoInicialDetalle" jdbcType="INTEGER" />
     <result column="id_compromiso_inicial" property="idCompromisoInicial" jdbcType="INTEGER" />    
     <result column="id_partida_uel_especifica" property="idPartidaUelEspecifica" jdbcType="INTEGER" />
     <result column="monto" property="monto" jdbcType="DOUBLE" />
-    <result column="ff" property="ff" jdbcType="INTEGER" />
+    <result column="ff" property="ff" jdbcType="INTEGER" />    
+    <result column="cod_presupuesto" property="codPartida" jdbcType="VARCHAR" />
+    <result column="cod_unidad_ejecutora" property="codUnidadEjecutora" jdbcType="INTEGER" />
+    <result column="nombre" property="denoUnidadEjecutora" jdbcType="VARCHAR" />
+    <result column="categoria_presupuesto" property="codCatePresu" jdbcType="INTEGER" />
+    <result column="descripcion" property="denoPartida" jdbcType="VARCHAR" />
+    
   </resultMap>
   
   <select id="buscarCompromisoInicialDetalle" resultMap="CompromisoInicialDetalle" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
 	SELECT id_compromiso_inicial_detalle, id_compromiso_inicial, id_partida_uel_especifica, monto
   	FROM compromisoinicialdetalle
  	
- 	<isParameterPresent >
  	where 
+ 	<isParameterPresent > 	
 	 	<isNotNull property="idCompromisoInicialDetalle" >
 			<iterate property="idCompromisoInicialDetalle" open="id_compromiso_inicial_detalle in (" close=")"	conjunction="," >
 				#idCompromisoInicialDetalle[]#
@@ -25,36 +31,42 @@
   	
   </select>
   
-  <select id="buscarCompromisoInicialDetalleForm" resultMap="CompromisoInicialDetalle" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
-SELECT 
-  * 
-FROM 
-  public.compromisoinicialdetalle, 
-  public.compromisoinicial, 
-  public.partidauelespecifica, 
-  public.uelespecifica, 
-  public.unidadejecutora
-WHERE 
-  compromisoinicial.id_compromiso_inicial = compromisoinicialdetalle.id_compromiso_inicial AND
-  partidauelespecifica.id_partida_uel_especifica = compromisoinicialdetalle.id_partida_uel_especifica AND
-  uelespecifica.id_uel_especifica = partidauelespecifica.id_uel_especifica AND
-  unidadejecutora.id_unidad_ejecutora = uelespecifica.id_unidad_ejecutora AND
-  compromisoinicial.expediente = 6;
+  <select id="buscarCompromisoInicialDetalleExt" resultMap="CompromisoInicialDetalle" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
+		SELECT id_compromiso_inicial_detalle, cdet.id_compromiso_inicial, cdet.id_partida_uel_especifica, ue.categoria_presupuesto, uel.cod_unidad_ejecutora, uel.nombre, cdet.ff, ctap.cod_presupuesto, ctap.descripcion, cdet.monto 
+		FROM 
+		  compromisoinicialdetalle cdet, 
+		  public.compromisoinicial, 
+		  public.partidauelespecifica, 
+		  uelespecifica ue, 
+		  unidadejecutora uel,
+		  cuentapresupuesto ctap
+		WHERE 
+		  compromisoinicial.id_compromiso_inicial = cdet.id_compromiso_inicial AND
+		  partidauelespecifica.id_partida_uel_especifica = cdet.id_partida_uel_especifica AND
+		  ue.id_uel_especifica = partidauelespecifica.id_uel_especifica AND
+		  uel.id_unidad_ejecutora = ue.id_unidad_ejecutora AND
+		  ctap.id_cuenta_presupuesto = partidauelespecifica.id_cuenta_presupuesto 
  	
  	<isParameterPresent >
- 	where 
-	 	<isNotNull property="idCompromisoInicialDetalle" >
-			<iterate property="idCompromisoInicialDetalle" open="id_compromiso_inicial_detalle in (" close=")"	conjunction="," >
+ 	
+	 	<isNotNull property="idCompromisoInicial" prepend=" and ">
+			<iterate property="idCompromisoInicial" open="cdet.id_compromiso_inicial in (" close=")"	conjunction="," >
+				#idCompromisoInicial[]#
+			</iterate>
+		</isNotNull>
+		
+		<isNotNull property="idCompromisoInicialDetalle" prepend=" and " >
+			<iterate property="idCompromisoInicialDetalle" open="cdet.id_compromiso_inicial_detalle in (" close=")"	conjunction="," >
 				#idCompromisoInicialDetalle[]#
 			</iterate>
 		</isNotNull>
-  	</isParameterPresent>
-  	
+		
+  	</isParameterPresent>  	
   </select>
   
   
   
-  <statement id="insertar_compromiso_inicial_detalle" parameterClass="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" resultClass="int">
+  <statement id="insertar_compromiso_inicial_detalle" parameterClass="sigefirrhh.persistencia.modelo.CompromisoInicialDetalle" resultClass="int">
 
     insert into compromisoinicialdetalle
     <dynamic prepend="(" >      

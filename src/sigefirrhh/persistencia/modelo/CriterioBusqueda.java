@@ -6,7 +6,8 @@ import java.util.List;
 
 public class CriterioBusqueda {
     
-    private List<Integer> idCompromisoInicial;  
+    private List<Integer> idCompromisoInicial;
+    private List<Integer> idCompromisoInicialDetalle;
     private List<Integer> idOrganismo;   
     private List<Integer> ano;   
     private List<Integer> tarea;
@@ -40,8 +41,6 @@ public class CriterioBusqueda {
     private List<Long> idRolOpcion;	
 	private List<Long> idRol;
 	private List<String> uri;
-    
-    
     
 	public CriterioBusqueda(){
     	this.codFrecuenPago = new  ArrayList<Integer>();
@@ -77,8 +76,15 @@ public class CriterioBusqueda {
         this.idRolOpcion= new   ArrayList<Long>();
         this.idRol = new ArrayList<Long>();	
     	this.uri= new  ArrayList<String>();
+    	this.idCompromisoInicialDetalle= new ArrayList<Integer>();
     }
 	
+	public List<Integer> getIdCompromisoInicialDetalle() {
+		return this.idCompromisoInicialDetalle;
+	}
+	public void addCodUnidadAdministradora(Integer idCompromisoInicialDetalle) {
+		this.idCompromisoInicialDetalle.add(idCompromisoInicialDetalle);
+	}
 	
 	public List<String> getCodUnidadAdministradora() {
 		return codUnidadAdministradora;

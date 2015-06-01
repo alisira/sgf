@@ -17,6 +17,7 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private Integer tarea;
     private Integer estatus;
     private Integer idTipoDocumento;
+    private Integer idTipoFondo;
     private String documento;
     private String observacion;
     private String gacetaCredAdicional;
@@ -28,7 +29,12 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private Date fechaRegistro;
     private String origenPresupuestario;
 
-    public Integer getIdCompromisoInicial() {
+    
+    public Integer getIdTipoFondo() {
+		return idTipoFondo;
+	}
+
+	public Integer getIdCompromisoInicial() {
         return idCompromisoInicial;
     }
 

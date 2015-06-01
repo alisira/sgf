@@ -3,7 +3,6 @@ package sigefirrhh.struts.actionForm;
 import org.apache.struts.action.ActionForm;
 
 public class CompromisoInicialForm extends ActionForm{
-    
 	
 	private static final long serialVersionUID = -7735259961764648388L;
 	
@@ -41,11 +40,17 @@ public class CompromisoInicialForm extends ActionForm{
     private String denoUel[];    
     private String partida[];
     private String denoPartida[];
+    private Double dispo[];
     private Double monto[];
-    private Double totalResumen;
+    private Double totalResumen;    
     
     
-    
+	public Double[] getDispo() {
+		return dispo;
+	}
+	public void setDispo(Double[] dispo) {
+		this.dispo = dispo;
+	}
 	public String getFechaGaceRecti() {
 		return fechaGaceRecti;
 	}

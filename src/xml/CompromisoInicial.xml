@@ -26,32 +26,6 @@
     <result column="fecha_registro" property="fechaRegistro" jdbcType="DATE" />
   </resultMap>
   
-  <resultMap id="compromisoinicialForm" class="sigefirrhh.persistencia.modelo.CompromisoInicial" >
-    <result column="id_compromiso_inicial" property="idCompromisoInicial" jdbcType="INTEGER" />
-    <result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />
-    <result column="ano" property="ano" jdbcType="INTEGER" />
-    <result column="tarea" property="tarea" jdbcType="INTEGER" />
-    <result column="estatus" property="estatus" jdbcType="INTEGER" />
-    <result column="id_unidad_administradora" property="idUnidadAdministradora" jdbcType="INTEGER" />
-    <result column="id_cuentadante" property="idCuentadante" jdbcType="INTEGER" />
-    <result column="id_tipo_pago" property="idTipoPago" jdbcType="INTEGER" />
-    <result column="id_tipo_fondo" property="idTipoFondo" jdbcType="INTEGER" />
-    <result column="id_tipo_documento" property="idTipoDocumento" jdbcType="INTEGER" />
-    <result column="documento" property="documento" jdbcType="VARCHAR" />
-    <result column="observacion" property="observacion" jdbcType="VARCHAR" />
-    <result column="origen_presupuestario" property="oriPresu" jdbcType="VARCHAR" />
-    <result column="gaceta_cred_adicional" property="gaceCrediAdi" jdbcType="VARCHAR" />
-    <result column="decreto_cred_adicional" property="decreCrediAdi" jdbcType="VARCHAR" />
-    <result column="fecha_cred_adicional" property="fechaGaceCredi" jdbcType="DATE" />
-    <result column="gaceta_rectificacion" property="gaceRecti" jdbcType="VARCHAR" />
-    <result column="decreto_rectificacion" property="decreRecti" jdbcType="VARCHAR" />
-    <result column="fecha_rectificacion" property="fechaGaceRecti" jdbcType="DATE" />
-    <result column="expediente" property="expediente" jdbcType="BIGINT" />
-    <result column="compromiso" property="compromiso" jdbcType="BIGINT" />
-    <result column="fecha_registro" property="fechaRegistro" jdbcType="DATE" />
-  </resultMap>
-  
-  
   <select id="buscarCompromisoInicial" resultMap="compromisoinicial" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
     <!--realizado el 10-04-15 13:39:44 .-->
     select id_compromiso_inicial, id_organismo, ano, tarea, estatus, id_unidad_administradora,

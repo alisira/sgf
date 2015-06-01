@@ -90,7 +90,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					
 					//Recupera la data del maestro compromiso
 					CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
-					criterioBusqueda.addExpediente(40);					
+					criterioBusqueda.addExpediente(51);					
 					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
 					List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");					
 					
@@ -103,10 +103,23 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					
 					//Recupera la data del detalle del compromiso
 					criterioBusqueda =null;
-					criterioBusqueda = new CriterioBusqueda();					 
+					criterioBusqueda = new CriterioBusqueda();
 					criterioBusqueda.addIdCompromisoInicial((compromisoInicial.get(0).getIdCompromisoInicial()));
 					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
-					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDAO.buscar(criterioBusqueda, "compromisoInicialDetalle");					
+					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
+					
+					System.out.println(compromisoInicialDetalle.size());
+					
+					CompromisoInicialForm comIni = new CompromisoInicialForm();
+					comIni.setAno(ano);
+					//comIni.
+					
+					for (int c=0;c<compromisoInicialDetalle.size();c++){
+						
+						
+					}
+					
+					
 					
 					request.setAttribute("CompromisoInicial", compromisoInicial.get(0));
 					request.setAttribute("CompromisoInicialDetalle", compromisoInicialDetalle.get(0));

@@ -80,10 +80,7 @@
 	                
 	                <div class="conte_div_left" style="width: 31%; height: 34px;" >
 	                    <label class="conte_label">Tipo de Fondo </label>
-	                    <html:select styleId="tipoFondo" property="tipoFondo" >
-	                    	<option value=0>Personal Activo</option>
-	                    	<option value=1>Jubilados y Pensionados</option>
-						</html:select> 
+	                    <label class="conte_label">&nbsp;<bean:write name="RegularizacionCompromisoForm" property="idTipoFondo"/></label> 
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 40%; height: 34px;">
@@ -105,7 +102,7 @@
 	                
 	                <div class="conte_div_left" style="width: 25%;">
 	                    <label class="conte_label">Unidad Administradora:</label>
-	                    <label class="conte_label">&nbsp;<bean:write name="UnidadAdministradora" property="codUnidadAdministradora"/></label>													                     
+	                    <label class="conte_label">&nbsp;<bean:write name="UnidadAdministradora" property="codUnidadAdministradora"/></label>
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 70%;">
