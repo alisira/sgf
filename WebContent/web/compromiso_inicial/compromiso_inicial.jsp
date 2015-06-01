@@ -8,58 +8,59 @@
 <%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
-{
+//System.out.println(session.getAttribute("titulo"));
 	String rutaTemp = null;
-	
+
 	if ((LoginSession)session.getAttribute("loginSession")!=null){
-	
-		if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
-			response.sendRedirect("/sigefirrhh/error.html");
-		}else{
-			ValidadorSesion vs = new ValidadorSesion();
-			HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
-			boolean temp = vs.validarPermiso(httpServletRequest);			
-			//System.out.println("Resultado:" + temp);
-			
-			if (!temp){
-				
-				response.sendRedirect("/sigefirrhh/sinpermiso.jsp");
 
+		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
+
+			if (session.getAttribute("ComproIniBean")==null){
+				ValidadorSesion vs = new ValidadorSesion();
+				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
+				boolean temp = vs.validarPermiso(httpServletRequest);
+
+				if (temp){
+					%>
+					<jsp:include page="/inc/top.jsp" />	
+	<%
+					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
+				}else{
+					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");					
+				}				
 			}else{
-				%>
-				<jsp:include page="/inc/top.jsp" />
-
-<%
-				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
-				//System.out.println(request.getRequestURI());
+				response.sendRedirect("/sigefirrhh/error.html");
 			}
-		}
-		
+		}else{			
+			response.sendRedirect("/sigefirrhh/error.html");
+		}		
 	}else{
 		response.sendRedirect("/sigefirrhh/error.html");
 	}
-
+	
+ 	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
+	
 %>
 
-		<title> Registro de Compromiso Inicial</title>
+		<script type="text/javascript" language="JavaScript">		
+			    document.title = "<bean:write name="titulo"/>" ;		
+		</script>
+
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>
-		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>		
-
-<% } %>	
-
+		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>
 
 		<div id="fondo_opaco" style="position: absolute; top: 0px; left: 0px; width: 903px; height: 553px; display: none; opacity: 0.70; z-index: 9; background-color: #111111;">
 		</div>
 	
-		<%@include file="../unidad_administradora/buscar_unidad_administradora.jsp" %>
-		
+		<jsp:include page="../unidad_administradora/buscar_unidad_administradora.jsp" />
 	
 		<div id="pagina" align="center" >
 		
-			<div id="contenido"  style="width:960px">	
+			<div id="contenido">	
 			
 			<html:form action="/compromisoInicial" method="post"> <!-- <form id="resumenNominaInicial" name="resumenNominaInicial" action="" method="post"> -->
-				<%@include file="origen_presupuestario.jsp" %>	
+				<jsp:include page="../compromiso_inicial/origen_presupuestario.jsp" />				
+				
 				<input name="idTipoFondo" id="idTipoFondo" value="1" type="hidden">
 				<input name="ff" id="ff" value="1" type="hidden">				
 				<input name="tablavacia" id="tablavacia" value="SI" type="hidden">
@@ -72,7 +73,7 @@
 	                    <label class="conte_label">Fecha: <script>hoy();document.write(fechaHoy);</script> </label>	                     
 	                </div>
 	
-					<div class="conte_div_left" style="width: 31%; height: 34px;" >
+					<div class="conte_div_left" style="width: 34%; height: 34px;" >
 	                    <label class="conte_label">Ejercicio Presupuestario: <bean:write name="ano"/> </label>    
 	                </div>
 	                
@@ -86,7 +87,7 @@
 	                
 	                <div class="conte_div_left" style="width: 40%; height: 34px;">
 	                    <label class="conte_label">Tipo de Documento </label>
-						<html:select name="CompromisoInicialForm" property="idTipoDocumento" tabindex="0" style="width: 235px;" styleId="idTipoDocumento">
+						<html:select name="CompromisoInicialForm" property="idTipoDocumento" tabindex="0" style="width: 240px;" styleId="idTipoDocumento">
 							<html:option value="">Seleccionar Tipo de Documento</html:option>
 							<logic:iterate name="TipoDocumentos" id="td">
 								<option	value=<bean:write name="td" property="codigo"/>>
@@ -97,7 +98,7 @@
 
 					</div>
 	                
-	                <div class="conte_div_left" style="width: 31%; height: 34px;">
+	                <div class="conte_div_left" style="width: 32%; height: 34px;">
 	                    <label class="conte_label">Nro.Documento </label>
 	                    <input type="text" name="documento" id="documento" size="15" maxlength="15">
 	                </div>
@@ -171,7 +172,7 @@
 					
 			  	</div>
 			  	
-			  	<div id="botoneria" style="width:960px">				
+			  	<div id="botoneria" style="width:1000px">				
 					<input name="button" id="calcular" value="Calcular" style="width: 100px; height: 30px; cursor: pointer; background-repeat: no-repeat; background-position: 3px 1px; padding-bottom: 4px;" onclick="calcular_resumen_inicial();" type="button" >
 					<input name="button" id="borrar" value="Borrar" style="width: 100px; height: 30px; cursor: pointer; background-repeat: no-repeat; background-position: 3px 1px; padding-bottom: 4px;" onclick="borrarTabla();borrarCampos();insertar_fila('');" type="button" disabled="disabled" >
 					<input name="enviar" id="enviar" value="Enviar" style="width: 100px; height: 30px; cursor: pointer; background-position: 3px 1px; background-repeat: no-repeat; padding-bottom: 4px;" onclick="guardar();" type="button" >
@@ -182,4 +183,7 @@
 		</div>
 	</body>
 </html>
+<%
+}
+%>
 

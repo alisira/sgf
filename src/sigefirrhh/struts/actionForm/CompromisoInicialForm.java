@@ -7,9 +7,9 @@ public class CompromisoInicialForm extends ActionForm{
 	
 	private static final long serialVersionUID = -7735259961764648388L;
 	
-	private Integer idCompromisoInicial;    
+	private Integer idCompromisoInicial;
 	private Integer idOrganismo;
-	private Integer ano;  
+	private Integer ano;
     private Integer tarea;  
     private Integer estatus;  
     private Integer idUnidadAdministradora;    
@@ -17,23 +17,23 @@ public class CompromisoInicialForm extends ActionForm{
     private Integer idTipoPago;
     private Integer idTipoDocumento;
     private String documento;
-    private String observacion;  
+    private String observacion;
     private Integer oriPresu;
     private String gaceCrediAdi;
     private String decreCrediAdi; 
     private String fechaGaceCredi;
-    private String gaceRecti;  
-    private String decreRecti;  
+    private String gaceRecti;
+    private String decreRecti;
     private String fechaGaceRecti;
     private Integer compromiso;
     //private Date fechaRegistro;
 	private Integer expediente;
-    private Integer idUsuario;        
+    private Integer idUsuario;
     private Integer mes;
     private Integer idTipoNomina;
     private Integer idTipoFondo;
     private String codFrecuenPago;	
-    
+
     //Detalle
     private Integer ff[];
     private Integer codCatePresu[];

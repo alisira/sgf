@@ -42,8 +42,7 @@
 
 			String mes = "00".substring(String.valueOf((cal.get(Calendar.MONTH)+1)).length())+ String.valueOf((cal.get(Calendar.MONTH)+1)); 
 			String dia = "00".substring(String.valueOf((cal.get(Calendar.DATE)+1)).length())+ String.valueOf((cal.get(Calendar.DATE)+1));		
-			fecha =   dia + "/" +  mes  + "/" + String.valueOf(cal.get(Calendar.YEAR));
-			
+			fecha =   dia + "/" +  mes  + "/" + String.valueOf(cal.get(Calendar.YEAR));			
 			
 			if (session.getAttribute("titulo")!=null) titulo = (String) session.getAttribute("titulo");
 			
@@ -59,7 +58,7 @@
 <html>
 	<head>
 		<title> <%=titulo %></title>
-		<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="<%=rutaTemp %>/js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="<%=rutaTemp %>/js/jquery.js"></script>
 		<script type="text/javascript" src="<%=rutaTemp %>/js/menu_view.js"></script>
 		<script language="javascript" src="<%=rutaTemp %>/js/comun.js"></script>

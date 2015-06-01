@@ -20,7 +20,11 @@
     from unidadadministradora
     where 1=1
     <isParameterPresent >
-		
+		<isNotNull property="idUnidadAdministradora" prepend=" and id_unidad_administradora IN ">
+			<iterate property="idUnidadAdministradora" open="(" close=")"	conjunction=",">
+				#idUnidadAdministradora[]#
+			</iterate>
+		</isNotNull>
 		<isNotNull property="codUnidadAdministradora" prepend=" and cod_unidad_administ IN ">
 			<iterate property="codUnidadAdministradora" open="(" close=")"	conjunction=",">
 				#codUnidadAdministradora[]#

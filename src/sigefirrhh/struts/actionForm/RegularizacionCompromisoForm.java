@@ -1,250 +1,364 @@
 package sigefirrhh.struts.actionForm;
 
+import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
-public class RegularizacionCompromisoForm extends ActionForm{    
-	
-	private static final long serialVersionUID = -7735259961764648388L;
-	
-	private Integer idCompromisoInicial;    
-	private Integer idOrganismo;
-	private Integer ano;  
-    private Integer tarea;  
-    private Integer estatus;  
-    private Integer idUnidadAdministradora;    
-    private Integer idCuentadante;
-    private Integer idTipoPago;
+public class RegularizacionCompromisoForm extends ActionForm{
+
+	private static final long serialVersionUID = -5087744671381475045L;
+
+    private Integer idCompromisoInicial;
+    private Integer idRegularizacionCompromisoInicial;
+    private Long expediente;
+    private Long compromiso;
+    private Integer ano;
+    private Integer tarea;
+    private Integer estatus;
     private Integer idTipoDocumento;
     private String documento;
-    private String observacion;  
-    private Integer oriPresu;
-    private String gaceCrediAdi;
-    private String decreCrediAdi; 
-    private String fechaGaceCredi;
-    private String gaceRecti;  
-    private String decreRecti;  
-    private String fechaGaceRecti;
-    private Integer compromiso;
-    //private Date fechaRegistro;
-	private Integer expediente;
-    private Integer idUsuario;        
-    private Integer mes;
-    private Integer idTipoNomina;
-    private Integer idTipoFondo;
-    private String codFrecuenPago;	
+    private String observacion;
+    private String gacetaCredAdicional;
+    private String decretoCredAdicional;
+    private Date fechaCredAdicional;
+    private String gacetaRectificacion;
+    private String decretoRectificacion;
+    private Date fechaRectificacion;
+    private Date fechaRegistro;
+    private String origenPresupuestario;
+
+    public Integer getIdCompromisoInicial() {
+        return idCompromisoInicial;
+    }
+
+    public void setIdCompromisoInicial(Integer idCompromisoInicial) {
+        this.idCompromisoInicial = idCompromisoInicial;
+    }
+
+    public Integer getIdRegularizacionCompromisoInicial() {
+        return idRegularizacionCompromisoInicial;
+    }
+
+    public void setIdRegularizacionCompromisoInicial(Integer idRegularizacionCompromisoInicial) {
+        this.idRegularizacionCompromisoInicial = idRegularizacionCompromisoInicial;
+    }
+
+    public Long getExpediente() {
+        return expediente;
+    }
+
+    public void setExpediente(Long expediente) {
+        this.expediente = expediente;
+    }
     
-    //Detalle
-    private Integer ff[];
-    private Integer codCatePresu[];
-    private Integer codUel[];
-    private String denoUel[];    
-    private String partida[];
-    private String denoPartida[];
-    private Double monto[];
-    private Double totalResumen;
-    
-    
-    
-	public String getFechaGaceRecti() {
-		return fechaGaceRecti;
-	}
-	public void setFechaGaceRecti(String fechaGaceRecti) {
-		this.fechaGaceRecti = fechaGaceRecti;
-	}
-	public String getFechaGaceCredi() {
-		return fechaGaceCredi;
-	}
-	public void setFechaGaceCredi(String fechaGaceCredi) {
-		this.fechaGaceCredi = fechaGaceCredi;
-	}
-	public Integer getOriPresu() {
-		return oriPresu;
-	}
-	public void setOriPresu(Integer oriPresu) {
-		this.oriPresu = oriPresu;
-	}
-	public String getGaceCrediAdi() {
-		return gaceCrediAdi;
-	}
-	public void setGaceCrediAdi(String gaceCrediAdi) {
-		this.gaceCrediAdi = gaceCrediAdi;
-	}
-	public String getDecreCrediAdi() {
-		return decreCrediAdi;
-	}
-	public void setDecreCrediAdi(String decreCrediAdi) {
-		this.decreCrediAdi = decreCrediAdi;
-	}
-	public String getGaceRecti() {
-		return gaceRecti;
-	}
-	public void setGaceRecti(String gaceRecti) {
-		this.gaceRecti = gaceRecti;
-	}
-	public String getDecreRecti() {
-		return decreRecti;
-	}
-	public void setDecreRecti(String decreRecti) {
-		this.decreRecti = decreRecti;
-	}
-	public Integer getIdCompromisoInicial() {
-		return idCompromisoInicial;
-	}
-	public void setIdCompromisoInicial(Integer idCompromisoInicial) {
-		this.idCompromisoInicial = idCompromisoInicial;
-	}
-	public Integer getIdOrganismo() {
-		return idOrganismo;
-	}
-	public void setIdOrganismo(Integer idOrganismo) {
-		this.idOrganismo = idOrganismo;
-	}
-	public Integer getAno() {
-		return ano;
-	}
-	public void setAno(Integer ano) {
-		this.ano = ano;
-	}
-	public Integer getTarea() {
-		return tarea;
-	}
-	public void setTarea(Integer tarea) {
-		this.tarea = tarea;
-	}
-	public Integer getEstatus() {
-		return estatus;
-	}
-	public void setEstatus(Integer estatus) {
-		this.estatus = estatus;
-	}
-	public Integer getIdUnidadAdministradora() {
-		return idUnidadAdministradora;
-	}
-	public void setIdUnidadAdministradora(Integer idUnidadAdministradora) {
-		this.idUnidadAdministradora = idUnidadAdministradora;
-	}
-	public Integer getIdCuentadante() {
-		return idCuentadante;
-	}
-	public void setIdCuentadante(Integer idCuentadante) {
-		this.idCuentadante = idCuentadante;
-	}
-	public Integer getIdTipoPago() {
-		return idTipoPago;
-	}
-	public void setIdTipoPago(Integer idTipoPago) {
-		this.idTipoPago = idTipoPago;
-	}
-	public Integer getIdTipoDocumento() {
-		return idTipoDocumento;
-	}
-	public void setIdTipoDocumento(Integer idTipoDocumento) {
-		this.idTipoDocumento = idTipoDocumento;
-	}
-	public String getDocumento() {
-		return documento;
-	}
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-	public String getObservacion() {
-		return observacion;
-	}
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}	
-	public Integer getCompromiso() {
-		return compromiso;
-	}
-	public void setCompromiso(Integer compromiso) {
-		this.compromiso = compromiso;
-	}	
-	public Integer getExpediente() {
-		return expediente;
-	}
-	public void setExpediente(Integer expediente) {
-		this.expediente = expediente;
-	}
-	public Integer getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	public Integer getMes() {
-		return mes;
-	}
-	public void setMes(Integer mes) {
-		this.mes = mes;
-	}
+    public Long getCompromiso() {
+        return compromiso;
+    }
+
+    public void setCompromiso(Long compromiso) {
+        this.compromiso = compromiso;
+    }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
+
+    public Integer getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(Integer tarea) {
+        this.tarea = tarea;
+    }
+
+    public Integer getEstatus() {
+        return estatus;
+    }
+ 
+    public void setEstatus(Integer estatus) {
+        this.estatus = estatus;
+    }
+
+    public Integer getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.id_tipo_documento
+     *
+     * @param idTipoDocumento the value for regularizacioncompromiso.id_tipo_documento
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setIdTipoDocumento(Integer idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.documento
+     *
+     * @return the value of regularizacioncompromiso.documento
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getDocumento() {
+        return documento;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.documento
+     *
+     * @param documento the value for regularizacioncompromiso.documento
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setDocumento(String documento) {
+        this.documento = documento == null ? null : documento.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.observacion
+     *
+     * @return the value of regularizacioncompromiso.observacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getObservacion() {
+        return observacion;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.observacion
+     *
+     * @param observacion the value for regularizacioncompromiso.observacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setObservacion(String observacion) {
+        this.observacion = observacion == null ? null : observacion.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.gaceta_cred_adicional
+     *
+     * @return the value of regularizacioncompromiso.gaceta_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getGacetaCredAdicional() {
+        return gacetaCredAdicional;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.gaceta_cred_adicional
+     *
+     * @param gacetaCredAdicional the value for regularizacioncompromiso.gaceta_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setGacetaCredAdicional(String gacetaCredAdicional) {
+        this.gacetaCredAdicional = gacetaCredAdicional == null ? null : gacetaCredAdicional.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.decreto_cred_adicional
+     *
+     * @return the value of regularizacioncompromiso.decreto_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getDecretoCredAdicional() {
+        return decretoCredAdicional;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.decreto_cred_adicional
+     *
+     * @param decretoCredAdicional the value for regularizacioncompromiso.decreto_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setDecretoCredAdicional(String decretoCredAdicional) {
+        this.decretoCredAdicional = decretoCredAdicional == null ? null : decretoCredAdicional.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.fecha_cred_adicional
+     *
+     * @return the value of regularizacioncompromiso.fecha_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public Date getFechaCredAdicional() {
+        return fechaCredAdicional;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.fecha_cred_adicional
+     *
+     * @param fechaCredAdicional the value for regularizacioncompromiso.fecha_cred_adicional
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setFechaCredAdicional(Date fechaCredAdicional) {
+        this.fechaCredAdicional = fechaCredAdicional;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.gaceta_rectificacion
+     *
+     * @return the value of regularizacioncompromiso.gaceta_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getGacetaRectificacion() {
+        return gacetaRectificacion;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.gaceta_rectificacion
+     *
+     * @param gacetaRectificacion the value for regularizacioncompromiso.gaceta_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setGacetaRectificacion(String gacetaRectificacion) {
+        this.gacetaRectificacion = gacetaRectificacion == null ? null : gacetaRectificacion.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.decreto_rectificacion
+     *
+     * @return the value of regularizacioncompromiso.decreto_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getDecretoRectificacion() {
+        return decretoRectificacion;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.decreto_rectificacion
+     *
+     * @param decretoRectificacion the value for regularizacioncompromiso.decreto_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setDecretoRectificacion(String decretoRectificacion) {
+        this.decretoRectificacion = decretoRectificacion == null ? null : decretoRectificacion.trim();
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.fecha_rectificacion
+     *
+     * @return the value of regularizacioncompromiso.fecha_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public Date getFechaRectificacion() {
+        return fechaRectificacion;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.fecha_rectificacion
+     *
+     * @param fechaRectificacion the value for regularizacioncompromiso.fecha_rectificacion
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setFechaRectificacion(Date fechaRectificacion) {
+        this.fechaRectificacion = fechaRectificacion;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.fecha_registro
+     *
+     * @return the value of regularizacioncompromiso.fecha_registro
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.fecha_registro
+     *
+     * @param fechaRegistro the value for regularizacioncompromiso.fecha_registro
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method returns the value of the database column regularizacioncompromiso.origen_presupuestario
+     *
+     * @return the value of regularizacioncompromiso.origen_presupuestario
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public String getOrigenPresupuestario() {
+        return origenPresupuestario;
+    }
+
+    /**
+     * This method was generated by Apache iBATIS ibator.
+     * This method sets the value of the database column regularizacioncompromiso.origen_presupuestario
+     *
+     * @param origenPresupuestario the value for regularizacioncompromiso.origen_presupuestario
+     *
+     * @ibatorgenerated Fri May 29 15:27:21 VET 2015
+     */
+    public void setOrigenPresupuestario(String origenPresupuestario) {
+        this.origenPresupuestario = origenPresupuestario == null ? null : origenPresupuestario.trim();
+    }
 	
-	public Integer getIdTipoNomina() {
-		return idTipoNomina;
-	}
-	public void setIdTipoNomina(Integer idTipoNomina) {
-		this.idTipoNomina = idTipoNomina;
-	}
-	public Integer getIdTipoFondo() {
-		return idTipoFondo;
-	}
-	public void setIdTipoFondo(Integer idTipoFondo) {
-		this.idTipoFondo = idTipoFondo;
-	}
-	public Integer[] getFf() {
-		return ff;
-	}
-	public void setFf(Integer[] ff) {
-		this.ff = ff;
-	}
-	public Integer[] getCodCatePresu() {
-		return codCatePresu;
-	}
-	public void setCodCatePresu(Integer[] codCatePresu) {
-		this.codCatePresu = codCatePresu;
-	}
-	public Integer[] getCodUel() {
-		return codUel;
-	}
-	public void setCodUel(Integer[] codUel) {
-		this.codUel = codUel;
-	}
-	public String[] getDenoUel() {
-		return denoUel;
-	}
-	public void setDenoUel(String[] denoUel) {
-		this.denoUel = denoUel;
-	}
-	public String[] getPartida() {
-		return partida;
-	}
-	public void setPartida(String[] partida) {
-		this.partida = partida;
-	}
-	public String[] getDenoPartida() {
-		return denoPartida;
-	}
-	public void setDenoPartida(String[] denoPartida) {
-		this.denoPartida = denoPartida;
-	}
-	public Double[] getMonto() {
-		return monto;
-	}
-	public void setMonto(Double[] monto) {
-		this.monto = monto;
-	}
-	public Double getTotalResumen() {
-		return totalResumen;
-	}
-	public void setTotalResumen(Double totalResumen) {
-		this.totalResumen = totalResumen;
-	}
-	public String getCodFrecuenPago() {
-		return codFrecuenPago;
-	}
-	public void setCodFrecuenPago(String codFrecuenPago) {
-		this.codFrecuenPago = codFrecuenPago;
-	}
-	
-	
+    public void reset(ActionMapping map, HttpServletRequest req){
+        this.idCompromisoInicial=null;    
+        this.idRegularizacionCompromisoInicial=null;    
+        this.expediente=null;
+        this.compromiso=null;
+        this.ano=null;
+        this.tarea=null;
+        this.estatus=null;
+        this.idTipoDocumento=null;
+        this.documento=null;
+        this.observacion=null;
+        this.gacetaCredAdicional=null;
+        this.decretoCredAdicional=null;
+        this.fechaCredAdicional=null;
+        this.gacetaRectificacion=null;
+        this.decretoRectificacion=null;
+        this.fechaRectificacion=null;
+        this.fechaRegistro=null;
+        this.origenPresupuestario=null;
+    }
     
 }

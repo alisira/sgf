@@ -67,6 +67,7 @@ public class LoginSession {
 	}
 
 	public boolean isValid() {
+		
 		return this.usuario!=null;
 	}
 

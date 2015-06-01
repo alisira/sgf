@@ -62,6 +62,6 @@
 	}	
 	
 	//System.out.println(url);
-	response.sendRedirect("/sigefirrhh/index.jsp");
+	//response.sendRedirect("/sigefirrhh/index.jsp");
 
 %>

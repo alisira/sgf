@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="deta_resumen_nomina" >
-  <resultMap id="BaseResultMap" class="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >
+  <resultMap id="CompromisoInicialDetalle" class="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >
     
     <result column="id_compromiso_inicial_detalle" property="idCompromisoInicialDetalle" jdbcType="INTEGER" />
     <result column="id_compromiso_inicial" property="idCompromisoInicial" jdbcType="INTEGER" />    
@@ -10,10 +10,49 @@
     <result column="ff" property="ff" jdbcType="INTEGER" />
   </resultMap>
   
-  <select id="buscar_compromiso_inicial_detalle" resultMap="BaseResultMap" parameterClass="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" >    
+  <select id="buscarCompromisoInicialDetalle" resultMap="CompromisoInicialDetalle" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
 	SELECT id_compromiso_inicial_detalle, id_compromiso_inicial, id_partida_uel_especifica, monto
-  	FROM compromisoinicialdetalle;
+  	FROM compromisoinicialdetalle
+ 	
+ 	<isParameterPresent >
+ 	where 
+	 	<isNotNull property="idCompromisoInicialDetalle" >
+			<iterate property="idCompromisoInicialDetalle" open="id_compromiso_inicial_detalle in (" close=")"	conjunction="," >
+				#idCompromisoInicialDetalle[]#
+			</iterate>
+		</isNotNull>
+  	</isParameterPresent>
+  	
   </select>
+  
+  <select id="buscarCompromisoInicialDetalleForm" resultMap="CompromisoInicialDetalle" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
+SELECT 
+  * 
+FROM 
+  public.compromisoinicialdetalle, 
+  public.compromisoinicial, 
+  public.partidauelespecifica, 
+  public.uelespecifica, 
+  public.unidadejecutora
+WHERE 
+  compromisoinicial.id_compromiso_inicial = compromisoinicialdetalle.id_compromiso_inicial AND
+  partidauelespecifica.id_partida_uel_especifica = compromisoinicialdetalle.id_partida_uel_especifica AND
+  uelespecifica.id_uel_especifica = partidauelespecifica.id_uel_especifica AND
+  unidadejecutora.id_unidad_ejecutora = uelespecifica.id_unidad_ejecutora AND
+  compromisoinicial.expediente = 6;
+ 	
+ 	<isParameterPresent >
+ 	where 
+	 	<isNotNull property="idCompromisoInicialDetalle" >
+			<iterate property="idCompromisoInicialDetalle" open="id_compromiso_inicial_detalle in (" close=")"	conjunction="," >
+				#idCompromisoInicialDetalle[]#
+			</iterate>
+		</isNotNull>
+  	</isParameterPresent>
+  	
+  </select>
+  
+  
   
   <statement id="insertar_compromiso_inicial_detalle" parameterClass="sigefirrhh.ibatis.modelo.CompromisoInicialDetalle" resultClass="int">
 

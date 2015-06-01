@@ -13,17 +13,33 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
+
+
+
+
+
+
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
+import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.Expediente;
+import sigefirrhh.persistencia.modelo.UnidadAdministradora;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
+import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
 import sigefirrhh.persistencia.dao.GastoProyectadoDAO;
+import sigefirrhh.persistencia.dao.TipoDocumentoDAO;
+import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
+import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
+import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
+import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
@@ -69,20 +85,37 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 	        if ( session.getAttribute("loginSession") != null){
 	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
 	        		
-	        		List<TipoDocumento> tipoDocumentos = new ArrayList<TipoDocumento>();
-					tipoDocumentos.add(new TipoDocumento(0, "Resumen de Nomina"));
-					tipoDocumentos.add(new TipoDocumento(1, "Memorandum"));
-					tipoDocumentos.add(new TipoDocumento(2, "Oficio"));
-					request.setAttribute("TipoDocumentos", tipoDocumentos);
+	        		TipoDocumentoDAOImple tipoDocumentoDAO = new TipoDocumentoDAOImple();					
+					List<TipoDocumento> listaTipoDocu= (List<TipoDocumento>) tipoDocumentoDAO.buscarTipoDocuTempo();					
+					
+					//Recupera la data del maestro compromiso
+					CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
+					criterioBusqueda.addExpediente(40);					
+					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
+					List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");					
+					
+					//Recupera la data de la unidad administradora
+					criterioBusqueda =null;
+					criterioBusqueda = new CriterioBusqueda();					 
+					criterioBusqueda.addIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());					
+					UnidadAdministradoraDAO unidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
+					List<UnidadAdministradora> unidadAdministradora= (List<UnidadAdministradora>) unidadAdministradoraDAO.buscar(criterioBusqueda, "UnidadAdministradora");		
+					
+					//Recupera la data del detalle del compromiso
+					criterioBusqueda =null;
+					criterioBusqueda = new CriterioBusqueda();					 
+					criterioBusqueda.addIdCompromisoInicial((compromisoInicial.get(0).getIdCompromisoInicial()));
+					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
+					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDAO.buscar(criterioBusqueda, "compromisoInicialDetalle");					
+					
+					request.setAttribute("CompromisoInicial", compromisoInicial.get(0));
+					request.setAttribute("CompromisoInicialDetalle", compromisoInicialDetalle.get(0));
+					request.setAttribute("TipoDocumento", listaTipoDocu);
+					request.setAttribute("UnidadAdministradora", unidadAdministradora.get(0));
 					request.setAttribute("ano", ano);
 					request.setAttribute("titulo", "Regularizacion de Compromiso");
-					
-			        ///System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-					//Se inicializan y se montan en el request todos los bean que necesita la vista
-					
-					//request.getSession().setAttribute("ResumenNominaBean", this.MD5("1")); //Para poner un bean en memoria y devolverlo
-					//request.setAttribute("ResumenNominaBean2", this.MD5("2")); //Para poner un bean en memoria y devolverlo
 					request.getSession().setAttribute("ReguComproBean", null);
+					
 					fwd ="apruebaNuevo";					
 					
 		        	//response.

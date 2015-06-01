@@ -5,16 +5,18 @@ import java.sql.Statement;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import sigefirrhh.persistencia.dao.UsuarioDAO;
 
-public class UsuarioDAOImple extends GenericDAOImplHibernate implements UsuarioDAO {
+import sigefirrhh.persistencia.dao.RegularizacionCompromisoDAO;
+
+
+public class RegularizacionCompromisoDAOImple extends GenericDAOImplHibernate implements RegularizacionCompromisoDAO {
 	
 	InitialContext cxt = null;
 	DataSource ds = null;
 	Connection conn = null;
 	Statement stmt = null;
 	
-	public UsuarioDAOImple(){
+	public RegularizacionCompromisoDAOImple(){
 		super();
 		/*try{
     		this.cxt = new InitialContext();

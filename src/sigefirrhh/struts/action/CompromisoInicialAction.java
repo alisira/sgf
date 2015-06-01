@@ -75,13 +75,14 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 					tipoDocumentos.add(new TipoDocumento(2, "Oficio"));
 					request.setAttribute("TipoDocumentos", tipoDocumentos);
 					request.setAttribute("ano", ano);
+					request.setAttribute("titulo", "Compromiso Inicial");
 					
 			        ///System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 					//Se inicializan y se montan en el request todos los bean que necesita la vista
 					
 					//request.getSession().setAttribute("ResumenNominaBean", this.MD5("1")); //Para poner un bean en memoria y devolverlo
 					//request.setAttribute("ResumenNominaBean2", this.MD5("2")); //Para poner un bean en memoria y devolverlo
-					request.getSession().setAttribute("ResumenNominaBean", null);
+					request.getSession().setAttribute("ComproIniBean", null);
 					fwd ="apruebaNuevo";					
 					
 		        	//response.
@@ -161,7 +162,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        if ( session.getAttribute("loginSession") != null){
 	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){			
 			
-					if (request.getSession().getAttribute("ResumenNominaBean") != null){
+					if (request.getSession().getAttribute("ComproIniBean") != null){
 						System.out.println("Posiblemente le dio atras, debe iniciar proceso desde el menu inicial");
 						fwd = "sesionCerrada";
 						//System.out.println(request.getSession().getAttribute("ResumenNominaBean"));
@@ -269,7 +270,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 		 		        	
 		 		        	formaResp.setTotalResumen(montoTotal);
 		 		        	//request.setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	request.getSession().setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
+		 		        	request.getSession().setAttribute("ComproIniBean", formaResp); //Para poner un bean en memoria y devolverlo
 		 		        	
 							
 		 		        	//request.setAttribute("ResumenNominaInicialAction", this.MD5("1"));

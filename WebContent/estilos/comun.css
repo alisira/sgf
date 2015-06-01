@@ -16,7 +16,7 @@ body.app {
 /*Estilo importante que define la estructura de los div*****************/
 .contenedor_div{
     overflow: auto;
-    padding: 5px;
+    padding: 4px;
     width: 100%;    
 }
 
@@ -36,8 +36,12 @@ body.app {
     text-align: right;
 }
 
+#contenido{
+	width: 1000px;    
+}
+
 .conte_para{
-    padding:10px;
+    padding:5px;
     overflow: auto;
     display: block;
     font-family: Tahoma,Verdana,Arial,san-serif;
@@ -59,7 +63,7 @@ body.app {
     width: 31%; 
     text-align: left;
     height: 30px;
-    font-size: 10pt;
+    font-size: 9pt;
     color: #666699;
     float: left;
     padding: 8px 0 1px 8px;

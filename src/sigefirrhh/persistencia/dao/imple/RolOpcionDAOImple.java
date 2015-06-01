@@ -17,13 +17,13 @@ public class RolOpcionDAOImple extends GenericDAOImplHibernate implements RolOpc
 	
 	public RolOpcionDAOImple(){
 		super();
-		try{
+		/*try{
     		this.cxt = new InitialContext();
     		this.ds = (DataSource) cxt.lookup( "java:/comp/env/jdbc/DBPoolSigefirrhh" );
     		
     	}catch (Exception e){
     		e.printStackTrace();
-    	}
+    	}*/
 	}
 
 	

@@ -18,13 +18,13 @@ public class OpcionDAOImple extends GenericDAOImplHibernate implements OpcionDAO
 	
 	public OpcionDAOImple(){
 		super();
-		try{
+		/*try{
     		this.cxt = new InitialContext();
     		this.ds = (DataSource) cxt.lookup( "java:/comp/env/jdbc/DBPoolSigefirrhh" );
     		
     	}catch (Exception e){
     		e.printStackTrace();
-    	}
+    	}*/
 	}
 
 	

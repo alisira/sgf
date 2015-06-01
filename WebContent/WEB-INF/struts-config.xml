@@ -43,7 +43,7 @@
         <form-bean name="UnidadAdministradoraForm" type="sigefirrhh.struts.actionForm.UnidadAdministradoraForm"/>
         <form-bean name="GastoProyectadoForm" type="sigefirrhh.struts.actionForm.GastoProyectadoForm"/>
         <form-bean name="CompromisoInicialForm" type="sigefirrhh.struts.actionForm.CompromisoInicialForm"/>
-        <form-bean name="RegularizacionCompromisoForm" type="sigefirrhh.struts.actionForm.RegularizacionCompromisoForm"/>
+        <form-bean name="RegularizacionCompromisoForm" type="sigefirrhh.struts.actionForm.RegularizacionCompromisoForm"/>        
         <form-bean name="ParametrosBusquedaForm" type="sigefirrhh.struts.actionForm.ParametrosBusquedaForm"/>
     </form-beans>
     
@@ -74,7 +74,7 @@
             <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
         </action>
         
-        <action path="/regularizacionCompromiso" type="sigefirrhh.struts.action.RegularizacionCompromisoAction" parameter="accion" name="CompromisoInicialForm" scope="request" input="/web/regularizacion_compromiso/regularizacion_compromiso.jsp">
+        <action path="/regularizacionCompromiso" type="sigefirrhh.struts.action.RegularizacionCompromisoAction" parameter="accion" name="RegularizacionCompromisoForm" scope="request" input="/web/regularizacion_compromiso/regularizacion_compromiso.jsp">
             <forward name="apruebaNuevo" path="/web/regularizacion_compromiso/regularizacion_compromiso.jsp" />
             <forward name="apruebaGuardar" path="/web/regularizacion_compromiso/reporte_regularizacion_compromiso.jsp" redirect="true"/>
         </action>

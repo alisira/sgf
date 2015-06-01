@@ -1,0 +1,6 @@
+1.Crear el xml de mapeo de ibatis con el ibator
+2.Copiar el modelo a la generado por ibator a la carpeta de persistencia correspondiente
+4.Crear el modelo de persistencia el dao y la implementacion se puede copiar del archivo plantilla (por definir)
+5.Crear el actionForm con las mismas columnas que tiene el modelo
+6.Crear el action copiandose el de plantilla segun el requerimiento(por definir)
+7.Modificar el mapeo de struts en el struts-config
