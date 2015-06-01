@@ -199,8 +199,8 @@ public class CompromisoInicialForm extends ActionForm{
 	public Integer[] getFf() {
 		return ff;
 	}
-	public void setFf(Integer[] ff) {
-		this.ff = ff;
+	public void setFf(Integer ff, Integer indice) {
+		this.ff[indice] = ff;
 	}
 	public Integer[] getCodCatePresu() {
 		return codCatePresu;

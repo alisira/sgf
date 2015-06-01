@@ -112,15 +112,13 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					
 					CompromisoInicialForm comIni = new CompromisoInicialForm();
 					comIni.setAno(ano);
-					//comIni.
+					comIni.setIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());					
 					
 					for (int c=0;c<compromisoInicialDetalle.size();c++){
-						
-						
+						comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);						
 					}
 					
-					
-					
+					request.setAttribute("comIni", comIni);
 					request.setAttribute("CompromisoInicial", compromisoInicial.get(0));
 					request.setAttribute("CompromisoInicialDetalle", compromisoInicialDetalle.get(0));
 					request.setAttribute("TipoDocumento", listaTipoDocu);
