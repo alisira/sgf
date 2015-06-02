@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
+
 public class CompromisoInicialForm extends ActionForm{
 	
 	private static final long serialVersionUID = -7735259961764648388L;
@@ -37,7 +39,8 @@ public class CompromisoInicialForm extends ActionForm{
     private Integer idTipoNomina;
     private Integer idTipoFondo;
     private String denoTipoFondo;
-    private String codFrecuenPago;	
+    private String codFrecuenPago;
+   
 
     //Detalle
     private Integer ff[];
@@ -49,8 +52,6 @@ public class CompromisoInicialForm extends ActionForm{
     private Double dispo[];
     private Double monto[];
     private Double totalResumen;
-    
-    
 
 
 	public CompromisoInicialForm(Integer tamaño) {

@@ -109,24 +109,17 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
 					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
 
-					//System.out.println(compromisoInicialDetalle.size());
-
+					//Crea un form y carga los datos del encabezado
 					CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
 					comIni.setAno(ano);
-					comIni.setDenoTipoFondo("Xfondo");
-					
-					//System.out.println(compromisoInicial.get(0).getDocumento());
-					
+					comIni.setDenoTipoFondo("Xfondo");					
 					comIni.setDocumento(compromisoInicial.get(0).getDocumento());
 					comIni.setCodUnidadAdministradora((unidadAdministradora.get(0).getCodUnidadAdministradora()));
 					comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
 					comIni.setObservacion(compromisoInicial.get(0).getObservacion());
-					comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());
+					comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());					
 					
-					
-					 
-					
-					
+					//Carga los datos del detalle
 					for (int c=0;c<compromisoInicialDetalle.size();c++){
 						comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);
 						comIni.setCodCatePresu(compromisoInicialDetalle.get(0).getCodCatePresu(),c);

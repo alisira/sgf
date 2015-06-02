@@ -133,31 +133,20 @@
 			        		</thead>
 			        		
 			        		<tbody>
-			        		
-			        		
-						 		
 						 		
 						 		<logic:iterate name="Compromiso" property="codCatePresu" id="ict" indexId="indice">
 						
 									<tr>
 						 		  
-										<td class="detalle_center">
-										
-										
-										<bean:define id="temp" name="Compromiso" property="codCatePresu"  type="java.lang.Integer" />										
-										<%Integer tmp=temp;%> 
-										<%=tmp%>
-										
+										<td class="detalle_center">										
 											<bean:write name="Compromiso" property='<%="codCatePresu[" + indice +"]"%>'/>
-											
-											
-											<input name="codCatePresu" value=<%="codCatePresu[" + indice +"]"%> >				
-											<html:hidden name="Compromiso" property='<%="codCatePresu[" + indice +"]"%>'/>
-											
+											<input name="codCatePresu" value=<bean:write name="Compromiso" property='<%="codCatePresu[" + indice +"]"%>'/> type="hidden">											
 										</td>
+										
 										<td class="detalle_center">
 											<bean:write name="Compromiso" property='<%="codUel[" + indice +"]"%>'/>
-										</td>					
+										</td>
+															
 										<td class="detalle_left">
 											<bean:write name="Compromiso" property='<%="denoUel[" + indice +"]"%>'/>
 										</td>
