@@ -1,4 +1,5 @@
 
+
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %> 
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
@@ -48,30 +49,26 @@
 		</script>
 
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>
-		<script language="javascript" src="<%=rutaTemp %>/js/compromiso_inicial.js"></script>
+		<script language="javascript" src="<%=rutaTemp %>/js/regularizacion_compromiso.js"></script>
 
 		<div id="fondo_opaco" style="position: absolute; top: 0px; left: 0px; width: 903px; height: 553px; display: none; opacity: 0.70; z-index: 9; background-color: #111111;">
-		</div>
-	
-		<jsp:include page="../unidad_administradora/buscar_unidad_administradora.jsp" />
+		</div>	
 	
 		<div id="pagina" align="center" >
 		
 			<div id="contenido">	
 			
 			<html:form action="/regularizacionCompromiso" method="post"> <!-- <form id="resumenNominaInicial" name="resumenNominaInicial" action="" method="post"> -->
-				<jsp:include page="../compromiso_inicial/origen_presupuestario.jsp" />				
-				
-				<input name="idTipoFondo" id="idTipoFondo" value="1" type="hidden">
-				<input name="ff" id="ff" value="1" type="hidden">				
+				<jsp:include page="../compromiso_inicial/origen_presupuestario.jsp" />
+								
 				<input name="tablavacia" id="tablavacia" value="SI" type="hidden">
-				<input name="accion" id="accion" value="guardar" type="hidden">
-				<input name="codFrecuenPago" id="codFrecuenPago" value="1 2 3" type="hidden">
+				<input name="accion" id="accion" value="guardar" type="hidden">				
+				<html:hidden name="Compromiso" property="idCompromisoInicial" />
 				
 				<div id="conte_para" class="conte_para">
 					
 					<div class="conte_div_left" style="width: 31%; height: 34px;" >
-	                    <label class="conte_label">Fecha: <script>hoy();document.write(fechaHoy);</script> </label>	                     
+	                    <label class="conte_label">Fecha: <script>hoy();document.write(fechaHoy);</script> </label>
 	                </div>
 	
 					<div class="conte_div_left" style="width: 34%; height: 34px;" >
@@ -80,19 +77,19 @@
 	                
 	                <div class="conte_div_left" style="width: 31%; height: 34px;" >
 	                    <label class="conte_label">Tipo de Fondo </label>
-	                    <label class="conte_label">&nbsp;<bean:write name="RegularizacionCompromisoForm" property="idTipoFondo"/></label> 
+	                    <label class="conte_label">&nbsp;<bean:write name="Compromiso" property="denoTipoFondo"/></label> 
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 40%; height: 34px;">
 	                    <label class="conte_label">Tipo de Documento </label>
-						<html:select name="RegularizacionCompromisoForm" property="idTipoDocumento" tabindex="0" style="width: 240px;" styleId="idTipoDocumento">
+						<html:select name="Compromiso" property="idTipoDocumento" tabindex="0" style="width: 240px;" styleId="idTipoDocumento">
 							<html:options collection="TipoDocumento" property="codigo" labelProperty="denominacion"/>
 						</html:select>
 					</div>
 	                
 	                <div class="conte_div_left" style="width: 32%; height: 34px;">
 	                    <label class="conte_label">Nro.Documento </label>
-	                    <html:text property="documento" styleId="documento" size="15" maxlength="15" />
+	                    <html:text name="Compromiso" property="documento" styleId="documento" size="15" maxlength="15" />
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 25%; height: 34px;" >
@@ -102,17 +99,17 @@
 	                
 	                <div class="conte_div_left" style="width: 25%;">
 	                    <label class="conte_label">Unidad Administradora:</label>
-	                    <label class="conte_label">&nbsp;<bean:write name="UnidadAdministradora" property="codUnidadAdministradora"/></label>
+	                    <label class="conte_label">&nbsp;<bean:write name="Compromiso" property="codUnidadAdministradora"/></label>
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 70%;">
 						<label class="conte_label">&nbsp;Denominacion:</label>
-						<label class="conte_label"><bean:write name="UnidadAdministradora" property="denominacion"/> </label>							                     
+						<label class="conte_label"><bean:write name="Compromiso" property="denoUniAdmi"/> </label>							                     
 	                </div>
 	                
 	                <div class="conte_div_left" style="width: 98%;">
 	                    <label class="conte_label">Observaci&oacute;n: </label>
-						<html:text property="observacion" styleId="observacion" size="87" maxlength="100" />							                     
+						<html:text name="Compromiso" property="observacion" styleId="observacion" size="87" maxlength="100" />
 	                </div>
 	                 
             	</div>
@@ -123,25 +120,85 @@
 						<table id="TablaConcepto" class="tablesorter tablesorter-blue" role="grid" >
 			  				<thead>
 								<tr id="encabezado" align="center">						    
-								    <td class="celda_encabezado" width="10%">Cod.Cat.Pres</td>									    
-									<td class="celda_encabezado" width="7%">UEL</td>
-									<td class="celda_encabezado" width="22%">Deno UEL</td>
-									<td class="celda_encabezado" width=5%">F.F</td>
+								    <td class="celda_encabezado" width="8%">Cod.Cat.Pres</td>									    
+									<td class="celda_encabezado" width="4%">UEL</td>
+									<td class="celda_encabezado" width="16%">Deno UEL</td>
+									<td class="celda_encabezado" width=3%">F.F</td>
 									<td class="celda_encabezado" width="10%">Cod.Partida</td>
-									<td class="celda_encabezado" width="25%">Deno Partida</td>
-									<td class="celda_encabezado" width="10%">Disp.Presu</td>
-							      	<td class="celda_encabezado" width="10%">Monto</td>						      	
+									<td class="celda_encabezado" width="23%">Deno Partida</td>
+									<td class="celda_encabezado" width="12%">Disp.Presu</td>
+							      	<td class="celda_encabezado" width="12%">Monto-Compro</td>						      	
+							      	<td class="celda_encabezado" width="12%">+/-</td>
 				        		</tr>
 			        		</thead>
 			        		
 			        		<tbody>
-				        		<tr id="vacio_impu" class="title odd">
-						 			<td colspan="8" >
-						 				<div  style="text-align: center;" >
-						 					Presione el bot&oacute;n calcular para obtener resumen de n&oacute;mina inicial
-						 				</div>
-						 			</td>
-						 		</tr>
+			        		
+			        		
+					 		
+						 		
+						 		
+						 		<logic:iterate name="Compromiso" property="codCatePresu" id="ict" indexId="indice">
+						
+									<tr>
+						 		  
+										<td class="detalle_center">
+										
+										
+										<bean:define id="temp" name="Compromiso" property="codCatePresu"  type="java.lang.Integer" />										
+										<%Integer tmp=temp;%> 
+										<%=tmp%>
+										
+											<bean:write name="Compromiso" property='<%="codCatePresu[" + indice +"]"%>'/>
+											
+											
+											<input name="codCatePresu" value=<%="codCatePresu[" + indice +"]"%> >				
+											<html:hidden name="Compromiso" property='<%="codCatePresu[" + indice +"]"%>'/>
+											
+										</td>
+										<td class="detalle_center">
+											<bean:write name="Compromiso" property='<%="codUel[" + indice +"]"%>'/>
+										</td>					
+										<td class="detalle_left">
+											<bean:write name="Compromiso" property='<%="denoUel[" + indice +"]"%>'/>
+										</td>
+										
+										<td class="detalle_center">
+											<bean:write name="Compromiso" property='<%="ff[" + indice +"]"%>'/>
+										</td>
+										
+										<td class="detalle_center">
+											<bean:write name="Compromiso" property='<%="partida[" + indice +"]"%>'/>
+										</td>
+										
+										<td class="detalle_left">
+											<bean:write name="Compromiso" property='<%="denoPartida[" + indice +"]"%>'/>
+										</td>
+										
+										<td class="detalle_right">
+											
+											<script type="text/javascript">
+												document.write(formato_numerico('<bean:write name="Compromiso" property='<%="dispo[" + indice +"]"%>'/>')); 
+											</script>
+										</td>
+										
+										<td class="detalle_right">
+											<script type="text/javascript">
+												document.write(formato_numerico('<bean:write name="Compromiso" property='<%="monto[" + indice +"]"%>'/>')); 
+											</script>						                       
+										</td>
+										
+										<td class="detalle_right">
+											<script type="text/javascript">
+												document.write(formato_numerico(0.00)); 
+											</script>						                       
+										</td>
+										
+																  
+									</tr>
+								  
+								</logic:iterate>
+						 		
 				   			</tbody>
 				  			
 						</table>			
@@ -153,8 +210,6 @@
 							  	<b> Total: </b>
 							  </td>
 							  <td class="renglons" style="text-align: right; font-weight: bold;" width="17%">
-							  
-							  
 							  	<b>
 							  		<input name="montoTotal" id="montoTotal" value="0.00" size="15" type="text" align="right" class="textoTabla" readonly="readonly">
 							  	</b>
@@ -167,8 +222,7 @@
 					
 			  	</div>
 			  	
-			  	<div id="botoneria" style="width:1000px">				
-					<input name="button" id="calcular" value="Calcular" style="width: 100px; height: 30px; cursor: pointer; background-repeat: no-repeat; background-position: 3px 1px; padding-bottom: 4px;" onclick="calcular_resumen_inicial();" type="button" >
+			  	<div id="botoneria" style="width:1000px">
 					<input name="button" id="borrar" value="Borrar" style="width: 100px; height: 30px; cursor: pointer; background-repeat: no-repeat; background-position: 3px 1px; padding-bottom: 4px;" onclick="borrarTabla();borrarCampos();insertar_fila('');" type="button" disabled="disabled" >
 					<input name="enviar" id="enviar" value="Enviar" style="width: 100px; height: 30px; cursor: pointer; background-position: 3px 1px; background-repeat: no-repeat; padding-bottom: 4px;" onclick="guardar();" type="button" >
 				</div>

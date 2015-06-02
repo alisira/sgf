@@ -86,8 +86,8 @@ body.app {
 	visibility: inherit; 
 	border-width: 1.5px;	
 	border-color: black black white; 
-	height: 350px; 
-	width: 960px; 
+	height: 275px; 
+	width: 1000px; 
 	margin: 5px;
 	overflow: scroll;
 }

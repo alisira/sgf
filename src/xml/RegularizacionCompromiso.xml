@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="regularizacioncompromiso" >
+
+	<resultMap id="RegularizacionCompromiso" class="sigefirrhh.persistencia.modelo.RegularizacionCompromiso" >   
+	    
+    	<result column="id_regularizacion_compromiso" property="idRegularizacionCompromisoInicial" jdbcType="INTEGER" />
+	    <result column="id_compromiso_inicial" property="idCompromisoInicial" jdbcType="INTEGER" />
+	    <result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />
+	    <result column="ano" property="ano" jdbcType="INTEGER" />
+	    <result column="tarea" property="tarea" jdbcType="INTEGER" />
+	    <result column="estatus" property="estatus" jdbcType="INTEGER" />	    
+	    <result column="id_tipo_documento" property="idTipoDocu" jdbcType="INTEGER" />
+	    <result column="documento" property="documento" jdbcType="VARCHAR" />
+	    <result column="observacion" property="observacion" jdbcType="VARCHAR" />
+	    <result column="origen_presupuestario" property="oriPresu" jdbcType="VARCHAR" />
+	    <result column="gaceta_cred_adicional" property="gaceCrediAdi" jdbcType="VARCHAR" />
+	    <result column="decreto_cred_adicional" property="decreCrediAdi" jdbcType="VARCHAR" />
+	    <result column="fecha_cred_adicional" property="fechaGaceCredi" jdbcType="DATE" />
+	    <result column="gaceta_rectificacion" property="gaceRecti" jdbcType="VARCHAR" />
+	    <result column="decreto_rectificacion" property="decreRecti" jdbcType="VARCHAR" />
+	    <result column="fecha_rectificacion" property="fechaGaceRecti" jdbcType="DATE" />
+	    <result column="expediente" property="expediente" jdbcType="BIGINT" />
+	    <result column="compromiso" property="compromiso" jdbcType="BIGINT" />
+	    <result column="fecha_registro" property="fechaRegistro" jdbcType="DATE" />
+	    
+	</resultMap>
+
+	 <statement id="guardarRegularizacionCompromiso" parameterClass="sigefirrhh.persistencia.modelo.RegularizacionCompromiso" resultClass="int">
+	    <!--realizado el 01-06-15 20:189:44 .-->
+	    insert into regularizacioncompromiso
+	    <dynamic prepend="(" >
+	      <isNotNull prepend="," property="idCompromisoInicial" >
+	        id_compromiso_inicial
+	      </isNotNull>
+	      <isNotNull prepend="," property="idRegularizacionCompromisoInicial" >
+	        id_regularizacion_compromiso
+	      </isNotNull>
+	      <isNotNull prepend="," property="expediente" >
+	        expediente
+	      </isNotNull>
+	      <isNotNull prepend="," property="compromiso" >
+	        compromiso
+	      </isNotNull>
+	      <isNotNull prepend="," property="ano" >
+	        ano
+	      </isNotNull>
+	      <isNotNull prepend="," property="tarea" >
+	        tarea
+	      </isNotNull>
+	      <isNotNull prepend="," property="estatus" >
+	        estatus
+	      </isNotNull>
+	      <isNotNull prepend="," property="idTipoDocu" >
+	        id_tipo_documento
+	      </isNotNull>
+	      <isNotNull prepend="," property="documento" >
+	        documento
+	      </isNotNull>
+	      <isNotNull prepend="," property="observacion" >
+	        observacion
+	      </isNotNull>
+	      <isNotNull prepend="," property="fechaRegistro" >
+	        fecha_registro
+	      </isNotNull>
+	      <isNotNull prepend="," property="oriPresu" >
+        origen_presupuestario
+      </isNotNull>
+      <isNotNull prepend="," property="gaceCrediAdi" >
+        gaceta_cred_adicional
+      </isNotNull>
+      <isNotNull prepend="," property="decreCrediAdi" >
+        decreto_cred_adicional
+      </isNotNull>
+      <isNotNull prepend="," property="fechaGaceCredi" >
+        fecha_cred_adicional
+      </isNotNull>
+      <isNotNull prepend="," property="gaceRecti" >
+        gaceta_rectificacion
+      </isNotNull>
+      <isNotNull prepend="," property="decreRecti" >
+        decreto_rectificacion
+      </isNotNull>
+      <isNotNull prepend="," property="fechaGaceRecti" >
+        fecha_rectificacion
+      </isNotNull>
+	      
+	      )
+	    </dynamic>
+	    values
+	    <dynamic prepend="(" >
+	      <isNotNull prepend="," property="idCompromisoInicial" >
+	        #idCompromisoInicial:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="idRegularizacionCompromisoInicial" >
+	        #idRegularizacionCompromisoInicial:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="expediente" >
+	        #expediente:BIGINT#
+	      </isNotNull>
+	      <isNotNull prepend="," property="compromiso" >
+	        #compromiso:BIGINT#
+	      </isNotNull>
+	      <isNotNull prepend="," property="ano" >
+	        #ano:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="tarea" >
+	        #tarea:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="estatus" >
+	        #estatus:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="idTipoDocu" >
+	        #idTipoDocu:INTEGER#
+	      </isNotNull>
+	      <isNotNull prepend="," property="documento" >
+	        #documento:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="observacion" >
+	        #observacion:VARCHAR#
+	      </isNotNull>	      
+	      <isNotNull prepend="," property="fechaRegistro" >
+	        #fechaRegistro:DATE#
+	      </isNotNull>
+	      <isNotNull prepend="," property="oriPresu" >
+        	#oriPresu:VARCHAR#
+			</isNotNull>
+	      <isNotNull prepend="," property="gaceCrediAdi" >
+	        #gaceCrediAdi:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="decreCrediAdi" >
+	        #decreCrediAdi:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="fechaGaceCredi" >
+	        #fechaGaceCredi:DATE#
+	      </isNotNull>
+	      <isNotNull prepend="," property="gaceRecti" >
+	        #gaceRecti:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="decreRecti" >
+	        #decreRecti:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="fechaGaceRecti" >
+	        #fechaGaceRecti:DATE#
+	      </isNotNull>
+	      
+	      )
+	    </dynamic>
+	    returning id_regularizacion_compromiso
+	  </statement>  
+
+</sqlMap>

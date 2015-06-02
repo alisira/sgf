@@ -189,7 +189,7 @@
 					</td>
 					
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="FF[" + indice +"]"%>'/>
+						<bean:write name="ResumenNominaBean" property='<%="ff[" + indice +"]"%>'/>
 					</td>
 					
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">

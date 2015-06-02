@@ -18,13 +18,11 @@ import sigecof.CompromisoInicialDTO;
 
 
 
-
-
-
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.Expediente;
+import sigefirrhh.persistencia.modelo.RegularizacionCompromiso;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.modelo.TipoDocumento;
@@ -32,17 +30,20 @@ import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
 import sigefirrhh.persistencia.dao.GastoProyectadoDAO;
+import sigefirrhh.persistencia.dao.RegularizacionCompromisoDAO;
 import sigefirrhh.persistencia.dao.TipoDocumentoDAO;
 import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
+import sigefirrhh.persistencia.dao.imple.RegularizacionCompromisoDAOImple;
 import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
+import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,42 +97,55 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					
 					//Recupera la data de la unidad administradora
 					criterioBusqueda =null;
-					criterioBusqueda = new CriterioBusqueda();					 
+					criterioBusqueda = new CriterioBusqueda();
 					criterioBusqueda.addIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());					
 					UnidadAdministradoraDAO unidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
 					List<UnidadAdministradora> unidadAdministradora= (List<UnidadAdministradora>) unidadAdministradoraDAO.buscar(criterioBusqueda, "UnidadAdministradora");		
-					
+
 					//Recupera la data del detalle del compromiso
 					criterioBusqueda =null;
 					criterioBusqueda = new CriterioBusqueda();
 					criterioBusqueda.addIdCompromisoInicial((compromisoInicial.get(0).getIdCompromisoInicial()));
 					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
 					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
-					
-					System.out.println(compromisoInicialDetalle.size());
-					
-					CompromisoInicialForm comIni = new CompromisoInicialForm();
+
+					//System.out.println(compromisoInicialDetalle.size());
+
+					CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
 					comIni.setAno(ano);
-					comIni.setIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());					
+					comIni.setDenoTipoFondo("Xfondo");
+					
+					//System.out.println(compromisoInicial.get(0).getDocumento());
+					
+					comIni.setDocumento(compromisoInicial.get(0).getDocumento());
+					comIni.setCodUnidadAdministradora((unidadAdministradora.get(0).getCodUnidadAdministradora()));
+					comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
+					comIni.setObservacion(compromisoInicial.get(0).getObservacion());
+					comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());
+					
+					
+					 
+					
 					
 					for (int c=0;c<compromisoInicialDetalle.size();c++){
-						comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);						
+						comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);
+						comIni.setCodCatePresu(compromisoInicialDetalle.get(0).getCodCatePresu(),c);
+						comIni.setCodUel(compromisoInicialDetalle.get(0).getCodUnidadEjecutora() ,c);
+					    comIni.setDenoUel(compromisoInicialDetalle.get(0).getDenoUnidadEjecutora(),c);
+					    comIni.setPartida(compromisoInicialDetalle.get(0).getCodPartida(),c);
+					    comIni.setDenoPartida(compromisoInicialDetalle.get(0).getDenoPartida(),c);
+					    comIni.setDispo(500.0,c);
+					    comIni.setMonto(compromisoInicialDetalle.get(0).getMonto(),c);
 					}
 					
-					request.setAttribute("comIni", comIni);
-					request.setAttribute("CompromisoInicial", compromisoInicial.get(0));
-					request.setAttribute("CompromisoInicialDetalle", compromisoInicialDetalle.get(0));
+					request.setAttribute("Compromiso", comIni);
 					request.setAttribute("TipoDocumento", listaTipoDocu);
-					request.setAttribute("UnidadAdministradora", unidadAdministradora.get(0));
 					request.setAttribute("ano", ano);
 					request.setAttribute("titulo", "Regularizacion de Compromiso");
 					request.getSession().setAttribute("ReguComproBean", null);
 					
-					fwd ="apruebaNuevo";					
-					
-		        	//response.
-		        	//request.setAttribute("ResumenNominaInicialAction", this.MD5("1"));
-		        	//System.out.println(request.getAttribute("ResumenNominaInicialAction"));
+					fwd ="apruebaNuevo";
+		        	
 	        	}else{
 	        		fwd ="sesionCerrada";
 		        }
@@ -199,240 +213,53 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 	        out.write("<root>");
 	        Organismo org = new Organismo();
 			org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-			CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;
-			CompromisoInicialForm formaResp = new CompromisoInicialForm();
+			RegularizacionCompromisoForm formaPeti = (RegularizacionCompromisoForm ) form;			
 			CriterioBusqueda criterio = new CriterioBusqueda();
-	        
+
 	        if ( session.getAttribute("loginSession") != null){
 	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){			
-			
+
 					if (request.getSession().getAttribute("ReguComproBean") != null){
 						System.out.println("Posiblemente le dio atras, debe iniciar proceso desde el menu inicial");
-						fwd = "sesionCerrada";
-						//System.out.println(request.getSession().getAttribute("ResumenNominaBean"));
-					
-					}else{
-														
-						
+						fwd = "sesionCerrada";						
+
+					}else{							
+
 						Integer expeResul = 0;
 						Date fecha = new Date();
-									
 						int idUsuario = 1;
-						int idUnidadAdministadora = formaPeti.getIdUnidadAdministradora();	
+	 		        	
+						Expediente expediente = new Expediente();
+						expediente.setFechaReg(fecha);
+						expediente.setAno(ano);				
+						expediente.setEstatus(1);
+						expediente.setIdUsuario(idUsuario);
+						expediente.setObservacion(formaPeti.getObservacion());
+						expediente.setIdOrganismo((int) org.getIdOrganismo());
+						expediente.setIdProceso(55);
+						ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
+						expeResul = (Integer) expedienteDAO.guardar(expediente);
 						
+	 		        	RegularizacionCompromisoDAO regularizacionCompromisoDAO = new RegularizacionCompromisoDAOImple();
 						
-						ValidadorSesion vs = new ValidadorSesion();
+	 		        	RegularizacionCompromiso regularizacionCompromiso = new RegularizacionCompromiso();
+	 		        	regularizacionCompromiso = (RegularizacionCompromiso) regularizacionCompromiso.llenarBean(regularizacionCompromiso,formaPeti);
 						
-						boolean temp = vs.validarPermiso(request);
-						
-						
-						System.out.println("A ver el resultado es " +temp);
-						
-						
-						
-								
-						//Integer tipoNomina = formaPeti.getTipoNomina();
-						//String observacion = 
-						
-						/*clRegistroCompromisoInicial clcompIni = new clRegistroCompromisoInicial();
-			 		       
-						clcompIni.setAnho_fiscal(ano);
-						clcompIni.setCod_Sigecof("60");
-						clcompIni.setCod_Sigecof(String.valueOf(org));
-						clcompIni.setCod_unidad_administ("60008");
-						clcompIni.setPersid_cuentadante(393821);
-						clcompIni.setTipo_pago(3);
-						clcompIni.setTipo_fondo(3);
-						clcompIni.setTipo_documento(46);
-						clcompIni.setNumero_documento("777");
-						clcompIni.setObservacion(formaPeti.getObservacion());
-						clcompIni.setOrigen_presupuestario("1");
-						
-						CompromisoInicialDTO compIniDTO = new CompromisoInicialDTO();
-						 * 
-						 */
-					
-						
-						if (formaPeti.getCodFrecuenPago() !=null && !formaPeti.getCodFrecuenPago().equals("")) {
-							if (formaPeti.getCodFrecuenPago().indexOf(' ') != -1){							
-								for (int i = 0; i < formaPeti.getCodFrecuenPago().trim().split("\\ ").length; i++) {
-									if (formaPeti.getCodFrecuenPago().trim().split("\\ ")[i].trim().length() > 0){									
-										criterio.addCodFrecuenPago(Integer.valueOf(formaPeti.getCodFrecuenPago().trim().split("\\ ")[i].trim()));
-									}
-								}						
-							}else{							
-								criterio.addCodFrecuenPago(Integer.valueOf(formaPeti.getCodFrecuenPago().trim()));
-							}												
-						}
-												
-						criterio.addIdOrganismo((int) org.getIdOrganismo());
-						criterio.addAno(ano);
-						
-						criterio.addMesesCalcu(12 -mes);
-						criterio.addQuinceCalcu((12 -mes) * 2);
-						criterio.addSemaCalcu(52 - semana);	
-						
-						GastoProyectadoDAO gastoProyectadoDAO = new GastoProyectadoDAOImple();					
-						List<GastoProyectado> listadoGasto = (List<GastoProyectado>) gastoProyectadoDAO.proyectarGasto(criterio);
-						
-		 		        if (listadoGasto.size() > 0){	 		        	
-		 		        	
-		 		        	Double montoTotal = 0.0;
-		 		        	
-		 		        	//ArrayList<ImputacionesCompromisoInicialDTO> impComDTO = new ArrayList<ImputacionesCompromisoInicialDTO>();
-		 		        	//ImputacionesCompromisoInicialDTO impDTOTemp = null;
-		 		        	
-		 		        	for (int i = 0;i < listadoGasto.size(); i++){				
-		 		        		/*impDTOTemp = new ImputacionesCompromisoInicialDTO();
-		 		        		impDTOTemp.setFuenteFinanciamiento("1");
-		 		        		impDTOTemp.setCategoriaPresupuestaria(String.valueOf(i.getCodCatePresu()));
-		 		        		impDTOTemp.setCodUnidadEjecutora(String.valueOf(i.getCodUnidadEjecutora()));
-		 		        		impDTOTemp.setMonto(BigDecimal.valueOf(i.getMonto()));
-		 		        		impDTOTemp.setObjetoGasto(i.getCodPartida().replace(".", ""));
-		 	 					
-			 					impComDTO.add(impDTOTemp);*/
-		 		        	}
-		 		        	
-		 		        	//clcompIni.setDetalles_compromiso(impComDTO);
-		 		        	//CompromisoInicialDTO ciDTO = clcompIni.EjecuteConsulta();
-		 		        	//System.out.println(ciDTO.getNumeroExpediente() + " " + ciDTO.getNumeroCompromiso() + " " +ciDTO.getDetallesCompromiso().size());
+	 		        	regularizacionCompromiso.setAno(ano);
+	 		        	regularizacionCompromiso.setExpediente(expeResul);
+	 		        	regularizacionCompromiso.setEstatus(0);
+	 		        	regularizacionCompromiso.setFechaRegistro(fecha);
+	 		        	regularizacionCompromiso.setTarea(1);
+	 		        	
+	 		        	regularizacionCompromiso.setIdCompromisoInicial(formaPeti.getIdCompromisoInicial());
+	 		        	regularizacionCompromiso.setIdOrganismo((int) org.getIdOrganismo());
 							
-		 		        	Expediente expediente = new Expediente();
-							expediente.setFechaReg(fecha);
-							expediente.setAno(ano);				
-							expediente.setEstatus(1);
-							expediente.setIdUsuario(idUsuario);
-							expediente.setObservacion(formaPeti.getObservacion());
-							expediente.setIdOrganismo((int) org.getIdOrganismo());
-							expediente.setIdProceso(55);
-							ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
-							expeResul = (Integer) expedienteDAO.guardar(expediente);
-							
-							//System.out.println("Triunfo seguro " +expeResul); 
-							
-		 		        	
-		 		        	
-		 		        	formaResp.setTotalResumen(montoTotal);
-		 		        	//request.setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	request.getSession().setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	
-							
-		 		        	//request.setAttribute("ResumenNominaInicialAction", this.MD5("1"));
-		 		        	//System.out.println(request.getAttribute("ResumenNominaInicialAction"));
-		 		        	
-
-		 		        	
-		 		        	fwd = "apruebaGuardar";			 		        	
-		 		        	
-		 		        }else{
-		 		        	error[0] = (String) "sinresultados";
-		 		       	}
-						
-						CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
-						
-						CompromisoInicial compromisoInicial = new CompromisoInicial();
-						compromisoInicial = (CompromisoInicial ) compromisoInicial.llenarBean(compromisoInicial,formaPeti);
-						
-						//System.out.println(formaPeti.getOriPresu() +  compromisoInicial.getOrigenPresupuestario())
+						Integer idReguCompro;
+						idReguCompro = (Integer) regularizacionCompromisoDAO.guardar(regularizacionCompromiso);
 						
 						
-						compromisoInicial.setAno(ano);
-						compromisoInicial.setExpediente(expeResul);
-						compromisoInicial.setEstatus(0);
-						compromisoInicial.setFechaRegistro(fecha);
-						compromisoInicial.setTarea(1);
-						compromisoInicial.setIdCuentadante(1);
-						compromisoInicial.setIdOrganismo((int) org.getIdOrganismo());						
-						compromisoInicial.setCompromiso(9999);
-						compromisoInicial.setIdTipoPago(1);
-						compromisoInicial.setIdUnidadAdministradora(idUnidadAdministadora);
-							
-						Integer idCompromisoInicial;
-						idCompromisoInicial = (Integer) compromisoInicialDAO.guardar(compromisoInicial);
-										
 						
-						
-		 		       /* if (arraySIGECOF.size() > 0){		 		        	
-		 		        	
-		 		        	Expediente expediente = new Expediente();
-							expediente.setFechaReg(fecha);
-							expediente.setAno(ano);				
-							expediente.setEstatus(1);
-							expediente.setIdUsuario(idUsuario);
-							ExpedienteDAOImpl expedienteDAO = new ExpedienteDAOImpl ();
-							expedienteDAO.setSqlMapClient(SMC);		
-							expeResul = expedienteDAO.insertarExpediente(expediente);//Nuevo Expediente			 		        	
-		 		        	
-		 		        	
-		 		        	CompromisoInicialDetalleDAOImpl compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImpl();
-		 		        	compromisoInicialDetalleDAO.setSqlMapClient(SMC);
-		 					CompromisoInicialDetalle compromisoInicialDetalle = new CompromisoInicialDetalle();
-		 					
-		 					//Arrays temporales contendran los valores pertenecientes al detalle del resumen de nomina
-		 					Integer[] tCodCatePresu = new Integer[listadoGasto.size()];			 					
-		 					Integer[] tCodUel = new Integer[listadoGasto.size()];
-		 					Integer[] tFF = new Integer[listadoGasto.size()];
-		 					String[] tDenoUel = new String[listadoGasto.size()];
-		 					String[] tPartida = new String[listadoGasto.size()];
-		 					String[] tDenoPartida = new String[listadoGasto.size()];
-		 					Double[] tMonto = new Double[listadoGasto.size()];
-
-		 		        	Iterator it = listadoGasto.iterator();
-		 		        	int con=0;
-		 		        	Double montoTotal = 0.0;
-		 		        	while(it.hasNext()){
-		 		        		GastoProyectado i = (GastoProyectado) it.next();
-		 		        		 
-		 		        		compromisoInicialDetalle.setIdCompromisoInicial(idCompromisoInicial);
-		 		        		compromisoInicialDetalle.setIdPartidaUelEspecifica(i.getIdPartidaUelEspecifica());
-		 		        		compromisoInicialDetalle.setMonto(i.getMonto());
-		 		        		
-		 		        		expeResul = compromisoInicialDetalleDAO.insertarCompromisoInicialDetalle(compromisoInicialDetalle);
-		 		        		if (expeResul.equals(Integer.valueOf(0)) || expeResul == null){
-		 							throw new Exception("Error 1 Desconocido en ResumenNominaInicialAction");
-		 						}    		        		
-								//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora() );
-		 		        		
-		 		        		tCodCatePresu[con] = i.getCodCatePresu();
-			 					tCodUel[con] = i.getCodUnidadEjecutora();
-			 					tDenoUel[con] = i.getDenoUnidadEjecutora();
-			 					tPartida[con] = i.getCodPartida();
-			 					tDenoPartida[con] = i.getDenoPartida();
-			 					tFF[con] = i.getFf();
-			 					//DecimalFormat formatoNum = new DecimalFormat("###,###,###,###.00");
-			 					//String tt = formatoNum.format(i.getMonto());				 					
-			 					tMonto[con] = i.getMonto();
-			 					montoTotal +=  i.getMonto();
-		 		        		con++;
-								
-		 		        	}
-		 		        	
-		 		        	
-		 		        	
-		 		        	
-		 		        	formaResp.setCodCatePresu(tCodCatePresu);
-		 		        	formaResp.setCodUel(tCodUel);
-		 		        	formaResp.setDenoUel(tDenoUel);
-		 		        	formaResp.setPartida(tPartida);
-		 		        	formaResp.setDenoPartida(tDenoPartida);
-		 		        	formaResp.setFF(tFF);
-
-		 		        	formaResp.setMonto(tMonto);
-		 		        	formaResp.setTotalResumen(montoTotal);
-		 		        	//request.setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	request.getSession().setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	
-							
-		 		        	//request.setAttribute("ResumenNominaInicialAction", this.MD5("1"));
-		 		        	//System.out.println(request.getAttribute("ResumenNominaInicialAction"));
-		 		        	
-
-		 		        	SMC.commitTransaction();
-		 		        	fwd = "apruebaGuardar";			 		        	
-		 		        	
-		 		        }else{
-		 		        	error[0] = (String) "sinresultados";
-		 		       	}*/			
+		 		       		
 					}						
 					
 			

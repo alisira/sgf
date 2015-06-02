@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Tutorial de Git en Español · Santiago Basulto | Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/poole.css">
+  <link rel="stylesheet" href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/lanyon.css">
+  <link rel="stylesheet" href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/custom.css">
+  <link rel="stylesheet" href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/monokai.css">
+  <link rel="stylesheet" href="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/css.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.santiagobasulto.com.ar/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="http://blog.santiagobasulto.com.ar/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://blog.santiagobasulto.com.ar/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input class="sidebar-checkbox" id="sidebar-checkbox" type="checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <h4>Santiago Basulto</h4>
+    <p>A machine for turning whisky into startups.</p>
+    <p class="bullet">Co-founder @ <a href="http://rmotr.com/">rmotr.com</a></p>
+    <p class="bullet">Dev Lead @ <a href="http://blog.santiagobasulto.com.ar/programacion/2011/11/27/clevertech.biz">Clevertech</a></p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://blog.santiagobasulto.com.ar/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="http://blog.santiagobasulto.com.ar/about.html">About</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="http://blog.santiagobasulto.com.ar/archive.html">Archive</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="http://blog.santiagobasulto.com.ar/contacto.html">Contact</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      © 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://blog.santiagobasulto.com.ar/" title="Home">Santiago Basulto | Blog</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Tutorial de Git en Español</h1>
+  <span class="post-date">27 Nov 2011</span>
+  <blockquote>
+<p>Este tutorial es una traducción con algunos agregados de <a href="http://www.vogella.de/articles/Git/article.html">Git Tutorial</a>, de <a href="http://www.vogella.de/">Lars Vogel</a>.</p>
+</blockquote>
+
+<p><br></p>
+
+<blockquote>
+<p>Para la traducción se han mejorado algunas cosas para adaptarlas al 
+habla hispana. De todas maneras, el vocabulario usado puede resultarte 
+raro. No estoy de acuerdo con traducir todas las palabras desde el 
+inglés al español, porque muchas veces esto es imposible. Me he 
+encontrado en libros de bases de Datos que me hablan de "comprometer" 
+una transacción, cuando podrían directamente haber usado la palabra 
+"commit". Por eso, tales palabras quedan en inglés, como corresponde. 
+También puede resultarte raro que transforme esas palabras en verbos y 
+las conjuge, como por ejemplo, la acción de hacer un "commit" la llamo 
+"comitear". Si nunca lo escuchaste, no te preocupes, porque esta es la 
+jerga que se utiliza en la industria.</p>
+</blockquote>
+
+<ul>
+<li> 1. <a href="#Git">Git</a>
+
+<ul>
+<li>   1.1. <a href="#que-es-git">¿Qué es Git?</a></li>
+<li>   1.2. <a href="#terminologia-importante">Terminología importante</a></li>
+<li>   1.3. <a href="#staging-index">Staging index</a></li>
+</ul></li>
+<li>  2. <a href="#Instalacion">Instalación</a></li>
+<li>  3. <a href="#Configuracion">Configuración</a>
+
+<ul>
+<li>  3.1. <a href="#configuracion-del-usuario">Configuración del usuario</a></li>
+<li>  3.2. <a href="#resaltado-de-colores">Resaltado de colores</a></li>
+<li>  3.3. <a href="#ignorar-archivos">Ignorar ciertos archivos</a></li>
+</ul></li>
+<li><p>4. <a href="#empezando-con-git">Empezando con Git</a></p>
+
+<ul>
+<li>  4.1. <a href="#creando-contenido">Creando contenido</a></li>
+<li>  4.2. <a href="#creando-el-repositorio">Crear el repositorio y hacer un commit</a></li>
+<li>  4.3. <a href="#ver-diferencias-via-diff">Ver las diferencias via diff y commitear los cambios</a></li>
+<li>  4.4. <a href="#status-diff-log">Status, Diff y el log de Commit</a></li>
+<li>  4.5. <a href="#correccion-mensajes-commit-git-amend">Corrección de mensajes de commit - git amend</a></li>
+<li>  4.6. <a href="#eliminar-archivos">Eliminar archivos</a></li>
+</ul></li>
+<li><p>5. <a href="#repositorios-externos">Trabajando con repositorios externos</a></p>
+
+<ul>
+<li>  5.1. <a href="#crear-repositorio-externo">Creando un repositorio Git externo</a></li>
+<li>  5.2. <a href="#subir-cambios-push">Subir los cambios a otro repositorio - Push</a></li>
+<li>  5.3. <a href="#add-remote">Add remote</a></li>
+<li>  5.4. <a href="#mostrar-repositorios-externos">Mostrar los repositorios externos existentes</a></li>
+<li>  5.5. <a href="#clonar-repositorio">Clonar tu repositorio</a></li>
+<li>  5.6. <a href="#trayendo-cambios-pull">Trayendo los cambios - Pull</a></li>
+</ul></li>
+<li><p>6. <a href="#revertir-cambios">Revertir cambios</a></p></li>
+<li><p>7. <a href="#etiquetando-git">Etiquetando en Git - Tagging</a></p></li>
+<li><p>8. <a href="#branch-merge">Branches y Merging</a></p>
+
+<ul>
+<li>  8.1. <a href="#branches">Branches</a></li>
+<li>  8.2. <a href="#merging">Merging</a></li>
+<li>  8.3. <a href="#borrar-branch">Borrar un branch</a></li>
+</ul></li>
+<li><p>9. <a href="#resolviendo-conflictos-merge">Resolviendo conflictos después de un merge</a></p></li>
+<li><p>10. <a href="#rebase">Rebase</a></p>
+
+<ul>
+<li>  10.1. <a href="#utilizando-rebase-varios-commits-branch">Utilizando rebase para varios commits en un mismo branch</a></li>
+<li>  10.2. <a href="#rebase-entre-branches">rebase entre branches</a></li>
+<li>  10.3. <a href="#buenas-practicas-rebase">Buenas prácticas para el uso de rebase</a></li>
+</ul></li>
+<li><p>11. <a href="#creando-aplicando-parches">Creando y aplicando parches</a></p></li>
+<li><p>12. <a href="#definiendo-alias">Definiendo un alias</a></p></li>
+<li><p>13. <a href="#ignorando-archivo-directorio">Ignorando un archivo / directorio</a></p></li>
+<li><p>14. <a href="#otros-comandos-utiles">Otros comándos útiles</a></p></li>
+<li><p>15. <a href="#instalando-servidor-git">Instalando un servidor Git</a></p></li>
+<li><p>16. <a href="#repositorios-remotos-online">Repositorios remotos online</a></p>
+
+<ul>
+<li>  16.1. <a href="#clonando-repositorios-remotos">Clonando repositorios remotos</a></li>
+<li>  16.2. <a href="#agregando-mas-repositorios-remotos">Agregando más repositorios remotos</a></li>
+<li>  16.3. <a href="#operacion-remota-http-proxy">Operaciones remotas via HTTP y un proxy</a></li>
+</ul></li>
+<li><p>17. <a href="#proveedores-hosting-git">Proveedores de hosting Git</a></p>
+
+<ul>
+<li>  17.1. <a href="#github">GitHub</a></li>
+<li>  17.2. <a href="#bitbucket">Bitbucket</a></li>
+</ul></li>
+<li><p>18. <a href="#herramientas-graficas-git">Herramientas gráficas para Git</a></p></li>
+<li><p>19. <a href="#version-original-kindle">Obtené la versión original para Kindle</a></p></li>
+<li><p>20. <a href="#preguntas-comentarios">Preguntas y comentarios</a></p></li>
+<li><p>21. <a href="#links-recursos-utiles">Links  y recursos útiles</a></p></li>
+</ul>
+
+<h2 id="Git">1. Git</h2>
+
+<h3 id="que-es-git">1.1. ¿qué es Git?</h3>
+
+<p>Git es un sistema de control de versiones distribuído (scvd) escrito 
+en C. Un sistema de control de versiones permite la creación de una 
+historia para una colección de archivos e incluye la funcionalidad para 
+revertir la colección de archivos a otro estado. Otro estado puede 
+significar a otra colección diferente de archivos o contenido diferente 
+de los archivos.</p>
+
+<p>Podés, por ejemplo, cambiar la colección de archivos a un estado de 2
+ días atras, o podés cambiar entre los estados para caracteristicas 
+experimentales y problemas de producción.</p>
+
+<p>Esta colección de archivos generalmente es llamada "código fuente". 
+En un sistema de control de versiones distribuído todos tienen una copia
+ completa del código fuente (incluyendo la historia completa del código 
+fuente) y puede realizar operaciones referidas al control de versiones 
+mediante esa copia local. El uso de un scvd no requiere un repositorio 
+central.</p>
+
+<p>Si haces cambios al código fuente, haces esos cambios relevantes para
+ el control de versiones (los agregas al staging index) y después los 
+agregas al repositorio (commit).</p>
+
+<p>Git mantiene todas las versiones. Por lo tanto podés revertir a cualquier punto en la historia de tu código fuente usando Git.</p>
+
+<p>Git realiza los commits a tu repositorio local y es posible 
+sincronizar ese repositorio con otros (tal vez remotos) repositorios. 
+Git te permite clonar los repositoriso, por ejemplo, crear una copia 
+exacta de un repositorio incluyendo la historia completa del código 
+fuente. Los dueños de los repositorios pueden sincronizar los cambios 
+via <code>push</code> (transfiere los cambios al repositorio remoto) o <code>pull</code> (obtiene los cambios desde un repositorio remoto).</p>
+
+<p>Git soporta el concepto de <code>branching</code>, es decir, podés 
+tener varias versiones diferentes de tu código fuente. Si querés 
+desarrollar una nueva característica, podés abrir un <code>branch</code> en tu código fuente y hacer los cambios en este <code>branch</code> sin afectar el principal desarrollo de tu código.</p>
+
+<p>Git puede ser usado desde la linea de comandos; esta manera será la 
+descripta en este tutorial. También existen herramientas gráficas, por 
+ejemplo Egit para el IDE Eclipse, pero estas herramientas no van a ser 
+descriptas en este tutorial.</p>
+
+<h3 id="terminologia-importante">1.2. Terminología importante</h3>
+
+<p><br>
+</p><table>
+    <tbody><tr>
+        <th>Término</th>
+        <th>Definición</th>
+    </tr>
+    <tr>
+        <td>Repositorio</td>
+        <td>Un repositorio contiene la historia, las diferentes 
+versiones en el tiempo y todas los distintos branch y etiquetas. En Git,
+ cada copia del repositorio es un repositorio completo. El repositoro te
+ permite obtener revisiones en tu copia actual.</td>
+    </tr>
+    <tr>
+        <td>Branch</td>
+        <td>Un branch es una linea separada de código con su propia 
+historia. Te es posible crear un nuevo branch de a partir de uno 
+existente y cambiar el código independientemente de otros branches. Uno 
+de los branches es el original (generalmente llamado master). El usuario
+ selecciona un branch y trabaja en ese branch seleccionado, el cual es 
+llamado copia actual (working copy). Seleccionar un branch es llamado 
+"obtener un branch" (checkout a branch)</td>
+    </tr>
+    <tr>
+        <td>Etiquetas (Tags)</td>
+        <td>Un tag (una etiqueta) apunta a un cierto punto en el tiempo 
+en un branch específico. Con un tag, es posible tener un punto con un 
+tiempo al cual siempre sea posible revertir el código, por ejemplo, 
+ponerle el tag "testing" al código 25.01.2009</td>
+    </tr>
+    <tr>
+        <td>Commit</td>
+        <td>Vos hacés un commit de los cambios a un repositorio. Esto 
+crea una revisión nueva la cual puede ser obtenida después, por ejemplo 
+si querés ver el código fuente de una versión anterior. Cada commit 
+contiene el autor y el que realizó el commit (comiteador), siendo así 
+posible identificar el origen del cambio. El autor y el comiteador 
+pueden ser diferentes personas.</td>
+    </tr>
+    <tr>
+        <td>URL</td>
+        <td>Una URL en Git determina la ubicación de un repositorio.</td>
+    </tr>
+    <tr>
+        <td>Revisión</td>
+        <td>Representa una versión del código fuente. Git identifica 
+revisiones con un id SHA1. Los id son de 160 bits de largo y son 
+representados en hexadecimal. La última versión puede ser direccionada a
+ través de "HEAD", la versión anterior mediante "HEAD-1" y así 
+siguiendo.</td>
+    </tr>
+</tbody></table>
+<br><p></p>
+
+<h3 id="staging-index">1.3. Staging index (el índice)</h3>
+
+<p>Git requiere que los cambios sean marcados explicitamente para el 
+próximo commit. Por ejemplo, si haces un cambio en un archivo y querés 
+que y querés que ese cambio sea relevante para el próximo commit, es 
+necesario que agregues el archivo a lo que se llama comunmnete "staging 
+index" mediante el comando <code>git add</code>. Dicho índice será una imagen completa de los cambios.</p>
+
+<p>Los nuevos archivos siempre deben ser explicitamente añadidos al 
+índice. Para archivos que ya han sido comiteados podés usar la opción -a
+ durante el commit.</p>
+
+<h2 id="Instalacion">2. Instalación</h2>
+
+<p>En Ubuntu podés instalar la herramienta de consola de Git con el siguiente comando:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install git-core</code></pre></div>
+
+<p>Para otras distribuciones de Linux deberías consultar la documentación correspondiente a la distro.</p>
+
+<p>Una versión de Git para Windows podés encontrarla en el sitio del 
+proyecto msysgit. La URL es: http://code.google.com/p/msysgit/ .</p>
+
+<h2 id="Configuracion">3. Configuración</h2>
+
+<p>Git te permite almacenar configuraciones globales en el archivo 
+.gitconfig. Ese archivo debe ser ubicado en tu directorio de usuario (el
+ home). Como mencioné anteriormente Git almacena el comiter y el autor 
+para cada commit. Esta y otra información adicional puede ser almacenada
+ en la configuración global.</p>
+
+<p>A continuación veremos cómo configurar Git para utilizar un usuario y
+ dirección de correo electrónico en particular, habilitar los colores y 
+cómo decirle a Git que ignore ciertos archivos.</p>
+
+<h3 id="configuracion-del-usuario">3.1. Configuración del usuario</h3>
+
+<p>Configurá tu usuario e email para Git mediante los siguientes comandos:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Configura el usuario que será usado por git</span>
+    <span class="c"># Obviamente deberías usar tu nombre</span>
+    git config --global user.name <span class="s2">"Santiago Basulto"</span>
+    <span class="c"># Lo mismo para el correo electrónico</span>
+    git config --global user.email <span class="s2">"santiago.basulto-nospam@example.com"</span>
+    <span class="c"># Configurar para que todos los cambios generen un push por defecto</span>
+    git config --global push.default <span class="s2">"matching"</span></code></pre></div>
+
+<h3 id="resaltado-de-colores">3.2. Resaltado de colores</h3>
+
+<p>Esto activará el resaltado de colores en la consola:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git config --global color.status auto
+    git config --global color.branch auto</code></pre></div>
+
+<h3 id="ignorar-archivos">3.3. Ignorar ciertos archivos</h3>
+
+<p>Git puede ser configurado para que ignore ciertos archivos y directorios. Esta configuración es realizada mediante el archivo <code>.gitignore</code>.
+ Este archivo puede estar en cualquier directorio y puede contener 
+patrones para archivos. Por ejemplo, es posible decirle a git que ignore
+ el directorio <code>bin</code> y todos los archivos que finalicen con la extensión <code>pyc</code> (archivos de python compilados) mediante el siguiente patrón en el archivo .gitignore en el directorio principal.</p>
+
+<pre>    bin
+    *.pyc
+</pre>
+
+<p>Git también ofrece la configuración global core.excludefile para especificar de manera global qué patrones ignorar.</p>
+
+<h2 id="empezando-con-git">4. Empezando con Git</h2>
+
+<p>A continuación trataré de guiarte a través de una utilización típica 
+de Git. Vas a crear algunos archivos, crear un repositorio Git local y 
+commitear los archivos en este repositorio. Después clonaremos el 
+repositorio y haremos push y pull entre los repositorios. Los 
+comentarios (marcados con #) antes de cada comando explican las acciones
+ específicas.</p>
+
+<p>Abrí una consola para comenzar.</p>
+
+<h3 id="creando-contenido">4.1. Creando contenido</h3>
+
+<p>Los comandos a continuación crean algunos archivos con algo de contenido y después son puestos bajo el control de versiones.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Navegá hasta el home</span>
+    <span class="nb">cd</span> ~/
+    <span class="c"># Crea un directorio</span>
+    mkdir ~/repo01
+    <span class="c"># Ingresá a ese directorio</span>
+    <span class="nb">cd </span>repo01
+    <span class="c"># Crea un nuevo directorio</span>
+    mkdir datafiles
+    <span class="c"># Crea algunos archivos</span>
+    touch test01
+    touch test02
+    touch test03
+    touch datafiles/data.txt
+    <span class="c"># Poné algo de texto adentro en el primer archivo</span>
+    ls &gt; test01</code></pre></div>
+
+<h3 id="creando-el-repositorio">4.2. Crear el repositorio y hacer un commit</h3>
+
+<p>Cada repositorio Git es almacenado en la carpeta <code>.git</code> 
+del directorio en el cual el repositorio ha sido creado. Este directorio
+ contiene la historia completa del repositorio. El archivo <code>.git/config</code> contiene la configuración local del repositorio.</p>
+
+<p>A continuación crearemos un repositorio Git, agregamos los archivos al índice del repositorio y commiteamos los cambios.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Inicializamos el repositorio local Git</span>
+    git init
+    <span class="c"># Agregamos todo (archivos y directorios) al repositorio</span>
+    git add .
+    <span class="c"># Hacemos un commit al repositorio</span>
+    git commit -m <span class="s2">"Initial commit"</span>
+    <span class="c"># Muestra el log (un historial)</span>
+    git log</code></pre></div>
+
+<h3 id="ver-diferencias-via-diff">4.3. Ver las diferencias via diff y commitear los cambios</h3>
+
+<p>El comando <code>diff</code> de Git permite al usuario ver los cambios hechos. Para probar esto, hacé algunos cambios a un archivo y fijate qué te muestra <code>diff</code></p>
+
+<p>Después comitea los cambios al repositorio.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Hacé algunos cambios al archivo</span>
+    <span class="nb">echo</span> <span class="s2">"Este es un cambio"</span> &gt; test01
+    <span class="nb">echo</span> <span class="s2">"y este es otro cambio"</span> &gt; test02
+
+    <span class="c"># Check the changes via the diff command</span>
+    <span class="c"># Mirá los cambios con el comando diff</span>
+    git diff
+
+    <span class="c"># Comitea los cambios, -a comitea los cambios de los archivos modificados</span>
+    <span class="c"># pero no agrega automaticamente nuevos archivos</span>
+    git commit -a -m <span class="s2">"Hay nuevos cambios"</span></code></pre></div>
+
+<h3 id="status-diff-log">4.3. Status, Diff y el log de Commit</h3>
+
+<p>A continuación utilizaremos comandos que te ayudarán a ver el estado actual de tu repositorio y un log de todos los commits.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Hacé algunos cambios al archivo</span>
+    <span class="nb">echo</span> <span class="s2">"Nuevo cambio"</span> &gt; test01
+    <span class="nb">echo</span> <span class="s2">"y otro nuevo cambio"</span> &gt; test02
+
+    <span class="c"># Mirá el estado actual de tu repositorio</span>
+    <span class="c"># (qué archivos han cambiado, son nuevos o eliminados)</span>
+    git status
+
+    <span class="c"># Muestra las diferencias entre los archivos no comiteados</span>
+    <span class="c"># y el último commit en el branch actual</span>
+    git diff
+
+    <span class="c"># Agrega los cambios al índice y comitea</span>
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"Más cambioos - con un error en el mensaje de commit"</span>
+
+    <span class="c"># Muestra el histórico de commits en el branch actual</span>
+    git log
+
+    <span class="c"># Muestra una linda vista gráfica de los cambios</span>
+    gitk --all</code></pre></div>
+
+<h3 id="correccion-mensajes-commit-git-amend">4.5. Corrección de mensajes de commit - git amend</h3>
+
+<p>El comando <code>amend</code> hace posible cambiar el último mensaje de commit.</p>
+
+<p>En el ejemplo anterior el mensaje de commit era incorrecto y tenía un error. A continuación lo corregimos mediante el parámetro <code>--amend</code>.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git commit --amend -m <span class="s2">"Más cambios, ahora correctos"</span></code></pre></div>
+
+<h3 id="eliminar-archivos">4.6. Eliminar archivos</h3>
+
+<p>Si eliminas un archivo que está bajo el control de versiones, el comando <code>git add .</code> no tendrá en cuenta que has eliminado el archivo. Es neceasrio que uses el comando <code>git commit</code> con la bandera <code>-a</code> o el comando <code>git add</code> con la bandera <code>-A</code>.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Crea un archivo y agregalo al control de versiones</span>
+    touch nonsense.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"un nuevo archivo ha sido creado"</span>
+    <span class="c"># Elimina el archivo</span>
+    rm nonsense.txt
+    <span class="c"># Proba hacer un commit de la forma normal -&gt; no va a andar</span>
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"elimine el archivo, pero no anda"</span>
+    <span class="c"># Ahora hace un commit con la bandera -a</span>
+    git commit -a -m <span class="s2">"El archivo nonsense.txt ahora si fue eliminado del índice"</span>
+    <span class="c"># Alternativamente podrías agregar los archivos borrados al índice mediante</span>
+    git add -A . 
+    git commit -m <span class="s2">"El archivo nonsense.txt ahora si fue eliminado del índice"</span></code></pre></div>
+
+<h2 id="repositorios-externos">5. Trabajando con repositorios externos</h2>
+
+<h3 id="crear-repositorio-externo">5.1. Creando un repositorio Git externo</h3>
+
+<p>Ahora crearemos un repositorio Git remoto. Git te permite almacenar este repositorio remoto tanto en la red como localmente.</p>
+
+<p>Un repositorio Git estandar es diferente de un repositorio remoto. Un
+ repo estandar contiene el código fuente y el repositorio Git. Podés 
+trabajor directamente en este directorio ya que este contiene una copia 
+de todos los archivos.</p>
+
+<p>Los repositorios remotos no contienen las copias de todos los 
+archivos. Estos solo tienen los archivos del repositorio, la información
+ perteneciente a Git. Para crear tal repositorio utilizá la bandera 
+--bare.</p>
+
+<p>Para simplificar los siguientes ejemplos, el repo será creado localmente en el filesystem.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Dirigite al repo</span>
+    <span class="nb">cd</span> ~/repo01
+    <span class="c"># hace un clone con la bandera --bare</span>
+    git clone --bare . ../remote-repository.git
+
+    <span class="c"># Comprobá que el contenido es idéntico al directorio .git en repo01</span>
+    ls ~/remote-repository.git</code></pre></div>
+
+<h3 id="subir-cambios-push">5.2. Subir los cambios a otro repositorio - Push</h3>
+
+<p>Hacé algunos cambios y subilos desde tu primer repositorio al repositorio remoto mediante estos comandos</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Navegá hasta el primer repo</span>
+    <span class="nb">cd</span> ~/repo01
+
+    <span class="c"># Hacé algunos cambios en los archivos</span>
+    <span class="nb">echo</span> <span class="s2">"Hola hola, prendé tu radio"</span> &gt; test01
+    <span class="nb">echo</span> <span class="s2">"Chau chau, apagá la radio"</span> &gt; test02
+
+    <span class="c"># Comitea los cambios, -a comiteara los cambios para archivos modificados</span>
+    <span class="c"># pero no agrega automaticamente nuevos archivos</span>
+    git commit -a -m <span class="s2">"Algunos cambios"</span>
+
+    <span class="c"># Subí los cambios</span>
+    git push ../remote-repository.git</code></pre></div>
+
+<h3 id="add-remote">5.3. Add remote</h3>
+
+<p>Siempre es posible subir cambios a un repositorio Git mediante su URL
+ completa. Pero también es posible agregar un "apodo" a un repositorio 
+mediante el comando <code>git remote add</code>. <code>origin</code> es un nombre especial que es normalmente usado de forma automática, si clonas un repositorio Git. <code>origin</code>
+ indica el repositorio original desde el cual has empezado. Ya que 
+nosotros comenzamos desde el principio, este nombre está aun disponible.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># agregá ../remote-repository.git con el nombre origin</span>
+    git remote add origin ../remote-repository.git 
+
+    <span class="c"># Otros cambios</span>
+    <span class="nb">echo</span> <span class="s2">"Agregué un repo remoto"</span> &gt; test02
+    <span class="c"># Commit</span>
+    git commit -a -m <span class="s2">"Test para el nuevo repo remoto origin"</span>
+    <span class="c"># sube automaticamente a origin</span>
+    git push origin</code></pre></div>
+
+<h3 id="mostrar-repositorios-externos">5.4. Mostrar los repositorios externos existentes</h3>
+
+<p>Para ver las definiciones existentes de los repositorios remotos, utilizá el siguiente comando:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Muestra los repositorios externos existentes</span>
+    git remote</code></pre></div>
+
+<h3 id="clonar-repositorio">5.5. Clonar tu repositorio</h3>
+
+<p>Crea un nuevo repositorio en un nuevo directorio con los siguientes comandos:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Navegá al home</span>
+    <span class="nb">cd</span> ~
+    <span class="c"># Crea un nuevo directorio</span>
+    mkdir repo02
+
+    <span class="c"># Navegá al nuevo directorio</span>
+    <span class="nb">cd</span> ~/repo02
+    <span class="c"># clonalo</span>
+    git clone ../remote-repository.git .</code></pre></div>
+
+<h3 id="trayendo-cambios-pull">5.6. Trayendo los cambios - Pull</h3>
+
+<p>Pull te permite obtener los últimos cambios de otro repositorio. En 
+tu segundo repositorio, hacé unos cambios, subilos (push) a tu 
+repositorio remoto y después traelos (con un pull) desde el primer repo.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Navegá hacia el home</span>
+<span class="nb">cd</span> ~
+
+<span class="c"># Navegá al segundo repo</span>
+<span class="nb">cd</span> ~/repo02
+<span class="c"># Hacé algunos cambios</span>
+<span class="nb">echo</span> <span class="s2">"Un cambio"</span> &gt; test01
+<span class="c"># Commit</span>
+git commit -a -m <span class="s2">"Un cambio"</span>
+
+<span class="c"># Subí los cambios al repo remoto</span>
+<span class="c"># Origin es automaticamente mantenido ya que clonamos desde este repositorio</span>
+git push origin
+
+<span class="c"># Navegá al primer repositorio y traete los cambios</span>
+<span class="nb">cd</span> ~/repo01
+git pull ../remote-repository.git/
+<span class="c"># reivsá los cambios</span>
+less test01</code></pre></div>
+
+<h2 id="revertir-cambios">6. Revertir cambios</h2>
+
+<p>Si creas archivos en tu copia actual que no quisieses comitear, es posible desecharlos.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Crea un nuevo archivo con algo de contenido</span>
+    touch test04
+    <span class="nb">echo</span> <span class="s2">"esto no sirve"</span> &gt; test04
+
+    <span class="c"># Hacé un dry-run para ver que ocurriría desde el último cambio</span>
+    <span class="c"># -n es lo mismo que --dry-run</span>
+    git clean -n
+
+    <span class="c"># Ahora lo borra</span>
+    git clean -f</code></pre></div>
+
+<p>You can check out older revisions of your source code via the commit 
+ID. The commit ID is shown if you enter the git log command. It is 
+displayed behind the commit word.</p>
+
+<p>Es posible obtener (mediante un check out) revisiones anteriores de 
+tu código mediante el ID de commit. El ID de commit se muestra si 
+ingresás el comando <code>git log</code>. Es mostrado después de la palabra commit.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Navegá al hoome</span>
+    <span class="nb">cd</span> ~/repo01
+    <span class="c"># obtene un log</span>
+    git log
+
+    <span class="c"># copiá uno commit viejo y obtené las revisiones anteriores</span>
+    git checkout nombre<span class="se">\_</span>del<span class="se">\_</span>commit</code></pre></div>
+
+<p>Si no agregaste los cambios al índice, también es posible revertir los cambios directamente.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># algún cambio sin sentido</span>
+    <span class="nb">echo</span> <span class="s2">"sin sentido"</span> &gt; test01
+    <span class="c"># no ha sido agregado al índice, por lo tanto</span>
+    <span class="c"># simplemente podemos obtener la versión anterior</span>
+    git checkout test01
+    <span class="c"># Comprobá el contenido</span>
+    cat test01
+    <span class="c"># Otro cambio sin sentido</span>
+    <span class="nb">echo</span> <span class="s2">"otro cambio sin sentido"</span> &gt; test01
+    <span class="c"># Agregamos el archivo al índice</span>
+    git add test01
+    <span class="c"># Recuperamos el archivo en el índice</span>
+    git reset HEAD test01
+    <span class="c"># Obtenemos la versión vieja desde el índice</span>
+    git checkout test01</code></pre></div>
+
+<p>También es posible revertir los commits mediante el siguiente comando:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Revertir un commit</span>
+    git revert commit_name</code></pre></div>
+
+<p>Si borraste un archivo pero no has hecho el cambio en el índice, o comiteado el cambio, es posible volver a obtener ese archvio.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># borramos el archivo</span>
+    rm test01
+    <span class="c"># revertimos la eliminación</span>
+    git checkout test01</code></pre></div>
+
+<p>Si agregaste el archivo al índice pero no querés comitearlo, es posible elminarlo del índice mediante el comando <code>git reset</code>.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># creamos un archivo</span>
+    touch incorrecto.txt
+    <span class="c"># lo agregamos al índice accidentalmente</span>
+    git add .
+    <span class="c"># lo borramos del índice</span>
+    git reset incorrecto.txt
+    <span class="c"># borramos el archivo</span>
+    rm incorrect.txt</code></pre></div>
+
+<p>Si borraste un directorio y no has comiteado los cambios es posible recuperarlo mediante el siguiente comando:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git checkout HEAD -- directorio<span class="se">\_</span>a<span class="se">\_</span>recuperar</code></pre></div>
+
+<h2 id="etiquetando-git">7. Etiquetando en Git - Tagging</h2>
+
+<p>Git tiene la opción de etiquetar (taguear) ciertas versiones para 
+encontrarlas de forma más fácil en el futuro. Lo más común es utilizarlo
+ para etiquetar una cierta versión que ha sido largada en producción.</p>
+
+<p>Es posible listar los tags disponibles mediante este comando:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git tag</code></pre></div>
+
+<p>Podés crear un nuevo tag de la siguiente manera. Con el parámetro -m especificás la descripción del tag.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git tag version1.6 -m <span class="s1">'version 1.6'</span></code></pre></div>
+
+<p>Si querés acceder al código asociado con ese tag:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git checkout tag<span class="se">\_</span>name</code></pre></div>
+
+<h2 id="branch-merge">8. Branches y Merging</h2>
+
+<h3 id="branches">8.1. Branches y Merging</h3>
+
+<p>Git te permite crear branches. Branches, el plural de branch, son 
+copias independientes del código fuente que pueden ser cambiadas 
+independientemente de las otras. El branch por defecto es llamado <em>master</em>.
+ Git te permite crear branches de forma muy rápida y barato en cuanto a 
+recursos. Es recomendable utilizar branches frecuentemente.</p>
+
+<p>El siguiente comando lista todos los branches disponibles localmente. El branch actualmente activo es marcado con un asterisco <em>*</em></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git branch</code></pre></div>
+
+<p>Si querés ver todos los branches (incluyendo aquellos remotos), utilizá el siguiente comando.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git branch -a</code></pre></div>
+
+<p>Es posible crear un nuevo branch de la siguiente manera.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Sintaxis: git branch &lt;nombre&gt; &lt;hash&gt;</span>
+    <span class="c"># &lt;hash&gt; es opcional</span>
+    <span class="c"># si no es especificado se utiliza el del último commit</span>
+    <span class="c"># si es especificado se utiliza el del commit correspondiente</span>
+    git branch testing
+    <span class="c"># cambiá al nuevo branch</span>
+    git checkout testing
+    <span class="c"># algunos cambios</span>
+    <span class="nb">echo</span> <span class="s2">"Algo nuevo en este branch"</span> &gt; test01
+    git commit -a -m <span class="s2">"algo nuevo"</span>
+    <span class="c"># Volvé al branch master</span>
+    git checkout master
+    <span class="c"># comprobá que el contenido de test01 es el anterior</span>
+    cat test01</code></pre></div>
+
+<h3 id="merging">8.2. Merging</h3>
+
+<p>Merge te permite combinar los cambios de dos branches. Merge realiza el comunmente llamado <em>merge de tres versiones</em> entre la última imagen de dos branches, basado en el más reciente ancestro en común de ambos.</p>
+
+<p>Como resultado se obtiene una nueva imagen. Es posible hacer un merge
+ entre los cambios de un branch y el actualmente activo mediante el 
+siguiente comando.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># sintaxis: git merge &lt;nombre-del-branch&gt;</span>
+    git merge testing</code></pre></div>
+
+<p>Si un conflicto ocurre, Git marcará el conflicto en el archivo y el 
+programador tiene que resolver el conflicto manualmente. Después de 
+resolverlo, puede agregar el archivo al índice y comitear el cambio.</p>
+
+<h3 id="borrar-branch">8.3. Borrar un branch</h3>
+
+<p>Para eliminar un branch que ya no es necesario, podés utilizar el siguiente comando.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># borra el branch 'testing'</span>
+    git branch -d testing
+    <span class="c"># comprobá que el branch fue borrado</span>
+    git branch</code></pre></div>
+
+<h2 id="resolviendo-conflictos-merge">9. Resolviendo conflictos después de un merge</h2>
+
+<p>Un conflicto ocurre si dos personas han modificado el mismo contenido
+ y Git no puede determinar automaticamente como deberían ser aplicados 
+ambos cambios.</p>
+
+<p>Git requiere que los conflictos sean resueltos manualmente. En esta 
+sección; primero crearemos un conflicto y después lo resolveremos y 
+aplicaremos el cambio al repositorio.</p>
+
+<p>De la siguiente manera creamos un conflicto.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># navegá al primer directorio</span>
+    <span class="nb">cd</span> ~/repo01
+    <span class="c"># algunos cambios</span>
+    touch conflictivo.txt
+    <span class="nb">echo</span> <span class="s2">"Cambio en el primer repo"</span> &gt; conflictivo.txt
+    <span class="c"># agregamos al índice y comiteamos</span>
+    git add . <span class="o">&amp;&amp;</span> git commit -a -m <span class="s2">"Creamos el conflicto 1"</span>
+
+    <span class="c"># Navegamos al segundo directorio</span>
+    <span class="nb">cd</span> ~/repo02
+    <span class="c"># más cambios</span>
+    touch conflictivo.txt
+    <span class="nb">echo</span> <span class="s2">"Cambio en el segundo repo"</span> &gt; conflictivo.txt
+    <span class="c"># agregamos al índice y comiteamos</span>
+    git add . <span class="o">&amp;&amp;</span> git commit -a -m <span class="s2">"Creamos el conflicto 2"</span>
+    <span class="c"># Hacemos un push al master</span>
+    git push
+
+    <span class="c"># ahora tratá de hacer un push desde el primer directorio</span>
+    <span class="c"># navegá al primer directorio</span>
+    <span class="nb">cd</span> ~/repo01
+    <span class="c"># Tratá de hacer un push -&gt; ocurrirá un error</span>
+    git push
+    <span class="c"># obtené los cambios</span>
+    git pull origin master</code></pre></div>
+
+<p>Git marca el conflicto en el archivo afectado (conflictivo.txt). El archivo debería tener el siguiente contenido.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Cambio en el primer repo
+=======
+Cambio en el segundo repo
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; b29196692f5ebfd10d8a9ca1911c8b08127c85f8
+</code></pre></div>
+<p>La parte superior (sobre la linea ====) contiene el contenido de tu 
+repositorio, y la parte inferior es la que tiene el contenido del 
+repositorio remoto. Ahora podés editar el archivo manualmente y después 
+comitear los cambios. Alternativamente, podrías usar el comando <code>git mergetool</code>. <code>git mergetool</code> lanza una herramienta configurable que muestra los cambios en una pantalla dividida.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># podes editar el archivo manualmente o usar</span>
+git mergetool
+<span class="c"># Te pedirá que selecciones qué herramienta para</span>
+<span class="c"># resolver el conflicto deseas utilizar </span>
+<span class="c"># por ejemplo en ubuntu podés usar la herramienta "meld"</span>
+<span class="c"># después de resolver los conflictos manualmente, los comiteamos</span>
+git commit -m <span class="s2">"conflictos resueltos"</span></code></pre></div>
+
+<h2 id="rebase">10. Rebase</h2>
+
+<h3 id="utilizando-rebase-varios-commits-branch">10.1 Utilizando rebase para varios commits en un mismo branch</h3>
+
+<p>El comando <code>rebase</code> te permite combinar varios commits en 
+uno único. Esto es útil ya que permite al usuario reescribir un poco de 
+la historia de los commits (haciendo algo de limpieza) antes de hacer un
+ push de los cambios a un repositorio remoto.</p>
+
+<p>A continuación crearemos varios commits que serán combinados más adelante.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Crea un nuevo archivo</span>
+    touch rebase.txt
+
+    <span class="c"># agregamos al índice y comiteamos</span>
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"rebase.txt añadido al índice"</span>
+
+    <span class="c"># Algunos cambios tontos</span>
+    <span class="nb">echo</span> <span class="s2">"contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué contenido"</span>
+    <span class="nb">echo</span> <span class="s2">" más contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué más contenido"</span>
+    <span class="nb">echo</span> <span class="s2">" más contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué más contenido"</span>
+    <span class="nb">echo</span> <span class="s2">" más contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué más contenido"</span>
+    <span class="nb">echo</span> <span class="s2">" más contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué más contenido"</span>
+    <span class="nb">echo</span> <span class="s2">" más contenido"</span> &gt;&gt; rebase.txt
+    git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">"agregué más contenido"</span>
+
+    <span class="c"># mirá el log (largo, no?)</span>
+    git log</code></pre></div>
+
+<p>Ahora combinaremos los últimos siete commits. Podés hacer esto interactivamente mediante el siguiente comando.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git rebase -i HEAD~7</code></pre></div>
+
+<p>Esto abre tu editor preferido y te deja editar el mensaje de commit o compactar (mediante <code>squash</code> - <code>s</code>) / arreglar (mediante <code>fixup</code> - <code>f</code>) el commit con el último.</p>
+
+<p>La opción de compactar (squash) combina los mensajes de commit mientras que arreglar (fixup) ignora los mensajes.</p>
+
+<h3 id="rebase-entre-branches">10.2 rebase entre branches</h3>
+
+<p>También podés usar Git para hacer un rebase entre dos branches. Como describimos anteriormente, el comando <code>merge</code> combina los cambios de dos branches. Rebase toma los cambios de un branch, crea un patch y lo aplica al otro branch.</p>
+
+<p>El resultado final del código fuente es el mismo que con <code>merge</code> pero la historia de commit es más limpia. La historia parece ser lineal.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Crea un nuevo branch</span>
+    git branch testing
+    <span class="c"># checkout del branch</span>
+    git checkout testing
+    <span class="c"># Hacemos algunos cambios</span>
+    <span class="nb">echo</span> <span class="s2">"Haremos un rebase con el master"</span> &gt; test01
+    <span class="c"># hacemos un commit al branch testing</span>
+    git commit -a -m <span class="s2">"Algo nuevo en el branch"</span>
+    <span class="c"># Hacemos un rebase con el master</span>
+    git rebase master</code></pre></div>
+
+<h3 id="buenas-practicas-rebase">10.1 Buenas prácticas para el uso de rebase</h3>
+
+<p>Siempre deberías chequear tu historial local antes de hacer un push con tus nuevos cambios a otro repositorio Git.</p>
+
+<p>Git te permite hacer commits locales. Esta característica es 
+frecuentemente utilizada para tener puntos a los cuales volver si algo 
+sale mal más adelante durante el desarrollo de nuevas funcionalidades. 
+Si haces esto, antes de hacer un push deberías mirar tu historial local y
+ validar si estos commits son relevantes para otros desarrolladores.</p>
+
+<p>Si todos esos commits son parte de la implementación de una 
+funcionalidad en particular, lo más probable es que quieras resumirlos 
+en un único commit antes de hacer el push.</p>
+
+<p>El rebase interactivo consiste basicamente en reescribir la historia.
+ Es seguro hacer esto siempre y cuando los commits no han sido subidos 
+(mediante un puhs) a otro repositorio. Esto significa que los commits 
+solo deben ser reescritos mientras no se haya hecho un push.</p>
+
+<p>Si reescribis algo y después haces un push de un commit que ya está 
+presente en otros repositorios Git, en realidad parecerá como si 
+hubieses implementado algo que alguien ya implementó en el pasado.</p>
+
+<h2 id="creando-aplicando-parches">11. Creando y aplicando parches</h2>
+
+<p>Un parche (patch) es un archivo de texto que contiene cambios para el
+ código fuente. Este archivo puede ser enviado a alguna persona y esta 
+persona puede usar dicho archivo para aplicar los cambios a su 
+repositorio.</p>
+
+<p>Los siguientes comandos crean un branch, hacen algunos cambios, crean un parche y aplican el parche al master.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># creamos un nuevo branch</span>
+    git branch mybranch
+    <span class="c"># usamos este branch</span>
+    git checkout mybranch
+    <span class="c"># hacemos algunos cambios</span>
+    touch test05
+    <span class="c"># cambiamos el contenido de un archvio</span>
+    <span class="nb">echo</span> <span class="s2">"New content for test01"</span> &gt;test01
+    <span class="c"># comiteamos esto al branch</span>
+    git add .
+    git commit -a -m <span class="s2">"primer commit en el branch"</span>
+
+    <span class="c"># creamos un parche -&gt; sintaxis: git format-patch master</span>
+    git format-patch origin/master
+    <span class="c"># se crea el archivo 0001-primer-commit-en-el-branch.patch</span>
+
+    <span class="c"># obtenemos el master</span>
+    git checkout master
+
+    <span class="c"># aplicamos el parche</span>
+    git apply 0001-primer-commit-en-el-branch.patch
+    <span class="c"># hacemos un commit normal en el master</span>
+    git add .
+    git commit -a -m <span class="s2">"parche aplicado"</span>
+
+    <span class="c"># borramos el archivo</span>
+    rm 0001-primer-commit-en-el-branch.patch</code></pre></div>
+
+<h2 id="definiendo-alias">12. Definiendo un alias</h2>
+
+<p>Un alias en Git te permite crear tus propios comandos Git. Por 
+ejemplo, podés definir un alias que sea una forma más corta para tu 
+comando favorito o podés combinar varios comandos con un alias.</p>
+
+<p>Por ejemplo, a continuación definimos el comando <code>git add-commit</code> que combina <code>git add . -A</code> y <code>git commit -m</code>. Después de definir este comando, podés usarlo de la siguiente manera: <code>git add-commit -m "mensaje"</code></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git config --global alias.add-commit <span class="s1">'!git add . -A &amp;&amp; git commit'</span></code></pre></div>
+
+<p>Unfortunately, defining an alias is at the time of writing this not 
+completely supported in msysGit. You can do single aliases, e.g. ca for 
+ca = commit -a) but you can't do ones beginning with ! .</p>
+
+<p>Desafortunadamente, la funcionalidad de los alias al momento de finalizar estas lineas no está completamente soportado en <em>msysGit</em>. Podés hacer alias simples (para un solo comando), por ejemplo utilizar el alias <code>ca</code> para <code>commit -a</code> pero no podes hacer los que comienzan con un <em>!</em>.</p>
+
+<h2 id="ignorando-archivo-directorio">13. Ignorando un archivo / directorio</h2>
+
+<p>Algunas veces deseamos que algunos archivos o directorios no sean incluídos en tu repositorio Git. Si los agregas al archivo <em>.gitignore</em>,
+ Git comenzará a ignorarlose desde ese momento. Esto quiere decir que no
+ los eliminará del repo. Por lo tanto, la última versión seguirá estando
+ en el índice. Para que sean eliminados del índice podés usar:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># eliminamos el directorio .metadata del repo</span>
+    git rm -r --cached .metadata
+    <span class="c"># eliminamos el archivo test.txt del repo</span>
+    git rm --cached test.txt</code></pre></div>
+
+<p>Esto no quiere decir que sean eliminados del historial de commits. Si
+ realmente deseas que sean borrados del historial, consultá el comando <code>git filter-branch</code> que te permite reescribir el historial de commits.</p>
+
+<h2 id="otros-comandos-utiles">14. Otros comándos útiles</h2>
+
+<p>La siguiente lista contiene algunos comandos de Git que son útiles para el trabajo diario.</p>
+
+<table>
+    <tbody><tr>
+        <th>Comando</th>
+        <th>Descripción</th>
+    </tr>
+    <tr>
+        <td><code>git blame "nombre-archivo"</code></td>
+        <td>Muestra quién creó o modificó el archivo</td>
+    </tr>
+    <tr>
+        <td><code>git checkout -b mi-branch master~1</code></td>
+        <td>Crea un branch basándose en el master sin incluir el último commit</td>
+    </tr>
+</tbody></table>
+
+<h2 id="instalando-servidor-git">15. Instalando un servidor Git</h2>
+
+<p>Como describí anteriormente no es necesario un servidor. Podés 
+utilizar simplemente el filesystem o un proveedor público de Git, como 
+Github o Bitbucket. De todas fromas, algunas veces es conveiente tener 
+nuestro propio servidor. Instalarlo en Ubuntu es relativamente sencillo.</p>
+
+<p>Primero comprobá que tenés instalado <em>ssh</em>.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install ssh</code></pre></div>
+
+<p>Si no instalaste Git, es necesario que lo hagas:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install git-core</code></pre></div>
+
+<p>Crea un nuevo usuario para Git.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo adduser git</code></pre></div>
+
+<p>Ahora logueate con el usuario de Git y crea un repositorio.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># logueate en el servidor</span>
+    <span class="c"># para probar podes usar localhost</span>
+    ssh git@DIRECCION_IP_DEL_SERVER
+
+
+    <span class="c"># Crea el repositorio</span>
+    git init --bare example.git</code></pre></div>
+
+<p>Ahora podés comitear al repositorio remoto.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir gitexample
+    <span class="nb">cd </span>gitexample
+    git init
+    touch README
+    git add README
+    git commit -m <span class="s1">'primer commit'</span>
+    git remote add origin git@DIRECCION_IP_DEL_SERVER:example.git
+    git push origin master</code></pre></div>
+
+<h2 id="repositorios-remotos-online">16. Repositorios remotos online</h2>
+
+<h3 id="clonando-repositorios-remotos">16.1 Clonando repositorios remotos</h3>
+
+<p>Git también soporta operaciones remotas. Git soporta varios tipos de 
+protocolos de transporte; el protocolo nativo de Git es llamado <em>git</em>.</p>
+
+<p>A continuación clonaremos un repositorio existente mediante el protocolo git.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone git@github.com:vogella/gitbook.git</code></pre></div>
+
+<p>Alternativamente podrías clonar el mismo repositorio mediante el protocolo http.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># clonamos a través de HTTP </span>
+    git clone http://vogella@github.com/vogella/gitbook.git</code></pre></div>
+
+<h3 id="agregando-mas-repositorios-remotos">16.2 Agregando más repositorios remotos</h3>
+
+<p>Si clonas un repositorio remoto, el repositorio original será llamado automaticamente <code>origin</code>.</p>
+
+<p>Podés hacer push con los cambios a este repositorio <code>origin</code> mediante <code>git push origin</code>. Por supuesto, para hacer un push al repo reomoto tenés que contar con los permisos de escritura para tal repo.</p>
+
+<p>También podés agregar más repositorios remotos a tu repositorio mediante el comando <code>git remote add [nombre] [url_repo]</code>. Por ejemplo si clonaste el repositorio de arriba con el protocolo git, podés agregar tambien el protocolo <code>https</code> de la siguiente manera:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">// agregamos el protocolo https
+    git remote add githttp https://vogella@github.com/vogella/gitbook.git</code></pre></div>
+
+<h3 id="operacion-remota-http-proxy">16.3 Operaciones remotas via HTTP y un proxy</h3>
+
+<p>Es posible utilizar el protocolo HTTP para clonar repositorios Git. 
+Es especialmente útil si tu firewall bloquea todo excepto HTTP.</p>
+
+<p>Git también provee soporte para acceso http mediante un servidor 
+proxy. El siguiente comando Git podría por ejemplo, clonar un 
+repositorio mediante http y un proxy. Podés incluir la variable proxy en
+ general para todas las aplicaciones o solamente para Git.</p>
+
+<p>Este ejemplo usa variables de entorno (enviroment variables).</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Linux</span>
+    <span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>http://proxy:8080
+    <span class="c"># Windows</span>
+    <span class="c"># Set http_proxy=http://proxy:8080 </span>
+    git clone http://dev.eclipse.org/git/org.eclipse.jface/org.eclipse.jface.snippets.git
+    <span class="c"># Push al origin usando http</span>
+    git push origin</code></pre></div>
+
+<p>Este ejemplo utiliza la configuracion de Git</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Set proxy for git globally</span>
+    <span class="c"># proxy para git global</span>
+    git config --global http.proxy http://proxy:8080
+    <span class="c"># para comprobar las configuraciones del proxy</span>
+    git config --get http.proxy
+    <span class="c"># por si necesitas borrar la configuración del proxy</span>
+    git config --global --unset http.proxy</code></pre></div>
+
+<h2 id="proveedores-hosting-git">17. Proveedores de hosting Git</h2>
+
+<p>En lugar de crear tu propio servidor, también es posible utilizar un 
+servicio de hosting. Los proveedores de hosting de Git más populares son
+ <a href="https://github.com/">Github</a> y <a href="https://bitbucket.org/">Bitbucket</a>. Ambos ofrecen almacenamiento gratuito con ciertas limitaciones.</p>
+
+<h3 id="github">17.1 GitHub</h3>
+
+<p>Git Hub es gratuito para todos los repositorios públicos, o sea que 
+si querés tener repositorios privados que solo son visibles por las 
+personas que vos elegis, tenés que pagarle a GitHub una tarifa mensual.</p>
+
+<p>GitHub requiere que crees lo que se llama una <em>key ssh</em> (llave SSH). Una descripción para crear dicha llave en Ubuntu puede ser encontrada en la sección de <em>ssh key creation</em> en el sitio de Ubuntu. Para windows remitite a <em>ssh key generation</em> de <em>msysgit</em>.</p>
+
+<p>Create una cuenta en GitHub y crea un repositorio. Después de crear 
+el repositorio en GitHub obtendrás una descripción de todos los comandos
+ que necesitás ejecutar para subir tu proyecto a GitHub. Seguí las 
+instrucciones.</p>
+
+<p>Las instrucciones deberían ser similares a las siguientes:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Global setup:
+ Set up git
+  git config --global user.name <span class="s2">"tu nombre"</span>
+  git config --global user.email tu.email@gmail.com
+      
+proximos pasos:
+  mkdir gitbook 
+  <span class="nb">cd </span>gitbook
+  git init
+  touch README
+  git add README
+  git commit -m <span class="s1">'primer commit'</span>
+  git remote add origin git@github.com:vogella/gitbook.git
+  git push -u origin master
+      
+Ya contás con un repo?
+  <span class="nb">cd </span>repo_existente
+  git remote add origin git@github.com:vogella/gitbook.git
+  git push -u origin master</code></pre></div>
+
+<h3 id="bitbucket">17.2 Bitbucket</h3>
+
+<p>Bitbucket provee ilimitados repositorios públicos y privados, aunque 
+el número de participantes para un repositorio privado está actualmente 
+limitaod a 5 colaboradores. Es decir, si tenés más de 5 desarrolladores 
+que necesitan acceder a ese repo privado vas a tener que pagar.</p>
+
+<h2 id="herramientas-graficas-git">18. Herramientas gráficas para Git</h2>
+
+<p>Este tutorial se basó en el uso de la consola de comandos para Git. 
+Si querés podes hechar un vistazo a las herramientas gráficas para el 
+trabajo con Git. Git provee dos herramientas gráficas. <em>gitk</em> muestra el historial y <em>git gui</em> muestra un editor que te permite realizar operaciones Git.</p>
+
+<p>El proyecto de Eclipse EGit provee integración de Git en Eclipse, el cual ya está incluído en la última versión de Eclipse.</p>
+
+<h2 id="version-original-kindle">19. Obtené la versión original para Kindle</h2>
+
+<p>La versión original de este tutorial en inglés para Kindle está disponible aquí:</p>
+
+<p><a href="http://www.amazon.com/dp/B0067QNR56" target="_blank"><img src="Tutorial%20de%20Git%20en%20Espa%C3%B1ol%20%C2%B7%20Santiago%20Basulto%20%20Blog%20Archivos/150x200xgitbook.html"></a></p>
+
+<h2 id="preguntas-comentarios">20. Preguntas y comentarios</h2>
+
+<p>Podés incluir tus preguntas y comentarios en la sección de abajo, de comentarios. Existe un grupo en inglés: <a href="http://groups.google.com/group/vogella">www.vogella.de Google Group</a></p>
+
+<h2 id="links-recursos-utiles">21. Links  y recursos útiles</h2>
+
+<p>La mayoría de la documentación está en inglés, por eso en primera 
+instancia decidí escribir/traducir este tutorial. Sin embargo, incluyo 
+algunos links útlies. <em>Si conocés alguno que quisieras incluir podés sugerirlo en la sección de comentarios</em>.</p>
+
+<ul>
+<li>  <a href="http://git-scm.com/">Sitio oficial de Git</a> - INGLES</li>
+<li>  <a href="http://eclipse.org/egit/">EGit para Eclipse</a> - INGLES</li>
+<li>  <a href="http://code.google.com/p/msysgit/">msysgit - Git para Windows</a> - INGLES</li>
+<li>  <a href="http://gitref.org/">Sitio de referencia de Git creado por un team de GitHub</a> - INGLES</li>
+<li>  <a href="http://github.com/guides/git-cheat-sheet">Cheat sheet</a> - INGLES</li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="http://en/coding/2015/05/08/dont-be-afraid-to-learn.html">
+            Don't be afraid to learn
+            <small>08 May 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://en/startups/2015/01/07/dont-grow.html">
+            Don't grow (yet)
+            <small>07 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://startups/2014/11/30/a-story-of-an-mvp.html">
+            How we built our MVP
+            <small>30 Nov 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  
+
+</body></html>
