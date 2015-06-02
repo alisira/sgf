@@ -135,7 +135,6 @@
 			        		<tbody>
 			        		
 			        		
-					 		
 						 		
 						 		
 						 		<logic:iterate name="Compromiso" property="codCatePresu" id="ict" indexId="indice">
