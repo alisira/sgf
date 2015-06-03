@@ -255,6 +255,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 							
 		 		        	Expediente expediente = new Expediente();
 							expediente.setFechaReg(fecha);
+							expediente.setExpediente(0);
 							expediente.setAno(ano);				
 							expediente.setEstatus(1);
 							expediente.setIdUsuario(idUsuario);
@@ -264,9 +265,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 							ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
 							expeResul = (Integer) expedienteDAO.guardar(expediente);
 							
-							//System.out.println("Triunfo seguro " +expeResul); 
-							
-		 		        	
+							System.out.println("Triunfo seguro " +expeResul);
 		 		        	
 		 		        	formaResp.setTotalResumen(montoTotal);
 		 		        	//request.setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
@@ -278,7 +277,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 		 		        	
 
 		 		        	
-		 		        	fwd = "apruebaGuardar";			 		        	
+		 		        	fwd = "apruebaNuevo";			 		        	
 		 		        	
 		 		        }else{
 		 		        	error[0] = (String) "sinresultados";
