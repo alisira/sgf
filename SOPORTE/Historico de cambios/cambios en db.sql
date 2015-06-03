@@ -17,28 +17,30 @@ alter table opcion add CONSTRAINT opcion_uri unique(uri);
 commit;
 
 
---Temporal de la regularizacion del compromiso
 CREATE TABLE regularizacioncompromiso
 (
-  id_regularizacion_compromiso_inicial serial NOT NULL, -- id de la regularizacion del compromiso inicial
-  id_compromiso_inicial NOT NULL, -- id de la regularizacion del compromiso inicial  
-  expediente bigint, -- numero de la regularizacion, expediente que es enviado por sigecof
-  compromiso bigint, -- numero del compromiso que es enviado por sigecof
-  ano integer NOT NULL, -- ejercicio presupuestario
+  id_regularizacion_compromiso serial NOT NULL,
+  id_compromiso_inicial integer NOT NULL,
+  expediente bigint,
+  compromiso bigint,
+  ano integer NOT NULL,
   tarea integer NOT NULL,
   estatus integer NOT NULL,
-  id_tipo_documento integer, -- identificador del documento
-  documento character varying(10), -- numero del documento
-  observacion character varying(300), -- observacion del compromiso  
-  gaceta_cred_adicional character varying(10), -- numero de la gaceta del credito adicional
-  decreto_cred_adicional character varying(10), -- decreto del credito adicional
-  fecha_cred_adicional date, -- fecha del creditod adicional
-  gaceta_rectificacion character varying(10), -- nro de la gaceta de rectificacion
-  decreto_rectificacion character varying(10), -- numero de decreto de la rectificacion
-  fecha_rectificacion date, -- fecha de la rectificacion
-  fecha_registro date, -- fecha de registro del compromiso en sigecof 
-  origen_presupuestario character varying(1), -- Origen presupuestario del compromiso. Puede ser:... 
-  CONSTRAINT id_regularizacion_compromiso_sigecof PRIMARY KEY (id_compromiso_inicial),    
+  id_tipo_documento integer,
+  documento character varying(10),
+  observacion character varying(300),
+  gaceta_cred_adicional character varying(10),
+  decreto_cred_adicional character varying(10),
+  fecha_cred_adicional date,
+  gaceta_rectificacion character varying(10),
+  decreto_rectificacion character varying(10),
+  fecha_rectificacion date,
+  fecha_registro date,
+  origen_presupuestario character varying(1),
+  CONSTRAINT id_regularizacion_compromiso_sigecof PRIMARY KEY (id_regularizacion_compromiso),
+  CONSTRAINT id_compromiso_inicial FOREIGN KEY (id_compromiso_inicial)
+      REFERENCES compromisoinicial (id_compromiso_inicial) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT id_tipo_documento FOREIGN KEY (id_tipo_documento)
       REFERENCES tipodocumento (id_tipo_documento) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -49,6 +51,10 @@ WITH (
 );
 ALTER TABLE regularizacioncompromiso
   OWNER TO postgres;
+COMMENT ON TABLE regularizacioncompromiso
+  IS 'esta tabla lleva el registro del compromiso inicial, el cual es enviado al sigecof. Asi mismo guarda los datos del mismo que son enviados por el sigecof. La lista de imputaciones por compromiso son almacenadas en la tabla compromiso_inicial_sicecof_imputaciones';
+
+
   
   INSERT INTO public.dependencia(id_dependencia, cod_dependencia, dependencia_staff, vigente, localidad, nivel_estructura, sede_diplomatica, id_tipo_dependencia, id_administradora_uel, id_unidad_funcional, id_grupo_organismo, id_organismo, nombre, aprobacion_mpd, id_sede, id_region, id_estructura) VALUES ('42'::integer, '01000400001'::text, 'N'::text, 'S'::text, 'C'::text, '1'::integer, 'N'::text, '11'::integer, '22'::integer, '16'::integer, '11'::integer, '11'::integer, 'DIRECCION DE PRUEBA DE CREDITO PUBLICO'::text, 'S'::text, '12'::integer, '11'::integer, '12'::integer)
 UPDATE public.accionespecifica SET denominacion='EJEMPLO DE ACCION CENTRALIZADA'::text WHERE id_accion_especifica = '51'::integer
