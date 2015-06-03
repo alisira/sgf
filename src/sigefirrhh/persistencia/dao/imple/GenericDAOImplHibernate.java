@@ -50,9 +50,22 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
     @Override
     public Object guardar(Object entity) throws SQLException, NestedSQLException, Exception  {
     	
+    	sqlMapper.startTransaction();
+    	
     	int maxi = entity.getClass().getName().split("\\.").length - 1;
     	Integer valor;
-  	   	valor = (Integer) getSqlMapClient().insert("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);    	
+    	//valor = (Integer) getSqlMapClient().insert("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
+    	valor = (Integer) getSqlMapClient().queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
+
+    	
+    	/*if (entity.getClass().getName().split("\\.")[maxi].equals("CompromisoInicial")){
+    		valor = (Integer) getSqlMapClient().queryForObject("guardarCompromisoInicial", entity);
+    	}*/
+    	
+    	sqlMapper.commitTransaction();
+    	
+  	  	System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);
+  	   	
     	return valor;
     }
 

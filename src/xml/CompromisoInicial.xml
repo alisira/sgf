@@ -97,7 +97,7 @@
   </select> 
   
   
-  <statement id="guardarCompromisoInicial" parameterClass="sigefirrhh.persistencia.modelo.CompromisoInicial" resultClass="int">
+  <statement id="guardarCompromisoInicial" parameterClass="sigefirrhh.persistencia.modelo.CompromisoInicial" resultClass="Integer">
     <!--realizado el 16-04-15 13:39:44 .-->
     insert into compromisoinicial
     <dynamic prepend="(" >      
