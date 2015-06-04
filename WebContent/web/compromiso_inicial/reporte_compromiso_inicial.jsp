@@ -5,25 +5,38 @@
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/struts-nested.tld" prefix="nested" %>
 <%@ page import="sigefirrhh.login.LoginSession" %>
+<%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
-{
+
 	String rutaTemp = null;
 
-	if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
-		response.sendRedirect("/sigefirrhh/error.html");
+	if ((LoginSession)session.getAttribute("loginSession")!=null){
+
+		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
+
+			if (session.getAttribute("ComproIniBean")!=null){
+				
+				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
+				
+			}else{
+				response.sendRedirect("/sigefirrhh/error.html");
+			}
+		}else{			
+			response.sendRedirect("/sigefirrhh/error.html");
+		}		
 	}else{
-		
-		rutaTemp = "/" + request.getRequestURI().split("/")[1] + "/" + request.getRequestURI().split("/")[2];
-		//System.out.println(request.getRequestURI());
+		response.sendRedirect("/sigefirrhh/error.html");
 	}
+	
+ 	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
 
 %>
 
 <html>
 	<head>
 
-		<title> Registro de Resumen de N&oacute;mina Inicial</title>
+		<title> Resumen de <bean:write name="CompromisoInicialForm" property="tituloApli"/></title>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">		
 		<meta http-equiv="Content-Style-Type" content="text/css">
@@ -88,7 +101,7 @@
 				
 				<tr>
 					<td valign="bottom" width="800">
-						RESUMEN DE NOMINA INICIAL
+						Resumen de <bean:write name="CompromisoInicialForm" property="tituloApli"/>
 					</td>
 				</tr>
 			
@@ -105,7 +118,7 @@
 					</td>
 		    	
 		    	<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="CompromisoInicialForm" property="expediente"  />			   	
+					<bean:write name="CompromisoInicialForm" property="expediente"  />
 				</td>
 				
 				<td id="titulo" width="140" height="20px">
@@ -113,7 +126,7 @@
 				</td>
 					    	   
 			   	<td colspan="1" id="contenido" style="text-align: left;" width="103" height="20px">
-	    	   		<bean:write name="CompromisoInicialForm" property="fechaRegistro"/>		
+	    	   		<bean:write name="CompromisoInicialForm" property="fechaRegistro"/>
 	    	   	</td> 
 				
 	  		 </tr>
@@ -124,7 +137,7 @@
 				</td>
 	    	   
 				<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="CompromisoInicialForm" property="idTipoNomina"  />
+					<bean:write name="CompromisoInicialForm" property="idTipoNomina" />
 				</td>
 				
 				<td colspan="1" id="titulo" height="20px">
@@ -137,14 +150,7 @@
 			 
 			 </tr>
 
-			<tr>
-				<td id="titulo" width="184" height="20px">
-					Categoría Presupuestaria:
-				</td>
-				<td colspan="7" id="contenido" style="text-align: left;">
-					<bean:write name="CompromisoInicialForm" property="idTipoNomina"  /> - <bean:write name="CompromisoInicialForm" property="idTipoNomina" />
-				</td>
-			</tr>
+			
 
 			<tr>
 				<td id="titulo" height="20px">Concepto de Pago: </td>
@@ -168,7 +174,9 @@
 				<td class="detalle_encabezado" width="21%">Deno UEL</td>
 				<td class="detalle_encabezado" width="3%">F.F</td>
 				<td class="detalle_encabezado" width="15%">Partida</td>
-		      	<td class="detalle_encabezado" width="17%">Monto</td>						      	
+				<td class="detalle_encabezado" width="15%">Denominacion</td>
+		      	<td class="detalle_encabezado" width="17%">Monto</td>	
+		      	<td class="detalle_encabezado" width="17%">Mensaje</td>							      	
 			</tr>
    		</thead>
 	
@@ -196,11 +204,20 @@
 						<bean:write name="CompromisoInicialForm" property='<%="partida[" + indice +"]"%>'/>
 					</td>
 					
+					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
+						<bean:write name="CompromisoInicialForm" property='<%="denoPartida[" + indice +"]"%>'/>
+					</td>
+					
 					<td id="detalle_estatico" style="text-align: right; padding: 0px 5px;" width="34">
 						<script type="text/javascript">
 							document.write(formato_numerico('<bean:write name="CompromisoInicialForm" property='<%="monto[" + indice +"]"%>'/>')); 
 						</script>						                       
 					</td>
+					
+					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
+						<bean:write name="CompromisoInicialForm" property='<%="mensajeSigecof[" + indice +"]"%>'/>
+					</td>
+					
 					
 											  
 				</tr>
@@ -208,8 +225,8 @@
 			</logic:iterate>
 				 	   
 		 	<tr>
-		  		<td colspan =5  id="detalle_estatico" style="text-align: right; padding: 0px 5px;" >
-					TOTAL RESUMEN INICIAL
+		  		<td colspan =7  id="detalle_estatico" style="text-align: right; padding: 0px 5px;" >
+					TOTAL COMPROMISO INICIAL
 				</td>
 				<td id="detalle_estatico" style="text-align: right; padding: 0px 5px;" >					
 					<script type="text/javascript">

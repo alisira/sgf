@@ -42,8 +42,8 @@
 	
 %>
 
-		<script type="text/javascript" language="JavaScript">		
-			    document.title = "<bean:write name="titulo"/>" ;		
+		<script type="text/javascript" language="JavaScript">
+			    document.title = "Registro de <bean:write name="CompromisoInicialForm" property="tituloApli"/>" ;		
 		</script>
 
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>

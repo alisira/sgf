@@ -44,6 +44,7 @@ public class CompromisoInicialForm extends ActionForm{
     private Integer idTipoFondo;
     private String denoTipoFondo;
     private String codFrecuenPago;
+    private Double totalResumen;
    
 
     //Detalle
@@ -53,9 +54,10 @@ public class CompromisoInicialForm extends ActionForm{
     private String denoUel[];
     private String partida[];
     private String denoPartida[];
+    private String mensajeSigecof[];
     private Double dispo[];
     private Double monto[];
-    private Double totalResumen;
+
 
 
 	public CompromisoInicialForm(Integer tamaño) {
@@ -112,9 +114,20 @@ public class CompromisoInicialForm extends ActionForm{
 	public void setMonto(Double valor, Integer indice) {		
 		this.monto[indice] = valor;		
 	}
+	
 
-	
-	
+	public String getTituloApli() {
+		return "Compromiso Inicial";
+	}
+
+	public String[] getMensajeSigecof() {
+		return mensajeSigecof;
+	}
+
+	public void setMensajeSigecof(String[] mensajeSigecof) {
+		this.mensajeSigecof = mensajeSigecof;
+	}
+
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}

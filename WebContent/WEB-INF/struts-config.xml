@@ -45,6 +45,7 @@
         <form-bean name="CompromisoInicialForm" type="sigefirrhh.struts.actionForm.CompromisoInicialForm"/>
         <form-bean name="RegularizacionCompromisoForm" type="sigefirrhh.struts.actionForm.RegularizacionCompromisoForm"/>        
         <form-bean name="ParametrosBusquedaForm" type="sigefirrhh.struts.actionForm.ParametrosBusquedaForm"/>
+        <form-bean name="TipoDocumentoForm" type="sigefirrhh.struts.actionForm.TipoDocumentoForm"/>
     </form-beans>
     
     <global-exceptions>
