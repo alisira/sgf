@@ -75,6 +75,9 @@
       </isNotNull>     
       <isNotNull prepend="," property="idPartidaUelEspecifica" >
         id_partida_uel_especifica
+      </isNotNull>
+      <isNotNull prepend="," property="ff" >
+        ff
       </isNotNull>      
       <isNotNull prepend="," property="monto" >
         monto
@@ -88,7 +91,10 @@
       </isNotNull>
       <isNotNull prepend="," property="idPartidaUelEspecifica" >
         #idPartidaUelEspecifica:INTEGER#
-      </isNotNull>     
+      </isNotNull> 
+      <isNotNull prepend="," property="ff" >
+        #ff:INTEGER#
+      </isNotNull>    
       <isNotNull prepend="," property="monto" >
         #monto:DOUBLE#
       </isNotNull>

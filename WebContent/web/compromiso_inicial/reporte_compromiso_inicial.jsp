@@ -105,7 +105,7 @@
 					</td>
 		    	
 		    	<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="ResumenNominaBean" property="expediente"  />			   	
+					<bean:write name="CompromisoInicialForm" property="expediente"  />			   	
 				</td>
 				
 				<td id="titulo" width="140" height="20px">
@@ -113,7 +113,7 @@
 				</td>
 					    	   
 			   	<td colspan="1" id="contenido" style="text-align: left;" width="103" height="20px">
-	    	   		<bean:write name="ResumenNominaBean" property="fechaReg"/>		
+	    	   		<bean:write name="CompromisoInicialForm" property="fechaRegistro"/>		
 	    	   	</td> 
 				
 	  		 </tr>
@@ -124,7 +124,7 @@
 				</td>
 	    	   
 				<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="ResumenNominaBean" property="tipoNomina"  />
+					<bean:write name="CompromisoInicialForm" property="idTipoNomina"  />
 				</td>
 				
 				<td colspan="1" id="titulo" height="20px">
@@ -132,7 +132,7 @@
 				</td>
 				
 	    	   	<td id="contenido" style="text-align: left;" width="103" height="20px">
-					<bean:write name="ResumenNominaBean" property="ano"/>
+					<bean:write name="CompromisoInicialForm" property="ano"/>
 				</td>
 			 
 			 </tr>
@@ -142,14 +142,14 @@
 					Categoría Presupuestaria:
 				</td>
 				<td colspan="7" id="contenido" style="text-align: left;">
-					<bean:write name="ResumenNominaBean" property="tipoNomina"  /> - <bean:write name="ResumenNominaBean" property="tipoNomina" />
+					<bean:write name="CompromisoInicialForm" property="idTipoNomina"  /> - <bean:write name="CompromisoInicialForm" property="idTipoNomina" />
 				</td>
 			</tr>
 
 			<tr>
 				<td id="titulo" height="20px">Concepto de Pago: </td>
 				<td colspan="5" id="contenido" style="text-align: left;">
-					 <bean:write name="ResumenNominaBean" property="tipoNomina"  />
+					 <bean:write name="CompromisoInicialForm" property="idTipoNomina"  />
 				</td>
 				
 			</tr>
@@ -174,31 +174,31 @@
 	
 		<tbody>
 			
-			<logic:iterate name="ResumenNominaBean" property="codCatePresu" id="ict" indexId="indice">
+			<logic:iterate name="CompromisoInicialForm" property="codCatePresu" id="ict" indexId="indice">
 						
 				<tr>
 	 		  
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="codCatePresu[" + indice +"]"%>'/>
+						<bean:write name="CompromisoInicialForm" property='<%="codCatePresu[" + indice +"]"%>'/>
 					</td>
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="codUel[" + indice +"]"%>'/>
+						<bean:write name="CompromisoInicialForm" property='<%="codUel[" + indice +"]"%>'/>
 					</td>					
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="denoUel[" + indice +"]"%>'/>
+						<bean:write name="CompromisoInicialForm" property='<%="denoUel[" + indice +"]"%>'/>
 					</td>
 					
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="ff[" + indice +"]"%>'/>
+						<bean:write name="CompromisoInicialForm" property='<%="ff[" + indice +"]"%>'/>
 					</td>
 					
 					<td id="detalle_estatico" style="text-align: center; padding: 0px 5px;" width="34">
-						<bean:write name="ResumenNominaBean" property='<%="partida[" + indice +"]"%>'/>
+						<bean:write name="CompromisoInicialForm" property='<%="partida[" + indice +"]"%>'/>
 					</td>
 					
 					<td id="detalle_estatico" style="text-align: right; padding: 0px 5px;" width="34">
 						<script type="text/javascript">
-						document.write(formato_numerico('<bean:write name="ResumenNominaBean" property='<%="monto[" + indice +"]"%>'/>')); 
+							document.write(formato_numerico('<bean:write name="CompromisoInicialForm" property='<%="monto[" + indice +"]"%>'/>')); 
 						</script>						                       
 					</td>
 					
@@ -213,7 +213,7 @@
 				</td>
 				<td id="detalle_estatico" style="text-align: right; padding: 0px 5px;" >					
 					<script type="text/javascript">
-						document.write(formato_numerico('<bean:write name="ResumenNominaBean" property='totalResumen' />')); 
+						document.write(formato_numerico('<bean:write name="CompromisoInicialForm" property='totalResumen' />')); 
 					</script>
 				</td>
 			</tr>
@@ -248,13 +248,13 @@
 				<br>
 				<br>
 				<div > 
-					<p>Elaborado Por: <bean:write name="ResumenNominaBean" property="codCatePresu"/> <bean:write name="ResumenNominaBean" property="codCatePresu"/>	 Analista de Personal I </p>			  
+					<p>Elaborado Por: <bean:write name="CompromisoInicialForm" property="codCatePresu"/> <bean:write name="CompromisoInicialForm" property="codCatePresu"/>	 Analista de Personal I </p>			  
 				</div> 
 
 			</div>
 
 		<script>
-			alert("Recuerde Imprimir su Portada antes de salir, gracias");
+			alert("Recuerde Imprimir su Formato antes de salir, gracias");
 		</script>
 
 	</body>

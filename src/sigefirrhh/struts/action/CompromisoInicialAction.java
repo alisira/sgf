@@ -17,6 +17,9 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -162,8 +165,8 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        out.write("<root>");
 	        Organismo org = new Organismo();
 			org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-			CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;
-			CompromisoInicialForm formaResp = new CompromisoInicialForm();
+			CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;			
+			
 			CriterioBusqueda criterio = new CriterioBusqueda();
 	        
 	        if ( session.getAttribute("loginSession") != null){
@@ -179,7 +182,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 						Date fecha = new Date();
 									
 						int idUsuario = 1;
-						int idUnidadAdministadora = formaPeti.getIdUnidadAdministradora();						
+						int idUnidadAdministadora = formaPeti.getIdUnidadAdministradora();
 																
 						if (formaPeti.getCodFrecuenPago() !=null && !formaPeti.getCodFrecuenPago().equals("")) {
 							if (formaPeti.getCodFrecuenPago().indexOf(' ') != -1){							
@@ -219,7 +222,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 		 		        	
 		 		        	Double montoTotal = 0.0;		 		        	
 							
-							CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();						
+							CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
 							CompromisoInicial compromisoInicial = new CompromisoInicial();
 							compromisoInicial = (CompromisoInicial ) compromisoInicial.llenarBean(compromisoInicial,formaPeti);						
 							compromisoInicial.setAno(ano);
@@ -232,34 +235,72 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 							compromisoInicial.setCompromiso(9999);
 							compromisoInicial.setIdTipoPago(1);
 							compromisoInicial.setIdUnidadAdministradora(idUnidadAdministadora);
-								
+							
 							Integer idCompromisoInicial;
 							idCompromisoInicial = (Integer) compromisoInicialDAO.guardar(compromisoInicial);
 							
-							//System.out.println("idCompromisoInicial " + idCompromisoInicial);
-							
-							
-							/*CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
+							CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
 							CompromisoInicialDetalle compromisoInicialDetalle= new CompromisoInicialDetalle();							
 							
 							for (int i = 0;i < listadoGasto.size(); i++){
 		 		        		
 								compromisoInicialDetalle.setIdCompromisoInicial(idCompromisoInicial);
 		 		        		compromisoInicialDetalle.setIdPartidaUelEspecifica(listadoGasto.get(i).getIdPartidaUelEspecifica());
+		 		        		compromisoInicialDetalle.setFf(1);
 		 		        		compromisoInicialDetalle.setMonto(listadoGasto.get(i).getMonto());
 		 		        		
 		 		        		expeResul = (Integer) compromisoInicialDetalleDAO.guardar(compromisoInicialDetalle);
 		 		        		if (expeResul.equals(Integer.valueOf(0)) || expeResul == null){
 		 							throw new Exception("Error 1 Desconocido en ResumenNominaInicialAction");
-		 						} 
-								
+		 						}
 								
 		 		        	}
+							
+							Integer[] ff = new Integer [listadoGasto.size()];
+							Integer[] codCatePresu = new Integer [listadoGasto.size()];
+							Integer[] codUel = new Integer [listadoGasto.size()];
+							String[] denoUel = new String [listadoGasto.size()];    
+							String[] partida = new String [listadoGasto.size()];
+							String[] denoPartida = new String [listadoGasto.size()];
+							Double[] dispo = new Double [listadoGasto.size()];
+							Double[] monto = new Double [listadoGasto.size()];							
+							
+							for (int c=0;c<listadoGasto.size();c++){
+								ff[c]= listadoGasto.get(0).getFf();
+								codCatePresu[c]= (listadoGasto.get(0).getCodCatePresu());
+								codUel[c]= (listadoGasto.get(0).getCodUnidadEjecutora() );
+							    denoUel[c]= (listadoGasto.get(0).getDenoUnidadEjecutora());
+							    partida[c]= (listadoGasto.get(0).getCodPartida());
+							    denoPartida[c]= (listadoGasto.get(0).getDenoPartida());
+							    dispo[c]= (500.0);
+							    monto[c]= (listadoGasto.get(0).getMonto());
+							    System.out.println(monto[0]);
+							}
+							
+							
+							formaPeti.setFf(ff);
+						    formaPeti.setCodCatePresu(codCatePresu);
+						    formaPeti.setCodUel(codUel);
+						    formaPeti.setDenoUel(denoUel);
+						    formaPeti.setPartida(partida);
+						    formaPeti.setDenoPartida(denoPartida);
+						    formaPeti.setDispo(dispo);
+						    formaPeti.setMonto(monto);
+							
+							formaPeti.setExpediente(expeResul);
+							formaPeti.setFechaRegistro(fecha);
+							
+							
+							
+							
+							//request.getSession().setAttribute("Compromiso", comIni);
 		 		        	
-		 		        	formaResp.setTotalResumen(montoTotal);?
-		 		        */
+		 		        	formaPeti.setTotalResumen(5.0);
+		 		        
+		 		        	//request.setAttribute("ComproIniBean", compromisoInicial); //Para poner un bean en memoria y devolverlo
+		 		        	//request.setAttribute("ComproIniDetalleBean", compromisoInicialDetalle); //Para poner un bean en memoria y devolverlo
 		 		        	//request.getSession().setAttribute("ComproIniBean", formaResp); //Para poner un bean en memoria y devolverlo
-		 		        	//fwd = "apruebaGuardar";			 		        	
+		 		        	fwd = "apruebaGuardar";
 		 		        	
 		 		        }else{
 		 		        	error[0] = (String) "sinresultados";

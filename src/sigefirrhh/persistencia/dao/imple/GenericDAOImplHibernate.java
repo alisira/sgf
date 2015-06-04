@@ -55,7 +55,7 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 
   	   	valor = (Integer) getSqlMapClientTemplate().queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
     	
-  	  	System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);  	   	
+  	  	//System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);  	   	
 
     	return valor;
     }

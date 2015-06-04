@@ -1,9 +1,13 @@
 package sigefirrhh.struts.actionForm;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 
@@ -32,7 +36,7 @@ public class CompromisoInicialForm extends ActionForm{
     private String decreRecti;
     private String fechaGaceRecti;
     private Integer compromiso;
-    //private Date fechaRegistro;
+    private Date fechaRegistro;
 	private Integer expediente;
     private Integer idUsuario;
     private Integer mes;
@@ -63,13 +67,27 @@ public class CompromisoInicialForm extends ActionForm{
 		this.denoPartida = new String [tamaño];
 		this.dispo = new Double [tamaño];
 		this.monto = new Double [tamaño];
+		
+		//System.out.println("por aqui menos");
+		
 
 	}
 	
 	public CompromisoInicialForm() {
 		super();
+		/*this.ff = new Integer [1500];
+		this.codCatePresu = new Integer [2];
+		this.codUel = new Integer [2];
+		this.denoUel = new String [2];    
+		this.partida = new String [2];
+		this.denoPartida = new String [2];
+		this.dispo = new Double [2];
+		this.monto = new Double [2];*/
+		
+		//System.out.println("Paso por aqui");
+		
 	}
-
+	
 	public void setFf(Integer ff, Integer indice) {
 		this.ff[indice] = ff;
 	}
@@ -97,6 +115,14 @@ public class CompromisoInicialForm extends ActionForm{
 
 	
 	
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
 	public Integer getCodUnidadAdministradora() {
 		return codUnidadAdministradora;
 	}
@@ -393,6 +419,19 @@ public class CompromisoInicialForm extends ActionForm{
 		this.totalResumen = totalResumen;
 	}
 		
-	
+	public void reset(ActionMapping map, HttpServletRequest req){
+		
+		//System.out.println("En el reset");
+        this.idCompromisoInicial=null;
+        this.expediente=null;
+        this.compromiso=null;
+        this.ano=null;
+        this.tarea=null;
+        this.estatus=null;
+        this.documento=null;
+        this.observacion=null;
+        this.fechaRegistro=null;
+        
+    }
     
 }

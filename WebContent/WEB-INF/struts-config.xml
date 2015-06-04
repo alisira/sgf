@@ -61,6 +61,7 @@
 
     <action-mappings>
         <action path="/Welcome" forward="/bienvenido.jsp"/>
+        
         <action path="/login" type="sigefirrhh.struts.action.LoginAction" name="loginForm" scope="request" input="/bienvenido.jsp">
             <forward name="AprobarLogin" path="/menu_principal.jsp"/>
             <forward name="RechazarLogin" path="/bienvenido.jsp"/>
@@ -69,7 +70,7 @@
         </action>
         <action path="/bienvenido" forward="/bienvenido.jsp"/> 
         
-        <action path="/compromisoInicial" type="sigefirrhh.struts.action.CompromisoInicialAction" parameter="accion" name="CompromisoInicialForm" scope="request" input="/web/compromiso_inicial/compromiso_inicial.jsp">
+        <action path="/compromisoInicial" type="sigefirrhh.struts.action.CompromisoInicialAction" parameter="accion" name="CompromisoInicialForm" > 
             <forward name="apruebaNuevo" path="/web/compromiso_inicial/compromiso_inicial.jsp" />
             <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
         </action>
@@ -78,7 +79,6 @@
             <forward name="apruebaNuevo" path="/web/regularizacion_compromiso/regularizacion_compromiso.jsp" />
             <forward name="apruebaGuardar" path="/web/regularizacion_compromiso/reporte_regularizacion_compromiso.jsp" redirect="true"/>
         </action>
-        
         
         <action path="/mantenimientoUnidadAdministradora" type="sigefirrhh.struts.action.MantenimientoUnidadAdministradora" input="/mantenimiento_unidad_administradora.jsp" parameter="accion" name="UnidadAdministradoraForm"  scope="request" >
            	<forward name="success" path="/procesos/mantenimiento_unidad_administradora.jsp" />
