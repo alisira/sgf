@@ -109,74 +109,80 @@
 			
 		    <br>
 			<br>
-			
-			<table class="tablaParametro" width="757" border="0px" cellpadding="1px" cellspacing="5px">
-		  		<tbody>
-					 <tr>			 
-					<td id="titulo" height="20px">
-						Expediente:
-					</td>
-		    	
-		    	<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="CompromisoInicialForm" property="expediente"  />
-				</td>
-				
-				<td id="titulo" width="140" height="20px">
-					Fecha:
-				</td>
-					    	   
-			   	<td colspan="1" id="contenido" style="text-align: left;" width="103" height="20px">
-	    	   		<bean:write name="CompromisoInicialForm" property="fechaRegistro"/>
-	    	   	</td> 
-				
-	  		 </tr>
-			 
-			 <tr>
-			 	<td id="titulo" height="20px">
-					Tipo de Nomina
-				</td>
-	    	   
-				<td colspan="2" id="contenido" style="text-align: left;" height="20px">
-					<bean:write name="CompromisoInicialForm" property="idTipoNomina" />
-				</td>
-				
-				<td colspan="1" id="titulo" height="20px">
-					Ejercicio Presupuestario:
-				</td>
-				
-	    	   	<td id="contenido" style="text-align: left;" width="103" height="20px">
-					<bean:write name="CompromisoInicialForm" property="ano"/>
-				</td>
-			 
-			 </tr>
+	
+			<table class="tablaParametro" width="900px" border="0px" cellpadding="1px" cellspacing="5px">
+				<tbody>
+					<tr>
+						<td id="titulo" height="20px">
+							<div style="width: 50px;">
+								Expediente:
+							</div>
+						</td>
+	
+						<td id="contenido" style="text-align: left;" height="20px">
+							<div style="width: 50px;">
+								<bean:write name="CompromisoInicialForm" property="expediente" />
+							</div>
+						</td>
+	
+						<td id="titulo" height="20px">Fecha:</td>
+	
+						<td id="contenido" style="text-align: left;" width="103" height="20px">
+							<div style="width: 150px;">
+								<bean:write	name="CompromisoInicialForm" property="fechaRegistro" />
+							</div>							
+						</td>
+	
+						<td id="titulo" height="20px">
+							<div style="width: 90px;">
+								Tipo de Nomina:
+							</div>
+						</td>
+	
+						<td id="contenido" style="text-align: left;" height="20px">
+							<div style="width: 50px;">
+								<bean:write name="CompromisoInicialForm" property="idTipoNomina" />							
+							</div>							
+						</td>
+	
+						<td id="titulo" height="20px">
+							<div style="width: 150px;">
+								Ejercicio Presupuestario:				
+							</div>							
+						</td>
+	
+						<td id="contenido" style="text-align: left;" height="20px">
+							<div style="width: 50px;">
+								<bean:write name="CompromisoInicialForm" property="ano" />		
+							</div>
+						</td>	
+	
+					</tr>
+	
+					<tr>
+						<td id="titulo" height="20px">Observacion:</td>
+						<td id="contenido" style="text-align: left;">
+							<bean:write	name="CompromisoInicialForm" property="idTipoNomina" />
+						</td>
+					</tr>
+	
+				</tbody>
+			</table>
+	
+			<br>
 
-			
-
-			<tr>
-				<td id="titulo" height="20px">Concepto de Pago: </td>
-				<td colspan="5" id="contenido" style="text-align: left;">
-					 <bean:write name="CompromisoInicialForm" property="idTipoNomina"  />
-				</td>
-				
-			</tr>
-				 
-		</tbody>
-	</table>
-		 
-	<br>
-
-	<table id="tablaDetalle" class="tablaDetalle" bordercolor="#c0c0c0" cellpadding="0px" cellspacing="0px" width="702px">
+	<table id="tablaDetalle" class="tablaDetalle" bordercolor="#c0c0c0" cellpadding="0px" cellspacing="0px" width="900px">
 	
 		<thead>
 			<tr id="detalle_encabezado" align="center">	     									    
-			    <td class="detalle_encabezado" width="10%">Cod.Cat.Pres</td>
-				<td class="detalle_encabezado" width="10%">UEL</td>
-				<td class="detalle_encabezado" width="21%">Deno UEL</td>
-				<td class="detalle_encabezado" width="3%">F.F</td>
-				<td class="detalle_encabezado" width="15%">Partida</td>
-				<td class="detalle_encabezado" width="15%">Denominacion</td>
-		      	<td class="detalle_encabezado" width="17%">Monto</td>	
-		      	<td class="detalle_encabezado" width="17%">Mensaje</td>							      	
+			    <td class="detalle_encabezado" width="9%">Cod.Cat.Pres</td>
+				<td class="detalle_encabezado" width="4%">UEL</td>
+				<td class="detalle_encabezado" width="20%">Deno UEL</td>
+				<td class="detalle_encabezado" width="2%">F.F</td>
+				<td class="detalle_encabezado" width="9%">Partida</td>
+				<td class="detalle_encabezado" width="25%">Denominacion</td>
+		      	<td class="detalle_encabezado" width="14%">Monto</td>	
+		      	<td class="detalle_encabezado" width="16%">Mensaje</td>							      	
 			</tr>
    		</thead>
 	

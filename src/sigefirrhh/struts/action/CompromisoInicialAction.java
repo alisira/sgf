@@ -165,21 +165,20 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        out.write("<root>");
 	        Organismo org = new Organismo();
-	        debo evaluar esto y listo
-	        
-			org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-			CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;			
 			
 			CriterioBusqueda criterio = new CriterioBusqueda();
 	        
 	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){			
+	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
 			
 					if (request.getSession().getAttribute("ComproIniBean") != null){
 						System.out.println("Posiblemente le dio atras, debe iniciar proceso desde el menu inicial");
 						error[0] = (String) "sesioncerrada";	
 					
 					}else{
+						
+						org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+						CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;			
 						
 						Integer expeResul = 0;
 						Date fecha = new Date();
