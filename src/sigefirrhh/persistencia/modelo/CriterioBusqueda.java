@@ -41,6 +41,7 @@ public class CriterioBusqueda {
     private List<Long> idRolOpcion;	
 	private List<Long> idRol;
 	private List<String> uri;
+	private List<String> ruta;
     
 	public CriterioBusqueda(){
     	this.codFrecuenPago = new  ArrayList<Integer>();
@@ -77,7 +78,15 @@ public class CriterioBusqueda {
         this.idRol = new ArrayList<Long>();	
     	this.uri= new  ArrayList<String>();
     	this.idCompromisoInicialDetalle= new ArrayList<Integer>();
+    	this.ruta= new  ArrayList<String>();
     }
+	
+	public List<String> getRuta() {
+		return this.ruta;
+	}
+	public void addRuta(String ruta) {
+		this.ruta.add(ruta);
+	}
 	
 	public List<Integer> getIdCompromisoInicialDetalle() {
 		return this.idCompromisoInicialDetalle;

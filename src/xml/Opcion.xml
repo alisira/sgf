@@ -29,6 +29,12 @@
 					#uri[]#
 				</iterate>
 			</isNotNull>
+			
+			<isNotNull prepend="AND" property="ruta" >
+				<iterate property="ruta" open="ruta in (" close=")"	conjunction="," >
+					#ruta[]#
+				</iterate>
+			</isNotNull>
 		
 		</isParameterPresent>
    		 order by jerarquia
@@ -60,5 +66,32 @@
 		
 		</isParameterPresent>
    		 order by op.jerarquia
-  </select> 
+  	</select>
+  
+	<select id="buscarOpcionExpediente" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
+	  	SELECT distinct id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, opcion.estatus,
+			opcion.descripcion,   expediente.ano,   expediente.estatus
+		FROM public.expediente,  public.opcion
+		WHERE 
+			expediente.id_proceso = opcion.id_opcion
+		  	and opcion.estatus = 'A'
+		<isParameterPresent >
+		
+			<isNotNull prepend="AND" property="uri" >
+				<iterate property="uri" open="uri in (" close=")" conjunction="," >
+					#uri[]#
+				</iterate>
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="ano" >
+				<iterate property="ano" open="ano in (" close=")" conjunction="," >
+					#ano[]#
+				</iterate>
+			</isNotNull>			
+		
+		</isParameterPresent>
+	
+		ORDER BY opcion.descripcion, expediente.ano
+   </select>
+   
 </sqlMap>

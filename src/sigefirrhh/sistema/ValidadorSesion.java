@@ -22,6 +22,36 @@ import sigefirrhh.persistencia.modelo.RolOpcion;
 
 public class ValidadorSesion {
 	
+	public Integer getIdOpcion(HttpServletRequest request) {
+		
+		OpcionDAO OpcionDAO = new OpcionDAOImple();					
+		List<Opcion> listadoOpcion = null;
+		
+		try {
+			String uri = null;
+			CriterioBusqueda criterio = new CriterioBusqueda();
+			
+			if (request.getRequestURI().indexOf(".do") != -1){					
+				uri = request.getServletPath().replace("/", "");
+				criterio.addRuta(uri);					
+			}else{
+				uri = request.getRequestURI().substring(12);
+				uri = uri.substring(0,uri.length()-4);
+				criterio.addUri(uri);
+			}
+		
+			listadoOpcion = (List<Opcion>) OpcionDAO.buscar(criterio, "Opcion");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listadoOpcion.get(0).getIdOpcion();
+		
+	}
 	public boolean validarPermiso(HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -46,46 +76,56 @@ public class ValidadorSesion {
 				loginSession.setEjecutar(true);	
 				resp= true;
 			}else{
-					String uri = request.getRequestURI().substring(12);
+					
+				
+				//System.out.println("URL completo " + request.getRequestURI());
+				String uri = null;
+				CriterioBusqueda criterio = new CriterioBusqueda();
+				
+				//Evalua desde donde viene el request (un jsp que searia un jsf o desde un action de struts)				
+				if (request.getRequestURI().indexOf(".do") != -1){					
+					uri = request.getServletPath().replace("/", "");
+					criterio.addRuta(uri);					
+				}else{
+					uri = request.getRequestURI().substring(12);
 					uri = uri.substring(0,uri.length()-4);
-					//System.out.println("URL de la pagina " + uri);
-					
-					Collection colUsuarioRol = new ArrayList();
-					colUsuarioRol = (ArrayList)loginSession.getColUsuarioRol();
-					
-					//System.out.println("Dentro del validar: " + colUsuarioRol.size());
-					
-					CriterioBusqueda criterio = new CriterioBusqueda();
-					Iterator iterator = colUsuarioRol.iterator();
-					
-					while (iterator.hasNext()){
-						
-						UsuarioRol usuarioRol = (UsuarioRol)iterator.next();
-						criterio.addIdRol(usuarioRol.getRol().getIdRol());						
-					}
 					criterio.addUri(uri);
-					
-					RolOpcionDAO colRolOpcionDAO = new RolOpcionDAOImple();					
-					List<RolOpcion> listadoRolOpcion = (List<RolOpcion>) colRolOpcionDAO.buscar(criterio, "RolOpcion");
-												
-					if (listadoRolOpcion .iterator().hasNext()){							
-						RolOpcion rolOpcion = new RolOpcion();
-						rolOpcion = (RolOpcion)listadoRolOpcion.iterator().next();
-						loginSession.setAutenticado(true);
-						loginSession.setConsultar(rolOpcion.getConsultar().equals("S"));
-						loginSession.setAgregar(rolOpcion.getAgregar().equals("S"));
-						loginSession.setModificar(rolOpcion.getModificar().equals("S"));
-						loginSession.setEliminar(rolOpcion.getEliminar().equals("S"));
-						loginSession.setEjecutar(rolOpcion.getEjecutar().equals("S"));
-						resp= true;						
-					}else{
-						resp= false;
-					}
-					
-					if (!loginSession.isAutenticado()){
-						resp= false;
-					}
 				}
+						
+				//System.out.println("URL a evaluar " + uri);					
+				Collection colUsuarioRol = new ArrayList();
+				colUsuarioRol = (ArrayList)loginSession.getColUsuarioRol();
+				
+				Iterator iterator = colUsuarioRol.iterator();
+				
+				while (iterator.hasNext()){
+					
+					UsuarioRol usuarioRol = (UsuarioRol)iterator.next();
+					criterio.addIdRol(usuarioRol.getRol().getIdRol());						
+				}
+				
+				
+				RolOpcionDAO colRolOpcionDAO = new RolOpcionDAOImple();					
+				List<RolOpcion> listadoRolOpcion = (List<RolOpcion>) colRolOpcionDAO.buscar(criterio, "RolOpcion");
+											
+				if (listadoRolOpcion .iterator().hasNext()){							
+					RolOpcion rolOpcion = new RolOpcion();
+					rolOpcion = (RolOpcion)listadoRolOpcion.iterator().next();
+					loginSession.setAutenticado(true);
+					loginSession.setConsultar(rolOpcion.getConsultar().equals("S"));
+					loginSession.setAgregar(rolOpcion.getAgregar().equals("S"));
+					loginSession.setModificar(rolOpcion.getModificar().equals("S"));
+					loginSession.setEliminar(rolOpcion.getEliminar().equals("S"));
+					loginSession.setEjecutar(rolOpcion.getEjecutar().equals("S"));
+					resp= true;						
+				}else{
+					resp= false;
+				}
+				
+				if (!loginSession.isAutenticado()){
+					resp= false;
+				}
+			}
 		
 		}catch (Exception e){
 			//log.debug("Error en el TLD de Seguridad",e);
@@ -151,7 +191,7 @@ public class ValidadorSesion {
 					//System.out.println("Si consigue el compromiso: " + vtOpciones[i][2].indexOf(".do"));
 					
 					if (vtOpciones[i][2].indexOf(".do") != -1){
-						menu += "<li> <a href=\"" + rutaTemp+ "/" + vtOpciones[i][2] + "\" class=\"level-1\">";	
+						menu += "<li> <a href=\"" + rutaTemp+ "/" + vtOpciones[i][2] + "?accion=nuevo\" class=\"level-1\">";	
 					}else{
 						if (!vtOpciones[i][2].equals("")){
 							menu += "<li> <a href=\"" + rutaTemp+ "/" + vtOpciones[i][2] + ".jsf\" class=\"level-1\">";	

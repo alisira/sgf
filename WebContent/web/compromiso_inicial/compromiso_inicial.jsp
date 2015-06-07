@@ -1,14 +1,12 @@
-
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %> 
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ page language="java" %>
-<%@ taglib uri="/WEB-INF/struts-nested.tld" prefix="nested" %>
 <%@ page import="sigefirrhh.login.LoginSession" %>
 <%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
-//System.out.println(session.getAttribute("titulo"));
+
 	String rutaTemp = null;
 
 	if ((LoginSession)session.getAttribute("loginSession")!=null){

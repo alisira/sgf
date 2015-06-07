@@ -11,35 +11,36 @@
 <% 
 
 	String rutaTemp = null;
-	
+
 	if ((LoginSession)session.getAttribute("loginSession")!=null){
-	
-		if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
-			response.sendRedirect("/sigefirrhh/error.html");
-		}else{
-			ValidadorSesion vs = new ValidadorSesion();
-			HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
-			boolean temp = vs.validarPermiso(httpServletRequest);			
-			//System.out.println("Resultado:" + temp);
-			
-			if (!temp){
-				
-				response.sendRedirect("/sigefirrhh/sinpermiso.jsp");
 
+		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
+
+			if (session.getAttribute("BuscarExpedienteBean")==null){
+				ValidadorSesion vs = new ValidadorSesion();
+				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
+				boolean temp = vs.validarPermiso(httpServletRequest);
+
+				if (temp){
+					%>
+					<jsp:include page="/inc/top.jsp" />	
+	<%
+					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
+				}else{
+					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");					
+				}				
 			}else{
-				%>
-				<jsp:include page="/menu.jsp" />
-
-<%
-				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
-				//System.out.println(request.getRequestURI());
+				response.sendRedirect("/sigefirrhh/error.html");
 			}
-		}
-		
+		}else{			
+			response.sendRedirect("/sigefirrhh/error.html");
+		}		
 	}else{
 		response.sendRedirect("/sigefirrhh/error.html");
 	}
-
+	
+ 	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
+	
 %>
 
 <html>
@@ -47,10 +48,7 @@
 	<head>	
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/comun.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/theme.css" >
-		<script language="javascript" src="<%=rutaTemp %>/js/jquery-2.1.1.min.js"></script>
-		<script language="javascript" src="<%=rutaTemp %>/js/comun.js"></script>
 		<script language="javascript" src="<%=rutaTemp %>/js/buscar_expediente.js"></script>
-		
 	</head>
 	
 	<body class="app" >
@@ -63,26 +61,34 @@
 				<div id="conte_para" class="conte_para">
 
 					<div id="titu_div" class="titu_div">
-	                    <label>Estatus Expediente </label>
+	                    <label>Punto de Decision Expediente </label>
 	                </div>
 
 					<div class="conte_div_left">
-	                    <label class="conte_label">Numero Expediente: <input name="textoBuscado" id="textoBuscado" size="25" class="inputtext" type="text"></label>	                     
+	                    
+	                    <label class="conte_label">Numero Expediente: <input name="textoBuscado" id="textoBuscado" size="25" class="inputtext" type="text"></label>
+	                    	                     
 	                </div>				
 
 	                <div class="conte_div_right">
+	                    
 	                    <label class="conte_label">Tipo de Expediente: </label>
-	                    <select id="tipo_expediente" name="tipo_expediente">
-	                    	<option value=0>Resumen de Nómina Inicial</option>
-	                    	<option value=1>Rendicion</option>
-						</select>	                     
+	                    
+	                    <html:select name="ParametrosBusquedaForm" property="idOpcion" tabindex="0" style="width: 240px;" styleId="idOpcion">	                    	
+	                    	<logic:iterate name="Opcion" id="td">
+								<option	value=<bean:write name="td" property="idOpcion"/>>
+									<bean:write name="td" property="descripcion" />
+								</option>
+							</logic:iterate>	                    	
+						</html:select>
+							                     
 	                </div>
 
 					<html:form action="/puntoDecision" method="post" styleId="ParametrosBusquedaForm" >
 					
-						<input type="hidden" id="expediente" name="expediente" value=""> </input>
-						<input type="hidden" id="proceso" name="proceso" value=""> </input>
-						<input type="hidden" id="accion" name="accion" value=""> </input>
+						<input type="hidden" id="expediente" name="expediente" value="" /> 
+						<input type="hidden" id="proceso" name="proceso" value="" />
+						<input type="hidden" id="accion" name="accion" value="" /> 
 		                <div class="conte_div_right" style="width: 98%;" >
 		                    <input name="btnBuscar"id="btnBuscar" value="Buscar" onclick="" type="button">		                  
 		                </div>	               
@@ -124,3 +130,6 @@
 		</div>	
 	</body>
 </html>
+<%
+}
+%>

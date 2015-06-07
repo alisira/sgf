@@ -52,8 +52,27 @@ Field[] campos = exp.getClass().getFields();
 	HttpSession session = (HttpSession)context.getExternalContext().getSession(true); 		
 	this.login2 = ((LoginSession)session.getAttribute("loginSession"));
 
+--Obtener la url completa que hace el request
+	request.getHeader("referer")
+--Obtener la url sin la aplicacion
+	request.getRequestURI()	
+--Obtener la url del servlet
+	request.getServletPath()
 
 sigefirrhh/base/ubicacion/Pais.jsf
+
+
+--Obtener los parametros de la funcion que ejecuta el request y sus valores
+	Enumeration<String> b = request.getParameterNames();
+					
+	while( b.hasMoreElements() ) {
+		System.out.println( b.nextElement());
+	}					
+	
+	//System.out.println(request.getParameterValues("accion"));
+	
+	String[] c = request.getParameterValues("accion");
+
 
 --Clase ejemplo conexion jdbc
 	package sigefirrhh.ibatis.dao;

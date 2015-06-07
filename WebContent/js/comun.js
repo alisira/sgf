@@ -13,7 +13,6 @@ function ObjetoBusqueda (urlListaActua, funcionActua, indiceReq, parametros) {
 	this.parametros=parametros;
 };
 
-
 $(document).ready(function(){
     $("#textoBuscado").keypress(function(evento){
     	if (evento.which == 0 || evento.which == 13 ){
@@ -42,6 +41,8 @@ $(document).ready(function(){
     });
     
     $("#btnBuscar").click(function(){
+    	
+    	textoBuscar = document.getElementById("textoBuscado").value;
     	borrarFilas('tablaDetalle');
     	addNode('tablaDetalle', "Busqueda en proceso, favor esperar, gracias_%_"+100, "", "", "", "", "","");  
 		invocaAjax(getContextPath() + objeBusqueda.urlListaActua, actualizaLista, objeBusqueda.parametros+textoBuscar);

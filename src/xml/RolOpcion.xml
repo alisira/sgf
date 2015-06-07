@@ -40,6 +40,12 @@
 					#uri[]#
 				</iterate>
 			</isNotNull>
+			
+			<isNotNull prepend="AND" property="ruta" >
+				<iterate property="ruta" open="ruta in (" close=")"	conjunction="," >
+					#ruta[]#
+				</iterate>
+			</isNotNull>
 		
 		</isParameterPresent>
    		ORDER BY ruta

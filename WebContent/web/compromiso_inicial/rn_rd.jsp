@@ -3,6 +3,7 @@
 <%@ page import="sigefirrhh.login.LoginSession" %>
 
 <% 
+HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
 
 if ((LoginSession)session.getAttribute("loginSession")!=null){
 

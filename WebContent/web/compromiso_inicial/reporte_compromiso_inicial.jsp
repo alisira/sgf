@@ -176,10 +176,10 @@
 		<thead>
 			<tr id="detalle_encabezado" align="center">	     									    
 			    <td class="detalle_encabezado" width="9%">Cod.Cat.Pres</td>
-				<td class="detalle_encabezado" width="4%">UEL</td>
+				<td class="detalle_encabezado" width="5%">UEL</td>
 				<td class="detalle_encabezado" width="20%">Deno UEL</td>
 				<td class="detalle_encabezado" width="2%">F.F</td>
-				<td class="detalle_encabezado" width="9%">Partida</td>
+				<td class="detalle_encabezado" width="10%">Partida</td>
 				<td class="detalle_encabezado" width="25%">Denominacion</td>
 		      	<td class="detalle_encabezado" width="14%">Monto</td>	
 		      	<td class="detalle_encabezado" width="16%">Mensaje</td>							      	

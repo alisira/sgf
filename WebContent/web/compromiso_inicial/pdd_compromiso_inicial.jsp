@@ -6,7 +6,7 @@
 <% 
 
 	String rutaTemp = null;
-
+			
 	if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
 		response.sendRedirect("/sigefirrhh/error.html");
 	}else{

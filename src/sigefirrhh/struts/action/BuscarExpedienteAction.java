@@ -1,6 +1,7 @@
 package sigefirrhh.struts.action;
 
 import org.apache.struts.action.*;
+import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.util.MessageResources;
 import org.postgresql.util.PSQLException;
 
@@ -9,22 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ibatis.common.jdbc.exception.NestedSQLException;
+
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import sigefirrhh.base.estructura.Organismo;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
+import sigefirrhh.persistencia.modelo.Opcion;
+import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
+import sigefirrhh.persistencia.dao.OpcionDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
+import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
 import sigefirrhh.struts.addons.Comun;
 
-public class BuscarExpedienteAction extends Action implements Serializable, Comun {
+public class BuscarExpedienteAction  extends DispatchAction implements Serializable, Comun {
    
 	private static final long serialVersionUID = -4298746168227316826L;
 	HttpSession session = null;
@@ -33,7 +41,86 @@ public class BuscarExpedienteAction extends Action implements Serializable, Comu
 	PrintWriter out = null;	
 	MessageResources messageResources = null;
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+		
+		error= new Object[2];
+		messageResources = getResources(request);		
+    		
+		try {
+			ValidadorSesion vs = new ValidadorSesion();
+			HttpSession session = request.getSession();
+	        if ( session.getAttribute("loginSession") != null){
+	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){	        		
+	        		if (vs.validarPermiso(request) == true){	        			
+	        			OpcionDAO opcionDAO = new OpcionDAOImple();
+						CriterioBusqueda criterio =new CriterioBusqueda();
+						criterio.addAno(ano);
+						List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
+						request.setAttribute("Opcion", listadoOpcion);
+						request.setAttribute("ano", ano);
+						request.getSession().setAttribute("BuscarExpedienteBean", null);
+						fwd ="apruebaNuevo";
+	
+	        		}else{
+	        			fwd ="sinPermiso";
+	        		}
+	        	}else{
+	        		fwd ="sesionCerrada";
+		        }	        	
+	        }else{
+	        	fwd ="sesionCerrada";
+	        }        		
+		
+	
+		} catch (Exception e) {
+			error[0] = (String) "erroraplicacion";
+			error[1]= e;
+
+		} finally{			
+
+			if (((String) error[0]) != null){
+				if (error[1] != null){
+					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+					((Throwable) error[1]).printStackTrace();					
+				}else{
+					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
+					//System.out.println(error[0]);
+				}
+
+				out.write("<error>");
+				
+				if (error[0].equals("sesionCerrada")){
+					out.write(messageResources.getMessage("errors.sesioncerrada"));
+					fwd = "sesionCerrada";
+				}else if (error[0].equals("sinPermiso")){
+					out.write(messageResources.getMessage("errors.sesioncerrada"));
+					fwd = "sinPermiso";
+		        }else if(error[0].equals("datosincompletos")){
+		        	out.write(messageResources.getMessage("errors.datosincompletos"));
+					fwd = "datosIncompletos";
+		        }else if(error[0].equals("errorcomunicacion")){
+		        	out.write(messageResources.getMessage("errors.comunicacion"));
+					fwd = "error";
+	        	}else if(error[0].equals("sinresultados")){
+	        		out.write(messageResources.getMessage("errors.sinresultados"));
+	        		fwd = "sinresultados";
+	        	}else if(error[0].equals("erroraplicacion")){
+	        		out.write(messageResources.getMessage("errors.aplicacion"));
+	        		fwd = "error";
+		        }
+
+				out.write("</error>");
+
+			}
+		}
+		return mapping.findForward(fwd);	
+		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
+		
+	}
+	
+	
+	
+	public ActionForward buscar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);
 		error= new Object[2];
@@ -53,18 +140,19 @@ public class BuscarExpedienteAction extends Action implements Serializable, Comu
 	        
 	        if ( session.getAttribute("loginSession") != null){
 	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-	        		
-					String tempExpe = "";
-					if (String.valueOf(forma.getExpediente()) !=null && !String.valueOf(forma.getExpediente()).equals("")) {
-						tempExpe = String.valueOf(forma.getExpediente());
-						if (tempExpe.indexOf(' ') != -1){							
-							for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
-								if (tempExpe.trim().split("\\ ")[i].trim().length() > 0){									
-									criterio.addExpediente(Integer.parseInt(tempExpe.trim().split("\\ ")[i].trim()));
-								}
-							}							
-						}else{							
-							criterio.addExpediente(Integer.parseInt(tempExpe.trim()));		
+					if (forma.getExpediente() !=null){
+						String tempExpe = "";
+						if (!forma.getExpediente().equals("")){
+							tempExpe = String.valueOf(forma.getExpediente());
+							if (tempExpe.indexOf(' ') != -1){
+								for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
+									if (tempExpe.trim().split("\\ ")[i].trim().length() > 0){									
+										criterio.addExpediente(Integer.parseInt(tempExpe.trim().split("\\ ")[i].trim()));
+									}
+								}							
+							}else{
+								criterio.addExpediente(Integer.parseInt(tempExpe.trim()));		
+							}
 						}									
 					}
 					

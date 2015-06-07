@@ -1,13 +1,18 @@
 package sigefirrhh.persistencia.dao.imple;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.postgresql.util.PSQLException;
+import com.ibatis.common.jdbc.exception.NestedSQLException;
 import sigefirrhh.persistencia.dao.OpcionDAO;
-import sigefirrhh.persistencia.dao.RolOpcionDAO;
+import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.persistencia.modelo.Opcion;
 
 public class OpcionDAOImple extends GenericDAOImplHibernate implements OpcionDAO {
 	
@@ -27,6 +32,10 @@ public class OpcionDAOImple extends GenericDAOImplHibernate implements OpcionDAO
     	}*/
 	}
 
-	
+	@Override
+	public List<Opcion> buscarOpcionExpediente(CriterioBusqueda criterioBusqueda) throws PSQLException, Exception, SQLException, NestedSQLException {
+		List<Opcion> lista = getSqlMapClient().queryForList("buscarOpcionExpediente", criterioBusqueda);
+        return lista;
+	}	
 
 }

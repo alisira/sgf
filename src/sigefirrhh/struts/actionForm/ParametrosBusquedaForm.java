@@ -39,8 +39,16 @@ public class ParametrosBusquedaForm extends ActionForm{
     private Integer idRegion;
 	private Integer cod_order_by;
 	private String proceso;
-	private Integer decision;	
+	private Integer decision;
+	private Integer idOpcion;
 	
+	
+	public Integer getIdOpcion() {
+		return idOpcion;
+	}
+	public void setIdOpcion(Integer idOpcion) {
+		this.idOpcion = idOpcion;
+	}
 	public String getExpediente() {
 		return expediente;
 	}

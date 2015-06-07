@@ -53,24 +53,14 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="welcome" path="/Welcome.do"/>
         <forward name="error" path="/web/html/error.jsp" />
         <forward name="exito" path="/web/html/exito.html"/>
     	<forward name="errorConexion" path="/web/html/error_DB.html" />
-    	<forward name="sesionCerrada" path="/error.html" />    	
+    	<forward name="sesionCerrada" path="/error.html" />
+    	<forward name="sinPermiso" path="/sinpermiso.jsp" />
     </global-forwards>
 
     <action-mappings>
-        <action path="/Welcome" forward="/bienvenido.jsp"/>
-        
-        <action path="/login" type="sigefirrhh.struts.action.LoginAction" name="loginForm" scope="request" input="/bienvenido.jsp">
-            <forward name="AprobarLogin" path="/menu_principal.jsp"/>
-            <forward name="RechazarLogin" path="/bienvenido.jsp"/>
-            <forward name="errorConexion" path="/html/error_DB.html"/>
-            
-        </action>
-        <action path="/bienvenido" forward="/bienvenido.jsp"/> 
-        
         <action path="/compromisoInicial" type="sigefirrhh.struts.action.CompromisoInicialAction" parameter="accion" name="CompromisoInicialForm" > 
             <forward name="apruebaNuevo" path="/web/compromiso_inicial/compromiso_inicial.jsp" />
             <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
@@ -89,8 +79,9 @@
             <forward name="AprobarLogin" path="/gasto_proyectado"/>
         </action>
         
-        <action path="/buscarExpediente" type="sigefirrhh.struts.action.BuscarExpedienteAction" name="ParametrosBusquedaForm" scope="request" input="/buscar_expediente.jsp">
-            <forward name="exito" path="/buscar_expediente.jsp"/>
+        <action path="/buscarExpediente" type="sigefirrhh.struts.action.BuscarExpedienteAction"  parameter="accion" name="ParametrosBusquedaForm" scope="request" input="/buscar_expediente.jsp">
+            <forward name="apruebaNuevo" path="/web/expediente/buscar_expediente.jsp"/>
+            <forward name="exito" path="/web/expediente/buscar_expediente.jsp"/>
         </action>
         
         <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion"  name="ParametrosBusquedaForm" scope="request" >
