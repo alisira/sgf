@@ -27,18 +27,18 @@
 	<%
 					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
 				}else{
-					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");					
+					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");
 				}				
 			}else{
 				response.sendRedirect("/sigefirrhh/error.html");
 			}
-		}else{			
+		}else{
 			response.sendRedirect("/sigefirrhh/error.html");
-		}		
+		}
 	}else{
 		response.sendRedirect("/sigefirrhh/error.html");
 	}
-	
+
  	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
 	
 %>
@@ -47,7 +47,7 @@
 
 	<head>
 		<script type="text/javascript" language="JavaScript">
-			    document.title = "<bean:write name="ParametrosBusquedaForm" property="tituloApli"/>" ;		
+		    document.title = "<bean:write name="ParametrosBusquedaForm" property="tituloApli"/>" ;		
 		</script>	
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/comun.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/theme.css" >

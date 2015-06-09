@@ -1,7 +1,7 @@
 var textoBuscar='';
 
 $(document).ready(function(){	
-	objeBusqueda = new ObjetoBusqueda('/buscarExpediente.do', actualizaListaExpedientes, "expediente", 'accion=buscar&estatus=0&expediente=');
+	objeBusqueda = new ObjetoBusqueda('/puntoDecision.do', actualizaListaExpedientes, "expediente", 'accion=buscar&estatus=0&expediente=');
 	
 	function actualizaListaExpedientes(req){
 		

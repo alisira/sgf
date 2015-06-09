@@ -79,15 +79,10 @@
             <forward name="AprobarLogin" path="/gasto_proyectado"/>
         </action>
         
-        <action path="/buscarExpediente" type="sigefirrhh.struts.action.BuscarExpedienteAction"  parameter="accion" name="ParametrosBusquedaForm" scope="request" input="/buscar_expediente.jsp">
-            <forward name="apruebaNuevo" path="/web/expediente/buscar_expediente.jsp"/>
-            <forward name="exito" path="/web/expediente/buscar_expediente.jsp"/>
-        </action>
-        
-        <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion"  name="ParametrosBusquedaForm" scope="request" >
-            <forward name="aprobarImprimir" path="/web/pdd/pdd.jsp"/>
-        </action>
-        
+        <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion" name="ParametrosBusquedaForm" >
+			<forward name="apruebaNuevo" path="/web/pdd/buscar_expediente.jsp"/>            
+           	<forward name="aprobarImprimir" path="/web/pdd/pdd.jsp"/>
+        </action>        
 
     </action-mappings>
     

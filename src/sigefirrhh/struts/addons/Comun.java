@@ -4,8 +4,11 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface Comun {
 	
+	public String validarAcceso(HttpServletRequest request);
 	// Obtenemos la hora
 	Locale l = new Locale("es","VE");
 	Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Caracas"),l);
