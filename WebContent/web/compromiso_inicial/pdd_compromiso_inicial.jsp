@@ -6,15 +6,36 @@
 <% 
 
 	String rutaTemp = null;
-			
-	if ( !((LoginSession)session.getAttribute("loginSession")).isValid() ) {
-		response.sendRedirect("/sigefirrhh/error.html");
-	}else{
-		
-		rutaTemp = "/" + request.getRequestURI().split("/")[1] + "/" + request.getRequestURI().split("/")[2];
-		//System.out.println(request.getRequestURI());
-	}
 
+	if ((LoginSession)session.getAttribute("loginSession")!=null){
+
+		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
+
+			if (session.getAttribute("ComproIniBean")==null){
+				ValidadorSesion vs = new ValidadorSesion();
+				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
+				boolean temp = vs.validarPermiso(httpServletRequest);
+
+				if (temp){
+					%>
+					<jsp:include page="/inc/top.jsp" />	
+	<%
+					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
+				}else{
+					response.sendRedirect("/sigefirrhh/sinpermiso.jsp");					
+				}				
+			}else{
+				response.sendRedirect("/sigefirrhh/error.html");
+			}
+		}else{			
+			response.sendRedirect("/sigefirrhh/error.html");
+		}		
+	}else{
+		response.sendRedirect("/sigefirrhh/error.html");
+	}
+	
+ 	if (rutaTemp!=null){//Escribe el html solo si la sesion esta activa y se seteo el rutaTemp
+	
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

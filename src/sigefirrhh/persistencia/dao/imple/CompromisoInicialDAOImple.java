@@ -18,6 +18,7 @@ import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.persistencia.modelo.Opcion;
 
 public class CompromisoInicialDAOImple extends GenericDAOImplHibernate implements CompromisoInicialDAO {
 	
@@ -67,6 +68,14 @@ public class CompromisoInicialDAOImple extends GenericDAOImplHibernate implement
   	   	return resultado;  	
 	}
 
-
+	public Integer actualizarCompromisoInicial2(CompromisoInicial record) throws PSQLException, Exception, SQLException, NestedSQLException {
+		Integer lista = (Integer) getSqlMapClientTemplate().queryForObject("actualizarCompromisoInicial", record);
+		if (lista==null) lista = 0;
+		
+        return lista;
+	}
+	
+	
+	
 
 }

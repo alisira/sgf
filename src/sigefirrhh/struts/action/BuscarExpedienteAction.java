@@ -49,6 +49,7 @@ public class BuscarExpedienteAction  extends DispatchAction implements Serializa
 		try {
 			ValidadorSesion vs = new ValidadorSesion();
 			HttpSession session = request.getSession();
+			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 	        if ( session.getAttribute("loginSession") != null){
 	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){	        		
 	        		if (vs.validarPermiso(request) == true){	        			
@@ -58,7 +59,9 @@ public class BuscarExpedienteAction  extends DispatchAction implements Serializa
 						List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
 						request.setAttribute("Opcion", listadoOpcion);
 						request.setAttribute("ano", ano);
-						request.getSession().setAttribute("BuscarExpedienteBean", null);
+						request.getSession().setAttribute("BuscarExpedienteBean", null);						
+						forma.setTituloApli("Buscar Expediente Punto de Decision ");
+						
 						fwd ="apruebaNuevo";
 	
 	        		}else{

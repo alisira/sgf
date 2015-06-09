@@ -44,7 +44,7 @@
 
 	
 	a.setColUsuarioRol(listaUsuarioRol);
-	a.setAdministrador("N");
+	a.setAdministrador("S");
 	//System.out.println(listaUsuarioRol.size());	
 
 	session.setAttribute("loginSession",a);	

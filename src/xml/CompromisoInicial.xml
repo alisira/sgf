@@ -235,6 +235,45 @@
     </dynamic>
     returning id_compromiso_inicial
   </statement>
+  
+	<statement id="actualizarCompromisoInicial"  parameterClass="sigefirrhh.persistencia.modelo.CompromisoInicial" resultClass="Integer">
+		UPDATE compromisoinicial
+		 
+		<dynamic prepend="SET"> 
+	      	<isNotNull prepend="," property="expediente">
+	        	expediente= #expediente:INTEGER#
+	      	</isNotNull>
+	      	<isNotNull prepend="," property="ano">
+	        	ano=#ano:INTEGER#
+	      	</isNotNull>	      	      
+	      	<isNotNull prepend="," property="estatus">
+	        	estatus =  #estatus:INTEGER#
+	      	</isNotNull>
+	      	<isNotNull prepend="," property="fechaRegistro">
+	        	fecha_registro = #fechaRegistro:DATE#
+	      	</isNotNull>
+	    </dynamic>
+	    
+	    <dynamic prepend="WHERE">
+	    	<isNotNull prepend="AND" property="expediente" >
+				expediente= #expediente:INTEGER#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="ano" >
+				ano=#ano:INTEGER#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="idCompromisoInicial" >
+				id_compromisoInicial =  #idCompromisoInicial#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="idOrganismo" >
+				id_organismo =  #idOrganismo:INTEGER#
+			</isNotNull> 
+	    </dynamic>
+	    RETURNING expediente
+	    
+	</statement>	
   	
   	 
 </sqlMap>

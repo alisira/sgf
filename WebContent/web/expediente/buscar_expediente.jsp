@@ -45,7 +45,10 @@
 
 <html>
 
-	<head>	
+	<head>
+		<script type="text/javascript" language="JavaScript">
+			    document.title = "<bean:write name="ParametrosBusquedaForm" property="tituloApli"/>" ;		
+		</script>	
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/comun.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/theme.css" >
 		<script language="javascript" src="<%=rutaTemp %>/js/buscar_expediente.js"></script>
@@ -61,13 +64,11 @@
 				<div id="conte_para" class="conte_para">
 
 					<div id="titu_div" class="titu_div">
-	                    <label>Punto de Decision Expediente </label>
+	                    <label><bean:write name="ParametrosBusquedaForm" property="tituloApli"/> </label>
 	                </div>
 
 					<div class="conte_div_left">
-	                    
 	                    <label class="conte_label">Numero Expediente: <input name="textoBuscado" id="textoBuscado" size="25" class="inputtext" type="text"></label>
-	                    	                     
 	                </div>				
 
 	                <div class="conte_div_right">
@@ -85,7 +86,6 @@
 	                </div>
 
 					<html:form action="/puntoDecision" method="post" styleId="ParametrosBusquedaForm" >
-					
 						<input type="hidden" id="expediente" name="expediente" value="" /> 
 						<input type="hidden" id="proceso" name="proceso" value="" />
 						<input type="hidden" id="accion" name="accion" value="" /> 

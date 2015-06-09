@@ -41,8 +41,15 @@ public class ParametrosBusquedaForm extends ActionForm{
 	private String proceso;
 	private Integer decision;
 	private Integer idOpcion;
+	private String tituloApli;
 	
 	
+	public String getTituloApli() {
+		return tituloApli;
+	}
+	public void setTituloApli(String tituloApli) {
+		this.tituloApli = tituloApli;
+	}
 	public Integer getIdOpcion() {
 		return idOpcion;
 	}

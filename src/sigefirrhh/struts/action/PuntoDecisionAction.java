@@ -171,8 +171,9 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 			        					compromisoInicial.setEstatus(forma.getDecision());
 		
 			        					int resultado;
-			    						CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
-			    						resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
+			        					CompromisoInicialDAOImple compromisoInicialDAO = new CompromisoInicialDAOImple();
+			    						//resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
+			    						resultado = compromisoInicialDAO.actualizarCompromisoInicial2(compromisoInicial);
 		
 			    						//System.out.println("resultado: " + resultado);
 			    						request.getSession().setAttribute("validaInicio", false);
