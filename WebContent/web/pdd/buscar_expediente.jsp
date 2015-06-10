@@ -58,8 +58,7 @@
 	
 		<div id="pagina" align="center">
 		
-			<div id="estatus_expediente" style="text-align: center; background-color: #FFFFFF;opacity: 1.00; top: 200px; z-index: 9999; display: block; color: #666666; width:56%;" >
-				<div class="close_div" onclick="mostrarVentana('fondo_opaco','estatus_expediente');borrarFilas('tablaDetalle')"></div>	
+			<div id="estatus_expediente" style="text-align: center; background-color: #FFFFFF;opacity: 1.00; top: 200px; z-index: 9999; display: block; color: #666666; width:56%;" >					
 
 				<div id="conte_para" class="conte_para">
 

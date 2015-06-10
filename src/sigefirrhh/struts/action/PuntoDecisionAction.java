@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,10 +49,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 		error= new Object[2];
 		messageResources = getResources(request);
     		
-		try {
-			
-			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
-			
+		try {			
+			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;			
 			String resp = validarAcceso(request);
     		if (resp == "valido"){
     			OpcionDAO opcionDAO = new OpcionDAOImple();
@@ -82,29 +81,29 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					//System.out.println(error[0]);
 				}
 
-				out.write("<error>");
+				//out.write("<error>");
 				
 				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+					//out.write(messageResources.getMessage("errors.sesioncerrada"));
 					fwd = "sesionCerrada";
 				}else if (error[0].equals("sinPermiso")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+					//out.write(messageResources.getMessage("errors.sesioncerrada"));
 					fwd = "sinPermiso";
 		        }else if(error[0].equals("datosincompletos")){
-		        	out.write(messageResources.getMessage("errors.datosincompletos"));
+		        	//out.write(messageResources.getMessage("errors.datosincompletos"));
 					fwd = "datosIncompletos";
 		        }else if(error[0].equals("errorcomunicacion")){
-		        	out.write(messageResources.getMessage("errors.comunicacion"));
+		        	//out.write(messageResources.getMessage("errors.comunicacion"));
 					fwd = "error";
 	        	}else if(error[0].equals("sinresultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
+	        		//out.write(messageResources.getMessage("errors.sinresultados"));
 	        		fwd = "sinresultados";
 	        	}else if(error[0].equals("erroraplicacion")){
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
+	        		//out.write(messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
 		        }
 
-				out.write("</error>");
+				//out.write("</error>");
 
 			}
 		}
@@ -117,25 +116,22 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 
 		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);
 		error= new Object[2];
-		messageResources = getResources(request);		
-					
-		try{
-			
+		messageResources = getResources(request);					
+		try{			
 			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 			session = request.getSession();
 			out = response.getWriter();
 	        response.setContentType("text/xml");
 	        response.setHeader("Cache-Control", "no-cache");
 	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");	      
+	        out.write("<root>");
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();
-	        
 			String resp = validarAcceso(request);
     		if (resp == "valido"){
 				if (forma.getExpediente() !=null){
 					String tempExpe = "";
-					if (!forma.getExpediente().equals("")){
+					if (!forma.getExpediente().equals("")){						
 						tempExpe = String.valueOf(forma.getExpediente());
 						if (tempExpe.indexOf(' ') != -1){
 							for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
@@ -155,18 +151,18 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				criterio.addAno(ano);
 				criterio.addEstatus(forma.getEstatus());					
 				
-				CompromisoInicialDAO resumenNominaDAO = new CompromisoInicialDAOImple();
-				List<CompromisoInicial> listadoResumenNomina = (List<CompromisoInicial>) resumenNominaDAO.buscar(criterio, "CompromisoInicial" );				
+				CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
+				List<CompromisoInicial> listadoCompromisoInicial = (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterio, "CompromisoInicial" );				
 				
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		        
-		        if (listadoResumenNomina.size() > 0){
-		        	for (int i = 0;i < listadoResumenNomina.size(); i++){
-						out.write("<expediente>" + listadoResumenNomina.get(i).getExpediente() + "</expediente>");
-						out.write("<fecha_reg>" + formatter.format(listadoResumenNomina.get(i).getFechaRegistro()) + "</fecha_reg>");
+		        if (listadoCompromisoInicial.size() > 0){
+		        	for (int i = 0;i < listadoCompromisoInicial.size(); i++){
+						out.write("<expediente>" + listadoCompromisoInicial.get(i).getExpediente() + "</expediente>");
+						out.write("<fecha_reg>" + formatter.format(listadoCompromisoInicial.get(i).getFechaRegistro()) + "</fecha_reg>");
 						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
 						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
-						out.write("<observacion>" + listadoResumenNomina.get(i).getObservacion() + "</observacion>");
+						out.write("<observacion>" + listadoCompromisoInicial.get(i).getObservacion() + "</observacion>");
 						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
 					}
 		       }else{
@@ -247,33 +243,23 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	        response.setContentType("text/xml");
 	        response.setHeader("Cache-Control", "no-cache");
 	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");			
-			
-			/*if (request.getHeader("content-type") == null){//Si el request es de un ajax
-				System.out.println("Ajax");
-			}else{
-				System.out.println("No Ajax");
-			}*/
-			//System.out.println("Entro al pdde");
+	        out.write("<root>");
 			
 	        fwd = validarAcceso(request);
     		if (fwd == "valido"){
 					
 					ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
-					int idUsuario = 1;
 					
-					Pdd pdd = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
+					Pdd pddCompromiso = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
 					
 					Organismo org = new Organismo();
-					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();		
+					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 					
-					//System.out.println("Expediente: " + forma.getExpediente() + " " + "Proceso: " + forma.getProceso());
+					String urlReporte =  pddCompromiso.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo());
 					
-					String urlReporte =  pdd.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo()); 		        	
- 		       
- 		        	//request.setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
- 		        	//request.getSession().setAttribute("ResumenNominaBean", formaResp); //Para poner un bean en memoria y devolverlo
-										
+					Map<Integer, String> opciones = pddCompromiso.opciones();
+					
+					request.setAttribute("Opciones", opciones);				
 					request.setAttribute("urlReporte", urlReporte);
 					request.setAttribute("expediente", forma.getExpediente());
 					request.setAttribute("proceso", forma.getProceso());

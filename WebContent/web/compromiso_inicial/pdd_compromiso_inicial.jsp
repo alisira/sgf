@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %> 
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page import="sigefirrhh.login.LoginSession" %>
+<%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
 
@@ -73,9 +77,10 @@
 		<div id="conte_para" class="conte_para">
 
 			<div class="conte_div_left">
+										
 				<select
 					style="width: 100px; height: 31px; cursor: pointer; background-position: 3px 1px; background-repeat: no-repeat; padding: 2px;">
-					<option>Aprobar</option>
+					<option>Aprobarr</option>
 					<option>Anular</option>
 				</select> 
 				<input name="enviar" id="enviar" value="Enviar"
@@ -92,3 +97,7 @@
 </body>
 
 </html>
+
+<%
+}
+%>

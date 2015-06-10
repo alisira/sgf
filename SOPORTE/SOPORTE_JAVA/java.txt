@@ -143,3 +143,11 @@ sigefirrhh/base/ubicacion/Pais.jsf
 	    
 	}
 
+--Iterar un hashmap
+		Iterator it = opcionesPDD.keySet().iterator();
+		while(it.hasNext()){
+		  Integer key = (Integer) it.next();
+		  System.out.println("Clave: " + key + " -> Valor: " + opcionesPDD.get(key));
+		}
+		
+		
