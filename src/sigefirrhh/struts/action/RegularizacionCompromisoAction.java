@@ -13,11 +13,6 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
-
-
-
-
-
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -29,36 +24,27 @@ import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
-import sigefirrhh.persistencia.dao.GastoProyectadoDAO;
 import sigefirrhh.persistencia.dao.RegularizacionCompromisoDAO;
-import sigefirrhh.persistencia.dao.TipoDocumentoDAO;
 import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
-import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
 import sigefirrhh.persistencia.dao.imple.RegularizacionCompromisoDAOImple;
 import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
-import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
 import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.ibatis.common.jdbc.exception.NestedSQLException;
-
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import sigefirrhh.base.estructura.Organismo;
 
 /** 
@@ -82,71 +68,65 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
     		
 		try {
 			
-			HttpSession session = request.getSession();
-	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){
 	        		
-	        		TipoDocumentoDAOImple tipoDocumentoDAO = new TipoDocumentoDAOImple();					
-					List<TipoDocumento> listaTipoDocu= (List<TipoDocumento>) tipoDocumentoDAO.buscarTipoDocuTempo();					
-					
-					//Recupera la data del maestro compromiso
-					CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
-					criterioBusqueda.addExpediente(51);					
-					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
-					List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");					
-					
-					//Recupera la data de la unidad administradora
-					criterioBusqueda =null;
-					criterioBusqueda = new CriterioBusqueda();
-					criterioBusqueda.addIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());					
-					UnidadAdministradoraDAO unidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
-					List<UnidadAdministradora> unidadAdministradora= (List<UnidadAdministradora>) unidadAdministradoraDAO.buscar(criterioBusqueda, "UnidadAdministradora");		
+        		TipoDocumentoDAOImple tipoDocumentoDAO = new TipoDocumentoDAOImple();					
+				List<TipoDocumento> listaTipoDocu= (List<TipoDocumento>) tipoDocumentoDAO.buscarTipoDocuTempo();
+				
+				//Recupera la data del maestro compromiso
+				CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
+				criterioBusqueda.addExpediente(51);					
+				CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
+				List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");
+				
+				//Recupera la data de la unidad administradora
+				criterioBusqueda =null;
+				criterioBusqueda = new CriterioBusqueda();
+				criterioBusqueda.addIdUnidadAdministradora(compromisoInicial.get(0).getIdUnidadAdministradora());
+				UnidadAdministradoraDAO unidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
+				List<UnidadAdministradora> unidadAdministradora= (List<UnidadAdministradora>) unidadAdministradoraDAO.buscar(criterioBusqueda, "UnidadAdministradora");
 
-					//Recupera la data del detalle del compromiso
-					criterioBusqueda =null;
-					criterioBusqueda = new CriterioBusqueda();
-					criterioBusqueda.addIdCompromisoInicial((compromisoInicial.get(0).getIdCompromisoInicial()));
-					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
-					List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
+				//Recupera la data del detalle del compromiso
+				criterioBusqueda =null;
+				criterioBusqueda = new CriterioBusqueda();
+				criterioBusqueda.addIdCompromisoInicial((compromisoInicial.get(0).getIdCompromisoInicial()));
+				CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
+				List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
 
-					//Crea un form y carga los datos del encabezado
-					CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
-					comIni.setAno(ano);
-					comIni.setDenoTipoFondo("Xfondo");					
-					comIni.setDocumento(compromisoInicial.get(0).getDocumento());
-					comIni.setCodUnidadAdministradora((unidadAdministradora.get(0).getCodUnidadAdministradora()));
-					comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
-					comIni.setObservacion(compromisoInicial.get(0).getObservacion());
-					comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());					
-					
-					//Carga los datos del detalle
-					for (int c=0;c<compromisoInicialDetalle.size();c++){
-						comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);
-						comIni.setCodCatePresu(compromisoInicialDetalle.get(0).getCodCatePresu(),c);
-						comIni.setCodUel(compromisoInicialDetalle.get(0).getCodUnidadEjecutora() ,c);
-					    comIni.setDenoUel(compromisoInicialDetalle.get(0).getDenoUnidadEjecutora(),c);
-					    comIni.setPartida(compromisoInicialDetalle.get(0).getCodPartida(),c);
-					    comIni.setDenoPartida(compromisoInicialDetalle.get(0).getDenoPartida(),c);
-					    comIni.setDispo(500.0,c);
-					    comIni.setMonto(compromisoInicialDetalle.get(0).getMonto(),c);
-					}
-					
-					request.setAttribute("Compromiso", comIni);
-					request.setAttribute("TipoDocumento", listaTipoDocu);
-					request.setAttribute("ano", ano);
-					request.setAttribute("titulo", "Regularizacion de Compromiso");
-					request.getSession().setAttribute("ReguComproBean", null);
-					
-					fwd ="apruebaNuevo";
-		        	
-	        	}else{
-	        		fwd ="sesionCerrada";
-		        }
+				//Crea un form y carga los datos del encabezado
+				CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
+				comIni.setAno(ano);
+				comIni.setDenoTipoFondo("Xfondo");					
+				comIni.setDocumento(compromisoInicial.get(0).getDocumento());
+				comIni.setCodUnidadAdministradora((unidadAdministradora.get(0).getCodUnidadAdministradora()));
+				comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
+				comIni.setObservacion(compromisoInicial.get(0).getObservacion());
+				comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());					
+				
+				//Carga los datos del detalle
+				for (int c=0;c<compromisoInicialDetalle.size();c++){
+					comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);
+					comIni.setCodCatePresu(compromisoInicialDetalle.get(0).getCodCatePresu(),c);
+					comIni.setCodUel(compromisoInicialDetalle.get(0).getCodUnidadEjecutora() ,c);
+				    comIni.setDenoUel(compromisoInicialDetalle.get(0).getDenoUnidadEjecutora(),c);
+				    comIni.setPartida(compromisoInicialDetalle.get(0).getCodPartida(),c);
+				    comIni.setDenoPartida(compromisoInicialDetalle.get(0).getDenoPartida(),c);
+				    comIni.setDispo(500.0,c);
+				    comIni.setMonto(compromisoInicialDetalle.get(0).getMonto(),c);
+				}
+				
+				request.setAttribute("Compromiso", comIni);
+				request.setAttribute("TipoDocumento", listaTipoDocu);
+				request.setAttribute("ano", ano);
+				request.setAttribute("titulo", "Regularizacion de Compromiso");
+				request.getSession().setAttribute("ReguComproBean", null);
+				
+				fwd ="apruebaNuevo";
 	        	
-	        }else{
-	        	fwd ="sesionCerrada";
-	        }        		
-		
+        	}else{
+        		error[0] = resp;
+	        }
 	
 		} catch (Exception e) {
 			error[0] = (String) "erroraplicacion";
@@ -338,5 +318,28 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 		}else{
 			return mapping.findForward(fwd);
 		}
+	}
+	
+	@Override
+	public String validarAcceso(HttpServletRequest request) {
+		String resp= null;
+		
+		HttpSession session = request.getSession();
+        if (session.getAttribute("loginSession") != null){
+        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+        		ValidadorSesion vs = new ValidadorSesion();
+        		if (vs.validarPermiso(request)){
+        			resp ="valido";
+        		}else{
+        			resp ="sinPermiso";
+        		}
+        	}else{
+        		resp ="sesionCerrada";
+	        }	        	
+        }else{
+        	resp ="sesionCerrada";
+        }  
+		
+		return resp;
 	}
 }

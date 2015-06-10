@@ -15,13 +15,11 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import sigefirrhh.base.estructura.Organismo;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.Opcion;
-import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.OpcionDAO;
@@ -46,34 +44,24 @@ public class BuscarExpedienteAction  extends DispatchAction implements Serializa
 		error= new Object[2];
 		messageResources = getResources(request);		
     		
-		try {
-			ValidadorSesion vs = new ValidadorSesion();
-			HttpSession session = request.getSession();
+		try {			
 			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
-	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){	        		
-	        		if (vs.validarPermiso(request) == true){	        			
-	        			OpcionDAO opcionDAO = new OpcionDAOImple();
-						CriterioBusqueda criterio =new CriterioBusqueda();
-						criterio.addAno(ano);
-						List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
-						request.setAttribute("Opcion", listadoOpcion);
-						request.setAttribute("ano", ano);
-						request.getSession().setAttribute("BuscarExpedienteBean", null);						
-						forma.setTituloApli("Buscar Expediente Punto de Decision ");
-						
-						fwd ="apruebaNuevo";
-	
-	        		}else{
-	        			fwd ="sinPermiso";
-	        		}
-	        	}else{
-	        		fwd ="sesionCerrada";
-		        }	        	
-	        }else{
-	        	fwd ="sesionCerrada";
-	        }        		
-		
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){	        			
+    			OpcionDAO opcionDAO = new OpcionDAOImple();
+				CriterioBusqueda criterio =new CriterioBusqueda();
+				criterio.addAno(ano);
+				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
+				request.setAttribute("Opcion", listadoOpcion);
+				request.setAttribute("ano", ano);
+				request.getSession().setAttribute("BuscarExpedienteBean", null);						
+				forma.setTituloApli("Buscar Expediente Punto de Decision ");
+				
+				fwd ="apruebaNuevo";
+
+    		}else{
+    			error[0] = resp;
+    		}
 	
 		} catch (Exception e) {
 			error[0] = (String) "erroraplicacion";
@@ -141,56 +129,51 @@ public class BuscarExpedienteAction  extends DispatchAction implements Serializa
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();			
 	        
-	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-					if (forma.getExpediente() !=null){
-						String tempExpe = "";
-						if (!forma.getExpediente().equals("")){
-							tempExpe = String.valueOf(forma.getExpediente());
-							if (tempExpe.indexOf(' ') != -1){
-								for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
-									if (tempExpe.trim().split("\\ ")[i].trim().length() > 0){									
-										criterio.addExpediente(Integer.parseInt(tempExpe.trim().split("\\ ")[i].trim()));
-									}
-								}							
-							}else{
-								criterio.addExpediente(Integer.parseInt(tempExpe.trim()));		
-							}
-						}									
-					}
-					
-					Organismo org = new Organismo();
-					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-					criterio.addIdOrganismo((int) org.getIdOrganismo());
-					criterio.addAno(ano);
-					criterio.addEstatus(forma.getEstatus());					
-					
-					CompromisoInicialDAO resumenNominaDAO = new CompromisoInicialDAOImple();
-					List<CompromisoInicial> listadoResumenNomina = (List<CompromisoInicial>) resumenNominaDAO.buscar(criterio, "CompromisoInicial" );				
-					
-			        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			        
-			        if (listadoResumenNomina.size() > 0){
-			        	for (int i = 0;i < listadoResumenNomina.size(); i++){
-							out.write("<expediente>" + listadoResumenNomina.get(i).getExpediente() + "</expediente>");
-							out.write("<fecha_reg>" + formatter.format(listadoResumenNomina.get(i).getFechaRegistro()) + "</fecha_reg>");
-							out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
-							out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
-							out.write("<observacion>" + listadoResumenNomina.get(i).getObservacion() + "</observacion>");
-							//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){
+				if (forma.getExpediente() !=null){
+					String tempExpe = "";
+					if (!forma.getExpediente().equals("")){
+						tempExpe = String.valueOf(forma.getExpediente());
+						if (tempExpe.indexOf(' ') != -1){
+							for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
+								if (tempExpe.trim().split("\\ ")[i].trim().length() > 0){									
+									criterio.addExpediente(Integer.parseInt(tempExpe.trim().split("\\ ")[i].trim()));
+								}
+							}							
+						}else{
+							criterio.addExpediente(Integer.parseInt(tempExpe.trim()));		
 						}
-			       }else{
-			    	   error[0] = (String) "sinresultados";
-			       }
-	        	
-	        	}else{
-	        		error[0] = (String) "sesioncerrada";
-		        }
+					}									
+				}
+				
+				Organismo org = new Organismo();
+				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+				criterio.addIdOrganismo((int) org.getIdOrganismo());
+				criterio.addAno(ano);
+				criterio.addEstatus(forma.getEstatus());					
+				
+				CompromisoInicialDAO resumenNominaDAO = new CompromisoInicialDAOImple();
+				List<CompromisoInicial> listadoResumenNomina = (List<CompromisoInicial>) resumenNominaDAO.buscar(criterio, "CompromisoInicial" );				
+				
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		        
+		        if (listadoResumenNomina.size() > 0){
+		        	for (int i = 0;i < listadoResumenNomina.size(); i++){
+						out.write("<expediente>" + listadoResumenNomina.get(i).getExpediente() + "</expediente>");
+						out.write("<fecha_reg>" + formatter.format(listadoResumenNomina.get(i).getFechaRegistro()) + "</fecha_reg>");
+						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
+						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
+						out.write("<observacion>" + listadoResumenNomina.get(i).getObservacion() + "</observacion>");
+						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
+					}
+		       }else{
+		    	   error[0] = (String) "sinresultados";
+		       }
 	        	
 	        }else{
-	        	error[0] = (String) "sesioncerrada";
-	        } 	        
-	      
+	        	error[0] = resp;
+	        }	      
  		
 		} catch (NestedSQLException e) {
 			error[0] = (String) "errorcomunicacion";
@@ -251,5 +234,29 @@ public class BuscarExpedienteAction  extends DispatchAction implements Serializa
 		//	return mapping.findForward(fwd);
 		//}
 	}
+	
+	@Override
+	public String validarAcceso(HttpServletRequest request) {
+		String resp= null;
+		
+		HttpSession session = request.getSession();
+        if (session.getAttribute("loginSession") != null){
+        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+        		ValidadorSesion vs = new ValidadorSesion();
+        		if (vs.validarPermiso(request)){
+        			resp ="valido";
+        		}else{
+        			resp ="sinPermiso";
+        		}
+        	}else{
+        		resp ="sesionCerrada";
+	        }	        	
+        }else{
+        	resp ="sesionCerrada";
+        }  
+		
+		return resp;
+	}
+	
 }
 

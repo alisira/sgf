@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.postgresql.util.PSQLException;
 
 import com.ibatis.common.jdbc.exception.NestedSQLException;
@@ -65,6 +67,11 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 		
 		List lista = getSqlMapClient().queryForList("buscar"+clase, entity);
         return lista;
+	}
+
+	@Override
+	public String validarAcceso(HttpServletRequest request) {
+		return null;
 	}
 
 	

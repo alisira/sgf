@@ -24,6 +24,7 @@ import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
+import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.UnidadAdministradoraForm;
 import sigefirrhh.struts.addons.Comun;
 
@@ -63,57 +64,53 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();
 	        
-	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){
 			        
-	    	        forma = (UnidadAdministradoraForm) form;
-	    				    			
-	    			if (forma.getDenominacion() !=null && !forma.getDenominacion().equals("")) {	    				
-	    				
-	    				if (forma.getDenominacion().indexOf(' ') != -1){
+    	        forma = (UnidadAdministradoraForm) form;
+    				    			
+    			if (forma.getDenominacion() !=null && !forma.getDenominacion().equals("")) {	    				
+    				
+    				if (forma.getDenominacion().indexOf(' ') != -1){
 
-	    					for (int i = 0; i < forma.getDenominacion().trim().split("\\ ").length; i++) {
-	    						if (forma.getDenominacion().trim().split("\\ ")[i].trim().length() > 3){	    							
-	    							criterio.addDenominacion(forma.getDenominacion().trim().split("\\ ")[i].trim());
-	    						}
-	    					}
+    					for (int i = 0; i < forma.getDenominacion().trim().split("\\ ").length; i++) {
+    						if (forma.getDenominacion().trim().split("\\ ")[i].trim().length() > 3){	    							
+    							criterio.addDenominacion(forma.getDenominacion().trim().split("\\ ")[i].trim());
+    						}
+    					}
 
-	    				}else{
-	    					criterio.addDenominacion(forma.getDenominacion().trim());
-	    				}
-	    			}
+    				}else{
+    					criterio.addDenominacion(forma.getDenominacion().trim());
+    				}
+    			}
 
-	    			criterio.addVigente("S");
-	    			
-	    			Organismo org = new Organismo();
-					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();					
-					criterio.addIdOrganismo((int) org.getIdOrganismo());
-					criterio.addAno(ano);
-	    			
-	    			UnidadAdministradoraDAO UnidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
-	    			List<UnidadAdministradora> listadoUnidadAdministradora = (List<UnidadAdministradora>) UnidadAdministradoraDAO.buscar(criterio, "UnidadAdministradora");
-	    	       
-	    	        if (listadoUnidadAdministradora.size() > 0){	    	        	
-	    	        	for (int i = 0;i < listadoUnidadAdministradora.size(); i++){	    					
-	    					out.write("<idUnidadAdministradora>" + listadoUnidadAdministradora.get(i).getIdUnidadAdministradora() + "</idUnidadAdministradora>");
-	    					out.write("<idOrganismo>" + listadoUnidadAdministradora.get(i).getIdOrganismo() +  "</idOrganismo>");
-	    					out.write("<codUnidadAdministradora>" + listadoUnidadAdministradora.get(i).getCodUnidadAdministradora() +  "</codUnidadAdministradora>");							
-	    					out.write("<ano>" + listadoUnidadAdministradora.get(i).getAno() +  "</ano>");
-	    					out.write("<denominacion>" + listadoUnidadAdministradora.get(i).getDenominacion() +  "</denominacion>");
-	    					out.write("<codPagadora>" + listadoUnidadAdministradora.get(i).getCodPagadora() +  "</codPagadora>");
-	    					out.write("<vigente>" + listadoUnidadAdministradora.get(i).getVigente() +  "</vigente>");
-	    					//System.out.println(i.getCedula() + " " + i.getNombre() + " " + i.getApellido());
-	    	        	}
-	    	        }else{
-	    	        	error[0] = (String) "sinresultados";
-	    	        }
-		        	
-	        	}else{
-	        		error[0] = (String) "sesioncerrada";
-		        }
+    			criterio.addVigente("S");
+    			
+    			Organismo org = new Organismo();
+				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();					
+				criterio.addIdOrganismo((int) org.getIdOrganismo());
+				criterio.addAno(ano);
+    			
+    			UnidadAdministradoraDAO UnidadAdministradoraDAO = new UnidadAdministradoraDAOImple();
+    			List<UnidadAdministradora> listadoUnidadAdministradora = (List<UnidadAdministradora>) UnidadAdministradoraDAO.buscar(criterio, "UnidadAdministradora");
+    	       
+    	        if (listadoUnidadAdministradora.size() > 0){	    	        	
+    	        	for (int i = 0;i < listadoUnidadAdministradora.size(); i++){	    					
+    					out.write("<idUnidadAdministradora>" + listadoUnidadAdministradora.get(i).getIdUnidadAdministradora() + "</idUnidadAdministradora>");
+    					out.write("<idOrganismo>" + listadoUnidadAdministradora.get(i).getIdOrganismo() +  "</idOrganismo>");
+    					out.write("<codUnidadAdministradora>" + listadoUnidadAdministradora.get(i).getCodUnidadAdministradora() +  "</codUnidadAdministradora>");							
+    					out.write("<ano>" + listadoUnidadAdministradora.get(i).getAno() +  "</ano>");
+    					out.write("<denominacion>" + listadoUnidadAdministradora.get(i).getDenominacion() +  "</denominacion>");
+    					out.write("<codPagadora>" + listadoUnidadAdministradora.get(i).getCodPagadora() +  "</codPagadora>");
+    					out.write("<vigente>" + listadoUnidadAdministradora.get(i).getVigente() +  "</vigente>");
+    					//System.out.println(i.getCedula() + " " + i.getNombre() + " " + i.getApellido());
+    	        	}
+    	        }else{
+    	        	error[0] = (String) "sinresultados";
+    	        }
 	        	
 	        }else{
-        		error[0] = (String) "sesioncerrada";
+	        	error[0] = resp;
 	        }
 	        
 		}catch (NullPointerException e){
@@ -180,5 +177,29 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 		//return mapping.findForward(null);
 		return null;		
 		
-    }
+    }	
+	
+	@Override
+	public String validarAcceso(HttpServletRequest request) {
+		String resp= null;
+		
+		HttpSession session = request.getSession();
+        if (session.getAttribute("loginSession") != null){
+        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+        		ValidadorSesion vs = new ValidadorSesion();
+        		if (vs.validarPermiso(request)){
+        			resp ="valido";
+        		}else{
+        			resp ="sinPermiso";
+        		}
+        	}else{
+        		resp ="sesionCerrada";
+	        }	        	
+        }else{
+        	resp ="sesionCerrada";
+        }  
+		
+		return resp;
+	}
+	
 }

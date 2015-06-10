@@ -245,8 +245,11 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        out.write("<root>");
 			
-	        fwd = validarAcceso(request);
-    		if (fwd == "valido"){
+	        String resp = validarAcceso(request);
+	        
+	        System.out.println(resp);
+	        
+    		if (resp == "valido"){
 					
 					ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 					
@@ -265,7 +268,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					request.setAttribute("proceso", forma.getProceso());
 					request.setAttribute("ano", ano);
 					
-					request.getSession().setAttribute("validaInicio", true);//sirve para impedir que le de atras al navegador e intente actualizar nuevamente
+					request.getSession().setAttribute("beanPDD", true);//sirve para impedir que le de atras al navegador e intente actualizar nuevamente
  		        	
  		        	fwd = "aprobarImprimir";
 			
@@ -328,62 +331,52 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 			session = request.getSession();			
 			
 			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
-			
-			/*if (request.getHeader("content-type") == null){//Si el request es de un ajax
-				System.out.println("Ajax");
-			}else{
-				System.out.println("No Ajax");
-			}*/			
-						
-			//validaInicio = (boolean) request.getSession().getAttribute("validaInicio");
-			
-	        if (session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-	        		if ((boolean) request.getSession().getAttribute("validaInicio")){	        	
-		        		if (forma.getExpediente() != null ){		        		
-			        		if (forma.getExpediente() != null ){
-			        			if (forma.getProceso()!= null ){
-			        				if (forma.getProceso().equals("pddCompromiso") ){
-		
-			        					Organismo org = new Organismo();
-			        					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();	
-			        					
-			        					CompromisoInicial compromisoInicial = new CompromisoInicial();
-			        					compromisoInicial.setExpediente(Integer.parseInt(forma.getExpediente()));
-			        					compromisoInicial.setAno(ano);
-			        					compromisoInicial.setIdOrganismo((int) (long)org.getIdOrganismo());
-			        					compromisoInicial.setEstatus(forma.getDecision());
-		
-			        					int resultado;
-			        					CompromisoInicialDAOImple compromisoInicialDAO = new CompromisoInicialDAOImple();
-			    						//resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
-			    						resultado = compromisoInicialDAO.actualizarCompromisoInicial2(compromisoInicial);
-		
-			    						//System.out.println("resultado: " + resultado);
-			    						request.getSession().setAttribute("validaInicio", false);
-			    						fwd = "exito";
-		
-			        				}else{
-			        					error[0] = (String) "datosincompletos";
-					        		}
-			        			}else{
-			        				error[0] = (String) "datosincompletos";
+
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){
+        		if ((boolean) request.getSession().getAttribute("beanPDD")){
+	        		if (forma.getExpediente() != null ){		        		
+		        		if (forma.getExpediente() != null ){
+		        			if (forma.getProceso()!= null ){
+		        				if (forma.getProceso().equals("pddCompromiso") ){
+	
+		        					Organismo org = new Organismo();
+		        					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();	
+		        					
+		        					CompromisoInicial compromisoInicial = new CompromisoInicial();
+		        					compromisoInicial.setExpediente(Integer.parseInt(forma.getExpediente()));
+		        					compromisoInicial.setAno(ano);
+		        					compromisoInicial.setIdOrganismo((int) (long)org.getIdOrganismo());
+		        					compromisoInicial.setEstatus(forma.getDecision());
+	
+		        					int resultado;
+		        					CompromisoInicialDAOImple compromisoInicialDAO = new CompromisoInicialDAOImple();
+		    						//resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
+		    						resultado = compromisoInicialDAO.actualizarCompromisoInicial2(compromisoInicial);
+	
+		    						//System.out.println("resultado: " + resultado);
+		    						request.getSession().setAttribute("beanPDD", false);
+		    						fwd = "exito";
+	
+		        				}else{
+		        					error[0] = (String) "datosincompletos";
 				        		}
-			        		}else{
-			        			error[0] = (String) "datosincompletos";
+		        			}else{
+		        				error[0] = (String) "datosincompletos";
 			        		}
 		        		}else{
 		        			error[0] = (String) "datosincompletos";
 		        		}
 	        		}else{
-	        			error[0] = (String) "sesioncerrada";
+	        			error[0] = (String) "datosincompletos";
 	        		}
-	        	}else{
-	        		error[0] = (String) "sesioncerrada";
-		        }        	
-	        }else{
-	        	error[0] = (String) "sesioncerrada";	        	
-	        }	        
+        		}else{
+        			error[0] = (String) "sesioncerrada";
+        		}
+        	}else{
+        		error[0] = resp;
+	        }
+	       
 			
 		} catch (Exception e) {
 			error[0] = (String) "erroraplicacion";
