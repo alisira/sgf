@@ -69,11 +69,11 @@
   	</select>
   
 	<select id="buscarOpcionExpediente" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
-	  	SELECT distinct id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, opcion.estatus,
+	  	SELECT distinct opcion.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, opcion.estatus,
 			opcion.descripcion,   expediente.ano,   expediente.estatus
 		FROM public.expediente,  public.opcion
 		WHERE 
-			expediente.id_proceso = opcion.id_opcion
+			expediente.id_opcion = opcion.id_opcion
 		  	and opcion.estatus = 'A'
 		<isParameterPresent >
 		

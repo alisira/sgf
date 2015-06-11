@@ -13,10 +13,14 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
+
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.Expediente;
+import sigefirrhh.persistencia.modelo.Opcion;
 import sigefirrhh.persistencia.modelo.RegularizacionCompromiso;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
 import sigefirrhh.login.LoginSession;
@@ -24,11 +28,13 @@ import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
+import sigefirrhh.persistencia.dao.OpcionDAO;
 import sigefirrhh.persistencia.dao.RegularizacionCompromisoDAO;
 import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
+import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
 import sigefirrhh.persistencia.dao.imple.RegularizacionCompromisoDAOImple;
 import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
@@ -36,15 +42,19 @@ import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
 import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.ibatis.common.jdbc.exception.NestedSQLException;
+
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+
 import sigefirrhh.base.estructura.Organismo;
 
 /** 
@@ -60,8 +70,60 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 	PrintWriter out = null;	
 	MessageResources messageResources = null;
 	
+public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+		
+		error= new Object[2];
+		messageResources = getResources(request);
+    		
+		try {			
+			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;			
+			String resp = validarAcceso(request);
+    		if (resp == "valido"){
+    			OpcionDAO opcionDAO = new OpcionDAOImple();
+				CriterioBusqueda criterio =new CriterioBusqueda();
+				criterio.addAno(ano);
+				criterio.addIdOpcion(1129);//Hay que buscar modelar la base de datos para que este id sea buscado de acuerdo al proceso actual
+				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
+				request.setAttribute("Opcion", listadoOpcion);
+				request.setAttribute("ano", ano);
+				request.getSession().setAttribute("RegularizacionCompromisoBean", null);
+				forma.setTituloApli("Buscar Expediente de Compromiso");
+				fwd = "apruebaNuevo";
+    		}else{
+    			error[0] = resp;
+    		}
 	
-	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+		} catch (Exception e) {
+			error[0] = (String) "erroraplicacion";
+			error[1]= e;	
+
+		} finally{
+
+			if (((String) error[0]) != null){
+				if (error[1] != null){
+					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+					((Throwable) error[1]).printStackTrace();					
+				}else{
+					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
+					//System.out.println(error[0]);
+				}
+
+				if (error[0].equals("sesionCerrada")){				
+					fwd = "sesionCerrada";					
+				}else if (error[0].equals("sinPermiso")){					
+					fwd = "sinPermiso";     	
+	        	}else if(error[0].equals("erroraplicacion")){
+	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));	        		
+	        		fwd = "error";
+		        }
+			}
+		}
+		return mapping.findForward(fwd);	
+		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
+	}
+	
+	
+	public ActionForward nuevo2(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 						
 		error= new Object[2];
 		messageResources = getResources(request);		
@@ -209,7 +271,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 						expediente.setIdUsuario(idUsuario);
 						expediente.setObservacion(formaPeti.getObservacion());
 						expediente.setIdOrganismo((int) org.getIdOrganismo());
-						expediente.setIdProceso(55);
+						expediente.setIdOpcion(55);
 						ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
 						expeResul = (Integer) expedienteDAO.guardar(expediente);
 						

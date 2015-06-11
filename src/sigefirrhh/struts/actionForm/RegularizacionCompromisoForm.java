@@ -30,6 +30,7 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private Date fechaRectificacion;
     private Date fechaRegistro;
     private String origenPresupuestario;
+    private String tituloApli;
     
     //Detalle
     private Integer ff[];
@@ -42,7 +43,15 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private Double monto[];    
 
     
-    public Integer getIdTipoDocu() {
+    public String getTituloApli() {
+		return tituloApli;
+	}
+
+	public void setTituloApli(String tituloApli) {
+		this.tituloApli = tituloApli;
+	}
+
+	public Integer getIdTipoDocu() {
 		return idTipoDocu;
 	}
 

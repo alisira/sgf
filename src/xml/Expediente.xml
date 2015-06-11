@@ -7,7 +7,7 @@
 	   <result column="expediente" property="expediente" jdbcType="INTEGER" />
 	   <result column="ano" property="ano" jdbcType="INTEGER" />
 	   <result column="id_usuario" property="idUsuario" jdbcType="INTEGER" />
-	   <result column="id_proceso" property="idProceso" jdbcType="INTEGER" />
+	   <result column="id_opcion" property="idOpcion" jdbcType="INTEGER" />
 	   <result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />	   
 	   <result column="estatus" property="estatus" jdbcType="INTEGER" />
 	   <result column="fecha_reg" property="fechaReg" jdbcType="DATE" />
@@ -31,8 +31,8 @@
 	      <isNotNull prepend="," property="idUsuario">
 	        id_usuario
 	      </isNotNull>
-	      <isNotNull prepend="," property="idProceso">
-	        id_proceso
+	      <isNotNull prepend="," property="idOpcion">
+	        id_opcion
 	      </isNotNull>	      
 	      <isNotNull prepend="," property="estatus">
 	        estatus
@@ -59,8 +59,8 @@
 	      <isNotNull prepend="," property="idUsuario">
 	        #idUsuario:INTEGER#
 	      </isNotNull>
-	      <isNotNull prepend="," property="idProceso">
-	        #idProceso:INTEGER#
+	      <isNotNull prepend="," property="idOpcion">
+	        #idOpcion:INTEGER#
 	      </isNotNull>	      
 	      <isNotNull prepend="," property="estatus">
 	        #estatus:INTEGER#

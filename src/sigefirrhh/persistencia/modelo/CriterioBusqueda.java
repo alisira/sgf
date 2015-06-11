@@ -39,6 +39,7 @@ public class CriterioBusqueda {
     private List<String> codUnidadAdministradora;
     
     private List<Long> idRolOpcion;	
+    private List<Integer> idOpcion;	
 	private List<Long> idRol;
 	private List<String> uri;
 	private List<String> ruta;
@@ -75,6 +76,7 @@ public class CriterioBusqueda {
         this.vigente= new  ArrayList<String>();
         this.codUnidadAdministradora= new  ArrayList<String>();
         this.idRolOpcion= new   ArrayList<Long>();
+        this.idOpcion= new   ArrayList<Integer>();
         this.idRol = new ArrayList<Long>();	
     	this.uri= new  ArrayList<String>();
     	this.idCompromisoInicialDetalle= new ArrayList<Integer>();
@@ -309,12 +311,17 @@ public class CriterioBusqueda {
 	public List<Long> getIdRolOpcion() {
 		return idRolOpcion;
 	}
-
-
 	public void addIdRolOpcion(Long idRolOpcion) {
 		this.idRolOpcion.add(idRolOpcion);
 	}
 
+	
+	public List<Integer> getIdOpcion() {
+		return idOpcion;
+	}
+	public void addIdOpcion(Integer idOpcion) {
+		this.idOpcion.add(idOpcion);
+	}
 
 	public List<Long> getIdRol() {
 		return idRol;

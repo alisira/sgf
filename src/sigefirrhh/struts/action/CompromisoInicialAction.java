@@ -202,7 +202,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 						expediente.setIdOrganismo((int) org.getIdOrganismo());
 						ValidadorSesion vs = new ValidadorSesion();
 						Integer idOpcion = vs.getIdOpcion(request);
-						expediente.setIdProceso(idOpcion);//Buscar el id del proceso actual en la base de datos
+						expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
 						ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
 						expeResul = (Integer) expedienteDAO.guardar(expediente);
 	 		        	
