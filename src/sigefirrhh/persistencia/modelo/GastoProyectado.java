@@ -19,8 +19,7 @@ public class GastoProyectado {
     
     private Integer idUel;
     private Integer idOrganismo;
-    private Integer idPartida;    
-    
+    private Integer idPartida;
     
 	public String getDenoUnidadEjecutora() {
 		return denoUnidadEjecutora;

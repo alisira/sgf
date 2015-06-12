@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Comun {
 	
-	public String validarAcceso(HttpServletRequest request);
+	public String validarAcceso(HttpServletRequest request, String funcion);
 	// Obtenemos la hora
 	Locale l = new Locale("es","VE");
 	Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Caracas"),l);
@@ -19,4 +19,5 @@ public interface Comun {
 	int semana = cal.get(Calendar.WEEK_OF_YEAR);	
 	
 	int ano = 2014;
+
 }

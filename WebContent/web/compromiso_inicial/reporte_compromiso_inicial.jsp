@@ -19,6 +19,11 @@
 				
 				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
 				
+				%>
+				<jsp:include page="/inc/top.jsp" />	
+<%
+				
+				
 			}else{
 				response.sendRedirect("/sigefirrhh/error.html");
 			}
@@ -78,7 +83,7 @@
 	 
 	<body class="app" oncontextmenu="return false;">		
 
-		<div align="center" >
+		<div id ="contenidoImpresion" align="center" >
 			<img src="<%=rutaTemp %>/images/cintillo2.jpg" width="725" height="96">
 			<a href="javascript:imprime();" id="imprimir" class="noImprimir" style="FONT-FAMILY: Tahoma,Verdana,Arial,san-serif;">
 				<img src="<%=rutaTemp %>/images/imprimir.jpg" alt="Imprimir" width="28px" align="right" border="0px" height="28px">		
@@ -278,6 +283,21 @@
 
 		<script>
 			alert("Recuerde Imprimir su Formato antes de salir, gracias");
+
+			/*var c, tmp;
+			 
+		    c = document.getElementById("contenidoImpresion");
+		        
+		    tmp = window.open(" ","Impresión.");
+		    
+		    tmp.document.open();
+		    tmp.document.write('<head><link href="/css/print.css" type="text/css" rel="stylesheet"/></head>'); //Esto es omitible
+		    tmp.document.write(c.innerHTML);
+		    tmp.document.close();
+		    tmp.print();
+		    tmp.close();*/
+
+			
 		</script>
 
 	</body>

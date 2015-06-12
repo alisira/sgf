@@ -16,6 +16,8 @@ import sigecof.clDisponibilidadPresupuestaria;
 
 
 
+
+
 import sigefirrhh.base.estructura.Organismo;
 
 
@@ -67,7 +69,7 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 			CriterioBusqueda criterio = new CriterioBusqueda();
 			//System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			
-			String resp = validarAcceso(request);
+			String resp = validarAcceso(request, "nuevo");
     		if (resp == "valido"){
 			
 		        GastoProyectadoForm forma = (GastoProyectadoForm) form;					
@@ -203,18 +205,31 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 	}
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request) {
+	public String validarAcceso(HttpServletRequest request, String funcion) {
 		String resp= null;
 		
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+        		
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			resp ="valido";
+        			
+        			if (funcion.equals("nuevo")){
+            			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
+            			resp ="valido";
+        			}else{
+    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
+    						resp ="valido";
+            			}else{
+            				resp ="sesionCerrada";
+            			}
+        			}	
+            			
         		}else{
         			resp ="sinPermiso";
         		}
+        		
         	}else{
         		resp ="sesionCerrada";
 	        }	        	

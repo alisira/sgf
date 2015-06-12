@@ -66,12 +66,20 @@
 		<link type="text/css" rel="stylesheet" href="<%=rutaTemp %>/estilos/styleIE.css">
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/comun.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="<%=rutaTemp %>/estilos/theme.css" >		
-
+		
+		<style type="text/css" media="print">
+			@media print {
+			#contenedor {display:none;}
+			#cintilloImagenes {display:none;}
+			#barraEstatus {display:none;}
+			}
+		</style>
+		
 	</head>
 
 	<body>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<table id="cintilloImagenes" width="100%" border="0" cellspacing="0" cellpadding="0">
 	    		<tr>
 			    <td align="left" width="100%">
 					<table width="100%"  border="0" cellspacing="0" cellpadding="0">
@@ -92,7 +100,7 @@
 		</table>
 		
 		
-		<div class="contenedor_div">
+		<div id="barraEstatus" class="contenedor_div">
 			
 			<div class="contenedor_div_left" style="width: 23%;background: #dddddd none repeat scroll 0 0; border-bottom-left-radius: 10px;border-right: 2px solid #fff;border-top-left-radius: 10px; margin-left: 4px;color: #777777 !important;font-size: 12px;padding: 0px;">
 				<img style="vertical-align:middle;" width="30" height="30" src="<%=rutaTemp %>/images/user.png">

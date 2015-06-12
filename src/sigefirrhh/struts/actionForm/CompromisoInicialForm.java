@@ -1,15 +1,9 @@
 package sigefirrhh.struts.actionForm;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 
 public class CompromisoInicialForm extends ActionForm{
 	
@@ -44,8 +38,7 @@ public class CompromisoInicialForm extends ActionForm{
     private Integer idTipoFondo;
     private String denoTipoFondo;
     private String codFrecuenPago;
-    private Double totalResumen;
-   
+    private Double totalResumen;   
 
     //Detalle
     private Integer ff[];
@@ -58,8 +51,6 @@ public class CompromisoInicialForm extends ActionForm{
     private Double dispo[];
     private Double monto[];
 
-
-
 	public CompromisoInicialForm(Integer tamaño) {
 		this.ff = new Integer [tamaño];
 		this.codCatePresu = new Integer [tamaño];
@@ -69,25 +60,10 @@ public class CompromisoInicialForm extends ActionForm{
 		this.denoPartida = new String [tamaño];
 		this.dispo = new Double [tamaño];
 		this.monto = new Double [tamaño];
-		
-		//System.out.println("por aqui menos");
-		
-
 	}
 	
 	public CompromisoInicialForm() {
 		super();
-		/*this.ff = new Integer [1500];
-		this.codCatePresu = new Integer [2];
-		this.codUel = new Integer [2];
-		this.denoUel = new String [2];    
-		this.partida = new String [2];
-		this.denoPartida = new String [2];
-		this.dispo = new Double [2];
-		this.monto = new Double [2];*/
-		
-		//System.out.println("Paso por aqui");
-		
 	}
 	
 	public void setFf(Integer ff, Integer indice) {

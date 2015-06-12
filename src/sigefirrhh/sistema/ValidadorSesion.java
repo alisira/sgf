@@ -67,7 +67,7 @@ public class ValidadorSesion {
 			loginSession.setEliminar(false);
 			loginSession.setEjecutar(false);
 				
-			if (loginSession.getAdministrador().equals("S") || loginSession.isServicioPersonal() == true) {	
+			if (loginSession.getAdministrador().equals("S") || loginSession.isServicioPersonal() == true) {
 				loginSession.setAutenticado(false);
 				loginSession.setConsultar(true);
 				loginSession.setAgregar(true);
@@ -90,9 +90,8 @@ public class ValidadorSesion {
 					uri = request.getRequestURI().substring(12);
 					uri = uri.substring(0,uri.length()-4);
 					criterio.addUri(uri);
-				}
-						
-				//System.out.println("URL a evaluar " + uri);					
+				}						
+
 				Collection colUsuarioRol = new ArrayList();
 				colUsuarioRol = (ArrayList)loginSession.getColUsuarioRol();
 				
@@ -103,7 +102,6 @@ public class ValidadorSesion {
 					UsuarioRol usuarioRol = (UsuarioRol)iterator.next();
 					criterio.addIdRol(usuarioRol.getRol().getIdRol());						
 				}
-				
 				
 				RolOpcionDAO colRolOpcionDAO = new RolOpcionDAOImple();					
 				List<RolOpcion> listadoRolOpcion = (List<RolOpcion>) colRolOpcionDAO.buscar(criterio, "RolOpcion");
@@ -180,15 +178,12 @@ public class ValidadorSesion {
 			menu = "<ul id=\"xx\" class=\"xx\">";
 			
 			for (int i=0; i<vtOpciones.length; i++) {
-				if (tieneHijos(i, vtOpciones)) {
-					//System.out.println("indice:" + i + " valor:" + vtOpciones[i][0] + " SI");				
+				if (tieneHijos(i, vtOpciones)) {				
 					menu += "<li>" + vtOpciones[i][1] +  "<ul>";
 				} else {
 					
 					String rutaTemp = null;
-					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;					
-					
-					//System.out.println("Si consigue el compromiso: " + vtOpciones[i][2].indexOf(".do"));
+					rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
 					
 					if (vtOpciones[i][2].indexOf(".do") != -1){
 						menu += "<li> <a href=\"" + rutaTemp+ "/" + vtOpciones[i][2] + "?accion=nuevo\" class=\"level-1\">";	
@@ -198,15 +193,10 @@ public class ValidadorSesion {
 						}else{
 							menu += "<li> <a href=\"" + rutaTemp+ "/" + "home.jsf\" class=\"level-1\">";
 						}
-						
-						
-					}
-					
-					
+					}					
 					menu += vtOpciones[i][1] + "</a></li>";
-					//System.out.println("indice:" + i + " valor:" + vtOpciones[i][0] + " NO");
+
 				}
-				//System.out.println(TieneHijos2(i, vtOpciones));
 				
 				if (i+1 < vtOpciones.length){
 			    	 if (vtOpciones[i+1][0].length() < vtOpciones[i][0].length()){ 
