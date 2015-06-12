@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html class="v2" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><head>
+<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+<meta content="width=1100" name="viewport">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script async="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/cbgapi.loaded_4"></script><script async="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/cbgapi.loaded_3"></script><script async="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/cbgapi.loaded_2"></script><script src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/ca-pub-5834390571455163.js" type="text/javascript" async=""></script><script src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/all.html" id="facebook-jssdk"></script><script async="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/cbgapi.loaded_1"></script><script async="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/cbgapi.loaded_0"></script><script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://www.javatutoriales.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Tutoriales de Programacion Java - Atom" href="http://www.javatutoriales.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Tutoriales de Programacion Java - RSS" href="http://www.javatutoriales.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Tutoriales de Programacion Java - Atom" href="http://www.blogger.com/feeds/2012232069289957092/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Tutoriales de Programacion Java - Atom" href="http://www.javatutoriales.com/feeds/672466666931712689/comments/default">
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/107775239-ieretrofit.js"></script>
+<![endif]-->
+<link href="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_1.png" rel="image_src">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Tutoriales de Programacion Java: Hibernate - Parte 9: Parámetros en HQL</title>
+<link type="text/css" rel="stylesheet" href="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/3681447274-widget_css_2_bundle.html">
+<link type="text/css" rel="stylesheet" href="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/authorization.html">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Simple
+Designer: Josh Peterson
+URL:      www.noaesthetic.com
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="keycolor" description="Main Color" type="color" default="#66bbdd"/>
+<Group description="Page Text" selector="body">
+<Variable name="body.font" description="Font" type="font"
+default="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="body.text.color" description="Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Backgrounds" selector=".body-fauxcolumns-outer">
+<Variable name="body.background.color" description="Outer Background" type="color" default="#66bbdd"/>
+<Variable name="content.background.color" description="Main Background" type="color" default="#ffffff"/>
+<Variable name="header.background.color" description="Header Background" type="color" default="transparent"/>
+</Group>
+<Group description="Links" selector=".main-outer">
+<Variable name="link.color" description="Link Color" type="color" default="#2288bb"/>
+<Variable name="link.visited.color" description="Visited Color" type="color" default="#888888"/>
+<Variable name="link.hover.color" description="Hover Color" type="color" default="#33aaff"/>
+</Group>
+<Group description="Blog Title" selector=".header h1">
+<Variable name="header.font" description="Font" type="font"
+default="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="header.text.color" description="Title Color" type="color" default="#3399bb" />
+</Group>
+<Group description="Blog Description" selector=".header .description">
+<Variable name="description.text.color" description="Description Color" type="color"
+default="#777777" />
+</Group>
+<Group description="Tabs Text" selector=".tabs-inner .widget li a">
+<Variable name="tabs.font" description="Font" type="font"
+default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="tabs.text.color" description="Text Color" type="color" default="#999999"/>
+<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000"/>
+</Group>
+<Group description="Tabs Background" selector=".tabs-outer .PageList">
+<Variable name="tabs.background.color" description="Background Color" type="color" default="#f5f5f5"/>
+<Variable name="tabs.selected.background.color" description="Selected Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Post Title" selector="h3.post-title, .comments h4">
+<Variable name="post.title.font" description="Font" type="font"
+default="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+</Group>
+<Group description="Date Header" selector=".date-header">
+<Variable name="date.header.color" description="Text Color" type="color"
+default="#222222"/>
+<Variable name="date.header.background.color" description="Background Color" type="color"
+default="transparent"/>
+</Group>
+<Group description="Post Footer" selector=".post-footer">
+<Variable name="post.footer.text.color" description="Text Color" type="color" default="#666666"/>
+<Variable name="post.footer.background.color" description="Background Color" type="color"
+default="#f9f9f9"/>
+<Variable name="post.footer.border.color" description="Shadow Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Gadgets" selector="h2">
+<Variable name="widget.title.font" description="Title Font" type="font"
+default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000"/>
+<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#999999"/>
+</Group>
+<Group description="Images" selector=".main-inner">
+<Variable name="image.background.color" description="Background Color" type="color" default="#ffffff"/>
+<Variable name="image.border.color" description="Border Color" type="color" default="#eeeeee"/>
+<Variable name="image.text.color" description="Caption Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Accents" selector=".content-inner">
+<Variable name="body.rule.color" description="Separator Line Color" type="color" default="#eeeeee"/>
+<Variable name="tabs.border.color" description="Tabs Border Color" type="color" default="#eeeeee"/>
+</Group>
+<Variable name="body.background" description="Body Background" type="background"
+color="#66bbdd" default="$(color) none repeat scroll top left"/>
+<Variable name="body.background.override" description="Body Background Override" type="string" default=""/>
+<Variable name="body.background.gradient.cap" description="Body Gradient Cap" type="url"
+default="url(http://www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="body.background.gradient.tile" description="Body Gradient Tile" type="url"
+default="url(http://www.blogblog.com/1kt/simple/body_gradient_tile_light.png)"/>
+<Variable name="content.background.color.selector" description="Content Background Color Selector" type="string" default=".content-inner"/>
+<Variable name="content.padding" description="Content Padding" type="length" default="10px"/>
+<Variable name="content.padding.horizontal" description="Content Horizontal Padding" type="length" default="10px"/>
+<Variable name="content.shadow.spread" description="Content Shadow Spread" type="length" default="40px"/>
+<Variable name="content.shadow.spread.webkit" description="Content Shadow Spread (WebKit)" type="length" default="5px"/>
+<Variable name="content.shadow.spread.ie" description="Content Shadow Spread (IE)" type="length" default="10px"/>
+<Variable name="main.border.width" description="Main Border Width" type="length" default="0"/>
+<Variable name="header.background.gradient" description="Header Gradient" type="url" default="none"/>
+<Variable name="header.shadow.offset.left" description="Header Shadow Offset Left" type="length" default="-1px"/>
+<Variable name="header.shadow.offset.top" description="Header Shadow Offset Top" type="length" default="-1px"/>
+<Variable name="header.shadow.spread" description="Header Shadow Spread" type="length" default="1px"/>
+<Variable name="header.padding" description="Header Padding" type="length" default="30px"/>
+<Variable name="header.border.size" description="Header Border Size" type="length" default="1px"/>
+<Variable name="header.bottom.border.size" description="Header Bottom Border Size" type="length" default="1px"/>
+<Variable name="header.border.horizontalsize" description="Header Horizontal Border Size" type="length" default="0"/>
+<Variable name="description.text.size" description="Description Text Size" type="string" default="140%"/>
+<Variable name="tabs.margin.top" description="Tabs Margin Top" type="length" default="0" />
+<Variable name="tabs.margin.side" description="Tabs Side Margin" type="length" default="30px" />
+<Variable name="tabs.background.gradient" description="Tabs Background Gradient" type="url"
+default="url(http://www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="tabs.border.width" description="Tabs Border Width" type="length" default="1px"/>
+<Variable name="tabs.bevel.border.width" description="Tabs Bevel Border Width" type="length" default="1px"/>
+<Variable name="date.header.padding" description="Date Header Padding" type="string" default="inherit"/>
+<Variable name="date.header.letterspacing" description="Date Header Letter Spacing" type="string" default="inherit"/>
+<Variable name="date.header.margin" description="Date Header Margin" type="string" default="inherit"/>
+<Variable name="post.margin.bottom" description="Post Bottom Margin" type="length" default="25px"/>
+<Variable name="image.border.small.size" description="Image Border Small Size" type="length" default="2px"/>
+<Variable name="image.border.large.size" description="Image Border Large Size" type="length" default="5px"/>
+<Variable name="page.width.selector" description="Page Width Selector" type="string" default=".region-inner"/>
+<Variable name="page.width" description="Page Width" type="string" default="auto"/>
+<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px"/>
+<Variable name="main.padding" description="Main Padding" type="length" default="15px"/>
+<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px"/>
+<Variable name="main.padding.bottom" description="Main Padding Bottom" type="length" default="30px"/>
+<Variable name="paging.background"
+color="#ffffff"
+description="Background of blog paging area" type="background"
+default="transparent none no-repeat scroll top center"/>
+<Variable name="footer.bevel" description="Bevel border length of footer" type="length" default="0"/>
+<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
+default="transparent none repeat scroll top left"/>
+<Variable name="mobile.background.size" description="Mobile Background Size" type="string" default="auto"/>
+<Variable name="mobile.button.color" description="Mobile Button Color" type="color" default="#ffffff" />
+<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left"/>
+<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right"/>
+*/
+/* Estilos propios para el blog */
+.negritas{
+font-weight: bold;
+}
+.centrado{
+text-align: center;
+margin: auto;
+}
+.codigo{
+font-weight: bold;
+font-family: courier new;
+}
+.nota{
+font-family: arial;
+color: rgb(0, 0, 102);
+font-weight: bold;
+font-size: 85%;
+}
+.titulo{
+font-weight: bold;
+color: #3399bb;
+font-size: 180%;
+text-transform: none;
+}
+.subtitulo{
+font-weight: bold;
+color: #3399bb;
+font-size:130%;
+}
+.ligaArchivo{
+font-size:85%;
+font-weight: bold;
+font-family:verdana;
+}
+body{
+text-align: justify;
+}
+pre {
+padding-top:24px; /* Relleno - para ajustar Fondo */
+}
+pre code {
+overflow:auto; /* Determina si es necesario agregar barras de Scroll */
+background-color:#eeeeee; /* Color de Fondo en Hex */
+border:1px dashed #000000; /* Color de Borde en Hex */
+color:#000000; /* Color de letra en Hex */
+display:block; /* No tocar */
+padding:5px; /* Relleno del cuadro */
+white-space:pre; /* No tocar */
+text-align:left; /* Alineacion del Texto , left=izquierda, center= centrado, right=derecha */
+min-height:63px; /* Altura minima del Cuadro */
+font-weight: bold;
+}
+table {
+overflow:auto;
+margin: auto;
+}
+th{
+text-align: center;
+background: rgb(204, 102, 0);
+color: black;
+border: 3px double;
+padding: 5px 10px 5px 10px;
+}
+td{
+border: 1px solid;
+padding: 5px 10px 5px 10px;
+}
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #222222;
+background: #66bbdd none repeat scroll top left;
+padding: 0 40px 40px 40px;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+a:link {
+text-decoration:none;
+color: #2288bb;
+}
+a:visited {
+text-decoration:none;
+color: #2aaadd;
+}
+a:hover {
+text-decoration:underline;
+color: #33aaff;
+}
+.body-fauxcolumn-outer .fauxcolumn-inner {
+background: transparent url(http://www.blogblog.com/1kt/simple/body_gradient_tile_light.png) repeat scroll top left;
+_background-image: none;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 400px;
+width: 100%;
+background: #66bbdd none repeat scroll top left;
+}
+.body-fauxcolumn-outer .cap-top .cap-left {
+width: 100%;
+background: transparent url(http://www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll top left;
+_background-image: none;
+}
+.content-outer {
+-moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 10px #333333;
+box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+margin-bottom: 1px;
+}
+.content-inner {
+padding: 10px 10px;
+}
+.content-inner {
+background-color: #ffffff;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+background: transparent none repeat-x scroll 0 -400px;
+_background-image: none;
+}
+.Header h1 {
+font: normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #3399bb;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, .2);
+}
+.Header h1 a {
+color: #3399bb;
+}
+.Header .description {
+font-size: 140%;
+color: #000000;
+}
+.header-inner .Header .titlewrapper {
+padding: 22px 30px;
+}
+.header-inner
+{
+background: #3399BB;
+}
+.header-inner .Header .descriptionwrapper {
+padding: 0 30px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section:first-child {
+border-top: 1px solid #eeeeee;
+}
+.tabs-inner .section:first-child ul {
+margin-top: -1px;
+border-top: 1px solid #eeeeee;
+border-left: 0 solid #eeeeee;
+border-right: 0 solid #eeeeee;
+}
+.tabs-inner .widget ul {
+background: #f5f5f5 url(http://www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll 0 -800px;
+_background-image: none;
+border-bottom: 1px solid #eeeeee;
+margin-top: 0;
+margin-left: -30px;
+margin-right: -30px;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .6em 1em;
+font: normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #999999;
+border-left: 1px solid #ffffff;
+border-right: 1px solid #eeeeee;
+}
+.tabs-inner .widget li:first-child a {
+border-left: none;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #000000;
+background-color: #96ccff;
+text-decoration: none;
+}
+/* Columns
+----------------------------------------------- */
+.main-outer {
+border-top: 0 solid #eeeeee;
+}
+.fauxcolumn-left-outer .fauxcolumn-inner {
+border-right: 1px solid #eeeeee;
+}
+.fauxcolumn-right-outer .fauxcolumn-inner {
+border-left: 1px solid #eeeeee;
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+margin: 0 0 1em 0;
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #000000;
+text-transform: uppercase;
+}
+/* Widgets
+----------------------------------------------- */
+.widget .zippy {
+color: #999999;
+text-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
+}
+.widget .popular-posts ul {
+list-style: none;
+}
+/* Posts
+----------------------------------------------- */
+.date-header span {
+background-color: transparent;
+color: #222222;
+padding: inherit;
+letter-spacing: inherit;
+margin: inherit;
+}
+.main-inner {
+padding-top: 30px;
+padding-bottom: 30px;
+}
+.main-inner .column-center-inner {
+padding: 0 15px;
+}
+.main-inner .column-center-inner .section {
+margin: 0 15px;
+}
+.post {
+margin: 0 0 25px 0;
+}
+h3.post-title, .comments h4 {
+font: normal bold 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+margin: .75em 0 0;
+}
+.post-body {
+font-size: 110%;
+line-height: 1.4;
+position: relative;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 2px;
+background: #ffffff;
+border: 1px solid #eeeeee;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 5px;
+}
+.post-body .tr-caption-container {
+color: #222222;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+.post-header {
+margin: 0 0 1.5em;
+line-height: 1.6;
+font-size: 90%;
+}
+.post-footer {
+margin: 20px -2px 0;
+padding: 5px 10px;
+color: #666666;
+background-color: #f9f9f9;
+border-bottom: 1px solid #eeeeee;
+line-height: 1.6;
+font-size: 90%;
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: 1px solid #eeeeee;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+#comments .avatar-image-container img {
+border: 1px solid #eeeeee;
+}
+/* Accents
+---------------------------------------------- */
+.section-columns td.columns-cell {
+border-left: 1px solid #eeeeee;
+}
+.blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.blog-pager-older-link, .home-link,
+.blog-pager-newer-link {
+background-color: #ffffff;
+padding: 5px;
+}
+.footer-outer {
+border-top: 0 dashed #bbbbbb;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+.mobile .body-fauxcolumn-outer .cap-top {
+background-size: 100% auto;
+}
+.mobile .content-outer {
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+padding: 0 40px;
+}
+body.mobile .AdSense {
+margin: 0 -40px;
+}
+.mobile .tabs-inner .widget ul {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .post {
+margin: 0;
+}
+.mobile .main-inner .column-center-inner .section {
+margin: 0;
+}
+.mobile .date-header span {
+padding: 0.1em 10px;
+margin: 0 -10px;
+}
+.mobile h3.post-title {
+margin: 0;
+}
+.mobile .blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.mobile .footer-outer {
+border-top: none;
+}
+.mobile .main-inner, .mobile .footer-inner {
+background-color: #ffffff;
+}
+.mobile-index-contents {
+color: #222222;
+}
+.mobile-link-button {
+background-color: #2288bb;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .section:first-child {
+border-top: none;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background-color: #96ccff;
+color: #000000;
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #eeeeee;
+}
+
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body {
+min-width: 1200px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 1200px;
+max-width: 1200px;
+_width: 1200px;
+}
+.main-inner .columns {
+padding-left: 0px;
+padding-right: 320px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0px;
+right: 320px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0px") -
+parseInt("320px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0px;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 320px;
+}
+.main-inner .column-left-outer {
+width: 0px;
+right: 100%;
+margin-left: -0px;
+}
+.main-inner .column-right-outer {
+width: 320px;
+margin-right: -320px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+--></style>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/google_top_exp.js" type="text/javascript"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style></head>
+<body class="">
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/navbar.xhtml" name="navbar-iframe" id="navbar-iframe" vspace="0" tabindex="0" style="" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<script gapi_processed="true" type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\0752012232069289957092\46blogName\75Tutoriales+de+Programacion+Java\46publishMode\75PUBLISH_MODE_HOSTED\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75http://www.javatutoriales.com/search\46blogLocale\75es\46v\0752\46homepageUrl\75http://www.javatutoriales.com/\46targetPostID\075672466666931712689\46blogPostOrPageUrl\75http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html\46vt\75-1202440189647903482',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="body-fauxcolumns">
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content">
+<div class="content-fauxcolumns">
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content-outer">
+<div class="content-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class="content-inner">
+<header>
+<div class="header-outer">
+<div class="header-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner" style="background-image: url(&quot;http://4.bp.blogspot.com/-2fJBy-rRcrU/Tr9bwDaOFLI/AAAAAAAABPs/xGlUMLQdHxs/s1600/logoJTcabecera.png&quot;); background-position: left; width: 1190px; min-height: 175px; _height: 175px; background-repeat: no-repeat; ">
+<div class="titlewrapper" style="background: transparent">
+<h1 class="title" style="background: transparent; border-width: 0px">
+<a href="http://www.javatutoriales.com/">Tutoriales de Programacion Java</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Blog dedicado a temas de programación 
+actuales usando el lenguaje de programación Java y las últimas versiones
+ de sus APIs y Herramientas.</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</header>
+<div class="tabs-outer">
+<div class="tabs-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs section" id="crosscol"><div class="widget PageList" id="PageList1">
+<h2>Páginas</h2>
+<div class="widget-content">
+<ul>
+<li><a href="http://www.javatutoriales.com/">Página principal</a></li>
+<li><a href="http://www.javatutoriales.com/p/concursos.html">Página de Concursos</a></li>
+<li><a href="http://www.javatutoriales.com/p/tutoriales-upao-2010.html">Tutoriales UPAO 2010</a></li>
+<li><a href="http://www.javatutoriales.com/p/presentaciones-capacitacion.html">Presentaciones Capacitación</a></li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=PageList&amp;widgetId=PageList1&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("PageList1"));' target="configPageList1" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+<div class="tabs section" id="crosscol-overflow"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="main-outer">
+<div class="main-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>domingo, 25 de julio de 2010</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry">
+<a name="672466666931712689"></a>
+<h3 class="post-title entry-title">
+Hibernate - Parte 9: Parámetros en HQL
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-672466666931712689">
+<div style="text-align: justify;">En los dos tutoriales anteriores aprendimos cómo crear sentencias en el <span class="codigo">Hibernate Query Language</span> (<span class="negritas">HQL</span>)
+ para poder hacer consultas más específicas, que las que por default nos
+ proporciona Hibernate, a objetos almacenados en nuestra base de datos.<br>
+<br>
+Hasta ahora nuestras consultas siempre han sido estáticas, pero en 
+nuestras aplicaciones usualmente deberemos pasarles parámetros para 
+obtener los datos correctos, como por ejemplo una cadena que represente 
+un criterio de búsqueda, o el <span class="codigo">username</span> y <span class="codigo">password</span> de un usuario que queramos buscar.<br>
+<br>
+Ahora veremos cómo poder pasar parámetros a estas consultas de una forma
+ “correcta”; y digo correcta porque siempre podríamos concatenar los 
+parámetros al String que usemos para generar nuestra consulta. <br>
+<br>
+<a name="more"></a>Afortunadamente existen dos formas de pasar los 
+parámetros sin tener que recurrir a la concatenación. Y como solo 
+existen dos formas este tutorial será corto, se los prometo ^_^! <br>
+<br>
+Comencemos recordando un poco cómo hacemos, desde nuestro código Java, una consulta en HQL.<br>
+<br>
+<span class="nota">Nota: Aunque uso el término general consulta, no solo
+ me refiero a pedir datos de la base, también uso este término para 
+referirme a inserciones o actualizaciones de datos.</span><br>
+<br>
+Hibernate proporciona la interface “<span class="codigo"><a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Query.html">org.hibernate.Query</a></span>”, la cual representa una consulta a la base de datos. Para obtener una instancia de “<span class="codigo">Query</span>” usamos el método “<span class="codigo">createQuery</span>” del objeto “<span class="codigo"><a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Session.html">org.hibernate.Session</a></span>”, que a su vez obtenemos de la clase “<span class="codigo"><a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/SessionFactory.html">org.hibernate.SessionFactory</a></span>” (si no recuerdan cómo obtener Session pueden revisarlo en la clase “<span class="codigo">HibernateUtil</span>” que creamos en <a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-1-persistiendo-objetos.html">el primer</a> y en <a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-2-persistiendo-objetos.html">el segundo tutorial</a>).<br>
+<br>
+El método “<span class="codigo">createQuery</span>” recibe como 
+parámetro una cadena que es nuestra consulta HQL, sin embargo, como 
+mencioné antes, hasta ahora solo hemos usado consultas estáticas. Sin 
+embargo solo en raras ocasiones estas consultas estáticas nos serán del 
+todo útiles.<br>
+<br>
+Hibernate proporciona dos formas de pasar parámetros a nuestras consultas:<br>
+<br>
+<ul><li>Parámetros con nombre (named query parameters).</li>
+<li>Parámetros posicionales estilo JDBC.</li>
+</ul><br>
+Antes de entrar en el detalle de cada una de ellas veamos el modelo de datos que usaremos para los ejemplos.<br>
+<br>
+La aplicación que crearemos será un mini sistema de ventas. Tendremos un “<span class="negritas codigo">Usuario</span>” que puede realizar “<span class="negritas codigo">Compras</span>” de “<span class="negritas codigo">Productos</span>”. Este “<span class="negritas codigo">Usuario</span>” tendrá una “<span class="negritas codigo">Direccion</span>” de entrega a la que llegarán los “<span class="negritas codigo">Productos</span>” que compre.<br>
+<br>
+Por lo tanto, tendremos una clase entidad “<span class="negritas codigo">Usuario</span>” que tendrá una relación <span class="negritas">uno a uno</span> con la clase entidad “<span class="negritas codigo">Direccion</span>”. El “<span class="negritas codigo">Usuario</span>” además tendrá una relación <span class="negritas">uno a muchos</span> con la clase entidad “<span class="negritas codigo">Compra</span>” que a su vez tendrá una relación <span class="negritas">muchos a muchos</span> con la clase entidad “<span class="negritas codigo">Producto</span>”.<br>
+<br>
+Como podemos ver el ejemplo es pequeño pero podremos usar varias de las 
+cosas que hemos aprendido a lo largo de estos tutoriales.<br>
+<br>
+En los tutoriales solamente usaré <span class="negritas">anotaciones</span>
+ para el ejemplo, sin embargo pueden descargar también la versión con 
+archivos de mapeo desde la liga que se encuentra al final del tutorial.<br>
+<br>
+Creamos un nuevo proyecto en <a href="http://netbeans.org/">NetBeans</a> (menú “<span class="codigo">File -&gt; New Project… -&gt; Java -&gt; Java Application</span>”). Le damos un nombre y una ubicación, y nos aseguramos de que las opciones "<span class="codigo">Create Main Class</span>" y "<span class="codigo">Set as Main Project</span>" estén habilitadas. Presionamos el botón "<span class="codigo">Finish</span>" y veremos aparecer en el editor nuestra clase "<span class="codigo">Main</span>".<br>
+<br>
+Agregamos la biblioteca de "<span class="codigo">Hibernate</span>" que creamos en <a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-1-persistiendo-objetos.html">el primer tutorial de la serie</a>. Hacemos clic derecho en el nodo "<span class="codigo">Libraries</span>" del proyecto. En el menú contextual que se abre seleccionamos la opción "<span class="codigo">Add Library...</span>":<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/_93xZudn-1kc/TEzkNzXRnyI/AAAAAAAAAzk/OsSrksSQjK8/s1600/H9_1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_1.png" border="0"></a></div><br>
+<br>
+En la ventana que se abre seleccionamos la biblioteca "<span class="codigo">Hibernate</span>":<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/_93xZudn-1kc/TEzkPWjLVVI/AAAAAAAAAzs/JABhdtwFI2o/s1600/H9_2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_2.png" border="0"></a></div><br>
+<br>
+Presionamos el botón "<span class="codigo">Add Library</span>" para que la biblioteca se agregue a nuestro proyecto. De la misma forma agregamos la biblioteca “<span class="codigo negritas">HibernateAnotaciones</span>” que creamos en <a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-2-persistiendo-objetos.html">el segundo tutorial</a>. Aprovechamos también para agregar <a href="http://dev.mysql.com/downloads/connector/j/">el conector de MySQL</a>. Debemos tener los siguientes archivos en nuestro proyecto:<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/_93xZudn-1kc/TEzkQ2Lw7lI/AAAAAAAAAz0/CV6EwH2Y0Yc/s1600/H9_3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_3.png" border="0"></a></div><br>
+<br>
+Ahora creamos dos paquetes, uno con el nombre "<span class="codigo">modelo</span>", que contendrá las clases entidades, y otro con el nombre "<span class="codigo">dao</span>" que contendrá las clases que se encargarán del manejo de los datos que almacenaremos en la base de datos.<br>
+<br>
+Hacemos clic derecho en el nodo del paquete que se creó al generar el 
+proyecto. En el menú contextual que se abre seleccionamos la opción "<span class="codigo">New -&gt; Java Package...</span>" y creamos los dos paquetes.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/_93xZudn-1kc/TEzkX7KasfI/AAAAAAAAAz8/GhRVr9VfSsU/s1600/H9_4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_4.png" border="0"></a></div><br>
+<br>
+Que deben quedar así:<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/_93xZudn-1kc/TEzkbHeOzdI/AAAAAAAAA0E/dNT7jJjQmJw/s1600/H9_5.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_5.png" border="0"></a></div><br>
+<br>
+También crearemos el archivo de configuración “<span class="codigo negritas">hibernate.cfg.xml</span>” que será prácticamente igual que el de los últimos 8 tutoriales:<br>
+<pre><code>
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;
+&lt;hibernate-configuration&gt;
+   &lt;session-factory&gt;
+
+      &lt;!-- parametros para la conexion a la base de datos --&gt;
+      &lt;property name="connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+      &lt;property name="connection.url"&gt;jdbc:mysql://localhost/ hibernateparametros &lt;/property&gt;
+      &lt;property name="connection.username"&gt;usuario&lt;/property&gt;
+      &lt;property name="connection.password"&gt;password&lt;/property&gt;
+
+      &lt;!-- Configuracion del pool interno --&gt;
+      &lt;property name="connection.pool_size"&gt;1&lt;/property&gt;
+
+      &lt;!-- Dialecto de la base de datos --&gt;
+      &lt;property name="dialect"&gt;org.hibernate.dialect.MySQL5Dialect&lt;/property&gt;
+
+      &lt;!-- Otras propiedades importantes --&gt;
+      &lt;property name="show_sql"&gt;true&lt;/property&gt;
+      &lt;property name="hbm2ddl.auto"&gt;create-drop&lt;/property&gt;
+
+      &lt;!-- Aqui iran las clases mapeadas --&gt;
+
+   &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre><br>
+<br>
+Para los tutoriales usaremos una base de datos llamada “<span class="codigo">hibernateparametros</span>”. Las tablas serán creadas de forma automática en base a nuestras entidades anotadas.<br>
+<br>
+Comencemos con la creación de nuestro modelo de datos, dentro del paquete “<span class="codigo">modelo</span>”,  con la clase “<span class="codigo">Direccion</span>” que queda de esta forma:<br>
+<pre><code>
+@Entity
+public class Direccion implements Serializable
+{
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
+    private String calle;
+    private String codigoPostal;
+
+    public Direccion()
+    {
+    }
+
+    public Direccion(String calle, String codigoPostal)
+    {
+        this.calle = calle;
+        this.codigoPostal = codigoPostal;
+    }
+
+    public String getCalle()
+    {
+        return calle;
+    }
+
+    public void setCalle(String calle)
+    {
+        this.calle = calle;
+    }
+
+    public String getCodigoPostal()
+    {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal)
+    {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    private void setId(int id)
+    {
+        this.id = id;
+    }
+}
+</code></pre><br>
+<br>
+No hay mucho que explicar sobre esta clase, es prácticamente la misma 
+que hemos visto en los tutoriales anteriores: una clase marcada con la 
+anotación <span class="codigo">@Entity</span> e indicando cuál de sus atributos servirá como <span class="negritas">identificador</span> usando la anotación <span class="codigo">@Id</span>.<br>
+<br>
+La clase “<span class="codigo">Direccion</span>” es muy parecida a la clase “<span class="codigo">Producto</span>” que queda así:<br>
+<pre><code>
+@Entity
+public class Producto implements Serializable
+{
+    public static enum Estatus{ACTIVO, INACTIVO};
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String nombre;
+    private String codigoBarras;
+    private float precio;
+    private Estatus estatus = Estatus.ACTIVO;
+    
+    public Producto()
+    {
+    }
+
+    public Producto(String nombre, String codigoBarras, float precio)
+    {
+        this.nombre = nombre;
+        this.codigoBarras = codigoBarras;
+        this.precio = precio;
+    }
+    
+    public String getCodigoBarras()
+    {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(String codigoBarras)
+    {
+        this.codigoBarras = codigoBarras;
+    }
+
+    public Estatus getEstatus()
+    {
+        return estatus;
+    }
+
+    public void setEstatus(Estatus estatus)
+    {
+        this.estatus = estatus;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
+    public float getPrecio()
+    {
+        return precio;
+    }
+
+    public void setPrecio(float precio)
+    {
+        this.precio = precio;
+    }
+}
+</code></pre><br>
+<br>
+Esta clase es un poco más interesante ya que, como podemos ver arriba, incluye una <span class="negritas">enumeración</span> llamada “<span class="codigo">Estatus</span>” que nos indica si el producto está “<span class="codigo">ACTIVO</span>” o “<span class="codigo">INACTIVO</span>”. Esta enumeración es <span class="codigo">public</span> y <span class="codigo">static</span> para que podamos acceder a ella desde afuera de la clase <span class="codigo">Producto</span> de esta forma: <span class="codigo">Producto.Estatus.ACTIVO</span> y <span class="codigo">Producto.Estatus.INACTIVO</span>, y podamos usarlos en nuestras consultas.<br>
+<br>
+También, la clase <span class="codigo">Producto</span> incluye un atributo de tipo <span class="codigo">Estatus</span>, llamado “<span class="codigo">estatus</span>” y que inicializamos con el valor “<span class="codigo">Estatus.ACTIVO</span>”, o sea, cada vez que se cree un producto este estará activo por default.<br>
+<br>
+Ahora comenzaremos a ver las clases entidad que tienen relación con otras entidades. La entidad “<span class="codigo">Usuario</span>” queda de la siguiente manera:<br>
+<pre><code>
+@Entity
+public class Usuario implements Serializable
+{
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
+    private String nombre;
+    private String username;
+    private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Direccion direccion;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List&lt;Compra&gt; compras = new ArrayList&lt;Compra&gt;();
+
+    public Usuario()
+    {
+    }
+
+    public Usuario(String nombre, String username, String password)
+    {
+        this.nombre = nombre;
+        this.username = username;
+        this.password = password;
+    }
+    public List&lt;Compra&gt; getCompras()
+    {
+        return compras;
+    }
+
+    public void setCompras(List&lt;Compra&gt; compras)
+    {
+        this.compras = compras;
+    }
+
+    public void addCompra(Compra compra)
+    {
+        this.compras.add(compra);
+        compra.setUsuario(this);
+    }
+
+    public Direccion getDireccion()
+    {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion)
+    {
+        this.direccion = direccion;
+    }
+
+    public long getId()
+    {
+        return id;
+    }
+
+    protected void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+}
+</code></pre><br>
+<br>
+La entidad “<span class="codigo">Usuario</span>” es un poco más 
+interesante que las dos que vimos anteriormente, ya que, además de 
+indicar cuál es su atributo identificador y mostrar algunos atributos 
+más, vemos que tiene las anotaciones que indican las relaciones que 
+tiene con las otras entidades.<br>
+<br>
+La relación uno a uno que tiene con “<span class="codigo">Direccion</span>” la representamos mediante la anotación “<span class="codigo">@OneToOne</span>”, que como podemos ver realizará todas las operaciones en cascada con esta entidad, en su atributo <span class="codigo">direccion</span>.<br>
+<br>
+También podemos ver que tiene una relación uno a muchos, representada mediante la anotación “<span class="codigo">@OneToMany</span>”, con la entidad “<span class="codigo">Compra</span>” en su atributo “<span class="codigo">compras</span>”.<br>
+<br>
+Finalmente, la entidad “<span class="codigo">Compra</span>” queda de esta manera:<br>
+<pre><code>
+@Entity
+public class Compra implements Serializable
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List&lt;Producto&gt; productos = new ArrayList&lt;Producto&gt;();
+    
+    private double importeTotal;
+    
+    @ManyToOne
+    private Usuario usuario;
+
+    public Usuario getUsuario()
+    {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario)
+    {
+        this.usuario = usuario;
+    }
+
+    public double getImporteTotal()
+    {
+        return importeTotal;
+    }
+
+    public void setImporteTotal(double importeTotal)
+    {
+        this.importeTotal = importeTotal;
+    }
+
+    public List&lt;Producto&gt; getProductos()
+    {
+        return productos;
+    }
+
+    public void setProductos(List&lt;Producto&gt; productos)
+    {
+        this.productos = productos;
+    }
+
+    public void addProducto(Producto producto)
+    {
+        this.productos.add(producto);
+        importeTotal += producto.getPrecio();
+    }
+
+    public long getId()
+    {
+        return id;
+    }
+
+    protected void setId(long id)
+    {
+        this.id = id;
+    }
+}
+</code></pre><br>
+<br>
+Como vemos, la entidad “<span class="codigo">Compra</span>” tiene una relación muchos a muchos con la entidad “<span class="codigo">Producto</span>”, a través de su atributo “<span class="codigo">listaProductos</span>”, en la cual colocamos la anotación “<span class="codigo">@ManyToMany</span>” que representa la relación. En esta anotación también hemos colocado el valor “<span class="codigo">FetchType.EAGER</span>” al atributo “<span class="codigo">fetch</span>” ya que queremos que al momento de recuperar una compra, se recuperen de forma automática todos los productos que la conforman.<br>
+<br>
+Como dije antes, esta relación será de tipo muchos a muchos, por lo que, además de saber qué <span class="codigo">Producto</span>s están en una <span class="codigo">Compra</span>, también podremos saber quién compró qué <span class="codigo">Producto</span>s, a través de la relación muchos a uno que “<span class="codigo">Compra</span>” tiene con la entidad “<span class="codigo">Usuario</span>”.<br>
+<br>
+Ahora ya tenemos las cuatro entidades que usaremos para este ejemplo. No olviden indicar estas clases en el archivo “<span class="codigo">hibernate.cfg.xml</span>”, que queda de esta forma:<br>
+<pre><code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;
+&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;
+        &lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;property name="hibernate.connection.url"&gt;jdbc:mysql://localhost:3306/hibernateparametros&lt;/property&gt;
+        &lt;property name="hibernate.connection.username"&gt;root&lt;/property&gt;
+        &lt;property name="hibernate.connection.password"&gt;123&lt;/property&gt;
+
+        &lt;!-- Configuracion del pool interno --&gt;
+        &lt;property name="connection.pool_size"&gt;1&lt;/property&gt;
+
+        &lt;!-- Dialecto de la base de datos --&gt;
+        &lt;property name="dialect"&gt;org.hibernate.dialect.MySQL5Dialect&lt;/property&gt;
+
+        &lt;!-- Otras propiedades importantes --&gt;
+        &lt;property name="show_sql"&gt;true&lt;/property&gt;
+        &lt;property name="hbm2ddl.auto"&gt;create-drop&lt;/property&gt;
+
+        &lt;!-- Aqui iran las clases mapeadas --&gt;
+        &lt;mapping class="hibernate.parametros.modelo.Direccion" /&gt;
+        &lt;mapping class="hibernate.parametros.modelo.Compra" /&gt;
+        &lt;mapping class="hibernate.parametros.modelo.Producto" /&gt;
+        &lt;mapping class="hibernate.parametros.modelo.Usuario" /&gt;
+
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre><br>
+<br>
+Para continuar esta parte de configuración crearemos la clase “<span class="codigo">HibernateUtil</span>” como lo hicimos en <a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-2-persistiendo-objetos.html">el segundo tutorial de la serie</a>.<br>
+<br>
+A continuación crearemos una clase de utilidad que nos ayudará a para 
+realizar las operaciones de consultas a la base de datos y de paso nos 
+ayudará a mostrar un poco como debe ser la separación de capas de lógica
+ y de persistencia en nuestra aplicación. Esta será una clase abstracta 
+que contendrá unos métodos de utilidad para las operaciones de base de 
+datos y de las cuales extenderá el resto de nuestras clases de 
+persistencia.<br>
+<br>
+Hacemos clic derecho sobre nuestro paquete “<span class="codigo">dao</span>” y en el menú contextual que aparece seleccionamos las opciones “<span class="codigo">New -&gt; Java Class</span>”. En la ventana que se abre colocamos como nombre de la clase “<span class="codigo">AbstractDAO</span>” y presionamos el botón “<span class="codigo">Finish</span>”.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/_93xZudn-1kc/TEzkcJrwiSI/AAAAAAAAA0M/1yYSSCPycD4/s1600/H9_6.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_6.png" border="0"></a></div><br>
+<br>
+Como dije antes, esta clase servirá de base para el resto de nuestras 
+clases de persistencia. Pero no queremos que alguien pueda crear una 
+instancia de esta clase directamente, así que la marcamos como “<span class="codigo">abstract</span>”, de la siguiente forma:<br>
+<pre><code>
+public abstract class AbstractDAO
+{
+}
+</code></pre><br>
+<br>
+No entraré mucho en los detalles de lo que hace esta clase porque es 
+básicamente lo mismo que hemos venido viendo a lo largo de los 
+tutoriales, así que solo colocaré el código final, que queda de esta 
+forma:<br>
+<pre><code>
+public abstract class AbstractDAO
+{
+    private Session sesion;
+
+    protected void iniciaOperacion()
+    {
+        sesion = HibernateUtil.getSessionFactory().openSession();
+        sesion.getTransaction().begin();
+    }
+
+    protected void terminaOperacion()
+    {
+        sesion.getTransaction().commit();
+        sesion.close();
+    }
+
+    protected void manejaExcepcion(HibernateException he) throws HibernateException
+    {
+        sesion.getTransaction().rollback();
+        throw he;
+    }
+
+    protected Session getSession()
+    {
+        return sesion;
+    }
+
+    public static void almacenaEntidad(Object entidad) throws HibernateException
+    {
+        AbstractDAO dummy = new AbstractDAO(){};
+
+        try
+        {
+            dummy.iniciaOperacion();
+            dummy.getSession().saveOrUpdate(entidad);
+            dummy.getSession().flush();
+        }
+        catch (HibernateException he)
+        {
+            dummy.manejaExcepcion(he);
+        }
+        finally
+        {
+            dummy.terminaOperacion();
+        }
+    }
+
+    public static &lt;T&gt; T getEntidad(Serializable id, Class&lt;T&gt; claseEntidad) throws HibernateException
+    {
+        AbstractDAO dummy = new AbstractDAO(){};
+
+        T objetoRecuperado = null;
+
+        try
+        {
+            dummy.iniciaOperacion();
+            objetoRecuperado = (T) dummy.getSession().get(claseEntidad, id);
+        }
+        catch (HibernateException he)
+        {
+            dummy.manejaExcepcion(he);
+        }
+        finally
+        {
+            dummy.terminaOperacion();
+        }
+
+        return objetoRecuperado;
+    }
+
+    public static &lt;T&gt; List&lt;T&gt; getListaEntidades(Class&lt;T&gt; claseEntidad) throws HibernateException
+    {
+        AbstractDAO dummy = new AbstractDAO(){};
+
+        List&lt;T&gt; listaResultado = null;
+
+        try
+        {
+            dummy.iniciaOperacion();
+            listaResultado = dummy.getSession().createQuery("FROM " + claseEntidad.getSimpleName()).list();
+        }
+        catch (HibernateException he)
+        {
+            dummy.manejaExcepcion(he);
+        }
+        finally
+        {
+            dummy.terminaOperacion();
+        }
+
+        return listaResultado;
+    }
+}
+</code></pre><br>
+<br>
+Como podemos ver, los métodos “<span class="codigo">iniciaOperacion</span>”, “<span class="codigo">terminaOperacion</span>”, y “<span class="codigo">manejaExcepcion</span>”
+ son los mismos que hemos venido viendo hasta ahora. El resto de los 
+métodos podrían parecer un poco extraños así que los explicaré sin 
+entrar mucho en detalles.<br>
+<br>
+El método “<span class="codigo">almacenaEntidad</span>” es un método estático que nos permite almacenar <span class="negritas">cualquier tipo de objeto entidad</span>.
+ El tener este método aquí nos evitará el tener que crear métodos 
+específicos para cada una de las entidades, y como el método es estático
+ ni siquiera tendremos que crear una instancia de una clase para guardar
+ una entidad. Créanme que esto resulta muy útil en los proyectos ^-^.<br>
+<br>
+Como podemos ver, es necesario crear un objeto “<span class="codigo">dummy</span>”, el cual es una clase que extiende a la misma “<span class="codigo">AbstractDAO</span>” para poder acceder a los métodos “<span class="codigo">iniciaOperacion</span>”, “<span class="codigo">terminaOperacion</span>”, y “<span class="codigo">manejaOperacion</span>” que están marcados como <span class="codigo">protected</span>.<br>
+<br>
+El método “<span class="codigo">getEntidad</span>” nos permite recuperar <span class="negritas">cualquier objeto entidad</span> del cual sepamos su identificador. Como vemos, este recibe como parámetros un “<span class="codigo">Serializable</span>” que es el identificador (que puede ser un <span class="codigo">Long</span>, <span class="codigo">String</span>, <span class="codigo">Integer</span>, en fin, casi cualquier clase que queramos), y la clase a la cual pertenece la entidad que queremos recuperar.<br>
+<br>
+El método “<span class="codigo">getListaEntidades</span>” es muy parecido al anterior con la diferencia que aquí se recuperan <span class="negritas">todas las entidades de un tipo</span> que tengamos almacenadas.<br>
+<br>
+Tanto en “<span class="codigo">getEntidad</span>” y “<span class="codigo">getListaEntidades</span>” podemos ver que se hace uso de <a href="http://download.oracle.com/docs/cd/E17409_01/javase/tutorial/java/generics/index.html">generics</a> (indicado por &lt;T&gt;) para recuperar los objetos de una clase determinada.<br>
+<br>
+Pues bien, comencemos viendo cómo pasar parámetros a nuestras consultas usando parámetros con nombre.<br>
+<br>
+<br>
+<h3 class="titulo">Parámetros con nombre</h3><br>
+Es la forma más simple de pasar parámetros a una consulta en HQL ya que, como su nombre lo indica, se le da un <span class="negritas">nombre al parámetro</span> y posteriormente se hace uso de este nombre para hacer referencia al parámetro.<br>
+<br>
+El nombre del parámetro debe ir dentro del <span class="codigo">String</span> de la consulta, este debe ir precedido por “<span class="codigo">:</span>”.<br>
+<br>
+Como primer ejemplo haremos una consulta para buscar a un <span class="codigo">Usuario</span>
+ que nos proporciona su nombre de usuario y contraseña (como en un 
+login). Esta consulta estará dentro de un método de la clase “<span class="codigo">UsuariosDAO</span>” que extenderá a la clase “<span class="codigo">AbstractDAO</span>” que creamos hace un momento.<br>
+<br>
+Hacemos clic derecho en el paquete “<span class="codigo">dao</span>”. En el menú que se abre seleccionamos “<span class="codigo">New -&gt; Java Class</span>”, ponemos como nombre de la clase “<span class="codigo">UsuariosDAO</span>” y presionamos el botón “<span class="codigo">Finish</span>”. La clase que se crea será una subclase de “<span class="codigo">AbstractDAO</span>” por lo que lo indicamos con la palabla clave <span class="codigo">extends</span>.<br>
+<pre><code>
+public class UsuariosDAO extends AbstractDAO
+{
+}
+</code></pre><br>
+<br>
+Ahora pasaremos a ver la consulta. Primero explicaré cada una de las 
+partes y posteriormente veremos cómo queda el método completo.<br>
+<br>
+Si recuerdan, en <a href="http://javatutoriales.blogspot.com/2009/09/hibernate-parte-7-hql-primera-parte.html">el tutorial de HQL</a>
+ vimos cómo hacer una consulta simple para recuperar un objeto. En este 
+caso la consulta quedaría inicialmente de la siguiente forma:<br>
+<pre><code>
+FROM Usuario u
+</code></pre><br>
+<br>
+La consulta anterior nos regresará a todos los <span class="codigo">Usuarios</span> que tengamos en la base de datos. Sin embargo esto no es lo que queremos, lo que queremos es recuperar a un <span class="codigo">Usuario</span>
+ específico cuyos nombres de usuario y contraseña coincidan con los 
+valores que le proporcionaremos. Para esto debemos usar una restricción 
+con la clausula “<span class="codigo">WHERE</span>”, y después indicarle
+ los parámetros que usaremos. Como dije hace un momento: para indicar 
+los parámetros lo hacemos con el símbolo “<span class="codigo">:</span>” seguido del nombre que tendrá el parámetro, este nombre puede ser cualquiera que nosotros queramos. De esta forma:<br>
+<pre><code>
+FROM Ususario u WHERE u. username = :nombreUsuario AND u. password = :password
+</code></pre><br>
+<br>
+La consulta anterior está esperando recibir dos parámetros “<span class="codigo">nombreUsuario</span>” y “<span class="codigo">password</span>”, una vez que reciba estos dos parámetros reemplazará las cadenas “<span class="codigo">:nombreUsuario</span>” y “<span class="codigo">:password</span>” con los valores correspondientes.<br>
+<br>
+Ahora la pregunta es: ¿Cómo establecemos estos parámetros? Pues bien, la respuesta a la pregunta anterior es que la interface “<a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Query.html">org.hibernate.Query</a>” tiene un método llamado “<span class="codigo">setParameter</span>” que recibe como primer argumento <span class="negritas">el nombre del parámetro</span> que queremos establecer, y como segundo argumento <span class="negritas">el valor de dicho parámetro</span>.
+ El hecho de que el segundo parámetro sea un objeto nos permite que le 
+pasemos valores de tipos arreglo, colecciones, bytes, booleanos, o 
+prácticamente cualquier cosa que necesitemos, como enumeraciones (lo 
+cual haremos en unos momentos). La forma de usar este método es la 
+siguiente:<br>
+<pre><code>
+query.setParameter(“nombreUsuario”, username);
+query.setParameter(“password”, password);
+</code></pre><br>
+<br>
+Finalmente, para recuperar el valor que regresa esta consulta usamos el método “<span class="codigo">uniqueResult()</span>” de la interface “<a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Query.html">org.hibernate.Query</a>”, como en los tutoriales anteriores:<br>
+<pre><code>
+Usuario usuario = (Usuario) query.uniqueResult();
+</code></pre><br>
+<br>
+Ahora pondremos todo lo anterior en un método llamado “<span class="codigo">getUsuario</span>” que queda de la siguiente forma (ya agregándole los métodos de utilidad que obtenemos por herencia de la clase “<span class="codigo">AbstractDAO</span>”.<br>
+<pre><code>
+    public Usuario getUsuario(String username, String password) throws HibernateException
+    {
+        Usuario usuario = null;
+
+        try
+        {
+            iniciaOperacion();
+            Query query = getSession().createQuery("FROM Ususario u WHERE u. username = :nombreUsuario AND u. password = :password");
+            query.setParameter("nombreUsuario", username);
+            query.setParameter("password", password);
+
+            usuario = (Usuario)query.uniqueResult();
+        }
+        catch (HibernateException he)
+        {
+            manejaExcepcion(he);
+        }
+        finally
+        {
+            terminaOperacion();
+        }
+
+
+        return usuario;
+    }
+</code></pre><br>
+<br>
+Y listo, con esto podremos recuperar a un <span class="codigo">Usuario</span> dado su nombre de usuario y contraseña (<span class="codigo">username</span> y <span class="codigo">password</span>). Probemos que este método funciona. Para esto, en nuestra clase “<span class="codigo">Main</span>” crearemos un método llamado “<span class="codigo">creaUsuarios</span>” que se encargará de llenar nuestra tabla de <span class="codigo">Usuarios</span> con algunos datos. Colocamos el método como sigue:<br>
+<pre><code>
+    private void creaUsuarios()
+    {
+        try
+        {
+            AbstractDAO.almacenaEntidad(new Usuario("Usuario de Prueba numero 1", "estudioso", "desvelado"));
+            AbstractDAO.almacenaEntidad(new Usuario("Usuario de Prueba numero 2", "caperucita", "loboFeroz"));
+            AbstractDAO.almacenaEntidad(new Usuario("Usuario de Prueba numero 3", "empleado", "infelicidad"));
+            AbstractDAO.almacenaEntidad(new Usuario("Usuario de Prueba numero 4", "usuarioComun", "password"));
+        }
+        catch (HibernateException he)
+        {
+            System.err.println("Ocurrió un error al agregar los usuarios...");
+            he.printStackTrace();
+        }
+    }
+</code></pre><br>
+<br>
+Como vemos, aquí usamos el método estático “<span class="codigo">almacenaEntidad</span>” de clase “<span class="codigo">AbstractDAO</span>” para guardar <span class="negritas">4</span> <span class="codigo">Usuario</span>s en la base de datos. Mandamos llamar a este método en el constructor de nuestra clase “<span class="codigo">Main</span>”.<br>
+<br>
+Ahora creamos un método para probar la recuperación de <span class="codigo">Usuario</span>s, el cual intentará recuperar al "<span class="codigo">Usuario de prueba 2</span>", usando su nombre de usuario “<span class="codigo">caperucita</span>” y su contraseña “<span class="codigo">loboFeroz</span>”. Si el <span class="codigo">Usuario</span> se encuentra mostraremos su nombre en la consola, si no mostraremos un mensaje de error. El método queda de la siguiente forma:<br>
+<pre><code>
+    private void buscaUsuario()
+    {
+        Usuario usuario = null;
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+
+        try
+        {
+            usuario = usuariosDAO.getUsuario("caperucita", "loboFeroz");
+        }catch (HibernateException e)
+        {
+            System.err.println("Ocurrió un error al recuperar usuario");
+            e.printStackTrace();
+        }
+
+        if(usuario == null)
+        {
+            System.out.println("No se encontró al usuario");
+        }
+        else
+        {
+            System.out.println("El usuario es: " + usuario.getNombre());
+        }
+    }
+</code></pre><br>
+<br>
+Invocamos a este método en el constructor de la clase “<span class="codigo">Main</span>”, justo después de la llamada a “<span class="codigo">creaUsuarios</span>”.<br>
+<pre><code>
+public Main()
+{
+    creaUsuarios();
+    buscaUsuario();
+}
+</code></pre><br>
+<br>
+Ejecutamos la aplicación y vemos que la salida generada nos indica que, efectivamente, el <span class="codigo">Usuario</span> recuperado es el <span class="codigo">Usuario</span> 2, con nombre “<span class="codigo">Usuario de Prueba numero 2</span>”:<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/_93xZudn-1kc/TEzkdRL-YWI/AAAAAAAAA0U/k81b9WX4MJw/s1600/H9_7.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_7.png" border="0"></a></div><br>
+<br>
+En realidad creo que no hay mucho más que decir en este punto sobre 
+parámetros con nombre, así que lo dejaré hasta aquí para pasar a la 
+siguiente y última parte de este tutorial en la que veremos cómo pasar 
+parámetros a una consulta por si posición.<br>
+<br>
+<br>
+<h3 class="titulo">Parámetros Posicionales estilo JDBC</h3><br>
+Este estilo de paso de parámetros les será muy conocido a los qué han trabajado con <a href="http://download.oracle.com/docs/cd/E17409_01/javase/6/docs/api/java/sql/PreparedStatement.html"><span class="codigo">PreparedStatement</span></a>
+ en JDBC ya que, igual que en estos últimos establecemos en qué parte de
+ la consulta deseamos que se coloquen los parámetros, haciendo uso de 
+signos de cierre de interrogación “<span class="codigo">?</span>”, que establecemos después usando la posición de los signos de interrogación (iniciando en 0).<br>
+<br>
+Para establecer los parámetros usando esta forma, nuevamente hacemos uso del método “<span class="codigo">setParameter</span>” de la interface “<span class="codigo"><a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Query.html">org.hibernate.Query</a></span>” que hemos venido usando hasta el momento.<br>
+<br>
+Para este segundo ejemplo haremos algo un poco más complejo. En primer lugar lo que intentaremos hacer es recuperar todos los <span class="codigo">Usuarios</span> que han comprado un <span class="codigo">Producto</span> que ya ha sido dado de baja del catálogo (que su estado sea “<span class="codigo">INACTIVO</span>”) en el catálogo de <span class="codigo">Productos</span> y que además, queremos que el código postal de su “<span class="codigo">Direccion</span>” sea igual al que le pasemos como parámetro a la función.<br>
+<br>
+Como lo que queremos hacer es recuperar una lista de <span class="codigo">Usuarios</span> la primera parte de nuestra consulta queda de la siguiente manera:<br>
+<pre><code>
+SELECT u FROM Usuario u
+</code></pre><br>
+<br>
+En este caso el “<span class="codigo">SELECT u</span>” es necesario ya que haremos <span class="codigo">join</span>s con varias otras entidades. Ahora, recordemos que cada “<span class="codigo">Usuario</span>” está relacionado con la entidad “<span class="codigo">Producto</span>” mediante las “<span class="codigo">Compras</span>” que ha realizado, por lo que el siguiente paso será hacer un <span class="codigo">join</span> entre estas dos entidades. El <span class="codigo">join</span> será de tipo <span class="codigo">fetch join</span> ya que queremos que la <span class="codigo">Compra</span> del <span class="codigo">Usuario</span> sea recuperada junto con los datos del <span class="codigo">Usuario</span>, de la siguiente forma:<br>
+<pre><code>
+SELECT u FROM Usuario u JOIN FETCH u.compras c
+</code></pre><br>
+<br>
+Y después hacemos nuevamente un join entre las <span class="codigo">Compra</span>s y los <span class="codigo">Producto</span>s:<br>
+<pre><code>
+SELECT u FROM Usuario u JOIN FETCH u.compras c JOIN c.productos p
+</code></pre><br>
+<br>
+El paso anterior es necesario ya que tanto las <span class="codigo">Compra</span>s del lado de del <span class="codigo">Usuario</span> como los <span class="codigo">Producto</span>s del lado de la <span class="codigo">Compra</span> son colecciones.<br>
+<br>
+Finalmente, colocaremos las dos restricciones que mencionamos anterioremente: que el <span class="codigo">estatus</span>
+ sea igual a un valor (que posteriormente estableceremos como inactivo y
+ que el código postal sea igual al que le pasemos como parámetros). 
+Recordemos que colocaremos signos de “<span class="codigo">?</span>” en 
+los lugares en los que queremos que posteriormente sean colocados 
+nuestros parámetros, por lo que la consulta final queda de la siguiente 
+forma:<br>
+<pre><code>
+SELECT u FROM Usuario u JOIN FETCH u.compras c JOIN c.productos p WHERE p.estatus = ? AND u.direccion.codigoPostal = ?
+</code></pre><br>
+<br>
+Ahora estableceremos los valores de los parámetros. Como dije antes, 
+para eso usaremos un número que representa la posición de cada uno de 
+los signos de “<span class="codigo">?</span>”, iniciando en <span class="negritas">0</span>. Por lo tanto, la posición del parámetro asociado a “<span class="codigo">p.estatus</span>” será “<span class="negritas">0</span>” y la posición del parámetro asociado a “<span class="codigo">u.direccion.codigoPostal</span>” será "<span class="negritas">1</span>".<br>
+<br>
+Establecemos los valores de la siguiente forma:<br>
+<pre><code>
+    query.setParameter(0, Producto.Estatus.INACTIVO);
+    query.setParameter(1, codigoPostal);
+</code></pre><br>
+<br>
+Finalmente, como lo que queremos hacer es obtener una lista de <span class="codigo">Usuario</span>s usamos el método “<span class="codigo">list</span>” de la interface “<span class="codigo"><a href="http://docs.jboss.org/hibernate/stable/core/api/org/hibernate/Query.html">org.hibernate.Query</a></span>”:<br>
+<pre><code>
+    List&lt;Usuario&gt; listaUsuarios = query.list();
+</code></pre><br>
+<br>
+Y ya está. Con esto tenemos todo lista la consulta. Pondremos todo lo anterior en un método llamado “<span class="codigo">getUsuariosConComprasInactivas</span>” en la clase “<span class="codigo">UsuadiosDAO</span>”:<br>
+<pre><code>
+    public List&lt;Usuario&gt; getUsuariosConComprasInactivas(String codigoPostal) throws HibernateException
+    {
+        List&lt;Usuario&gt; listaUsuarios = null;
+
+        try
+        {
+            iniciaOperacion();
+
+            Query query = getSession().createQuery("FROM Usuario u JOIN u.compras c JOIN c.productos p WHERE p.estatus = ? AND u.direccion.codigoPostal = ?");
+            query.setParameter(0, Producto.Estatus.INACTIVO);
+            query.setParameter(1, codigoPostal);
+            
+
+            listaUsuarios = query.list();
+
+        }catch(HibernateException he)
+        {
+            he.printStackTrace();
+            manejaExcepcion(he);
+        }finally
+        {
+            terminaOperacion();
+        }
+
+        return listaUsuarios;
+    }
+</code></pre><br>
+<br>
+Ahora probemos que este método funciona correctamente. Primero coloquemos algunos datos en la base creando un método llamado “<span class="codigo">creaCompras</span>” en la clase “<span class="codigo">Main</span>”. El método queda de la siguiente forma:<br>
+<pre><code>
+    private void creaCompras()
+    {
+        Producto libros    = new Producto("Libro",  "ABC123456", 120.0F);
+        Producto iPads     = new Producto("iPad",   "RAF755576", 1315.45F);
+        Producto televisor = new Producto("T.V.",   "AOF765984", 379.64F);
+        Producto postales  = new Producto("Postal", "ELF",       15.65F);
+        Producto juegos    = new Producto("Videojuego", "MEN", 158.24F);
+
+        libros.setEstatus(Producto.Estatus.INACTIVO);
+        postales.setEstatus(Producto.Estatus.INACTIVO);
+
+        Usuario usuario1 = new Usuario("Usuario de Prueba numero 1", "estudioso", "desvelado");
+        usuario1.setDireccion(new Direccion("calle principal", "12345"));
+
+        Usuario usuario2 = new Usuario("Usuario de Prueba numero 2", "caperucita", "loboFeroz");
+        usuario2.setDireccion(new Direccion("primera avenida", "AVR-175"));
+
+        Usuario usuario3 = new Usuario("Usuario de Prueba numero 3", "empleado", "infelicidad");
+        usuario3.setDireccion(new Direccion("puesta del sol", "12345"));
+
+        Usuario usuario4 = new Usuario("Usuario de Prueba numero 4", "usuarioComun", "password");
+        usuario4.setDireccion(new Direccion("Este 145", null));
+
+        Compra compraUsuario1 = new Compra();
+        compraUsuario1.addProducto(libros);
+        usuario1.addCompra(compraUsuario1);
+
+        compraUsuario1 = new Compra();
+        compraUsuario1.addProducto(televisor);
+        compraUsuario1.addProducto(juegos);
+        usuario1.addCompra(compraUsuario1);
+
+        Compra compraUsuario2 = new Compra();
+        compraUsuario2.addProducto(iPads);
+        compraUsuario2.addProducto(televisor);
+        compraUsuario2.addProducto(juegos);
+        usuario2.addCompra(compraUsuario2);
+
+        Compra compraUsuario3 = new Compra();
+        compraUsuario3.addProducto(iPads);
+        compraUsuario3.addProducto(televisor);
+        usuario3.addCompra(compraUsuario3);
+
+        compraUsuario3 = new Compra();
+        compraUsuario3.addProducto(postales);
+        compraUsuario3.addProducto(juegos);
+        usuario3.addCompra(compraUsuario3);
+
+        Compra compraUsuario4 = new Compra();
+        compraUsuario4.addProducto(libros);
+        usuario4.addCompra(compraUsuario4);
+
+        try
+        {
+            AbstractDAO.almacenaEntidad(libros);
+            AbstractDAO.almacenaEntidad(iPads);
+            AbstractDAO.almacenaEntidad(televisor);
+            AbstractDAO.almacenaEntidad(postales);
+            AbstractDAO.almacenaEntidad(juegos);
+
+            AbstractDAO.almacenaEntidad(usuario1);
+            AbstractDAO.almacenaEntidad(usuario2);
+            AbstractDAO.almacenaEntidad(usuario3);
+            AbstractDAO.almacenaEntidad(usuario4);
+        }
+        catch (HibernateException he)
+        {
+            System.err.println("Ocurrió un error al agregar los usuarios...");
+            he.printStackTrace();
+        }
+    }
+</code></pre><br>
+<br>
+El método anterior se encarga de crear algunos <span class="codigo">Producto</span>s, <span class="codigo">Usuario</span>s y <span class="codigo">Compra</span>s para estos <span class="codigo">Usuario</span>s.
+ Ahora crearemos el método que se encargará de ejecutar la consulta que 
+hemos realizado y mostrar en la salida el nombre de los <span class="codigo">Usuario</span>s que cumplan con la condición y los <span class="codigo">Producto</span>s que compraron:<br>
+<pre><code>
+    private void buscaUsuariosProductosInactivos()
+    {
+        List&lt;Usuario&gt; listaUsuarios = new UsuariosDAO().getUsuariosConComprasInactivas("12345");
+
+        for(int i = 0; i &lt; listaUsuarios.size(); i++)
+        {
+            Usuario usuarioActual = listaUsuarios.get(i);
+            
+            System.out.println("\nUsuario: " + usuarioActual.getNombre());
+
+            List&lt;Compra&gt; listaCompras = usuarioActual.getCompras();
+
+            for(int numeroCompra = 0; numeroCompra &lt; listaCompras.size(); numeroCompra++)
+            {
+                List&lt;Producto&gt; listaProductos = listaCompras.get(numeroCompra).getProductos();
+
+                for(int numeroProducto = 0; numeroProducto &lt; listaProductos.size(); numeroProducto++)
+                {
+                    Producto producto = listaProductos.get(numeroProducto);
+
+                    System.out.println("\t" + producto.getNombre());
+                }
+            }
+        }
+    }
+</code></pre><br>
+<br>
+El método anterior solo muestra en la salida el nombre del  <span class="codigo">Usuario</span> que cumple con las condiciones que establecimos, y los <span class="codigo">Producto</span>s que compró.<br>
+<br>
+Coloquemos los dos métodos anteriores en el constructor de nuestra clase “<span class="codigo">Main</span>” y ejecutemos la aplicación para  ver cuál es la salida generada:<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/_93xZudn-1kc/TEzke-tl8GI/AAAAAAAAA0c/L8koheAE8a8/s1600/H9_8.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/H9_8.png" border="0"></a></div><br>
+<br>
+Como podemos ver, hay dos <span class="codigo">Usuario</span>s que cumplen con la condición de habar comprado un <span class="codigo">Producto</span> inactivo (<span class="codigo">Libro</span> y <span class="codigo">Postal</span>) y que tienen como código postal “<span class="codigo">12345</span>”.<br>
+<br>
+Pues bien, con esto concluye este tutorial sobre paso de parámetros a 
+consultas HQL. Espero que les sea de utilidad. En el próximo tutorial 
+mostraré cómo usar Hibernate cuando tenemos clases entidad que hacen uso
+ de Herencia (clases que extienden de otras clases).<br>
+<br>
+No olviden dejar sus dudas, comentarios y sugerencias en la sección de comentarios.<br>
+Saludos.<br>
+<br>
+<span class="negritas">Descarga los archivos de  este tutorial desde aquí:</span><br>
+<ul><li><a href="http://sites.google.com/site/javatutoriales/home/HibernateParametrosAnotaciones.zip"><span class="ligaArchivo">Parámetros en HQL con Anotaciones</span></a></li>
+<li><a href="http://sites.google.com/site/javatutoriales/home/HibernateParametrosMapeos.zip"><span class="ligaArchivo">Parámetros en HQL con Archivos de Mapeo</span></a></li>
+</ul><br>
+<span class="negritas">Entradas Relacionadas:</span><br>
+<ul><li><a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-1-persistiendo-objetos.html">Parte  1: Persistiendo Objetos Simples usando Mapeos en XML</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/05/hibernate-parte-2-persistiendo-objetos.html">Parte  2: Persistiendo Objetos Simples usando Anotaciones (Metadatos)</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/06/hibernate-parte-3-relaciones-uno-uno.html">Parte  3: Relaciones / Uno a uno</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/06/hibernate-parte-4-relaciones-uno-muchos.html">Parte  4: Relaciones / Uno a muchos</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/08/hibernate-parte-5-relaciones-muchos-uno_02.html">Parte  5: Relaciones / Muchos a uno</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/08/hibernate-parte-6-relaciones-muchos.html">Parte  6: Relaciones / Muchos a Muchos</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2009/09/hibernate-parte-7-hql-primera-parte.html">Parte 7: HQL Primera Parte</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2010/05/hibernate-parte-8-hql-segunda-parte.html">Parte 8: HQL Segunda Parte</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2010/08/hibernate-parte-10-herencia.html">Parte 10: Herencia</a></li>
+<li><a href="http://javatutoriales.blogspot.com/2010/08/hibernate-parte-11-interceptores-y.html">Parte 11: Interceptores y Eventos</a></li>
+</ul></div>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1"><span class="post-author vcard">
+Publicado por
+<span class="fn">Alex</span>
+</span>
+<span class="post-timestamp">
+en
+<a class="timestamp-link" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html" rel="bookmark" title="permanent link"><abbr class="published" title="2010-07-25T19:18:00-07:00">19:18</abbr></a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-1025891168">
+<a href="http://www.blogger.com/post-edit.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;from=pencil" title="Editar entrada">
+<img alt="" class="icon-action" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_edit_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<span class="reaction-buttons">
+<table border="0" width="100%" cellpadding="0" cellspacing="0"><tbody><tr>
+<td class="reactions-label-cell" nowrap="nowrap" valign="top" width="1%">
+<span class="reactions-label">
+Reacciones:</span>&nbsp;</td>
+<td><iframe allowtransparency="true" class="reactions-iframe" name="reactions" scrolling="no" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/blog-post-reactions.xhtml" frameborder="0"></iframe></td>
+</tr></tbody></table>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="http://www.blogger.com/share-post.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;target=email" target="_blank" title="Enviar por correo electrónico"><span class="share-button-link-text">Enviar por correo electrónico</span></a><a class="goog-inline-block share-button sb-blog" href="http://www.blogger.com/share-post.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;target=blog" onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target="_blank" title="Escribe un blog"><span class="share-button-link-text">Escribe un blog</span></a><a class="goog-inline-block share-button sb-twitter" href="http://www.blogger.com/share-post.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;target=twitter" target="_blank" title="Compartir con Twitter"><span class="share-button-link-text">Compartir con Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="http://www.blogger.com/share-post.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;target=facebook" onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target="_blank" title="Compartir con Facebook"><span class="share-button-link-text">Compartir con Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="http://www.blogger.com/share-post.g?blogID=2012232069289957092&amp;postID=672466666931712689&amp;target=pinterest" target="_blank" title="Compartir en Pinterest"><span class="share-button-link-text">Compartir en Pinterest</span></a><div class="goog-inline-block dummy-container"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/fastbutton.html" name="I0_1429303245354" id="I0_1429303245354" vspace="0" tabindex="0" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></div>
+</div>
+<span class="post-backlinks post-comment-link">
+</span>
+</div>
+<div class="post-footer-line post-footer-line-2"><span class="post-labels">
+Etiquetas:
+<a href="http://www.javatutoriales.com/search/label/hibernate" rel="tag">hibernate</a>,
+<a href="http://www.javatutoriales.com/search/label/hql" rel="tag">hql</a>,
+<a href="http://www.javatutoriales.com/search/label/parametros" rel="tag">parametros</a>,
+<a href="http://www.javatutoriales.com/search/label/parametros%20por%20nombre" rel="tag">parametros por nombre</a>,
+<a href="http://www.javatutoriales.com/search/label/parametros%20posicionales" rel="tag">parametros posicionales</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3"></div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>10 comentarios:</h4>
+<div class="comments-content">
+<script async="async" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/comments.html" type="text/javascript"></script>
+<script type="text/javascript">
+    (function() {
+      var items = [{'id': '7317571121476353561', 'body': 'Hola Alex ,ante todo gracias por estos tutoriales ya que me estan ayudando mucho a aprender hibernate. Tengo una duda respecto  hql &#191;se puede aplicar en una consulta las funciones de upper, lower, trim?', 'timestamp': '1280255679853', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751280255679853#c7317571121476353561', 'author': {'name': 'Elizabet', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/15488191963415643841'}, 'displayTime': '27 de julio de 2010, 11:34', 'deleteclass': 'item-control blog-admin pid-725313478'}, {'id': '6260613948138832554', 'body': 'Hola Elizabet;\74br /\76\74br /\76Si, claro que es posible, y se usan igual que en SQL estandar.\74br /\76\74br /\76Saludos', 'timestamp': '1280257478564', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751280257478564#c6260613948138832554', 'author': {'name': 'Alex', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/06974037481671868076'}, 'displayTime': '27 de julio de 2010, 12:04', 'deleteclass': 'item-control blog-admin pid-1025891168'}, {'id': '8266372216314941556', 'body': 'Hola,\74br /\76Sigo tus tutoriales con interés y me han ido muy bien para aprender. Hasta hoy no habia tenido ningun problema pero con la aplicación de este tutorial tengo uno.\74br /\76Se produce una excepcion en la clase UsuarioDAO metodo getUsuario.\74br /\76Ocurrió un error al recuperar usuario\74br /\76org.hibernate.TransactionException: Transaction not successfully started\74br /\76No se encontró al usuario\74br /\76        at org.hibernate.transaction.JDBCTransaction.commit(JDBCTransaction.java:100)\74br /\76        at hibernateparametros.dao.AbstractDAO.terminaOperacion(AbstractDAO.java:26)\74br /\76        at hibernateparametros.dao.UsuariosDAO.getUsuario(UsuariosDAO.java:33)\74br /\76        at hibernateparametros.Main.buscaUsuario(Main.java:51)\74br /\76        at hibernateparametros.Main.(Main.java:21)\74br /\76        at hibernateparametros.Main.main(Main.java:25)\74br /\76\74br /\76Hasta este puntod todo funciona bien, se crea el esquema en bd, se introducen los usuarios, etc.\74br /\76\74br /\76Alguna idea?\74br /\76\74br /\76Gracias.', 'timestamp': '1282487632227', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751282487632227#c8266372216314941556', 'author': {'name': 'tocandolapera', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/12248874120216320842'}, 'displayTime': '22 de agosto de 2010, 7:33', 'deleteclass': 'item-control blog-admin pid-391573588'}, {'id': '8193023583325763477', 'body': 'Hola tocandolapera :S.\74br /\76\74br /\76Pues se me ocurre que puede ser porque hay algún problema en tu archivo de configuración (tal vez, la base de datos no existe, o el username o el password). Lo que puedes hacer es poner un printStackTrace en el método manejaExcepcion o en el catch de getUsuario.\74br /\76\74br /\76Prueba y si no, seguimos buscando el problema.\74br /\76\74br /\76Saludos.', 'timestamp': '1282626466899', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751282626466899#c8193023583325763477', 'author': {'name': 'Alex', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/06974037481671868076'}, 'displayTime': '23 de agosto de 2010, 22:07', 'deleteclass': 'item-control blog-admin pid-1025891168'}, {'id': '5103865823782884104', 'body': 'Primero que nada quiero agradecerte en nombre mio y de muchos otros que  siguiendo tus publicaciones hemos aprendido sobre hibernate e ireport.\74br /\76Ahora en el caso de la clase AbstractDAO puedo leer que solo el el metodo almacenaEntidad abres y cierras la sesion con los metodos\74br /\76  dummy.iniciaOperacion();              dummy.getSession().saveOrUpdate(entidad);\74br /\76            dummy.getSession().flush();\74br /\76y en todos los metodos siguiente no cierras la sesion, ahora mi pregunta quiza un poco tonta es que pasa con estas sesiones se crea una cada ves que invocas el metodo iniciaOperacion()\74br /\76o se usa la misma sesion  si se abre otra sesion que pasa con las otras que se abren en los demas metodos crud\74br /\76\74br /\76saludos cordiales\74br /\76\74br /\76edwin alvarenga', 'timestamp': '1285186437543', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751285186437543#c5103865823782884104', 'author': {'name': 'Edwin Alvarenga', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/17998441461336494657'}, 'displayTime': '22 de septiembre de 2010, 13:13', 'deleteclass': 'item-control blog-admin pid-475115778'}, {'id': '9112401565155343337', 'body': 'Hola Edwin;\74br /\76\74br /\76Muchas gracias por tus comentarios, que bueno que el blog ha servido :D.\74br /\76\74br /\76En realidad en cada uno de los métodos se cierra la sesión, en el bloque finally, donde se invoca dummy.terminaOperacion(). En realidad es ese el método el que se encarga de cerrar la sesión y está en el bloque finally, justamente para asegurar que esta se cerrará, ya sea que haya una excepción o no ;).\74br /\76\74br /\76El método \46quot;flush\46quot; de la sesión lo que hace es indicarle a Hibernate que queremos que la operación indicada se realice en ese instante, en vez de esperar a que este lo haga por su cuenta (el cual por cierto es uno de los mecanismos que se supone que tiene).\74br /\76\74br /\76De todas formas, contestando a tu pregunta: si no cierras una conexión corres el riesgo de dos cosas. La primera es que la operación que estas intentado realizar nunca ocurra, ya que la sesión seguirá abierta y Hibernate no sabrá en que momento la terminarás. \74br /\76\74br /\76El segundo riesgo en realidad es más grande. Cuando abres una sesión y tu apliación está usando un pool de conexiones, tomas una conexión de este pool. Si no cierras la sesión, la conexión nunca será regresada al pool, y por lo tanto llegará el momento en el que no tendrás más conexiones disponibles, y ya no podrás hacer operaciones en tu base de datos (lo cual se te avisará con su correspondiente excepción). En caso de que no estes usando un pool, de todas formas, Hibernate irá realizando conexiones a tu base de datos. Los manejadores de bases de datos tiene un número límitado de conexiones que pueden tener abiertas de forma simultanea; si no terminas la sesión ocurrirá lo mismo, se terminaran las conexiones que puedes hacer a tu base de datos y ya no podrás realizar otra operación.\74br /\76\74br /\76Espero que esto resuelva tu duda. Cualquier otra pregunta que tengas, no dudes en hacerla y con todo gusto trataré de responderla.\74br /\76\74br /\76Saludos.', 'timestamp': '1285191657298', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751285191657298#c9112401565155343337', 'author': {'name': 'Alex', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/06974037481671868076'}, 'displayTime': '22 de septiembre de 2010, 14:40', 'deleteclass': 'item-control blog-admin pid-1025891168'}, {'id': '4840220947090512921', 'body': 'Gracias por tu pronta respuesta, ahora tengo claro que es lo que sucede en la clase AbstractDAO, solo una peticion si no es mucha molestia, sera que en un futuro podrias considerar seguir con esta saga de tutoriales explicados con peras y manzanas.\74br /\76un tutorial trabajar hibernate con spring, utilizando HibernateTemplate\74br /\76\74br /\76\74br /\76saludos cordiales', 'timestamp': '1285193925528', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751285193925528#c4840220947090512921', 'author': {'name': 'Edwin Alvarenga', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/17998441461336494657'}, 'displayTime': '22 de septiembre de 2010, 15:18', 'deleteclass': 'item-control blog-admin pid-475115778'}, {'id': '1179951904072748689', 'body': 'Que buenos tutoriales yo no puedo creer todabia que este tipo de informacion sea gratis jajajaja te pasas Alex un espectaculo todo lo que haces..!!! \74br /\76\74br /\76Graciasss :\46#39;(', 'timestamp': '1289435791059', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751289435791059#c1179951904072748689', 'author': {'name': 'EdgardoDamian', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/02763354937195783450'}, 'displayTime': '10 de noviembre de 2010, 16:36', 'deleteclass': 'item-control blog-admin pid-736819525'}, {'id': '6072363032472440942', 'body': 'Una vez más, muchas gracias por esta gran ayuda Alex!\74br /\76\74br /\76Solo quería comentar que me quemé la cabeza casi 2 horas con la excepción que también le dió a uno que comentó mas arriba ( y hace un año)...\74br /\76\74br /\76el error es una jodida \46quot;s\46quot; demás en la consulta que tu haces!!!!! pusiste \46quot;Ususario\46quot; donde va \46quot;Usuario\46quot;  ^-^ !!!!   y como es una simple cadena de texto no me daba cuenta por que no me lo marcaba el IDE!!!!!! \74br /\76\74br /\76Igual aprendí la lección: probar SIEMPRE toda consulta hql por separado en algun hql editor... :D\74br /\76\74br /\76Saludos!', 'timestamp': '1313526452772', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751313526452772#c6072363032472440942', 'author': {'name': 'RocketBear', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/05445553614298989582'}, 'displayTime': '16 de agosto de 2011, 13:27', 'deleteclass': 'item-control blog-admin pid-1523913367'}, {'id': '6781828506887761188', 'body': 'buenicimos los tutos..la verdad un genio..tengo una duda, se pueden manejar logins y usuarios a nivel de base de datos desde la aplicaion??', 'timestamp': '1342755088920', 'permalink': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment\0751342755088920#c6781828506887761188', 'author': {'name': 'Marcelo Marin Salvagiot', 'avatarUrl': '//lh6.googleusercontent.com/-WntiIC2lhko/AAAAAAAAAAI/AAAAAAAAAGI/v422lGgjLgo/s512-c/photo.jpg', 'profileUrl': 'http://www.blogger.com/profile/02135425700582044178'}, 'displayTime': '19 de julio de 2012, 20:31', 'deleteclass': 'item-control blog-admin pid-83785632'}];
+      var msgs = {'loadMore': 'Cargar más...', 'loading': 'Cargando...', 'loaded': 'Ya no hay más', 'addComment': 'Añadir comentario', 'reply': 'Responder', 'delete': 'Eliminar'};
+      var config = {'blogId': '2012232069289957092', 'postId': '672466666931712689', 'feed': 'http://www.javatutoriales.com/feeds/672466666931712689/comments/default', 'authorName': 'Alex', 'authorUrl': 'http://www.blogger.com/profile/06974037481671868076', 'baseUri': 'http://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+</script>
+<div id="comment-holder">
+<div id="bc_0_11C" kind="c"><div id="bc_0_11CT"><div id="bc_0_10T" class="comment-thread" kind="r" t="0" u="0"><ol id="bc_0_10TB"><li id="bc_0_0B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c7317571121476353561" class="comment-block"><div id="bc_0_0M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/15488191963415643841">Elizabet</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1280255679853#c7317571121476353561">27 de julio de 2010, 11:34</a></span></div><p id="bc_0_0MC" class="comment-content">Hola
+ Alex ,ante todo gracias por estos tutoriales ya que me estan ayudando 
+mucho a aprender hibernate. Tengo una duda respecto  hql ¿se puede 
+aplicar en una consulta las funciones de upper, lower, trim?</p><span id="bc_0_0MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-725313478"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=7317571121476353561">Eliminar</a></span></span></div><div id="bc_0_0BR" class="comment-replies"></div><div id="bc_0_0B_box" class="comment-replybox-single"></div></li><li id="bc_0_1B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c6260613948138832554" class="comment-block"><div id="bc_0_1M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="http://www.blogger.com/profile/06974037481671868076">Alex</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1280257478564#c6260613948138832554">27 de julio de 2010, 12:04</a></span></div><p id="bc_0_1MC" class="comment-content">Hola Elizabet;<br><br>Si, claro que es posible, y se usan igual que en SQL estandar.<br><br>Saludos</p><span id="bc_0_1MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-1025891168"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=6260613948138832554">Eliminar</a></span></span></div><div id="bc_0_1BR" class="comment-replies"></div><div id="bc_0_1B_box" class="comment-replybox-single"></div></li><li id="bc_0_2B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c8266372216314941556" class="comment-block"><div id="bc_0_2M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/12248874120216320842">tocandolapera</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1282487632227#c8266372216314941556">22 de agosto de 2010, 7:33</a></span></div><p id="bc_0_2MC" class="comment-content">Hola,<br>Sigo
+ tus tutoriales con interés y me han ido muy bien para aprender. Hasta 
+hoy no habia tenido ningun problema pero con la aplicación de este 
+tutorial tengo uno.<br>Se produce una excepcion en la clase UsuarioDAO metodo getUsuario.<br>Ocurrió un error al recuperar usuario<br>org.hibernate.TransactionException: Transaction not successfully started<br>No se encontró al usuario<br>        at org.hibernate.transaction.JDBCTransaction.commit(JDBCTransaction.java:100)<br>        at hibernateparametros.dao.AbstractDAO.terminaOperacion(AbstractDAO.java:26)<br>        at hibernateparametros.dao.UsuariosDAO.getUsuario(UsuariosDAO.java:33)<br>        at hibernateparametros.Main.buscaUsuario(Main.java:51)<br>        at hibernateparametros.Main.(Main.java:21)<br>        at hibernateparametros.Main.main(Main.java:25)<br><br>Hasta este puntod todo funciona bien, se crea el esquema en bd, se introducen los usuarios, etc.<br><br>Alguna idea?<br><br>Gracias.</p><span id="bc_0_2MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-391573588"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=8266372216314941556">Eliminar</a></span></span></div><div id="bc_0_2BR" class="comment-replies"></div><div id="bc_0_2B_box" class="comment-replybox-single"></div></li><li id="bc_0_3B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c8193023583325763477" class="comment-block"><div id="bc_0_3M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="http://www.blogger.com/profile/06974037481671868076">Alex</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1282626466899#c8193023583325763477">23 de agosto de 2010, 22:07</a></span></div><p id="bc_0_3MC" class="comment-content">Hola tocandolapera :S.<br><br>Pues
+ se me ocurre que puede ser porque hay algún problema en tu archivo de 
+configuración (tal vez, la base de datos no existe, o el username o el 
+password). Lo que puedes hacer es poner un printStackTrace en el método 
+manejaExcepcion o en el catch de getUsuario.<br><br>Prueba y si no, seguimos buscando el problema.<br><br>Saludos.</p><span id="bc_0_3MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-1025891168"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=8193023583325763477">Eliminar</a></span></span></div><div id="bc_0_3BR" class="comment-replies"></div><div id="bc_0_3B_box" class="comment-replybox-single"></div></li><li id="bc_0_4B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c5103865823782884104" class="comment-block"><div id="bc_0_4M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/17998441461336494657">Edwin Alvarenga</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1285186437543#c5103865823782884104">22 de septiembre de 2010, 13:13</a></span></div><p id="bc_0_4MC" class="comment-content">Primero
+ que nada quiero agradecerte en nombre mio y de muchos otros que  
+siguiendo tus publicaciones hemos aprendido sobre hibernate e ireport.<br>Ahora
+ en el caso de la clase AbstractDAO puedo leer que solo el el metodo 
+almacenaEntidad abres y cierras la sesion con los metodos<br>  dummy.iniciaOperacion();              dummy.getSession().saveOrUpdate(entidad);<br>            dummy.getSession().flush();<br>y
+ en todos los metodos siguiente no cierras la sesion, ahora mi pregunta 
+quiza un poco tonta es que pasa con estas sesiones se crea una cada ves 
+que invocas el metodo iniciaOperacion()<br>o se usa la misma sesion  si se abre otra sesion que pasa con las otras que se abren en los demas metodos crud<br><br>saludos cordiales<br><br>edwin alvarenga</p><span id="bc_0_4MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-475115778"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=5103865823782884104">Eliminar</a></span></span></div><div id="bc_0_4BR" class="comment-replies"></div><div id="bc_0_4B_box" class="comment-replybox-single"></div></li><li id="bc_0_5B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c9112401565155343337" class="comment-block"><div id="bc_0_5M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="http://www.blogger.com/profile/06974037481671868076">Alex</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1285191657298#c9112401565155343337">22 de septiembre de 2010, 14:40</a></span></div><p id="bc_0_5MC" class="comment-content">Hola Edwin;<br><br>Muchas gracias por tus comentarios, que bueno que el blog ha servido :D.<br><br>En
+ realidad en cada uno de los métodos se cierra la sesión, en el bloque 
+finally, donde se invoca dummy.terminaOperacion(). En realidad es ese el
+ método el que se encarga de cerrar la sesión y está en el bloque 
+finally, justamente para asegurar que esta se cerrará, ya sea que haya 
+una excepción o no ;).<br><br>El método "flush" de la sesión lo que hace
+ es indicarle a Hibernate que queremos que la operación indicada se 
+realice en ese instante, en vez de esperar a que este lo haga por su 
+cuenta (el cual por cierto es uno de los mecanismos que se supone que 
+tiene).<br><br>De todas formas, contestando a tu pregunta: si no cierras
+ una conexión corres el riesgo de dos cosas. La primera es que la 
+operación que estas intentado realizar nunca ocurra, ya que la sesión 
+seguirá abierta y Hibernate no sabrá en que momento la terminarás. <br><br>El
+ segundo riesgo en realidad es más grande. Cuando abres una sesión y tu 
+apliación está usando un pool de conexiones, tomas una conexión de este 
+pool. Si no cierras la sesión, la conexión nunca será regresada al pool,
+ y por lo tanto llegará el momento en el que no tendrás más conexiones 
+disponibles, y ya no podrás hacer operaciones en tu base de datos (lo 
+cual se te avisará con su correspondiente excepción). En caso de que no 
+estes usando un pool, de todas formas, Hibernate irá realizando 
+conexiones a tu base de datos. Los manejadores de bases de datos tiene 
+un número límitado de conexiones que pueden tener abiertas de forma 
+simultanea; si no terminas la sesión ocurrirá lo mismo, se terminaran 
+las conexiones que puedes hacer a tu base de datos y ya no podrás 
+realizar otra operación.<br><br>Espero que esto resuelva tu duda. 
+Cualquier otra pregunta que tengas, no dudes en hacerla y con todo gusto
+ trataré de responderla.<br><br>Saludos.</p><span id="bc_0_5MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-1025891168"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=9112401565155343337">Eliminar</a></span></span></div><div id="bc_0_5BR" class="comment-replies"></div><div id="bc_0_5B_box" class="comment-replybox-single"></div></li><li id="bc_0_6B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c4840220947090512921" class="comment-block"><div id="bc_0_6M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/17998441461336494657">Edwin Alvarenga</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1285193925528#c4840220947090512921">22 de septiembre de 2010, 15:18</a></span></div><p id="bc_0_6MC" class="comment-content">Gracias
+ por tu pronta respuesta, ahora tengo claro que es lo que sucede en la 
+clase AbstractDAO, solo una peticion si no es mucha molestia, sera que 
+en un futuro podrias considerar seguir con esta saga de tutoriales 
+explicados con peras y manzanas.<br>un tutorial trabajar hibernate con spring, utilizando HibernateTemplate<br><br><br>saludos cordiales</p><span id="bc_0_6MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-475115778"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=4840220947090512921">Eliminar</a></span></span></div><div id="bc_0_6BR" class="comment-replies"></div><div id="bc_0_6B_box" class="comment-replybox-single"></div></li><li id="bc_0_7B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c1179951904072748689" class="comment-block"><div id="bc_0_7M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/02763354937195783450">EdgardoDamian</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1289435791059#c1179951904072748689">10 de noviembre de 2010, 16:36</a></span></div><p id="bc_0_7MC" class="comment-content">Que
+ buenos tutoriales yo no puedo creer todabia que este tipo de 
+informacion sea gratis jajajaja te pasas Alex un espectaculo todo lo que
+ haces..!!! <br><br>Graciasss :'(</p><span id="bc_0_7MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-736819525"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=1179951904072748689">Eliminar</a></span></span></div><div id="bc_0_7BR" class="comment-replies"></div><div id="bc_0_7B_box" class="comment-replybox-single"></div></li><li id="bc_0_8B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/b36-rounded.html"></div><div id="c6072363032472440942" class="comment-block"><div id="bc_0_8M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/05445553614298989582">RocketBear</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1313526452772#c6072363032472440942">16 de agosto de 2011, 13:27</a></span></div><p id="bc_0_8MC" class="comment-content">Una vez más, muchas gracias por esta gran ayuda Alex!<br><br>Solo
+ quería comentar que me quemé la cabeza casi 2 horas con la excepción 
+que también le dió a uno que comentó mas arriba ( y hace un año)...<br><br>el
+ error es una jodida "s" demás en la consulta que tu haces!!!!! pusiste 
+"Ususario" donde va "Usuario"  ^-^ !!!!   y como es una simple cadena de
+ texto no me daba cuenta por que no me lo marcaba el IDE!!!!!! <br><br>Igual aprendí la lección: probar SIEMPRE toda consulta hql por separado en algun hql editor... :D<br><br>Saludos!</p><span id="bc_0_8MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-1523913367"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=6072363032472440942">Eliminar</a></span></span></div><div id="bc_0_8BR" class="comment-replies"></div><div id="bc_0_8B_box" class="comment-replybox-single"></div></li><li id="bc_0_9B" class="comment" kind="b"><div class="avatar-image-container"><img src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/photo.jpg"></div><div id="c6781828506887761188" class="comment-block"><div id="bc_0_9M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/02135425700582044178">Marcelo Marin Salvagiot</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html?showComment=1342755088920#c6781828506887761188">19 de julio de 2012, 20:31</a></span></div><p id="bc_0_9MC" class="comment-content">buenicimos
+ los tutos..la verdad un genio..tengo una duda, se pueden manejar logins
+ y usuarios a nivel de base de datos desde la aplicaion??</p><span id="bc_0_9MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Responder</a><span class="item-control blog-admin pid-83785632"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=2012232069289957092&amp;postID=6781828506887761188">Eliminar</a></span></span></div><div id="bc_0_9BR" class="comment-replies"></div><div id="bc_0_9B_box" class="comment-replybox-single"></div></li></ol><div id="bc_0_10I" class="continue" kind="ci"><a href="javascript:;" target="_self">Añadir comentario</a></div><div id="bc_0_10T_box" class="comment-replybox-thread"></div><div id="bc_0_10L" class="loadmore loaded" kind="rb"><a href="javascript:;" target="_self">Cargar más...</a></div></div></div></div>
+</div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=2012232069289957092&amp;postID=672466666931712689" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" id="comment-editor" name="comment-editor" src="" frameborder="0" height="410" width="100%"></iframe>
+<script type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/666035058-comment_from_post_iframe.html"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+<a name="links"></a><h4>
+</h4>
+<p class="comment-footer">
+<a class="comment-link" href="" id="Blog1_backlinks-create-link" target="_blank">
+</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://www.javatutoriales.com/2010/08/hibernate-parte-10-herencia.html" id="Blog1_blog-pager-newer-link" title="Entrada más reciente">Entrada más reciente</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://www.javatutoriales.com/2010/05/hibernate-parte-8-hql-segunda-parte.html" id="Blog1_blog-pager-older-link" title="Entrada antigua">Entrada antigua</a>
+</span>
+<a class="home-link" href="http://www.javatutoriales.com/">Página principal</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Suscribirse a:
+<a class="feed-link" href="http://www.javatutoriales.com/feeds/672466666931712689/comments/default" target="_blank" type="application/atom+xml">Enviar comentarios (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'es'};</script>
+</div></div>
+</div>
+</div>
+<div class="column-left-outer">
+<div class="column-left-inner">
+<aside>
+</aside>
+</div>
+</div>
+<div class="column-right-outer">
+<div class="column-right-inner">
+<aside>
+<div class="sidebar section" id="sidebar-right-1"><div class="widget HTML" id="HTML2">
+<div class="widget-content">
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10181132-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=HTML&amp;widgetId=HTML2&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML2"));' target="configHTML2" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML1">
+<h2 class="title">Donaciones</h2>
+<div class="widget-content">
+<center><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input value="_s-xclick" name="cmd" type="hidden">
+<input value="-----BEGIN PKCS7-----MIIHLwYJKoZIhvcNAQcEoIIHIDCCBxwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCXPi+zSED+6bSMiEqF2pvXyVVr4Uv3RufmaCjbMXo3d9/76i58CIy6xwrCGcP6RdwAD30H+DUNFIL86CvkHUiwjQP1lKOp39UNY3wVC91IT1i5BqnZWyFj7AqcwbiFWnYphYAoA5H5zX7Y8im4YpsWDknkD09IoOqSn0LH43wf5DELMAkGBSsOAwIaBQAwgawGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIzFdWlZbi5+iAgYiF8Olq/d3Eyk0Q15CEKfOFTo9u74uRNCneSRYuT50EMNSZxnwl3RQOf/Bh9kVXFgppCaYSyfmeeBi14BCCIDNLxsN6EQnDSW0sKKdbLpHL2YU6Ord15nVXMyYQUAjJoD6kVN2VNzLyz0zEV8dC9KLafkIn4boxSXk6K7ntcdLOosf8l2ieZEL6oIIDhzCCA4MwggLsoAMCAQICAQAwDQYJKoZIhvcNAQEFBQAwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMB4XDTA0MDIxMzEwMTMxNVoXDTM1MDIxMzEwMTMxNVowgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBR07d/ETMS1ycjtkpkvjXZe9k+6CieLuLsPumsJ7QC1odNz3sJiCbs2wC0nLE0uLGaEtXynIgRqIddYCHx88pb5HTXv4SZeuv0Rqq4+axW9PLAAATU8w04qqjaSXgbGLP3NmohqM6bV9kZZwZLR/klDaQGo1u9uDb9lr4Yn+rBQIDAQABo4HuMIHrMB0GA1UdDgQWBBSWn3y7xm8XvVk/UtcKG+wQ1mSUazCBuwYDVR0jBIGzMIGwgBSWn3y7xm8XvVk/UtcKG+wQ1mSUa6GBlKSBkTCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb22CAQAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCBXzpWmoBa5e9fo6ujionW1hUhPkOBakTr3YCDjbYfvJEiv/2P+IobhOGJr85+XHhN0v4gUkEDI8r2/rNk1m0GA8HKddvTjyGw/XqXa+LSTlDYkqI8OwR8GEYj4efEtcRpRYBxV8KxAW93YDWzFGvruKnnLbDAF6VR5w/cCMn5hzGCAZowggGWAgEBMIGUMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMDkwNjI4MTUyMDIwWjAjBgkqhkiG9w0BCQQxFgQUcW+Z9o8V0PZQYXxTPS2Ke8z09jswDQYJKoZIhvcNAQEBBQAEgYA3UDucn++CLAWWNW/sqpg229DZJu6Dqz1S/qJ3VqQ26IHOhhKCA2yr51KioprZ7CneGZDGkEd86AsPHudRSswJP6LxIgDP3uspR/C+Tn0vNajv23CZExrIg9E+dot5wefxbpTqlmK7KwUvEj7ynIfx0p7Iawb3bmBn7gdefWeh8A==-----END PKCS7-----
+" name="encrypted" type="hidden">
+<input alt="PayPal - The safer, easier way to pay online!" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/btn_donateCC_LG.gif" name="submit" border="0" type="image">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/pixel.gif" border="0" height="1" width="1">
+</form></center>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=HTML&amp;widgetId=HTML1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' target="configHTML1" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML3">
+<h2 class="title">Java Tutoriales en Facebook</h2>
+<div class="widget-content">
+<div class="fb-like-box" data-href="http://www.facebook.com/pages/Java-Tutoriales/121935157864634" data-width="292" data-height="600" data-show-faces="true" data-stream="true" data-header="false"></div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=HTML&amp;widgetId=HTML3&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML3"));' target="configHTML3" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client="pub-5834390571455163";
+google_ad_host="pub-1556223355139109";
+google_ad_host_channel="00000+00031+00032+00005";
+google_alternate_ad_url="http://www.blogger.com/img/blogger_ad160x600.html";
+google_ad_width=160;
+google_ad_height=600;
+google_ad_format="160x600_as";
+google_ad_type="text_image";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="333333";
+google_color_url="FF6633";
+google_color_text="FF9933";
+//--></script>
+<script type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/show_ads.js">
+</script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="160"></iframe></ins></ins>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=AdSense&amp;widgetId=AdSense1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense1"));' target="configAdSense1" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget Followers" id="Followers2">
+<h2 class="title">Seguidores</h2>
+<div class="widget-content">
+<div id="Followers2-wrapper">
+<div style="margin-right:2px;">
+<script type="text/javascript">
+        if (!window.google || !google.friendconnect) {
+          document.write('<script type="text/javascript"' +
+              'src="//www.google.com/friendconnect/script/friendconnect.js">' +
+              '</scr' + 'ipt>');
+        }
+      </script><script type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/friendconnect.js"></script>
+<script type="text/javascript">
+      if (!window.registeredBloggerCallbacks) {
+        window.registeredBloggerCallbacks = true;
+
+        
+
+        
+        gadgets.rpc.register('requestReload', function() {
+          document.location.reload();
+        });
+
+        
+        gadgets.rpc.register('requestSignOut', function(siteId) {
+          
+          google.friendconnect.container.openSocialSiteId = siteId;
+          google.friendconnect.requestSignOut();
+        });
+      }
+    </script>
+<script type="text/javascript">
+    
+    function registerGetBlogUrls() {
+      gadgets.rpc.register('getBlogUrls', function() {
+        var holder = {};
+        
+          
+            
+            
+              holder.currentPost = "http://www.blogger.com/feeds/2012232069289957092/posts/default/672466666931712689";
+            
+            
+            
+              holder.currentComments = "http://www.blogger.com/feeds/2012232069289957092/672466666931712689/comments/default";
+            
+            holder.currentPostUrl = "";
+            holder.currentPostId = 672466666931712689
+          
+          
+          
+            holder.postFeed = "http://www.blogger.com/feeds/2012232069289957092/posts/default";
+          
+          
+          
+            holder.commentFeed = "http://www.blogger.com/feeds/2012232069289957092/comments/default";
+          
+          holder.currentBlogUrl = "http://www.javatutoriales.com/";
+          holder.currentBlogId = "2012232069289957092";
+        
+        return holder;
+      });
+    }
+  </script>
+<script type="text/javascript">
+  if (!window.registeredCommonBloggerCallbacks) {
+    window.registeredCommonBloggerCallbacks = true;
+
+    gadgets.rpc.register('resize_iframe', function(height) {
+      var el = document.getElementById(this['f']);
+      if (el) {
+        el.style.height = height + 'px';
+      }
+    });
+
+    
+    gadgets.rpc.register('set_pref', function() {});
+
+    registerGetBlogUrls();
+  }
+  </script>
+<div class="gadgets-gadget-container" id="div-l6568wnu8kn8" style="width: 100%; visibility: visible;"><div id="gfc_iframe_436424635_0_body"><iframe id="gfc_iframe_436424635_0" name="gfc_iframe_436424635_0" style="width: 100%; height: 242px;" scrolling="no" allowtransparency="true" frameborder="0" height="260"></iframe></div></div>
+<script type="text/javascript">
+    var skin = {};
+    skin['FACE_SIZE'] = '32';
+    skin['HEIGHT'] = "260";
+    skin['BORDER_COLOR'] = "transparent";
+    skin['ENDCAP_BG_COLOR'] = "transparent";
+    skin['ENDCAP_TEXT_COLOR'] = "#222222";
+    skin['ENDCAP_LINK_COLOR'] = "#2288bb";
+    
+    skin['CONTENT_BG_COLOR'] = "transparent";
+    skin['CONTENT_LINK_COLOR'] = "#2288bb";
+    skin['CONTENT_TEXT_COLOR'] = "#222222";
+    skin['CONTENT_SECONDARY_LINK_COLOR'] = "#2288bb";
+    skin['CONTENT_SECONDARY_TEXT_COLOR'] = "#999999";
+    skin['CONTENT_HEADLINE_COLOR'] = "#000000";
+    google.friendconnect.container.setParentUrl("/");
+    google.friendconnect.container["renderMembersGadget"](
+    {id: "div-l6568wnu8kn8",
+     height: 260,
+     
+     
+     
+     site: "01578265053229508923",
+     locale: 'es' },
+     skin);
+  </script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=Followers&amp;widgetId=Followers2&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("Followers2"));' target="configFollowers2" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogArchive" id="BlogArchive2">
+<h2>Archivo del blog</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive2_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2015-01-01T00:00:00-08:00&amp;updated-max=2016-01-01T00:00:00-08:00&amp;max-results=1">2015</a>
+<span class="post-count" dir="ltr">(1)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2015_01_01_archive.html">enero</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2013-01-01T00:00:00-08:00&amp;updated-max=2014-01-01T00:00:00-08:00&amp;max-results=1">2013</a>
+<span class="post-count" dir="ltr">(1)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2013_11_01_archive.html">noviembre</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2012-01-01T00:00:00-08:00&amp;updated-max=2013-01-01T00:00:00-08:00&amp;max-results=2">2012</a>
+<span class="post-count" dir="ltr">(2)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2012_06_01_archive.html">junio</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2012_04_01_archive.html">abril</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2011-01-01T00:00:00-08:00&amp;updated-max=2012-01-01T00:00:00-08:00&amp;max-results=11">2011</a>
+<span class="post-count" dir="ltr">(11)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_12_01_archive.html">diciembre</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_11_01_archive.html">noviembre</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_10_01_archive.html">octubre</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_06_01_archive.html">junio</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_04_01_archive.html">abril</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_02_01_archive.html">febrero</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2011_01_01_archive.html">enero</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2010-01-01T00:00:00-08:00&amp;updated-max=2011-01-01T00:00:00-08:00&amp;max-results=10">2010</a>
+<span class="post-count" dir="ltr">(10)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_12_01_archive.html">diciembre</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_10_01_archive.html">octubre</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_09_01_archive.html">septiembre</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_08_01_archive.html">agosto</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_07_01_archive.html">julio</a>
+<span class="post-count" dir="ltr">(1)</span>
+<ul class="posts">
+<li><a href="http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html">Hibernate - Parte 9: Parámetros en HQL</a></li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2010_05_01_archive.html">mayo</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/search?updated-min=2009-01-01T00:00:00-08:00&amp;updated-max=2010-01-01T00:00:00-08:00&amp;max-results=22">2009</a>
+<span class="post-count" dir="ltr">(22)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_09_01_archive.html">septiembre</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_08_01_archive.html">agosto</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_07_01_archive.html">julio</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_06_01_archive.html">junio</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_05_01_archive.html">mayo</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_04_01_archive.html">abril</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_03_01_archive.html">marzo</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_02_01_archive.html">febrero</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://www.javatutoriales.com/2009_01_01_archive.html">enero</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=BlogArchive&amp;widgetId=BlogArchive2&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive2"));' target="configBlogArchive2" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget AdSense" id="AdSense3">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client="pub-5834390571455163";
+google_ad_host="pub-1556223355139109";
+google_ad_host_channel="00000+00031+00032+00005";
+google_ad_width=160;
+google_ad_height=600;
+google_ad_format="160x600_as";
+google_ad_type="text_image";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="333333";
+google_color_url="FF6633";
+google_color_text="FF9933";
+//--></script>
+<script type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/show_ads.js">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="160"></iframe></ins></ins>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=AdSense&amp;widgetId=AdSense3&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense3"));' target="configAdSense3" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget Profile" id="Profile2">
+<h2>Datos personales</h2>
+<div class="widget-content">
+<dl class="profile-datablock">
+<dt class="profile-data">
+<a data-gapiattached="true" data-onload="true" data-gapiscan="true" class="profile-name-link g-profile" href="http://www.blogger.com/profile/06974037481671868076" rel="author" style="background-image: url(//www.blogger.com/img/logo-16.png);">
+Alex
+</a>
+</dt>
+<dd class="profile-textblock">Programador Java con algunos años de 
+experiencia en múltiples poyectos y con múltiples APIs y herramientas 
+deseoso de compartir experiencias con el resto de programadores.</dd>
+</dl>
+<a class="profile-link" href="http://www.blogger.com/profile/06974037481671868076" rel="author">Ver todo mi perfil</a>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=Profile&amp;widgetId=Profile2&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("Profile2"));' target="configProfile2" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+<table class="section-columns columns-2" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="sidebar section" id="sidebar-right-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="sidebar section" id="sidebar-right-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sidebar section" id="sidebar-right-3"></div>
+</aside>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<footer>
+<div class="footer-outer">
+<div class="footer-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot section" id="footer-1"></div>
+<table class="section-columns columns-2" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot section" id="footer-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="foot section" id="footer-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class="foot section" id="footer-3"><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Con la tecnología de <a href="http://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2012232069289957092&amp;widgetType=Attribution&amp;widgetId=Attribution1&amp;action=editWidget&amp;sectionId=footer-3" onclick='return _WidgetManager._PopupConfig(document.getElementById("Attribution1"));' target="configAttribution1" title="Editar">
+<img alt="" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div><iframe src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/blank.html" style="height: 0px; width: 0px; position: absolute;" name="google_top_static_frame" id="google_top_static_frame" frameborder="0"></iframe>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/849756096-widgets.html"></script>
+<script gapi_processed="true" type="text/javascript" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/plusone.js"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV2";window['blogger_blog_id'] = '2012232069289957092';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2012232069289957092','//www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html','2012232069289957092');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2012232069289957092', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Tutoriales de Programacion Java', 'pageType': 'item', 'postId': '672466666931712689', 'url': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html', 'canonicalUrl': 'http://www.javatutoriales.com/2010/07/hibernate-parte-9-parametros-en-hql.html', 'canonicalHomepageUrl': 'http://www.javatutoriales.com/', 'homepageUrl': 'http://www.javatutoriales.com/', 'blogspotFaviconUrl': 'http://www.javatutoriales.com/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': '', 'searchLabel': '', 'searchQuery': '', 'pageName': 'Hibernate - Parte 9: Parámetros en HQL', 'pageTitle': 'Tutoriales de Programacion Java: Hibernate - Parte 9: Parámetros en HQL', 'encoding': 'UTF-8', 'locale': 'es', 'localeUnderscoreDelimited': 'es', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Tutoriales de Programacion Java - Atom\42 href\75\42http://www.javatutoriales.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Tutoriales de Programacion Java - RSS\42 href\75\42http://www.javatutoriales.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Tutoriales de Programacion Java - Atom\42 href\75\42http://www.blogger.com/feeds/2012232069289957092/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Tutoriales de Programacion Java - Atom\42 href\75\42http://www.javatutoriales.com/feeds/672466666931712689/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'postImageThumbnailUrl': 'http://3.bp.blogspot.com/_93xZudn-1kc/TEzkNzXRnyI/AAAAAAAAAzk/OsSrksSQjK8/s72-c/H9_1.png', 'postImageUrl': 'http://3.bp.blogspot.com/_93xZudn-1kc/TEzkNzXRnyI/AAAAAAAAAzk/OsSrksSQjK8/s320/H9_1.png', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'pub-5834390571455163', 'ieCssRetrofitLinks': '\74!--[if IE]\76\74script type\75\42text/javascript\42 src\75\42https://www.blogger.com/static/v1/jsbin/107775239-ieretrofit.js\42\76\74/script\76\n\74![endif]--\076', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cda3ddef07a85452', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'content_padding': '10px', 'paging_background': 'transparent none no-repeat scroll top center', 'image_border_small_size': '2px', 'body_background_gradient_cap': 'url(http://www.blogblog.com/1kt/simple/gradients_light.png)', 'tabs_selected_background_color': '#96ccff', 'body_rule_color': '#eeeeee', 'header_shadow_spread': '1px', 'header_shadow_offset_left': '-1px', 'header_padding': '30px', 'link_visited_color': '#2aaadd', 'mobile_background_size': 'auto', 'post_title_font': 'normal bold 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'tabs_text_color': '#999999', 'date_header_margin': 'inherit', 'header_background_gradient': 'none', 'header_bottom_border_size': '1px', 'content_shadow_spread_webkit': '5px', 'header_shadow_offset_top': '-1px', 'mobile_button_color': '#ffffff', 'widget_title_font': 'normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'main_section_margin': '15px', 'keycolor': '#66bbdd', 'content_shadow_spread': '40px', 'image_background_color': '#ffffff', 'header_font': 'normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'header_background_color': 'transparent', 'main_border_width': '0', 'main_padding': '15px', 'tabs_border_color': '#eeeeee', 'image_text_color': '#222222', 'description_text_size': '140%', 'post_footer_background_color': '#f9f9f9', 'body_background_gradient_tile': 'url(http://www.blogblog.com/1kt/simple/body_gradient_tile_light.png)', 'page_width': 'auto', 'tabs_background_gradient': 'url(http://www.blogblog.com/1kt/simple/gradients_light.png)', 'mobile_background_overlay': 'transparent none repeat scroll top left', 'main_padding_bottom': '30px', 'tabs_background_color': '#f5f5f5', 'image_border_large_size': '5px', 'post_margin_bottom': '25px', 'body_background_override': '', 'tabs_margin_side': '30px', 'link_hover_color': '#33aaff', 'description_text_color': '#000000', 'body_text_color': '#222222', 'content_padding_horizontal': '10px', 'endSide': 'right', 'page_width_selector': '.region-inner', 'date_header_padding': 'inherit', 'post_footer_text_color': '#666666', 'startSide': 'left', 'date_header_color': '#222222', 'tabs_font': 'normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'post_footer_border_color': '#eeeeee', 'body_font': 'normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'footer_bevel': '0', 'tabs_bevel_border_width': '1px', 'date_header_background_color': 'transparent', 'content_shadow_spread_ie': '10px', 'widget_title_text_color': '#000000', 'header_border_horizontalsize': '0', 'image_border_color': '#eeeeee', 'tabs_border_width': '1px', 'content_background_color': '#ffffff', 'link_color': '#2288bb', 'header_text_color': '#3399bb', 'date_header_letterspacing': 'inherit', 'tabs_margin_top': '0', 'main_padding_top': '30px', 'header_border_size': '1px', 'tabs_selected_text_color': '#000000', 'content_background_color_selector': '.content-inner', 'body_background_color': '#66bbdd', 'widget_alternate_text_color': '#999999'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'crosscol', null, document.getElementById('PageList1'), {'title': 'Páginas', 'links': [{'href': 'http://www.javatutoriales.com/', 'title': 'Página principal', 'isCurrentPage': false}, {'href': 'http://www.javatutoriales.com/p/concursos.html', 'title': 'Página de Concursos', 'isCurrentPage': false, 'id': '4512556915229767839'}, {'href': 'http://www.javatutoriales.com/p/tutoriales-upao-2010.html', 'title': 'Tutoriales UPAO 2010', 'isCurrentPage': false, 'id': '536068431336521106'}, {'href': 'http://www.javatutoriales.com/p/presentaciones-capacitacion.html', 'title': 'Presentaciones Capacitación', 'isCurrentPage': false, 'id': '3353108707671477467'}], 'mobile': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'showBacklinks': true, 'postId': '672466666931712689', 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/1542284578-lbx__es.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/791027213-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'sidebar-right-1', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebar-right-1', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'sidebar-right-1', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar-right-1', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers2', 'sidebar-right-1', null, document.getElementById('Followers2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive2', 'sidebar-right-1', null, document.getElementById('BlogArchive2'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense3', 'sidebar-right-1', null, document.getElementById('AdSense3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile2', 'sidebar-right-1', null, document.getElementById('Profile2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', null, document.getElementById('Attribution1'), {'attribution': 'Con la tecnología de \74a href\75\47http://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+</script>
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Tutoriales%20de%20Programacion%20Java:%20Hibernate%20-%20Parte%209:%20Par%C3%A1metros%20en%20HQL_files/postmessageRelay.html" id="oauth2relay390478429" name="oauth2relay390478429"></iframe></body></html>

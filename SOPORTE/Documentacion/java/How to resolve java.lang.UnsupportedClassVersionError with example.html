@@ -1,0 +1,3186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr" xmlns:g="http://www.google.com/2005/gml/g"><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/v2.js" async=""></script><script async="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/cbgapi.loaded_2"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/all.html" id="facebook-jssdk"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/dU3ek4CPmr4Ai1acwqm_6r.js" async=""></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/ca-pub-5808379456926196.js" type="text/javascript" async=""></script><script async="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/cbgapi.loaded_1"></script><script async="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/cbgapi.loaded_0"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/ga.js" async="" type="text/javascript"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/ti.js" type="text/javascript" async=""></script><script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://javarevisited.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Javarevisited - RSS" href="http://javarevisited.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Javarevisited - Atom" href="http://www.blogger.com/feeds/8712770457197348465/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/4925529764363638095/comments/default">
+<link href="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/java_logo_50_50.jpg" rel="image_src">
+<link href="https://plus.google.com/114528699166048052030" rel="publisher">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<meta content="This article explains why java.lang.unsupportedclassversionerror comes in java, how to resolve unsupportedClassVerssionError in Java with example" name="description">
+<meta content="java.lang.unsupportedclassversionerror,unsupportedclassversionerror in java" name="keywords">
+<!-- place future descriptions and keywords here -->
+<script type="text/javascript">
+      if(document.location.protocol=='http:'){
+         var Tynt=Tynt||[];Tynt.push('dU3ek4CPmr4Ai1acwqm_6r');Tynt.i={"ap":"Read more:"};
+         (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+                                                  }
+    </script>
+<title>
+How to resolve java.lang.UnsupportedClassVersionError  with example
+</title>
+<link type="text/css" rel="stylesheet" href="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/728935430-widget_css_bundle.html">
+<link type="text/css" rel="stylesheet" href="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/gsearch.css">
+<link type="text/css" rel="stylesheet" href="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/authorization.html">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Rounders 3
+Date:     27 Feb 2004
+Updated by: Blogger Team
+----------------------------------------------- */
+#navbar-iframe {
+display: none !important;
+}
+/* Variable definitions
+====================
+<Variable name="mainBgColor" description="Main Background Color"
+type="color" default="#ffffff">
+<Variable name="mainTextColor" description="Text Color" type="color"
+default="#333">
+<Variable name="postTitleColor" description="Post Title Color" type="color"
+default="#333">
+<Variable name="dateHeaderColor" description="Date Header Color"
+type="color" default="#586">
+<Variable name="borderColor" description="Post Border Color" type="color"
+default="#bbb">
+<Variable name="mainLinkColor" description="Link Color" type="color"
+default="#456">
+<Variable name="mainVisitedLinkColor" description="Visited Link Color"
+type="color" default="#234">
+<Variable name="mainHoverLinkColor" description="Hover Link Color"
+type="color" default="#234">
+<Variable name="titleBgColor" description="Page Header Background Color"
+type="color" default="#357">
+<Variable name="titleTextColor" description="Blog Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarHeaderColor"
+description="Top Sidebar Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarBgColor"
+description="Top Sidebar Background Color"
+type="color" default="#586">
+<Variable name="topSidebarTextColor" description="Top Sidebar Text Color"
+type="color" default="#fff">
+<Variable name="topSidebarLinkColor" description="Top Sidebar Link Color"
+type="color" default="#fff">
+<Variable name="topSidebarVisitedLinkColor"
+description="Top Sidebar Visited Link Color"
+type="color" default="#fff">
+<Variable name="bottomSidebarHeaderColor"
+description="Bottom Sidebar Title Color"
+type="color" default="#abc">
+<Variable name="bottomSidebarLinkColor"
+description="Bottom Sidebar Link Color"
+type="color" default="#99ddbb">
+<Variable name="bottomSidebarVisitedLinkColor"
+description="Bottom Sidebar Visited Link Color"
+type="color" default="#ffffff">
+<Variable name="bodyFont" description="Text Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="pageTitleFont" description="Blog Title Font" type="font"
+default="normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="descriptionFont" description="Blog Description Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="headerFont" description="Sidebar Title Font" type="font"
+default="normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="postTitleFont" description="Post Title Font" type="font"
+default="normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="startSide" description="Start side in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="End side in blog language"
+type="automatic" default="right">
+*/
+body, .body-fauxcolumn-outer {
+background:#123;
+margin:0;
+text-align:center;
+line-height: 1.5em;
+font: x-small Trebuchet MS, Verdana, Arial, Sans-serif;
+color:#333333;
+font-size/* */:/**/small;
+font-size: /**/small;
+}
+/* Page Structure
+----------------------------------------------- */
+/* The images which help create rounded corners depend on the
+following widths and measurements. If you want to change
+these measurements, the images will also need to change.
+*/
+#outer-wrapper {
+width:1072px;
+margin:0 auto;
+text-align:left;
+font: normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#main-wrap1 {
+width:732px;
+float:left;
+background:#ffffff url("") no-repeat left bottom;
+margin:0px 0 0;
+padding:0 0 10px;
+color:#333333;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#main-wrap2 {
+float:left;
+width:100%;
+padding:10px 0 0;
+}
+#main {
+padding:0;
+width:732px;
+}
+#sidebar-wrap {
+width:340px;
+float:right;
+margin:0px 0 0;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+.main .widget {
+margin-top: 4px;
+width: 686px;
+padding: 0 13px;
+}
+.main .Blog {
+margin: 0;
+padding: 0;
+width: 732px;
+}
+/* Links
+----------------------------------------------- */
+a:link {
+color: #0066CC;
+}
+a:visited {
+color: #660099;
+}
+a:hover {
+color: #000066;
+}
+a img {
+border-width:0;
+}
+/* Blog Header
+----------------------------------------------- */
+#header-wrapper {
+background:#335577 url("") no-repeat left top;
+margin-top:4px;
+margin-right:0;
+margin-bottom:0;
+margin-left:0;
+padding-top:2px;
+padding-right:0;
+padding-bottom:0;
+padding-left:0;
+color:#ffffff;
+}
+#header {
+background:url("") no-repeat left bottom;
+padding:0 15px 4px;
+}
+#header h1 {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#header a,
+#header a:visited {
+text-decoration:none;
+color: #ffffff;
+}
+#header .description {
+margin:0;
+padding:1px 30px 15px;
+line-height:0.5em;
+font: normal normal 75% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title a{
+text-decoration:none;
+color: #ffffff;
+}
+/* Posts
+----------------------------------------------- */
+h2.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+h4.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+.post {
+margin:.3em 0 25px;
+padding:0 13px;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+}
+h2.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h2.post-title a, h2.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+h1.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h1.post-title a, h1.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+.post h3 {
+margin:0;
+line-height:1.5em;
+display:block;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:0px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.post h3 a, .post h3 a:visited {
+text-decoration:none;
+color: #333333;
+}
+a.title-link:hover {
+background-color: #bbbbbb;
+color: #333333;
+}
+.post-body {
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+border-bottom-color:#ffffff;
+padding-top:10px;
+padding-right:14px;
+padding-bottom:1px;
+padding-left:29px;
+font-size:12pt;
+line-height:1.5
+}
+html>body .post-body {
+border-bottom-width:0;
+}
+.post-body {
+margin:0 0 .75em;
+}
+.post-body blockquote {
+line-height:1.3em;
+}
+.post-footer {
+background: #ffffff;
+margin:0;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border:1px dotted #bbbbbb;
+border-width:1px;
+font-size:100%;
+line-height:1.5em;
+color: #666666;
+}
+/*
+The first line of the post footer might only have floated text, so we need to give it a height.
+The height comes from the post-footer line-height
+*/
+.post-footer-line-1 {
+min-height:1.5em;
+_height:1.5em;
+}
+.post-footer p {
+margin: 0;
+}
+html>body .post-footer {
+border-bottom-color:transparent;
+}
+.uncustomized-post-template .post-footer {
+text-align: right;
+}
+.uncustomized-post-template .post-author,
+.uncustomized-post-template .post-timestamp {
+display: block;
+float: left;
+text-align:left;
+margin-right: 4px;
+}
+.post-footer a {
+color: #456;
+}
+.post-footer a:hover {
+color: #234;
+}
+a.comment-link {
+/* IE5.0/Win doesn't apply padding to inline elements,
+so we hide these two declarations from it */
+background/* */:/**/url("http://www.blogblog.com/rounders/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+html>body a.comment-link {
+/* Respecified, for IE5/Mac's benefit */
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+.post img, table.tr-caption-container {
+margin-top:0;
+margin-right:0;
+margin-bottom:5px;
+margin-left:0;
+padding:4px;
+border:1px solid #bbbbbb;
+}
+.tr-caption-container img {
+border: none;
+margin: 0;
+padding: 0;
+}
+blockquote {
+margin:.75em 0;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+padding:5px 15px;
+color: #558866;
+}
+.post blockquote p {
+margin:.5em 0;
+}
+#blog-pager-newer-link {
+float: left;
+margin-left: 13px;
+}
+#blog-pager-older-link {
+float: right;
+margin-right: 13px;
+}
+#blog-pager {
+text-align: center;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+margin-left: 13px;
+}
+/* Comments
+----------------------------------------------- */
+#comments {
+margin:-25px 13px 0;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:20px;
+padding-right:0;
+padding-bottom:15px;
+padding-left:0;
+}
+#comments h4 {
+margin:0 0 10px;
+padding-top:0;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border-bottom:1px dotted #bbbbbb;
+font-size:120%;
+line-height:1.4em;
+color:#333333;
+}
+#comments-block {
+margin-top:0;
+margin-right:15px;
+margin-bottom:0;
+margin-left:9px;
+}
+.comment-author {
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat 2px .3em;
+margin:.5em 0;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+font-weight:bold;
+}
+.comment-body {
+margin:0 0 1.25em;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+}
+.comment-body p {
+margin:0 0 .5em;
+}
+.comment-footer {
+margin:0 0 .5em;
+padding-top:0;
+padding-right:0;
+padding-bottom:.75em;
+padding-left:20px;
+}
+.comment-footer a:link {
+color: #333;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+.comment-form {
+padding-left:20px;
+padding-right:5px;
+}
+#comments .comment-form h4 {
+padding-left:0px;
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {
+float: left;
+margin-top: 5px;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+border: 4px solid #ffffff;
+}
+.profile-datablock {
+margin-top:0;
+margin-right:15px;
+margin-bottom:.5em;
+margin-left:0;
+padding-top:8px;
+}
+.profile-link {
+background:url("http://www.blogblog.com/rounders3/icon_profile_left.gif") no-repeat left .1em;
+padding-left:15px;
+font-weight:bold;
+}
+.profile-textblock {
+clear: both;
+margin: 0;
+}
+.sidebar .clear, .main .widget .clear {
+clear: both;
+}
+#sidebartop-wrap {
+background:#558866 url("") no-repeat left bottom;
+margin:0px 0px 15px;
+padding:0px 0px 10px;
+color:#ffffff;
+}
+#sidebartop-wrap2 {
+background:url("") no-repeat left top;
+padding: 10px 0 0;
+margin:0;
+border-width:0;
+}
+#sidebartop h2 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop h4 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop a {
+color: #ffffff;
+}
+#sidebartop a:hover {
+color: #ffffff;
+}
+#sidebartop a:visited {
+color: #ffffff;
+}
+#sidebar a {
+color: #99ddbb;
+}
+#sidebar a:hover,
+#sidebar a:visited {
+color: #ffffff;
+}
+/* Sidebar Boxes
+----------------------------------------------- */
+.sidebar .widget {
+margin:.5em 13px 1.25em;
+padding:0 0px;
+}
+.widget-content {
+margin-top: 0.5em;
+}
+#sidebarbottom-wrap1 {
+background:#335577 url("") no-repeat left top;
+margin:0 0 15px;
+padding:10px 0 0;
+color: #ffffff;
+}
+#sidebarbottom-wrap2 {
+background:url("") no-repeat left bottom;
+padding:0 0 8px;
+}
+.sidebar h2 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar h4 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar ul {
+list-style:none;
+margin:0 0 1.25em;
+padding:0;
+}
+.sidebar ul li {
+background:url("http://www2.blogblog.com/rounders3/icon_arrow_sm.gif") no-repeat 2px .25em;
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:3px;
+padding-left:16px;
+margin-bottom:3px;
+border-bottom:1px dotted #bbbbbb;
+line-height:1.4em;
+}
+.sidebar p {
+margin:0 0 .6em;
+}
+#sidebar h2 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+#sidebar h4 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+/* Footer
+----------------------------------------------- */
+#footer-wrap1 {
+clear:both;
+margin:0 0 10px;
+padding:15px 0 0;
+}
+#footer-wrap2 {
+background:#335577 url("") no-repeat left top;
+color:#ffffff;
+}
+#footer {
+background:url("") no-repeat left bottom;
+padding:8px 15px;
+}
+#footer hr {display:none;}
+#footer p {margin:0;}
+#footer a {color:#ffffff;}
+#footer .widget-content {
+margin:0;
+}
+/** Page structure tweaks for layout editor wireframe */
+body#layout #main-wrap1,
+body#layout #sidebar-wrap,
+body#layout #header-wrapper {
+margin-top: 0;
+}
+body#layout #header, body#layout #header-wrapper,
+body#layout #outer-wrapper {
+margin-left:0,
+margin-right: 0;
+padding: 0;
+}
+body#layout #outer-wrapper {
+width: 1030px;
+}
+body#layout #footer-wrap1 {
+padding-top: 0;
+}
+#CustomSearch1{
+margin-top:-55px;
+margin-left:750px;
+width: 300px;
+display: block;
+position: absolute;
+}
+#AdSense1{
+padding-left:-10px;
+margin-left:2px;
+}
+
+--></style>
+<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19004659-1']);
+                 _gaq.push(['_trackPageview']);
+                 _gaq.push(['_trackPageLoadTime']);
+                 (function() {
+                 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                 })();
+    </script>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/google_top_exp.js" type="text/javascript"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/slide.xml" type="text/javascript" async=""></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/get" type="text/javascript" async="async" id="OB_settings_call"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/get_002" type="text/javascript" async="async" id="outbrainPostRecRankRequestID_0"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/a.js" async="" type="text/javascript"></script><script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/14292970569480.asc" charset="UTF-8" type="text/javascript"></script><link href="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/outbrainWidget.css" id="cssLinkID" type="text/css" rel="stylesheet"></head>
+<body>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/navbar.xhtml" name="navbar-iframe" id="navbar-iframe" vspace="0" tabindex="0" style="" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<script gapi_processed="true" type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\758712770457197348465\46blogName\75Javarevisited\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75http://javarevisited.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://javarevisited.blogspot.com/\46targetPostID\0754925529764363638095\46blogPostOrPageUrl\75http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html\46blogFollowUrl\75https://plus.google.com/103515296667914706982\46vt\0754844056124419152223',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<!--INFOLINKS_OFF-->
+<div id="outer-wrapper">
+<div id="header-wrapper">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<p class="title">
+<a href="http://javarevisited.blogspot.com/">
+Javarevisited
+</a>
+</p>
+</div>
+<div class="descriptionwrapper">
+<p class="description">
+<span>
+Blog about  Java programming language, FIX Protocol, Tibco Rendezvous and related Java technology stack.
+</span>
+</p>
+</div>
+</div>
+</div></div>
+</div>
+<div id="crosscol-wrapper" style="text-align:center">
+<div class="crosscol section" id="crosscol"><div class="widget CustomSearch" id="CustomSearch1">
+<div class="widget-content">
+<div id="CustomSearch1_form">
+<span class="cse-status">Loading...</span>
+</div>
+</div>
+<style type="text/css">
+      #uds-searchControl .gs-result .gs-title,
+      #uds-searchControl .gs-result .gs-title *,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results * {
+        color:#0066CC;
+      }
+
+      #uds-searchControl .gs-result .gs-title a:visited,
+      #uds-searchControl .gs-result .gs-title a:visited * {
+        color:#660099;
+      }
+
+      #uds-searchControl .gs-relativePublishedDate,
+      #uds-searchControl .gs-publishedDate {
+        color: #558866;
+      }
+
+      #uds-searchControl .gs-result a.gs-visibleUrl,
+      #uds-searchControl .gs-result .gs-visibleUrl {
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-results {
+        border-color: #bbbbbb;
+        background-color: #ffffff;
+      }
+
+      #uds-searchControl .gsc-tabhActive {
+        border-color: #bbbbbb;
+        border-top-color: #333333;
+        background-color: #ffffff;
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-tabhInactive {
+        border-color: #bbbbbb;
+        background-color: transparent;
+        color: #0066CC;
+      }
+
+      #uds-searchClearResults {
+        border-color: #bbbbbb;
+      }
+
+      #uds-searchClearResults:hover {
+        border-color: #333333;
+      }
+
+      #uds-searchControl .gsc-cursor-page {
+        color: #0066CC;
+      }
+
+      #uds-searchControl .gsc-cursor-current-page {
+        color: #333333;
+      }
+    </style>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=CustomSearch&amp;widgetId=CustomSearch1&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("CustomSearch1"));' target="configCustomSearch1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML2">
+<div class="widget-content">
+<div style="background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(204, 204, 204); margin-top: 79px; width: 75px;  margin-right: 10px; margin-left: -80px; display: block; top: 10px; position: fixed; list-style-type:none;padding-top:15px" id="sharebar">
+<a class="addthis_button_stumbleupon_badge"></a>
+<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+<a class="addthis_button_tweet" tw:count="vertical"></a> 
+<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+<a class="addthis_button_linkedin_counter" li:counter="top"></a>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML2&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML2"));' target="configHTML2" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+<!--INFOLINKS_ON-->
+<div id="main-wrap1">
+<div id="main-wrap2">
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<script type="text/javascript">
+                      __spr_config = {
+                        pid: '4ee2dade396cef4af800010b',
+                        title: "How to resolve java.lang.UnsupportedClassVersionError  with example",
+                        ckw: "core java",
+                        pub: "Friday, July 1, 2011",
+                        url: "http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html"
+                      };
+                      (function(){ // The Slide by Simple Reach
+                        var s = document.createElement('script');
+                                                       s.async = true;
+                                                       s.type = 'text/javascript';
+                                                       s.src = document.location.protocol + '//d8rk54i4mohrb.cloudfront.net/js/slide.js';
+                                                       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+                                                       })();
+                    </script>
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+                        <div class="date-outer">
+                      
+<h4 class="date-header">
+<span>
+Friday, July 1, 2011
+</span>
+</h4>
+
+                        <div class="date-posts">
+                      
+<div class="post-outer">
+<div class="post hentry">
+<a name="4925529764363638095"></a>
+<h1 class="post-title entry-title">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html" title="How to resolve java.lang.UnsupportedClassVersionError  with example">
+How to resolve java.lang.UnsupportedClassVersionError  with example
+</a>
+</h1>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+<div style="float:right; margin:5px 6px 0px 5px">
+
+                        <script type="text/javascript"><!--
+                        google_ad_client = "ca-pub-5808379456926196";
+                        google_ad_host = "pub-1556223355139109";
+                        /* Large Rectangle 300x250, created 1/25/11 */
+                        google_ad_slot = "3870191442";
+                        google_ad_width = 300;
+                        google_ad_height = 250;
+                        //-->
+                        </script>
+                        <script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/show_ads.js">
+                        </script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="250" width="300"></iframe></ins></ins>
+                      
+</div>
+<div style="float:right; margin:5px 6px 0px 5px">
+</div>
+</div>
+<div class="post-body entry-content">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">java.lang.UnsupportedClassVersionError </span><span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">&nbsp;is a quite common error after <a href="http://javarevisited.blogspot.com/2011/06/noclassdeffounderror-exception-in.html">NoClassDefFoundError</a>
+ or ClassNotFoundException they all seems to related to class files but 
+they all are different and there cause and resolution are different. In 
+this java tutorial we will see what is </span><span style="color: black; font-family: Verdana; font-size: 9pt;">UnsupportedClassVersionError </span><span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">in Java? Why UnsupportedClassVersionError</span><span style="color: black; font-family: Verdana; font-size: 9pt;"> </span><span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">comes in Java? What is class file format and version numbers associated with it and finally how to resolve </span><span style="color: black; font-family: Verdana; font-size: 9pt;">UnsupportedClassVersionError </span><span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">in Java.&nbsp;</span></h3>
+<h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">This article is in continuation of debugging tutorials like <a href="http://javarevisited.blogspot.com/2011/02/how-to-setup-remote-debugging-in.html">How to remote debug Java program in Eclipse</a> and <a href="http://javarevisited.blogspot.com/2011/07/java-debugging-tutorial-example-tips.html">10 Java debugging tips in Eclipse</a>. If you have not read those article you may find them useful.</span></h3>
+<h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt; font-weight: normal;">&nbsp;</span></h3>
+<h2 style="font-weight: normal;">
+<u><span style="font-style: normal;">How to resolve UnsupportedClassVersionError in Java</span></u></h2>
+<h3 style="font-weight: normal;">
+<u><span style="color: black;">What is UnSupportedClassVersionError in Java?</span></u></h3>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<a href="http://1.bp.blogspot.com/-IxSm_itJ4sg/Tg6ZejT0xII/AAAAAAAAAMY/9PHh0EZmiaY/s1600/java_logo_50_50.jpg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="UnSupportedClassVersionError, java.lang.UnsupportedClassVersionError" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/java_logo_50_50.jpg" border="0"></a><span style="color: black; font-family: Verdana; font-size: 9pt;">Java.lang.UnsupportedClassVersionError
+ is a subclass of java.lang.ClassFormatError. This is a kind of linking 
+error which occurs during linking phase accordingly 
+java.lang.ClassFormatError has also derived from java.lang.LinkageError.
+ As the name suggests "UnSupportedClassVersionError" so it’s related to 
+unsupported class version, now questions comes what is class version in 
+Java? Well every source file is compiled into class file and each class 
+file has two versions associated with it, major version and minor 
+version. <b>Version of class file is represented as major_version.minor_version</b>. This version is used to determine <i>format of class file in Java</i>.</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">According
+ to Java Virtual Machine specification, “A JVM implementation can 
+support a class file format of version v if and only if v lies in some 
+contiguous range Mi.0 v Mj.m. Only Sun can specify what range of 
+versions a JVM implementation conforming to a certain release level of 
+the Java platform may support.” For example: JDK 1.2 supports class file
+ formats from version 45.0 to version 46.0 inclusive. So if a class file
+ has version 48.0 it means that major version of class file is "48" and 
+minor version is "0", which tells us that JDK 1.4 has been used to 
+compile and generate that class file.</span><br>
+<br>
+<br>
+<br>
+<h3>
+<u>When UnSupportedClassVersionError in Java comes:</u></h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">So now
+ we got the theory behind class file format and major and minor version 
+of class file in Java. Now a million dollar question is when 
+UnSupportedClassVersionError in Java does occur?&nbsp; precise answer of
+ this is "When JVM tries to load a class and found that class file 
+version is not supported it throws <i>UnSupportedClassVersionError</i> and it generally occurs if a <b>higher JDK version&nbsp; is used to compile the source file and&nbsp; a lower JDK version is used to run the program</b>. for example if you compile your java source file in JDK 1.5 and you will try to run it on JDK 1.4 you will get error <b>"java.lang.UnsupportedClassVersionError: Bad version number in .class file</b> [at java.lang.ClassLoader.defineClass1(Native Method)]".</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">But 
+its important to note is that vice-versa is not true "you can compile 
+your program in J2SE 1.4 and run on J2SE 1.5 and you will not get any 
+UnSupportedClassVersionError". When a higher JDK is used for compilation
+ it creates class file with higher version and when a lower JDK is used 
+to run the program it found that higher version of class file not 
+supported at JVM level and results in 
+java.lang.UnsupportedClassVersionError.</span><br>
+<br>
+<br>
+<h3>
+<u>How to fix UnSupportedClassVersionError</u></h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">Now we know the <i>root cause of UnSupportedClassVersionError</i>
+ that we are using a lower JVM for running the program. But major 
+problem is that stack trace of UnSupportedClassVersionError will not 
+tell you for which class it’s coming. So if you are using multiple third
+ party jars in your application you find that it comes at a particular 
+part when JVM tries to load a class from a particular jar. anyway we all
+ know that latest version of JDK is 1.6 so maximum version of class file
+ could be generated by JDK 6, so by using JDK 6 we can solve 
+UnSupportedClassVersionError, but many times its not easy to just move 
+to higher JDK version. So I would suggest:</span><br>
+<br>
+<div style="color: purple; font-family: &quot;Courier New&quot;,Courier,monospace;">
+<span style="font-size: 9pt;">1) Find out due to which jar or class file this UnSupportedClassVersionError is coming?</span></div>
+<div style="color: purple; font-family: &quot;Courier New&quot;,Courier,monospace;">
+<span style="font-size: 9pt;">2) Try to compile source code of that jar with the JDK version you are using to run your program, if source is available.</span></div>
+<div style="color: purple; font-family: &quot;Courier New&quot;,Courier,monospace;">
+<span style="font-size: 9pt;">3) If you don't have source try to find the compatible version of that library.</span></div>
+<div style="color: purple; font-family: &quot;Courier New&quot;,Courier,monospace;">
+<span style="font-size: 9pt;">4) Increase the JRE version you are using to run your program.</span></div>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">You 
+can go by any approach to resolve UnSupportedClassVersionError based 
+upon your need. Generally a higher JVM version is ok and does not cause 
+any problem unless the class file format is quite old and no more 
+supported by Sun in higher JVMs. The best way to deal with 
+UnSupportedClassVersionError in Java is to use same version or JDK and 
+JRE for compiling and running your program.</span><br>
+<br>
+<br>
+<br>
+<h3>
+<u>Example of UnSupportedClassVersionError in Java</u></h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">You can easily <u>reproduce UnSupportedClassVersionError</u>
+ by using javac of higher JDK and "java" from lower Java version. Let’s 
+see some of examples of UnSupportedClassVersionError in Java:</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">1) <b>java.lang.UnsupportedClassVersionError: EquityTradingManager (Unsupported major.minor version 49.0)</b></span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at java.lang.ClassLoader.defineClass0(Native Method)</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at java.lang.ClassLoader.defineClass(ClassLoader.java:539)</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">==&gt;Since
+ we know that major version 49 is supported by JDK 1.5, so these will 
+"java.lang.UnsupportedClassVersionError” will come if JVM used to run 
+this program is lower than Java 1.5.</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">2<b>) Java.lang.UnsupportedClassVersionError: Bad version number in .class file</b></span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">3) <b>java.lang.unsupportedclassversionerror unsupported classversion 50.0</b></span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">==&gt; Compile in JDK 1.6 and running on lower version than Java 6.</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">4) <b>java.lang.unsupportedclassversionerror unsupported classversion 49.0</b></span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">==&gt; compiled in Java 5 and running on lower JVM than JDK 5.</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">5) <b>java.lang.unsupportedclassversionerror bad version number in eclipse.</b></span><br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-w6p4e0W4E-Q/Tg6ZWAtmUZI/AAAAAAAAAMU/1LZYAVb3Yvg/s1600/unsupportedclassversionerror_in_java.GIF" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="java.lang.unsupportedclassversionerror unsupported classversion 49.0 or 50.0" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/unsupportedclassversionerror_in_java.jpeg" border="0" height="103" width="320"></a></div>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">==&gt;
+ Most of us use eclipse for building and running project some of us also
+ use ant for building project. In eclipse there is some setting related 
+to java source version which if you got incorrect can result in 
+"java.lang.unsupportedclassversionerror bad version number". so make 
+sure you have correct configuration. For example if you compile with 
+source compatible 1.6 you need JRE 6 to execute the program. To check 
+the compiler setting in eclipse go to project&nbsp; ==&gt;</span><span style="color: black; font-family: Wingdings; font-size: 9pt;"></span><span style="color: black; font-family: Verdana; font-size: 9pt;">Properties</span><span style="color: black; font-family: Wingdings; font-size: 9pt;">==&gt;</span><span style="color: black; font-family: Verdana; font-size: 9pt;">Java Compiler as shown in image<br>
+</span><br>
+<br>
+<br>
+<br>
+<br>
+<h3>
+<u>Important point about UnSupportedClassVersionError in Java:</u></h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">1) If 
+you encounter UnSupportedClassVersionError, check the JRE version you 
+are using to run program and switch to higher version for quick 
+solution.</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">2) 
+java.lang.UnsupportedClassVersionError is derived from 
+java.lang.LinkageError, so it will not be detected in compile time and 
+it will only come on runtime, precisely when JVM tries to load a class.</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">3) 
+Class file format which is identified using major version and minor 
+version. Class file format is assigned when you compile source file and 
+its depends on JDK version used to compile.</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">4) Its
+ always best practice to use same version of java for compilation and 
+execution to avoid any chance of UnSupportedClassVersionError.</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">5) <i><u>UnSupportedClassVersionError</u></i> is not related to <a href="http://javarevisited.blogspot.com/2011/01/how-classpath-work-in-java.html">java classpath</a> , so don't confuse this with NoClassDefFoundError or ClassNotFoundException.</span><br>
+<br>
+<h3>
+<u>Major Class Versions of Various JDK</u></h3>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">Following are the major version of <i><u>class file format</u></i> in standard JDK environment.</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.1 = 45</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.2 = 46</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.3 = 47</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.4 = 48</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.5 = 49</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">JDK 1.6 = 50</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">You can also get version of "javac" (used for compilation) and version of "java" (used for execution) as below</span><br>
+<b><span style="color: black; font-family: Verdana; font-size: 9pt;">C:\equity trading\stocks&gt;javac -version</span></b><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">javac 1.6.0-beta2</span><br>
+<br>
+<b><span style="color: black; font-family: Verdana; font-size: 9pt;">C:\equity trading\stocks&gt;java -version</span></b><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">java version "1.6.0-beta2"</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">Java(TM) SE Runtime Environment (build 1.6.0-beta2-b86)</span><br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">Java HotSpot(TM) Client VM (build 1.6.0-beta2-b86, mixed mode, sharing)</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">Now 
+you can identify your JDK version based on class file format version 
+whenever you see java.lang.UnsupportedClassVersionError :)</span><br>
+<br>
+<span style="color: black; font-family: Verdana; font-size: 9pt;">So next time when you see <b>UnsupportedClassVersionError</b> don't be afraid and follow the best approach based upon your need.<br>
+<br>
+If you like this post you may find my other tutorial <a href="http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html">how java hashmap works</a>, <a href="http://javarevisited.blogspot.com/2010/10/why-string-is-immutable-in-java.html">why String is immutable in java</a>, <a href="http://javarevisited.blogspot.com/2011/05/wait-notify-and-notifyall-in-java.html">why wait and notify needs to call from synchronized context </a>&nbsp;interesting.</span></div>
+<div style="clear: both; margin-left:-40px">
+</div>
+<div dir="ltr" style="text-align: left; background-color:white; margin-top:10px; margin-bottom:5px; padding: 3px" trbidi="on">
+<div class="MsoNormal">
+</div>
+</div>
+<div style="clear: both;"></div>
+</div><div class="OB_default" style="display: block;" id="outbrain_widget_0"><div id="outbrain_container_0_rec" class="div-wrapper" style="clear:both;;padding:0 0 10px 0;"><div class="voterDiv" style="display: block;" id="OutbrainVoterDiv_0_rec"><fieldset style="display: block; padding-left: 8px; padding-right: 8px;" id="recommendationsFieldset_0_rec" class="outbrain-recommendationsFieldset outbrain-border">      <div id="recommendationsWait_outer_0" class="Outbrain_recommendationsWait_outer" style="display:none;"><div class="Outbrain_recommendationsWait_inner">               <p><img style="border:0px !important"></p>       </div></div>  <legend class="Outbrain_recommendations_legend">You might like:</legend>    <ul id="recommendationsList_0_rec" class="recommendations_ul">    <li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2014/09/10-questions-to-make-programming-interviews-cheaper.html" onmousedown="this.href='http://traffic.outbrain.com/network/redir?p=rm066WIkFUco7wZF0D63L_3BHcjbIwNJEMs6p9Dz8Jz4EtNETBn956uvn9ohQM9H7BDvVF1UqpTVOpWSRGfCrYupAE3QIeaqw26kDPH1cN7p4cCwan9sO6xIJGQxLusHCaugu84n2IvBtpO5K0wlQ28WTy3U1YdUz37D_JnJXWr16BXWf1ozUKHrgdfNeoz1oDEJkNmtU0ZeVD311zW_OvJyvtMPfyHxUEXye6CsUiW-IKbVzu1V-Mq1U1YJzytlhUByy5-iy8KE9tGNQBH_24f6kKd_tVGd_ZaQATteTH1b1BRyT8ncGAfup00_O6xKhsjceD0X4rz0Qi43x1swmuq5IrL28ojjOzgmB_Ip-Oa6cn5mCT6SB_HkL9KH0HDPYS_OnUnxgLd09EPw6c8VguY2taU7HOvHRDwoSiLM7z00i0HIVIDziDuXPrYi1dOVuSNJ4Wz906_HD_wMjNodPBh71bp2mDNAPdbUTFkVTC4&amp;c=e0bbb6ae&amp;v=3&amp;version=234469';return true;" onclick="javascript:return(true)">10 Interview Questions Every Programmer Should Know</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2011/12/bad-version-number-in-class-files-cause.html" onmousedown="this.href='http://traffic.outbrain.com/network/redir?p=r1qZOuxYpU79yQ5A-SYmE0csAq-6esbt4wHryEQ7Q6W_6nYUqs3BnjvIKQUuJPICquT_mFoD3I06N904NFJuV2-NCnxW8FTyz6jeOzjQfcOR_fl26m3NoC-IEsbObQorW48YKDfmLTGhXb2tE9hiI_9Bru6_aTnI_ylouO-qvvV2nlgJ13qXdNEQgrmyi1O_taBxOTLRVqTWKH2GncF8GNJEgQGSFsrAgGkIFxrgSJUxs9YgVhlrn5gR7WRWGsmGZpT1_74xU0G_ffd7zrqAsleh2ZUq8Iy4TbSRRnWfNGgQar5HVntABrTF5wmzjcz9Y17X0ne5LhI5RjCVvyQwoV3zc3KXbnAFDvbzo-FUwBFV8YsLC39aad_Rr8ydtBsYN1_KW0PM6Riz-_ZJ9TpPB9g4oFYqThBu9LRanaxLozMeEHCrN0K_4MhP2-f4K71aVvLJmE2hj7MNSbio-WWE1gGEgOuiDRAoag3tXB4SoTY&amp;c=759f54b2&amp;v=3&amp;version=234469';return true;" onclick="javascript:return(true)">Error java.lang.UnsupportedClassVersionError: Bad version number in .class files Cause and Solution</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2011/06/noclassdeffounderror-exception-in.html" onmousedown="this.href='http://traffic.outbrain.com/network/redir?p=0tFE7vYd_LxzlgD1knTkAGWyopMPboJ9h0NGWKWLzB3FrUiuao_IaiyZ1BKO8u031mlxXXk2J3ZA_QokYB5s-IkKaObA9QiVcOA4QxKhqsvYmEG6SmkV8UNL3biCBJD0dsAoFyHRIwI-ybcsOahyLeC-CNjeruXR8otJJ7WmNerUcMhQhfuXT35JgGn1N4oDvje3ZWIv3DO-lA7x1hyi_B4vx0aexI4jZ4NvUcstMbBLCjivmCxBuqXkYF5fhZHPZg-g3-i6_KtxM8pF0xP4Vo-Ep2TRn2lmzxu0LwZG4RCyXIys6vXE5HTaIh_JAQC3q9bPkjrUgNypcr3IfLalmX1smVJyndLdSNl7t09nL0pOam88dLlPcIcKiQD_QeVbvBj9hyV8dHKa1nUSXt47OFq3gb3k5h06BSGbMiUYoHbaE27Bjs1eqNMVMWzFY1YVOxgrcmv3KnJPsyNS6hAgSAgCcQ8dWTQV7VN3JmL2-5c&amp;c=3a9bac44&amp;v=3&amp;version=234469';return true;" onclick="javascript:return(true)">3 ways to solve java.lang.NoClassDefFoundError in Java J2EE</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2011/01/how-classpath-work-in-java.html" onmousedown="this.href='http://traffic.outbrain.com/network/redir?p=8Utwu-VU2FBLUkLlzsY91MoROZASey70R2dgFY8PUtrK9AEtVhJhdG3YKQelyebKPQoFTqGCrdVO0eig8JxD675LBKmTw_uTu_4IyK7N_Fop3Gb9373Hx0sINk_0G4a_59MKbCKdDNXeG8v6kj9ygkY9v_iDFGON7AVure7yQw18D7TrrtnQYLoT6QX7lPaUyk82RSNfdndZJlp3Yi5ae3X3-B0DRYNBP9pPiW-goFM6ePvcSDIeN4kwBprTFdpFZt_yeijezi_MYyHO3-qE3p6Jw80YUlwvEyG-NAKpahNSVJ_qg1D7997rTr72KEQL3IQlLDNZ-Pkvkrk6JFaqWV8RcqO6uUK3Hq7YwYvcjxIQkQh6-4AiH5QvJd3Wl4IjH7YdgaAEDZBKoDWtaf0cAo1wpwqHrd8V4w3cM1Vmng10s97curj2didsVKc8B7oXg9XxZC9AyupPGFxqPj9CNKk8VCC7tOUysbmfeZv9vRw&amp;c=af88751b&amp;v=3&amp;version=234469';return true;" onclick="javascript:return(true)">How to Set Classpath for Java on Windows and Linux</a></li></ul></fieldset><table id="outbrainTableRecommendation_0_rec" class="outbrain-table-recommendations-bottom" style="display:none;"><tbody><tr><td>  <div id="recommendationsPcLegend_0_rec" class="Outbrain_recommendations_pc_legend" style="display:none;"></div></td><td>  <div id="recommendationsMoreDiv_0_rec" class="moreRecommendationsLinkDiv" style="display:none;"></div></td></tr></tbody></table><div id="outbrain_whatIs_0_rec" class="what_is_container" style="direction:LTR"><a class="what_is_link" onclick="OBR.extern.callWhatIsBranding('http://www.outbrain.com/what-is/default/en',500,480);">Recommended by <span class="ob_amelia" title="Outbrain"></span></a></div></div></div> </div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class="fn">
+Javin Paul
+</span>
+</span>
+<span class="post-timestamp">
+at
+<a class="timestamp-link" href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html" rel="bookmark" title="permanent link">
+<abbr class="published" title="2011-07-01T21:13:00-07:00">
+9:13 PM
+</abbr>
+</a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-action">
+<a href="http://www.blogger.com/email-post.g?blogID=8712770457197348465&amp;postID=4925529764363638095" title="Email Post">
+<img alt="" class="icon-action" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_email.html" height="13" width="18">
+</a>
+</span>
+<span class="item-control blog-admin pid-1367717747">
+<a href="http://www.blogger.com/post-edit.g?blogID=8712770457197348465&amp;postID=4925529764363638095&amp;from=pencil" title="Edit Post">
+<img alt="" class="icon-action" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_edit_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons">
+<a class="goog-inline-block share-button sb-email" href="http://www.blogger.com/share-post.g?blogID=8712770457197348465&amp;postID=4925529764363638095&amp;target=email" target="_blank" title="Email This">
+<span class="share-button-link-text">
+Email This
+</span>
+</a>
+<a class="goog-inline-block share-button sb-blog" href="http://www.blogger.com/share-post.g?blogID=8712770457197348465&amp;postID=4925529764363638095&amp;target=blog" onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target="_blank" title="BlogThis!">
+<span class="share-button-link-text">
+BlogThis!
+</span>
+</a>
+<a class="goog-inline-block share-button sb-twitter" href="http://www.blogger.com/share-post.g?blogID=8712770457197348465&amp;postID=4925529764363638095&amp;target=twitter" target="_blank" title="Share to Twitter">
+<span class="share-button-link-text">
+Share to Twitter
+</span>
+</a>
+<a class="goog-inline-block share-button sb-facebook" href="http://www.blogger.com/share-post.g?blogID=8712770457197348465&amp;postID=4925529764363638095&amp;target=facebook" onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target="_blank" title="Share to Facebook">
+<span class="share-button-link-text">
+Share to Facebook
+</span>
+</a>
+<div class="goog-inline-block dummy-container">
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/fastbutton.html" name="I0_1429297056865" id="I0_1429297056865" vspace="0" tabindex="0" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+Labels:
+<a href="http://javarevisited.blogspot.com/search/label/core%20java?max-results=3" rel="tag">
+core java
+</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+Location:
+<a href="http://maps.google.com/maps?q=United+States@39.095962936305476,-101.25&amp;z=10" target="_blank">
+United States
+</a>
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>
+17 comments
+                      :
+                    </h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="" id="comments-block">
+<dt class="comment-author anon-comment-icon" id="c8447336131734751170">
+<a name="c8447336131734751170"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8447336131734751170">
+<p>
+Hi I am trying to run my program and getting below error:<br><br>java.lang.UnsupportedClassVersionError: Bad version number in .class file<br>        at java.lang.ClassLoader.defineClass1(Native Method)<br>        at java.lang.ClassLoader.defineClass(Unknown Source)<br>        at java.security.SecureClassLoader.defineClass(Unknown Source)<br>        at java.net.URLClassLoader.defineClass(Unknown Source)<br>        at java.net.URLClassLoader.access$100(Unknown Source)<br>        at java.net.URLClassLoader$1.run(Unknown Source)<br>        at java.security.AccessController.doPrivileged(Native Method)<br>        at java.net.URLClassLoader.findClass(Unknown Source)<br>        at java.lang.ClassLoader.loadClass(Unknown Source)<br>        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)<br>        at java.lang.ClassLoader.loadClass(Unknown Source)<br>        at java.lang.ClassLoader.loadClassInternal(Unknown Source)<br>Exception in thread "main"<br><br>Can you please suggest what is wrong ?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1311914939355#c8447336131734751170" title="comment permalink">
+July 28, 2011 at 9:48 PM
+</a>
+<span class="item-control blog-admin pid-932145522">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=8447336131734751170" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c2900078559658206007">
+<a name="c2900078559658206007"></a>
+Sneha
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2900078559658206007">
+<p>
+I like very much your all explanation for answers about all java hectic 
+questions. thank you so much for sharing your knowledge. It will 
+definitely help us in interview.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1324053472552#c2900078559658206007" title="comment permalink">
+December 16, 2011 at 8:37 AM
+</a>
+<span class="item-control blog-admin pid-779879833">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=2900078559658206007" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c2250528581519942614">
+<a name="c2250528581519942614"></a>
+Suraj
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2250528581519942614">
+<p>
+java.lang.UnsupportedClassVersionError Comes not because of different 
+JDK at compile time at run-time but an higher JDK during compile time 
+and lower JDK during runtime.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1325047043127#c2250528581519942614" title="comment permalink">
+December 27, 2011 at 8:37 PM
+</a>
+<span class="item-control blog-admin pid-2125648763">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=2250528581519942614" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8514369344584210061">
+<a name="c8514369344584210061"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8514369344584210061">
+<p>
+Does java.lang.UnsupportedClassVersionError: Bad version number in 
+.class file is also comes due to same reason ? we are getting this error
+ in Java and JSP code and appreciate your help .
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1325047338039#c8514369344584210061" title="comment permalink">
+December 27, 2011 at 8:42 PM
+</a>
+<span class="item-control blog-admin pid-2125648763">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=8514369344584210061" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8283834536562586914">
+<a name="c8283834536562586914"></a>
+Ricky
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8283834536562586914">
+<p>
+@Anonymous here is what Javadoc says "UnSupportedClassVersionError 
+thrown when the Java Virtual Machine attempts to read a class file and 
+determines that the major and minor version numbersin the file are not 
+supported.<br><br>by the way "java.lang.UnsupportedClassVersionError: 
+Bad version number in .class file" comes when you compile your source 
+code in higher JDK and running them on lower JRE e.g. Compiling in JDK 
+1.6 and running on JRE 1.5
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1325059776590#c8283834536562586914" title="comment permalink">
+December 28, 2011 at 12:09 AM
+</a>
+<span class="item-control blog-admin pid-2125648763">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=8283834536562586914" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c1826758376522754720">
+<a name="c1826758376522754720"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1826758376522754720">
+<p>
+is it  possible  to  use from 1.5  a  child class loader  with version java  version 1.6.<br><br>I mean something  what  C/C++ can do  when needs  to use java  code and  runs  a  JVM  in v 1.5  or 1.6, depending on needs.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1325767119362#c1826758376522754720" title="comment permalink">
+January 5, 2012 at 4:38 AM
+</a>
+<span class="item-control blog-admin pid-1264880400">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=1826758376522754720" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c5815507637715522980">
+<a name="c5815507637715522980"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5815507637715522980">
+<p>
+Had on mac OSX<br><br>Exception in thread "main" java.lang.UnsupportedClassVersionError: Bad version number in .class file<br><br>Problem was solved by:<br><br>Clearing the cache in Java preferences<br>open "/Applications/Utilities/Java Preferences.app"
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1327569185851#c5815507637715522980" title="comment permalink">
+January 26, 2012 at 1:13 AM
+</a>
+<span class="item-control blog-admin pid-672909668">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=5815507637715522980" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c3913038662668310882">
+<a name="c3913038662668310882"></a>
+Vividha
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3913038662668310882">
+<p>
+Real cause of java.lang.UnsupportedClassVersionError: Bad version number
+ in .class file is having different version of Javac compiler and JRE 
+version during build and deployment process. suppose you are creating 
+your build with JDK 1.6 compiler but your web server or application 
+server is running on JRE 1.5 which is lower source version than you will
+ get this error whenever that particular class will be loaded.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1342166668441#c3913038662668310882" title="comment permalink">
+July 13, 2012 at 1:04 AM
+</a>
+<span class="item-control blog-admin pid-169845227">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=3913038662668310882" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8196371030259597530">
+<a name="c8196371030259597530"></a>
+Neha
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8196371030259597530">
+<p>
+I was getting this error as the system variables PATH, JAVA_HOME were 
+not set correctly and I had not restarted my system after setting these.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1342551195902#c8196371030259597530" title="comment permalink">
+July 17, 2012 at 11:53 AM
+</a>
+<span class="item-control blog-admin pid-1668146953">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=8196371030259597530" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6313175219514962516">
+<a name="c6313175219514962516"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6313175219514962516">
+<p>
+Nice one..easy to understand.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1346852846367#c6313175219514962516" title="comment permalink">
+September 5, 2012 at 6:47 AM
+</a>
+<span class="item-control blog-admin pid-1920574283">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=6313175219514962516" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c7659129096465886643">
+<a name="c7659129096465886643"></a>
+Zach
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7659129096465886643">
+<p>
+I am getting java.lang.unsupportedclassversionerror unsupported 
+major.minor version while building by Java application using ANT build 
+file. My JDK version are 1.6.20, Please help me to fix this error.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1351138604202#c7659129096465886643" title="comment permalink">
+October 24, 2012 at 9:16 PM
+</a>
+<span class="item-control blog-admin pid-945951459">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=7659129096465886643" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c5975444557878350145">
+<a name="c5975444557878350145"></a>
+Reena
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5975444557878350145">
+<p>
+Hello, What is cause of How to fix 
+java.lang.unsupportedclassversionerror unsupported major.minor version 
+50.0, It Seems everything on my PATH and Classpath are fine and I am 
+using Java 6 ?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1351139237732#c5975444557878350145" title="comment permalink">
+October 24, 2012 at 9:27 PM
+</a>
+<span class="item-control blog-admin pid-945951459">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=5975444557878350145" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c4354576741665378455">
+<a name="c4354576741665378455"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4354576741665378455">
+<p>
+Why java errors are so hard t solve. There are many Like this which takes long time to fix
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1367119481899#c4354576741665378455" title="comment permalink">
+April 27, 2013 at 8:24 PM
+</a>
+<span class="item-control blog-admin pid-1308113428">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=4354576741665378455" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6165993984158544627">
+<a name="c6165993984158544627"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6165993984158544627">
+<p>
+Hello, I am getting following error message :<br>Exception in thread 
+"main" java.lang.UnsupportedClassVersionError (Unsupported major.minor 
+version 48.0), while running a Java application? We have Java version 
+1.5 installed on Server, Please advise?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1374728610136#c6165993984158544627" title="comment permalink">
+July 24, 2013 at 10:03 PM
+</a>
+<span class="item-control blog-admin pid-1917087576">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=6165993984158544627" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c7026741453807244555">
+<a name="c7026741453807244555"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7026741453807244555">
+<p>
+I did this error, while working with Murex before, especially while 
+installing Murex on one of our test box, which was running on Java 5 
+from long time. If you are installing MError message Exception in thread
+ "main" java.lang.UnsupportedClassVersionError: 
+org/apache/lucene/document/Fieldable (Unsupported major.minor version 
+48.0) means that your java version is not suitable for Murex. Check if 
+you have JDK 1.6 or not, because Murex currently support ava 1.6.* or 
+higher.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1396761163313#c7026741453807244555" title="comment permalink">
+April 5, 2014 at 10:12 PM
+</a>
+<span class="item-control blog-admin pid-2127617977">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=7026741453807244555" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c3807718355089162247">
+<a name="c3807718355089162247"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3807718355089162247">
+<p>
+Hello admin, I am getting "Exception in thread "main" 
+java.lang.UnsupportedClassVersionError: HelloWorld : Unsupported 
+major.minor version 51.0" error while trying to run my HelloWorld class 
+from command line. Can you please help to fix this error?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1428363370804#c3807718355089162247" title="comment permalink">
+April 6, 2015 at 4:36 PM
+</a>
+<span class="item-control blog-admin pid-1316120423">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=3807718355089162247" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c4514248873908716289">
+<a name="c4514248873908716289"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4514248873908716289">
+<p>
+Hello there, I am getting "java.lang.unsupportedclassversionerror 
+unsupported major.minor version 50.0" while running a Java program in 
+our production environment. We are still running on Java 1.5 but the 
+build used to work before. 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html?showComment=1428380673945#c4514248873908716289" title="comment permalink">
+April 6, 2015 at 9:24 PM
+</a>
+<span class="item-control blog-admin pid-309073770">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=8712770457197348465&amp;postID=4514248873908716289" title="Delete Comment">
+<img src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon_delete13.html">
+</a>
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">
+Post a Comment
+</h4>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=8712770457197348465&amp;postID=4925529764363638095" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" id="comment-editor" name="comment-editor" src="" frameborder="0" height="410" width="100%"></iframe>
+<script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/666035058-comment_from_post_iframe.html"></script>
+<script type="text/javascript">
+                    BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html', '03974492238039089807');
+                  </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+                      </div></div>
+                    
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://javarevisited.blogspot.com/2011/07/java-debugging-tutorial-example-tips.html" id="Blog1_blog-pager-newer-link" title="Newer Post">
+Newer Post
+</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://javarevisited.blogspot.com/2011/06/special-bash-parameters-in-script-linux.html" id="Blog1_blog-pager-older-link" title="Older Post">
+Older Post
+</a>
+</span>
+<a class="home-link" href="http://javarevisited.blogspot.com/">
+Home
+</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="http://javarevisited.blogspot.com/feeds/4925529764363638095/comments/default" target="_blank" type="application/atom+xml">
+Post Comments
+                      (
+                      Atom
+                      )
+                    </a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};</script>
+</div></div>
+</div>
+</div>
+<div id="sidebar-wrap">
+<div id="sidebartop-wrap">
+<div id="sidebartop-wrap2">
+<div class="sidebar section" id="sidebartop"><div class="widget HTML" id="HTML5">
+<div class="widget-content">
+<div id="GoogleAds1" style="margin-top:-15px">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5808379456926196";
+google_ad_host = "pub-1556223355139109";
+/* 300 x 600 Right Side Bar Above the Fold */
+google_ad_slot = "1677562743";
+google_ad_width = 300;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/show_ads.js">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="300"></iframe></ins></ins>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML5&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML5"));' target="configHTML5" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-5808379456926196";
+    google_ad_host = "ca-host-pub-1556223355139109";
+    google_ad_host_channel = "L0001";
+    google_ad_slot = "4782887948";
+    google_ad_width = 336;
+    google_ad_height = 280;
+</script>
+<!-- javarevisited_sidebartop_AdSense1_336x280_as -->
+<script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/show_ads.js">
+</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=AdSense&amp;widgetId=AdSense1&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense1"));' target="configAdSense1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML10">
+<div class="widget-content">
+<div data-type="ad" data-publisher="lqm.javarevisited.site" data-zone="ron" data-format="300x250"><iframe id="dmad1" allowtransparency="false" style="z-index:10" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" height="250" width="300"></iframe></div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML10&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML10"));' target="configHTML10" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML6">
+<div class="widget-content">
+<div data-type="ad" data-publisher="lqm.javarevisited.site" data-zone="ron" data-format="300x250"><iframe id="dmad2" allowtransparency="false" style="z-index:10" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" height="250" width="300"></iframe></div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML6&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML6"));' target="configHTML6" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML1">
+<div class="widget-content">
+<div data-type="ad" data-publisher="lqm.javarevisited.site" data-zone="ron" data-format="160x600"><iframe id="dmad3" allowtransparency="false" style="z-index:10" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" height="600" width="160"></iframe></div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML1&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' target="configHTML1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Followers" id="Followers1">
+<h2 class="title">Followers</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<script type="text/javascript">
+        if (!window.google || !google.friendconnect) {
+          document.write('<script type="text/javascript"' +
+              'src="//www.google.com/friendconnect/script/friendconnect.js">' +
+              '</scr' + 'ipt>');
+        }
+      </script><script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/friendconnect.js"></script>
+<script type="text/javascript">
+      if (!window.registeredBloggerCallbacks) {
+        window.registeredBloggerCallbacks = true;
+
+        
+
+        
+        gadgets.rpc.register('requestReload', function() {
+          document.location.reload();
+        });
+
+        
+        gadgets.rpc.register('requestSignOut', function(siteId) {
+          
+          google.friendconnect.container.openSocialSiteId = siteId;
+          google.friendconnect.requestSignOut();
+        });
+      }
+    </script>
+<script type="text/javascript">
+    
+    function registerGetBlogUrls() {
+      gadgets.rpc.register('getBlogUrls', function() {
+        var holder = {};
+        
+          
+            
+            
+              holder.currentPost = "http://www.blogger.com/feeds/8712770457197348465/posts/default/4925529764363638095";
+            
+            
+            
+              holder.currentComments = "http://www.blogger.com/feeds/8712770457197348465/4925529764363638095/comments/default";
+            
+            holder.currentPostUrl = "";
+            holder.currentPostId = 4925529764363638095
+          
+          
+          
+            holder.postFeed = "http://www.blogger.com/feeds/8712770457197348465/posts/default";
+          
+          
+          
+            holder.commentFeed = "http://www.blogger.com/feeds/8712770457197348465/comments/default";
+          
+          holder.currentBlogUrl = "http://javarevisited.blogspot.com/";
+          holder.currentBlogId = "8712770457197348465";
+        
+        return holder;
+      });
+    }
+  </script>
+<script type="text/javascript">
+  if (!window.registeredCommonBloggerCallbacks) {
+    window.registeredCommonBloggerCallbacks = true;
+
+    gadgets.rpc.register('resize_iframe', function(height) {
+      var el = document.getElementById(this['f']);
+      if (el) {
+        el.style.height = height + 'px';
+      }
+    });
+
+    
+    gadgets.rpc.register('set_pref', function() {});
+
+    registerGetBlogUrls();
+  }
+  </script>
+<div class="gadgets-gadget-container" id="div-n6f19rivupzi" style="width: 100%; visibility: visible;"><div id="gfc_iframe_1921986908_0_body"><iframe id="gfc_iframe_1921986908_0" name="gfc_iframe_1921986908_0" style="width: 100%; height: 242px;" scrolling="no" allowtransparency="true" frameborder="0" height="260"></iframe></div></div>
+<script type="text/javascript">
+    var skin = {};
+    skin['FACE_SIZE'] = '32';
+    skin['HEIGHT'] = "260";
+    skin['BORDER_COLOR'] = "transparent";
+    skin['ENDCAP_BG_COLOR'] = "transparent";
+    skin['ENDCAP_TEXT_COLOR'] = "#333333";
+    skin['ENDCAP_LINK_COLOR'] = "#000000";
+    
+    skin['CONTENT_BG_COLOR'] = "transparent";
+    skin['CONTENT_LINK_COLOR'] = "#000000";
+    skin['CONTENT_TEXT_COLOR'] = "#333333";
+    skin['CONTENT_SECONDARY_LINK_COLOR'] = "#FFFFFF";
+    skin['CONTENT_SECONDARY_TEXT_COLOR'] = "#000000";
+    skin['CONTENT_HEADLINE_COLOR'] = "#000000";
+    google.friendconnect.container.setParentUrl("/");
+    google.friendconnect.container["renderMembersGadget"](
+    {id: "div-n6f19rivupzi",
+     height: 260,
+     
+     
+     
+     site: "03974492238039089807",
+     locale: 'en' },
+     skin);
+  </script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=Followers&amp;widgetId=Followers1&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("Followers1"));' target="configFollowers1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h4>
+Blog Archive
+</h4>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2015-01-01T00:00:00-08:00&amp;updated-max=2016-01-01T00:00:00-08:00&amp;max-results=42">
+2015
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          42
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2014-01-01T00:00:00-08:00&amp;updated-max=2015-01-01T00:00:00-08:00&amp;max-results=50">
+2014
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          106
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2013-01-01T00:00:00-08:00&amp;updated-max=2014-01-01T00:00:00-08:00&amp;max-results=50">
+2013
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          136
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          5
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          13
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2012-01-01T00:00:00-08:00&amp;updated-max=2013-01-01T00:00:00-08:00&amp;max-results=50">
+2012
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          217
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          52
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          35
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2011-01-01T00:00:00-08:00&amp;updated-max=2012-01-01T00:00:00-08:00&amp;max-results=50">
+2011
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          145
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          22
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+<ul class="posts">
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/jdk7-multi-cache-block-example-tutorial.html">
+How to use Java 1. 7 Multiple Catch Block with exa...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/java-multi-threading-interview.html">
+Top 15 Java Multithreading, Concurrency Interview ...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/classnotfoundexception-vs.html">
+Difference between ClassNotFoundException vs NoCla...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/why-multiple-inheritances-are-not.html">
+Why multiple inheritances are not supported in Jav...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/string-vs-stringbuffer-vs-stringbuilder.html">
+String vs StringBuffer vs StringBuilder in Java
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/java-debugging-tutorial-example-tips.html">
+10 Tips to Debug Java Program in Eclipse
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html">
+How to resolve java.lang.UnsupportedClassVersionEr...
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2010-01-01T00:00:00-08:00&amp;updated-max=2011-01-01T00:00:00-08:00&amp;max-results=33">
+2010
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          33
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          29
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=BlogArchive&amp;widgetId=BlogArchive1&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' target="configBlogArchive1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML12">
+<div class="widget-content">
+<!-- AddThis Button BEGIN -->
+<h4>Follow Us</h4>
+<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
+<a class="addthis_button_google_plusone_badge" g:plusone:size="badge" g:plusone:href="https://plus.google.com/103515296667914706982/" rel="nofollow"></a>
+</div>
+<script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/addthis_widget.html"></script>
+<!-- AddThis Button END -->
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML12&amp;action=editWidget&amp;sectionId=sidebartop" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML12"));' target="configHTML12" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div id="sidebarbottom-wrap1">
+<div id="sidebarbottom-wrap2">
+<div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML4">
+<h4 class="title">
+References
+</h4>
+<div class="widget-content">
+<ul><br><li><a href="http://docs.oracle.com/javase/6/docs/api/" rel="nofollow">Java API documentation JDK 6</a></li><br><li><a href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/" rel="nofollow">Spring framework doc</a></li><br><li><a href="http://struts.apache.org/" rel="nofollow">Struts</a></li><br><li><a href="http://jdk7.java.net/" rel="nofollow">JDK 7 API</a></li><br><li><a href="http://dev.mysql.com/doc/refman/5.5/en/" rel="nofollow">MySQL</a></li><br><li><a href="http://www.linux.org/" rel="nofollow">Linux</a></li><br><li><a href="http://www.eclipse.org/" rel="nofollow">Eclipse</a></li><br><li><a href="http://jquery.com/" rel="nofollow">jQuery</a></li><br></ul>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=HTML&amp;widgetId=HTML4&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML4"));' target="configHTML4" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Copyright by Javin Paul 2012. Powered by <a href="http://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=Attribution&amp;widgetId=Attribution1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("Attribution1"));' target="configAttribution1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footer-wrap1">
+<div id="footer-wrap2">
+<div class="footer section" id="footer"><div class="widget HTML" id="HTML3">
+<script language="JavaScript">var OB_platformType = 1; var OB_langJS = 'http://widgets.outbrain.com/lang_en.js'; var OBITm = '1287894986691';var OB_raterMode = 'singleThumb';var OB_recMode = 'rec';</script><script language="JavaScript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/OutbrainRater.js"></script><div id="outbrain_manager_helper_div" style="display:none;"></div><iframe id="odbPingIframeId" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/a.html" name="odbFrame" style="width:0px;height:0px;display:none;" frameborder="0"></iframe><span id="outbrainCurrentPosition"></span> 
+<input name="OBKey" value="+OCjH50Z4DIVqrUFp64IDQ==" type="hidden"> <script language="JavaScript">var OBCTm='1287894986691'; </script><script language="JavaScript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/claim.js"></script>
+</div><div class="widget PageList" id="PageList1">
+<div class="widget-content">
+<ul>
+<li>
+<a href="http://javarevisited.blogspot.com/p/about-me.html">
+About Me
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/p/privacy-policy.html">
+Privacy Policy
+</a>
+</li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&amp;widgetType=PageList&amp;widgetId=PageList1&amp;action=editWidget&amp;sectionId=footer" onclick='return _WidgetManager._PopupConfig(document.getElementById("PageList1"));' target="configPageList1" title="Edit">
+<img alt="" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+</div>
+</div><iframe src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/blank.html" style="height: 0px; width: 0px; position: absolute;" name="google_top_static_frame" id="google_top_static_frame" frameborder="0"></iframe>
+<!-- infolinks -->
+<script type="text/javascript">
+      var infolink_pid = 258201;
+      var infolink_wsid = 0;
+    </script>
+<script src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/infolinks_main.js" type="text/javascript"></script><script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/ice.js"></script>
+<!-- facebook -->
+<div id="fb-root"></div>
+<script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+<!-- lake quincy -->
+<script type="text/javascript">
+      function _dmBootstrap(file) {
+        var _dma = document.createElement('script'); 
+                                          _dma.type = 'text/javascript';
+                                          _dma.async = true; 
+                                          _dma.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + file;
+                                          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(_dma);
+                                          }
+                                          function _dmFollowup(file) { if (typeof DMAds === 'undefined')  _dmBootstrap('cdn2.DeveloperMedia.com/a.min.js');}
+                                                                           (function () { _dmBootstrap('cdn1.DeveloperMedia.com/a.min.js'); setTimeout(_dmFollowup, 2000);})();
+    </script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/849756096-widgets.html"></script>
+<script type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/jsapi"></script>
+<script gapi_processed="true" type="text/javascript" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/plusone.js"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '8712770457197348465';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d8712770457197348465','//javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html','8712770457197348465');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '8712770457197348465', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Javarevisited', 'pageType': 'item', 'postId': '4925529764363638095', 'url': 'http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html', 'canonicalUrl': 'http://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html', 'canonicalHomepageUrl': 'http://javarevisited.blogspot.com/', 'homepageUrl': 'http://javarevisited.blogspot.com/', 'blogspotFaviconUrl': 'http://javarevisited.blogspot.com/favicon.ico', 'enabledCommentProfileImages': false, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-19004659-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'How to resolve java.lang.UnsupportedClassVersionError  with example', 'pageTitle': 'Javarevisited: How to resolve java.lang.UnsupportedClassVersionError  with example', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Javarevisited - RSS\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://www.blogger.com/feeds/8712770457197348465/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/4925529764363638095/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'googleProfileUrl': 'https://plus.google.com/114528699166048052030', 'postImageThumbnailUrl': 'http://1.bp.blogspot.com/-IxSm_itJ4sg/Tg6ZejT0xII/AAAAAAAAAMY/9PHh0EZmiaY/s72-c/java_logo_50_50.jpg', 'postImageUrl': 'http://1.bp.blogspot.com/-IxSm_itJ4sg/Tg6ZejT0xII/AAAAAAAAAMY/9PHh0EZmiaY/s1600/java_logo_50_50.jpg', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'ca-pub-5808379456926196', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cda3ddef07a85452', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'bottomSidebarLinkColor': '#99ddbb', 'mainVisitedLinkColor': '#660099', 'borderColor': '#bbbbbb', 'mainTextColor': '#333333', 'postTitleColor': '#333333', 'mainBgColor': '#ffffff', 'mainLinkColor': '#0066CC', 'topSidebarTextColor': '#ffffff', 'headerFont': 'normal bold 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'dateHeaderColor': '#558866', 'endSide': 'right', 'topSidebarLinkColor': '#ffffff', 'topSidebarHeaderColor': '#ffffff', 'startSide': 'left', 'mainHoverLinkColor': '#000066', 'bottomSidebarHeaderColor': '#aabbcc', 'postTitleFont': 'normal bold 135% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'titleTextColor': '#ffffff', 'pageTitleFont': 'normal bold 200% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'topSidebarVisitedLinkColor': '#ffffff', 'titleBgColor': '#335577', 'bottomSidebarVisitedLinkColor': '#ffffff', 'topSidebarBgColor': '#558866', 'bodyFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'descriptionFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_CustomSearchView', new _WidgetInfo('CustomSearch1', 'crosscol', null, document.getElementById('CustomSearch1'), {'title': '', 'includeBlog': true, 'includePostLinks': false, 'includeWeb': false, 'linkLists': [], 'blogUrl': 'http://javarevisited.blogspot.com/', 'loadingMsg': 'Loading...', 'thisBlogMsg': 'This Blog', 'linkedFromHereMsg': 'Linked From Here', 'theWebMsg': 'The Web', 'backgroundColor': '#ffffff', 'textColor': '#333333', 'dateColor': '#558866', 'linkColor': '#0066CC', 'urlColor': '#333333', 'visitedLinkColor': '#660099', 'borderColor': '#bbbbbb', 'activeBorderColor': '#333333', 'cse_ua': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'crosscol', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'sidebartop', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebartop', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML10', 'sidebartop', null, document.getElementById('HTML10'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML6', 'sidebartop', null, document.getElementById('HTML6'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebartop', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebartop', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebartop', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML12', 'sidebartop', null, document.getElementById('HTML12'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'sidebar', null, document.getElementById('Attribution1'), {'attribution': 'Copyright by Javin Paul 2012. Powered by \74a href\75\47http://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'footer', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'footer', null, document.getElementById('PageList1'), {'title': '', 'links': [{'href': 'http://javarevisited.blogspot.com/p/about-me.html', 'title': 'About Me', 'isCurrentPage': false, 'id': '6312557353959475498'}, {'href': 'http://javarevisited.blogspot.com/p/privacy-policy.html', 'title': 'Privacy Policy', 'isCurrentPage': false, 'id': '7683233013767637665'}], 'mobile': false}, 'displayModeFull'));
+</script>
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/postmessageRelay.html" id="oauth2relay337516395" name="oauth2relay337516395"></iframe><iframe style="display: none;" name="DMGlobalUserIdetifierIFRAME" id="DMGlobalUserIdetifierIFRAME" src="How%20to%20resolve%20java.lang.UnsupportedClassVersionError%20with%20example_files/a_002.html" height="1" width="1"></iframe></body></html>

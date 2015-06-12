@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" dir="ltr" lang="es"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Usando Hibernate    [Curso Hibernate]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2012-08-30T18:22:24+0200">
+<meta name="keywords" content="unidades,02_hibernate,04_usando_hibernate">
+<link rel="search" type="application/opensearchdescription+xml" href="http://cursohibernate.es/lib/exe/opensearch.php" title="Curso Hibernate">
+<link rel="start" href="http://cursohibernate.es/">
+<link rel="contents" href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=index" title="Índice">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://cursohibernate.es/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://cursohibernate.es/feed.php?mode=list&amp;ns=unidades:02_hibernate">
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://cursohibernate.es/doku.php?do=export_xhtml&amp;id=unidades:02_hibernate:04_usando_hibernate">
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://cursohibernate.es/doku.php?do=export_raw&amp;id=unidades:02_hibernate:04_usando_hibernate">
+<link rel="canonical" href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate">
+<link rel="stylesheet" media="screen" type="text/css" href="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/css_002.css">
+<link rel="stylesheet" media="all" type="text/css" href="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/css.css">
+<link rel="stylesheet" media="print" type="text/css" href="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/css_003.css">
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+var NS='unidades:02_hibernate';var JSINFO = {"id":"unidades:02_hibernate:04_usando_hibernate","namespace":"unidades:02_hibernate"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/js.php"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+//--><!]]></script><script src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+var pageTracker = _gat._getTracker("UA-34712348-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+//--><!]]></script>
+
+  <link rel="shortcut icon" href="http://cursohibernate.es/lib/tpl/dokubook/images/favicon.ico">
+
+  
+  <!-- change link borders dynamically -->
+  <style type="text/css">
+            div.dokuwiki ul#top__nav a.edit,
+        div.dokuwiki ul#top__nav a.show,
+        div.dokuwiki ul#top__nav a.source,
+        div.dokuwiki ul#top__nav a.restore
+        {
+      border-color: #fabd23;
+      border-bottom: 1px solid #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="show">
+<div class="dokuwiki">
+  
+  <div id="sidebar_left" class="sidebar">
+    <a href="http://cursohibernate.es/" name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]">  <img class="logo" src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/dokuwiki-128.png" alt="Curso Hibernate">
+</a>
+ 
+    <span class="sb_label">navigation</span>
+<div id="navigation" class="sidebar_box">
+<div id="sb__index__tree">
+
+<ul class="idx">
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=ejercicios" class="idx_dir"><strong>ejercicios</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=patrones" class="idx_dir"><strong>patrones</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=privado" class="idx_dir"><strong>privado</strong></a></div></li>
+<li class="open"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades" class="idx_dir"><strong>unidades</strong></a></div>
+<ul class="idx">
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A01_introduccion_orm" class="idx_dir"><strong>01_introduccion_orm</strong></a></div></li>
+<li class="open"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A02_hibernate" class="idx_dir"><strong>02_hibernate</strong></a></div>
+<ul class="idx">
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:00_start" class="wikilink1" title="unidades:02_hibernate:00_start">Inicio</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:01_install" class="wikilink1" title="unidades:02_hibernate:01_install">Instalación</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:02_entidad" class="wikilink1" title="unidades:02_hibernate:02_entidad">Mapeo de una Entidad</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:03_configurando" class="wikilink1" title="unidades:02_hibernate:03_configurando">Configurando</a></div></li>
+<li class="level3"><div class="li"><span class="curid"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate" class="wikilink1" title="unidades:02_hibernate:04_usando_hibernate">Usando Hibernate</a></span></div></li>
+</ul>
+</li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A03_relaciones" class="idx_dir"><strong>03_relaciones</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A04_claves_primarias_y_tipos_datos" class="idx_dir"><strong>04_claves_primarias_y_tipos_datos</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A05_hibernate_query_language" class="idx_dir"><strong>05_hibernate_query_language</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A06_objetos_validaciones" class="idx_dir"><strong>06_objetos_validaciones</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A07_arquitectura" class="idx_dir"><strong>07_arquitectura</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;idx=unidades%3A08_spring" class="idx_dir"><strong>08_spring</strong></a></div></li>
+</ul>
+</li>
+<li class="level1"><div class="li"><a href="http://cursohibernate.es/doku.php?id=referencias" class="wikilink1" title="referencias">Referencias</a></div></li>
+<li class="level1"><div class="li"><a href="http://cursohibernate.es/doku.php?id=start" class="wikilink1" title="start">Curso de Hibernate con Spring</a></div></li>
+</ul>
+</div>
+</div>
+<span class="sb_label">buscar</span>
+<div id="search">
+<form action="/doku.php" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input name="do" value="search" type="hidden"><input id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" type="text"><input value="Buscar" class="button" title="Buscar" type="submit"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form></div>
+<span class="sb_label">toolbox</span>
+<div id="toolbox" class="sidebar_box">
+<a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=index" class="action index" accesskey="x" rel="nofollow" title="Índice [X]">Índice</a><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=media" class="action media" rel="nofollow" title="Gestor de ficheros">Gestor de ficheros</a><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=recent" class="action recent" accesskey="r" rel="nofollow" title="Cambios recientes [R]">Cambios recientes</a><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=backlink" class="action backlink" rel="nofollow" title="Enlaces anteriores">Enlaces anteriores</a><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=login&amp;sectok=ef779e70a3e2cce513a6be158b407c10" class="action login" rel="nofollow" title="Conectarse">Conectarse</a><br><form class="button" method="get" action="/doku.php?id=unidades:02_hibernate:04_usando_hibernate">  <div class="no">    <input value="Exportar a ODT" class="button" type="submit">    <input name="do" value="export_odt" type="hidden">    <input name="id" value="unidades:02_hibernate:04_usando_hibernate" type="hidden">  </div></form>
+</div>
+  </div>
+
+  <div id="dokubook_container_left">
+
+    <div class="stylehead">
+
+      <div class="header">
+                        <div class="logo">
+          <a href="http://cursohibernate.es/doku.php" name="dokuwiki__top" accesskey="h" title="[ALT+H]">Curso Hibernate</a>        </div>
+      </div>
+
+      <ul id="top__nav">
+        <li><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=edit&amp;rev=" class="action source" accesskey="v" rel="nofollow" title="Ver fuente [V]">Ver fuente</a></li>
+<li><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate&amp;do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Revisiones antiguas [O]">Revisiones antiguas</a></li>
+      </ul>
+
+    </div>
+
+    
+    <div class="page">
+
+            <div class="breadcrumbs">
+        <span class="bchead">Traza:</span> <span class="bcsep">•</span> <span class="curid"><a href="http://cursohibernate.es/doku.php?id=unidades:02_hibernate:04_usando_hibernate" class="breadcrumbs" title="unidades:02_hibernate:04_usando_hibernate">Usando Hibernate</a></span>      </div>
+      
+      
+      <!-- wikipage start -->
+      <!-- TOC START -->
+<div class="toc">
+<div style="cursor: pointer;" class="tocheader toctoggle" id="toc__header"><span class="toc_close" id="toc__toggle"><span>−</span></span>Tabla de Contenidos</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="#usando_hibernate" class="toc">Usando Hibernate</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="#sesionfactory" class="toc">SesionFactory</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#session" class="toc">Session</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#transacciones" class="toc">Transacciones</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#crud" class="toc">CRUD</a></span></div>
+<ul class="toc">
+<li class="level3"><div class="li"><span class="li"><a href="#guardar" class="toc">Guardar</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="#leer" class="toc">Leer</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="#actualizar" class="toc">Actualizar</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="#borrar" class="toc">Borrar</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="#guardar_y_actualizar" class="toc">Guardar y actualizar</a></span></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><span class="li"><a href="#referencias" class="toc">Referencias</a></span></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1"><a name="usando_hibernate" id="usando_hibernate">Usando Hibernate</a></h1>
+<div class="level1">
+
+<p>
+Hasta ahora hemos visto cómo configurar hibernate usando los ficheros <acronym title="Extensible Markup Language">XML</acronym>
+ de configuración o usando notaciones pero no hemos visto nada de código
+ Java para usarlo realmente. En esta lección veremos finalmente cómo 
+usar Java para persistir una clase.
+</p>
+
+<p>
+La clase que más usaremos en Hibernate es <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html"><code>org.hibernate.Session</code></a>.
+ Esta clase contiene métodos para leer, guardar o borrar entidades sobre
+ la base de datos. Pero antes de poder usarla hace falta crear el objeto
+ <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> que mediante el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html#openSession%28%29"><code>SessionFactory.openSession()</code></a> nos dará acceso a <a class="javadoc" target="_blank" href="http://cursohibernate.es/org/hibernate/Session.html"><code>Session</code></a>. 
+</p>
+<pre class="code java">Session session <span class="sy0">=</span> sessionFactory.<span class="me1">openSession</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+<p>
+Veamos ahora cómo crear el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a>.
+</p>
+
+</div>
+
+<h2 class="sectionedit2"><a name="sesionfactory" id="sesionfactory">SesionFactory</a></h2>
+<div class="level2">
+
+<p>
+La forma de crear el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> es mediante un objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/cfg/Configuration.html"><code>org.hibernate.cfg.Configuration</code></a> que leerá el fichero de configuración de hibernate <code>hibernate.cfg.xml</code> que se encuentra en el directorio raíz de las clases Java. 
+</p>
+<div class="code"><pre class="java code java codeShown"><span class="lno"> 1:</span> <span class="kw1">import</span> <span class="co2">org.hibernate.SessionFactory</span><span class="sy0">;</span>
+<span class="lno"> 2:</span> <span class="kw1">import</span> <span class="co2">org.hibernate.cfg.Configuration</span><span class="sy0">;</span>
+<span class="lno"> 3:</span> <span class="kw1">import</span> <span class="co2">org.hibernate.service.ServiceRegistry</span><span class="sy0">;</span>
+<span class="lno"> 4:</span> <span class="kw1">import</span> <span class="co2">org.hibernate.service.ServiceRegistryBuilder</span><span class="sy0">;</span>
+<span class="lno"> 5:</span>
+<span class="lno"> 6:</span> SessionFactory sessionFactory<span class="sy0">;</span>
+<span class="lno"> 7:</span>
+<span class="lno"> 8:</span> Configuration configuration <span class="sy0">=</span> <span class="kw1">new</span> Configuration<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 9:</span> configuration.<span class="me1">configure</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">10:</span> ServiceRegistry serviceRegistry <span class="sy0">=</span> <span class="kw1">new</span> ServiceRegistryBuilder<span class="br0">(</span><span class="br0">)</span>.<span class="me1">applySettings</span><span class="br0">(</span>configuration.<span class="me1">getProperties</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>.<span class="me1">buildServiceRegistry</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">11:</span> sessionFactory <span class="sy0">=</span> configuration.<span class="me1">buildSessionFactory</span><span class="br0">(</span>serviceRegistry<span class="br0">)</span><span class="sy0">;</span>
+</pre><p class="codefoot codeShown"><a name="listado_1creacion_del_objeto_sessionfactory">Listado 1.Creación del objeto SessionFactory</a></p></div><ul>
+<li class="level1"><div class="li"> En la línea 8 vemos cómo se crea el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/cfg/Configuration.html"><code>Configuration</code></a></div>
+</li>
+<li class="level1"><div class="li"> En la línea 9 mediante el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/cfg/Configuration.html#configure%28%29"><code>configure()</code></a> se va a leer el fichero de configuración <code>hibernate.cfg.xml</code>. </div>
+</li>
+<li class="level1"><div class="li"> La línea 10 es nueva en hibernate 4 y contiene la lista de los distintos servicios que usará <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup> hibernate.Para ello se crea un objeto de la clase <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/service/ServiceRegistry.html"><code>org.hibernate.service.ServiceRegistry</code></a>.</div>
+</li>
+<li class="level1"><div class="li"> La línea 11 es la que finalmente creará el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> en función de la configuración y de los servicios.</div>
+</li>
+</ul>
+
+<p>
+Todo el código anterior deberá realizarse una única vez en la aplicación y deberemos guardar la referencia a <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> para su posterior uso durante toda la vida de la aplicación.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Si vemos la <a href="http://docs.jboss.org/hibernate/orm/4.1/quickstart/en-US/html_single/#hibernate-gsg-tutorial-basic-test" class="urlextern" title="http://docs.jboss.org/hibernate/orm/4.1/quickstart/en-US/html_single/#hibernate-gsg-tutorial-basic-test" rel="nofollow">documentación de hibernate 4.1</a> se indica que la forma de crear el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> es la siguiente:
+<p></p>
+<div class="code"><pre class="java code java codeShown"><span class="lno">1:</span> Configuration configuration <span class="sy0">=</span> <span class="kw1">new</span> Configuration<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">2:</span> configuration.<span class="me1">configure</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">3:</span> sessionFactory <span class="sy0">=</span> configuration.<span class="me1">buildSessionFactory</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+</pre><p class="codefoot codeShown"><a name="forma_antigua_de_crear_el_objeto_sessionfactory">Forma antigua de crear el objeto SessionFactory</a></p></div>
+<p>
+Sin embargo al usar este código se puede observar que el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/cfg/Configuration.html#buildSessionFactory%28%29"><code>buildSessionFactory()</code></a> está depreciado.En la documentación del propio método se indica que ahora se use <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/cfg/Configuration.html#buildSessionFactory%28org.hibernate.service.ServiceRegistry%29"><code>buildSessionFactory(ServiceRegistry serviceRegistry)</code></a> es decir que la documentación contiene un error y debemos usar el código del Listado 1.
+</p>
+
+<p>
+Una discusión sobre el error en la documentación de Hibernate 4 la podéis encontrar en:<a href="http://stackoverflow.com/questions/8621906/is-buildsessionfactory-deprecated-in-hibernate-4" class="urlextern" title="http://stackoverflow.com/questions/8621906/is-buildsessionfactory-deprecated-in-hibernate-4" rel="nofollow">Is buildSessionFactory() deprecated in hibernate 4?</a>
+</p>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+Al finalizar la aplicación deberemos llamar al método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html#close%28%29"><code>close()</code></a>:
+</p>
+<pre class="java code java">sessionFactory.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 class="sectionedit3"><a name="session" id="session">Session</a></h2>
+<div class="level2">
+
+<p>
+Ahora que ya tenemos el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a> podemos obtener la <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html"><code>Session</code></a> para trabajar con Hibernate. Como ya hemos visto crear la <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html"><code>Session</code></a> es tan sencillo como  llamar al método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html#openSession%28%29"><code>openSession()</code></a>:
+</p>
+<pre class="code java">Session session <span class="sy0">=</span> sessionFactory.<span class="me1">openSession</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+<p>
+Una vez obtenida la sesión trabajaremos con Hibernate persistiendo las 
+clases y una vez finalizado se deberá cerrar la sesión con el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#close%28%29"><code>close()</code></a>:
+</p>
+<pre class="code java">session.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span> </pre>
+
+</div>
+
+<h2 class="sectionedit4"><a name="transacciones" id="transacciones">Transacciones</a></h2>
+<div class="level2">
+
+<p>
+Para trabajar con una base de datos usamos las transacciones. En hibernate es tan sencillo como:
+</p>
+<ul>
+<li class="level1"><div class="li"> Crear una nueva transacción  llamando al método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SharedSessionContract.html#beginTransaction%28%29"><code>beginTransaction()</code></a> de la sesión:</div>
+</li>
+</ul>
+<pre class="code java">session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+<p>
+<br>
+
+</p>
+<ul>
+<li class="level1"><div class="li"> Hacer un commit de la transacción actual llamando al método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Transaction.html#commit%28%29"><code>commit()</code></a> de la transacción actual de la sesión:</div>
+</li>
+</ul>
+<pre class="code java">session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+<p>
+<br>
+
+</p>
+<ul>
+<li class="level1"><div class="li"> Hacer un rollback de la transacción actual llamando al método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Transaction.html#rollback%28%29"><code>rollback()</code></a> de la transacción actual de la sesión:</div>
+</li>
+</ul>
+<pre class="code java">session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">rollback</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+</div>
+
+<h2 class="sectionedit5"><a name="crud" id="crud">CRUD</a></h2>
+<div class="level2">
+
+<p>
+Ya hemos llegado al punto en que tenemos todo preparado para poder 
+trabajar con Hibernate en las operaciones fundamentales de una base de 
+datos, las operaciones <a href="http://es.wikipedia.org/wiki/CRUD" class="interwiki iw_wpes" title="http://es.wikipedia.org/wiki/CRUD">CRUD</a>.
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>C</strong>reate: Guardar un nuevo objeto en la base de datos.</div>
+</li>
+<li class="level1"><div class="li"> <strong>R</strong>ead:Leer los datos de un objeto de la base de datos.</div>
+</li>
+<li class="level1"><div class="li"> <strong>U</strong>pdate:Actualizar los datos de un objeto de la base de datos.</div>
+</li>
+<li class="level1"><div class="li"> <strong>D</strong>elete:Borrar los datos de un objeto de la base de datos.</div>
+</li>
+</ul>
+
+<p>
+Estas 4 operaciones será tan sencillas de usar desde hibernate como llamar a un único método para cada uno de ellos.
+</p>
+
+</div>
+
+<h3 class="sectionedit6"><a name="guardar" id="guardar">Guardar</a></h3>
+<div class="level3">
+
+<p>
+Usaremos el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#save%28java.lang.Object%29"><code>save(Object object)</code></a> de la sesión pasándole como argumento el objeto a guardar.
+</p>
+<pre class="java code java">Profesor profesor<span class="sy0">=</span><span class="kw1">new</span> Profesor<span class="br0">(</span><span class="nu0">101</span>, <span class="st0">"Juan"</span>, <span class="st0">"Perez"</span>, <span class="st0">"García"</span><span class="br0">)</span><span class="sy0">;</span>  <span class="co1">//Creamos el objeto</span>
+&nbsp;
+Session session <span class="sy0">=</span> sessionFactory.<span class="me1">openSession</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+session.<span class="me1">save</span><span class="br0">(</span>profesor<span class="br0">)</span><span class="sy0">;</span> <span class="co1">//&lt;|--- Aqui guardamos el objeto en la base de datos.</span>
+&nbsp;
+session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+session.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+<p>
+Como vemos , guardar una clase Java en la base de datos solo implica usar una única línea. 
+</p>
+
+</div>
+
+<h3 class="sectionedit7"><a name="leer" id="leer">Leer</a></h3>
+<div class="level3">
+
+<p>
+El método que debemos usar es <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#get%28java.lang.Class,%20java.io.Serializable%29"><code>get(Class,Serializable)</code></a>, al que le deberemos pasar la clase que queremos leer y su clave primaria.
+</p>
+<pre class="java code java">Profesor profesor<span class="sy0">=</span><span class="br0">(</span>Profesor<span class="br0">)</span>session.<span class="me1">get</span><span class="br0">(</span>profesor.<span class="kw1">class</span>,<span class="nu0">101</span><span class="br0">)</span><span class="sy0">;</span></pre>
+<p>
+El método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#get%28java.lang.Class,%20java.io.Serializable%29"><code>get(Class,Serializable)</code></a> permite leer un único objeto de la base de datos a partir de su clave primaria.
+</p>
+
+<p>
+El uso de este método tiene 2 peculiaridades:
+</p>
+<ul>
+<li class="level1"><div class="li"> Uso del cast:Es necesario hacer un cast añadiendo <code>(Message)</code> en el retorno de la función. Ésto es así ya que el método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session/html.html#get%28java.lang.Class,%20java.io.Serializable%29"><code>get()</code></a>
+ se usa para cualquier tipo de entidad así que Java desconoce que tipo 
+de datos va a retornar , por lo que debemos decírselo nosotros mediante 
+el cast para “asegurarle” el tipo que retorna.</div>
+</li>
+<li class="level1"><div class="li"> El uso de la propiedad <code>.class</code>:Ésta es la forma que se ha definido en en lenguaje Java para pasar un objeto de la clase <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/lang/Class.html"><code>java.lang.Class</code></a>. Véase <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.8.2" class="urlextern" title="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.8.2" rel="nofollow">Class Literals</a>.</div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit8"><a name="actualizar" id="actualizar">Actualizar</a></h3>
+<div class="level3">
+
+<p>
+El método a usar es <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#update%28java.lang.Object%29"><code>update(Object object)</code></a>, al que le deberemos pasar el objeto a actualizar en la base de datos
+</p>
+<pre class="java code java">session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+session.<span class="me1">update</span><span class="br0">(</span>profesor<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+<p>
+El método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#update%28java.lang.Object%29"><code>update(Object object)</code></a> simplemente actualiza el objeto de la base de datos.
+</p>
+
+</div>
+
+<h3 class="sectionedit9"><a name="borrar" id="borrar">Borrar</a></h3>
+<div class="level3">
+
+<p>
+Ahora pasemos a borrar un objeto desde la base de datos.El método que debemos usar es <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#delete%28java.lang.Object%29"><code>delete(Object object)</code></a>, al que le deberemos pasar el objeto a borrar de la base de datos
+</p>
+<pre class="java code java">session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+session.<span class="me1">delete</span><span class="br0">(</span>profesor<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></pre>
+<p>
+El método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#delete%28java.lang.Object%29"><code>delete(Object object)</code></a> simplemente borra el objeto de la base de datos.
+</p>
+
+</div>
+
+<h3 class="sectionedit10"><a name="guardar_y_actualizar" id="guardar_y_actualizar">Guardar y actualizar</a></h3>
+<div class="level3">
+
+<p>
+Muchas veces resulta cómodo al programar no tener que estar pendiente de
+ si un objeto va a insertarse o actualizarse. Para ello Hibernate 
+dispone del método <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/Session.html#saveOrUpdate%28java.lang.Object%29"><code>saveOrUpdate(Object object)</code></a> que inserta o actualiza en la base de datos en función de si ya existe o no dicha fila.
+</p>
+<pre class="java code java"><span class="lno">1:</span> Profesor profesor<span class="sy0">=</span><span class="kw1">new</span> Profesor<span class="br0">(</span><span class="nu0">101</span>, <span class="st0">"Juan"</span>, <span class="st0">"Perez"</span>, <span class="st0">"García"</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">2:</span>
+<span class="lno">3:</span> session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">4:</span>
+<span class="lno">5:</span> session.<span class="me1">saveOrUpdate</span><span class="br0">(</span>profesor<span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">6:</span>
+<span class="lno">7:</span> session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+</pre>
+<p>
+En este caso dependiendo de si existe o no la fila en la base de datos con <code>Id=101</code> se realizará un <code>UPDATE</code> o un <code>INSERT</code> contra la base de datos.
+</p>
+
+</div>
+
+<h2 class="sectionedit11"><a name="referencias" id="referencias">Referencias</a></h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="http://stackoverflow.com/questions/8621906/is-buildsessionfactory-deprecated-in-hibernate-4" class="urlextern" title="http://stackoverflow.com/questions/8621906/is-buildsessionfactory-deprecated-in-hibernate-4" rel="nofollow">Is buildSessionFactory() deprecated in hibernate 4?</a>: Discusión sobre el error en la documentación de Hibernate 4.</div>
+</li>
+<li class="level1"><div class="li"> <a href="http://rgordon.co.uk/blog/2012/02/24/hibernate-please-dont-deprecate-yourself/" class="urlextern" title="http://rgordon.co.uk/blog/2012/02/24/hibernate-please-dont-deprecate-yourself/" rel="nofollow">Hibernate – Please Don’t Deprecate Yourself</a>: Post sobre la nueva forma de crear el buildSessionFactory en Hibernate 4.</div>
+</li>
+<li class="level1"><div class="li"> <a href="http://docs.jboss.org/hibernate/orm/4.1/quickstart/en-US/html_single/#hibernate-gsg-tutorial-basic-test" class="urlextern" title="http://docs.jboss.org/hibernate/orm/4.1/quickstart/en-US/html_single/#hibernate-gsg-tutorial-basic-test" rel="nofollow">Documentación de hibernate 4.1</a>:Documentación errónea sobre crear el objeto <a class="javadoc" target="_blank" href="http://docs.jboss.org/hibernate/core/4.1/javadocs/org/hibernate/SessionFactory.html"><code>SessionFactory</code></a>.</div>
+</li>
+</ul>
+
+</div>
+<div class="footnotes">
+<div class="fn"><sup><a href="#fnt__1" id="fn__1" name="fn__1" class="fn_bot">1)</a></sup> 
+ Tiene registrados</div>
+</div>
+
+      <!-- wikipage stop -->
+
+      <div class="meta">
+        <div class="doc">
+          unidades/02_hibernate/04_usando_hibernate.txt · Última modificación: 2012/08/30 18:22 por admin        </div>
+      </div>
+
+      <a href="#dokuwiki__top" class="action top" accesskey="x" rel="nofollow" title="Ir hasta arriba [X]">Ir hasta arriba</a>
+      <div class="clearer"></div>
+
+    </div>
+
+    
+    <div class="clearer"></div>
+
+    
+    <div class="stylefoot">
+          </div>
+
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="license"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/cc-by-nc-sa.png" class="medialeft licbutton" alt="CC Attribution-Noncommercial-Share Alike 3.0 Unported"></a> </div>
+  <a target="_blank" href="http://www.chimeric.de/" title="chimeric.de=chi`s home"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-chimeric-de.png" alt="chimeric.de = chi`s home" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-css.png" alt="Valid CSS" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-dw.png" alt="Driven by DokuWiki" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" border="0" height="15" width="80"></a>
+  
+  <a target="_blank" href="http://cursohibernate.es/feed.php" title="Recent changes RSS feed"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-rss.png" alt="Recent changes RSS feed" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/button-xhtml.png" alt="Valid XHTML 1.0" border="0" height="15" width="80"></a>
+</div>
+
+  </div>
+
+</div>
+<div class="no"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/indexer.gif" alt="" height="1" width="2"></div>
+
+
+<div aria-labelledby="ui-dialog-title-media__popup_content" role="dialog" tabindex="-1" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" style="display: none; z-index: 1000; outline: 0px none;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-dialog-title-media__popup_content" class="ui-dialog-title">Configuración del vínculo</span><a role="button" class="ui-dialog-titlebar-close ui-corner-all" href="#"><span class="ui-icon ui-icon-closethick">close</span></a></div><div class="ui-dialog-content ui-widget-content" id="media__popup_content"><p id="media__link"><label>Destino del vínculo</label><button title="Vínculo a la pagina de descripción" id="media__linkbtn1" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_link_lnk.png"></button><button title="Vínculo al original" id="media__linkbtn2" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_link_direct.png"></button><button title="Sin vínculo" id="media__linkbtn3" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_link_nolnk.png"></button><button title="Mostrar solo el vínculo." id="media__linkbtn4" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_link_displaylnk.png"></button></p><p id="media__align"><label>Alineación</label><button title="No use alineación." id="media__alignbtn1" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_align_noalign.png"></button><button title="Alinear imagen a la izquierda" id="media__alignbtn2" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_align_left.png"></button><button title="Alinear imagen en el centro." id="media__alignbtn3" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_align_center.png"></button><button title="Alinear imagen a la derecha." id="media__alignbtn4" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_align_right.png"></button></p><p id="media__size"><label>Tamaño de la imagen</label><button title="Versión en tamaño pequeño" id="media__sizebtn1" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_size_small.png"></button><button title="Versión en tamaño medio" id="media__sizebtn2" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_size_medium.png"></button><button title="Versión en tamaño grande" id="media__sizebtn3" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_size_large.png"></button><button title="Versión original" id="media__sizebtn4" class="button"><img src="Usando%20Hibernate%20%5BCurso%20Hibernate%5D_files/media_size_original.png"></button></p><p><input value="Insertar" class="button" id="media__sendbtn" type="button"></p></div></div></body></html>

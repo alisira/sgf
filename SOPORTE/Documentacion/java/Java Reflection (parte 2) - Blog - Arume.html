@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es"><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="es">
+
+	<title>Java Reflection (parte 2) - Blog - Arume</title>
+
+	<meta name="author" xml:lang="gl" content="Arume, arumeinformatica.es" lang="gl">
+
+	<meta name="mssmarttagspreventparsing" content="true">
+	<meta http-equiv="imagetoolbar" content="false">
+	<meta http-equiv="msthemecompatible" content="no">
+
+	<!-- base href="http://www.arumeinformatica.es/" -->
+
+	<meta name="keywords" content="blog, Arume, página web, Java Reflection (parte 2)">
+	<meta name="description" content="Santi amplía su artículo sobre Java Reflection (Reflexión en Java), una funcionalidad de Java que permite al programador inspeccionar y manipular clases e interfaces en tiempo de ejecución.">
+
+	<meta name="google-site-verification" content="XrgckwjLgeNa_PCkQa8CZpZK1B8Lm4A_mDUIg3h2mkk">
+	<meta name="msvalidate.01" content="121EDA297AE55FE16160D94A9F291A85">
+
+	<link rel="icon" href="http://www.arumeinformatica.es/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://www.arumeinformatica.es/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" type="text/css" href="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/styles.css" media="all">
+	<!--[if lte IE 6]>
+	<link rel="stylesheet" type="text/css" href="static/css/styles_ie6.css" media="all" />
+	<![endif]-->
+	<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="static/css/styles_ie7.css" media="all" />
+	<![endif]-->
+
+	<link rel="alternate" href="http://www.arumeinformatica.es/gl/blog/java-reflection-parte-2/" xml:lang="gl" hreflang="gl" title="Versión en galego" lang="gl">
+	<link rel="stylesheet" type="text/css" media="all" href="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/styles_blog.css">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 del Blog de Arume" href="http://www.arumeinformatica.es/blog/rss/">
+	<script src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/ca-pub-7135949180217717.js" type="text/javascript" async=""></script><script src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/ga_002.js" async="" type="text/javascript"></script><script type="text/javascript" src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/ga.js"></script></head>
+<body id="p-blog-java-reflection-parte-2">
+	<div id="outer">
+		<div id="inner" class="pagewidth clearfix">
+			<div id="header" class="clearfix">
+				
+<ul id="i18n-menu">
+	<li><a href="http://www.arumeinformatica.es/gl/blog/java-reflection-parte-2/" xml:lang="gl" hreflang="gl" title="Versión en galego" lang="gl">Galego</a></li>
+	<li class="current">Español</li>
+</ul>
+				<div><p id="mod-accesibility" class="ac-hidden"><a href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#sk-content" rel="nofollow">Saltar al contenido</a></p>
+</div>
+				<h1><a href="http://www.arumeinformatica.es/"><img src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/logo.png" alt="Arume Desenvolvementos Informáticos" height="128" width="228"></a></h1>
+				
+<h2 class="ac-hidden">Menú Principal</h2>
+<p class="ac-hidden"><a href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#sk-main" rel="nofollow">Saltar el menú principal</a></p>
+<ul id="main-menu" class="clearfix">
+	<li class="first"><a href="http://www.arumeinformatica.es/" title="Página principal [1]" accesskey="1">Inicio</a></li>
+	<li><a href="http://www.arumeinformatica.es/que-hacemos/" title="Qué hacemos y cómo lo hacemos [2]" accesskey="2">Qué hacemos</a></li>
+	<li><a href="http://www.arumeinformatica.es/quienes-somos/" title="Acerca de nosotros [3]" accesskey="3">Quiénes somos</a></li>
+	<li><a href="http://www.arumeinformatica.es/portafolio/" title="Páginas web en las que participamos [4]" accesskey="4">Portafolio</a></li>
+	<li><a href="http://www.arumeinformatica.es/contacto/" title="Comunícate con nosotros [5]" accesskey="5">Contacto</a></li>
+	<li class="current"><a href="http://www.arumeinformatica.es/blog/" title="Artículos técnicos y de opinión sobre la web [6]" accesskey="6"><em>Blog</em></a></li>
+	<li><a href="http://www.arumeinformatica.es/dudas/" title="Definiciones y respuestas a preguntas frecuentes [7]" accesskey="7">Dudas</a></li>
+	<li><a href="http://www.arumeinformatica.es/utiles/" title="Herramientas útiles creadas por nosotros [8]" accesskey="8">Útiles</a></li>
+</ul>
+<p class="ac-hidden"><a id="sk-main" name="sk-main"></a></p>
+			</div>
+			<div id="side">
+<div id="mod-contact" class="vcard clearfix">
+	<h2>Hola, somos <span class="fn org">Arume</span></h2>
+	<div id="mod-contact-data">
+		<p id="mod-contact-text">Desarrollamos <a href="http://www.arumeinformatica.es/que-hacemos/" title="Qué hacemos"><strong>páginas web, aplicaciones para móviles, capas de realidad aumentada y aplicaciones para <span xml:lang="en" lang="en">Facebook</span></strong></a>. Nos apasiona la informática y somos unos perfeccionistas incurables; por eso en nuestros proyectos <a href="http://www.arumeinformatica.es/que-hacemos/#como-lo-hacemos" title="Cómo lo hacemos"><strong>utilizamos estándares</strong></a>.</p>
+		<p class="mod-contact-info"><abbr title="Teléfono">tel.</abbr> <span class="tel">625 519 694</span> <a class="email" href="mailto:arume@arumeinformatica.es">arume@arumeinformatica.es</a></p>
+		<p class="adr"><span class="street-address">Mendaña de Neyra, 34</span>, <span class="extended-address">3º B</span>, <span class="postal-code">15008</span>, <span class="locality">A Coruña</span></p>
+	</div>
+</div>
+<h2><a name="mod-blog-user" id="mod-blog-user"></a>Autenticarse</h2>
+<form method="post" action="blog/java-reflection-parte-2/#mod-blog-user" id="blog-user-form">
+	<p class="form-inputs"><label for="blog_user_form_email" xml:lang="en" lang="en">Email </label><input id="blog_user_form_email" name="blog_user_form_email" class="inputbox"></p>
+	<p class="form-inputs"><label for="blog_user_form_pass">Contraseña </label><input id="blog_user_form_pass" name="blog_user_form_pass" class="inputbox" type="password"></p>
+	<p class="required-email"><label for="required-email-auth">No cubrir este campo </label><input id="required-email-auth" name="required-email"></p>
+	<p class="buttons"><input name="mod-blog-user-send" value="Entrar" class="button" type="submit"></p>
+	<p class="mod-blog-user-extra"><a href="http://www.arumeinformatica.es/blog/usuarios/registrarse/">Registrarse</a>. <a class="mod-blog-user-forgotten" href="http://www.arumeinformatica.es/blog/usuarios/olvide-mi-contrasena/">¿Has olvidado tu contraseña?</a></p>
+</form>
+
+<h2>Etiquetas</h2>
+<p class="ac-hidden"><a href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#sk-menus-blog" rel="nofollow">Saltar las etiquetas</a></p>
+<ul id="blog-tag-menu">
+	<li><a href="http://www.arumeinformatica.es/blog/tag/accesibilidad/" rel="tag">Accesibilidad</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/android/" rel="tag">Android</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/arume/" rel="tag"><span xml:lang="gl" lang="gl">Arume</span></a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/bases-de-datos/" rel="tag">Bases de datos</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/css/" rel="tag"><abbr xml:lang="en" title="Cascading Style Sheets" lang="en">CSS</abbr></a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/facebook/" rel="tag"><span xml:lang="en" lang="en">Facebook</span></a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/html/" rel="tag"><abbr xml:lang="en" title="HyperText Markup Language" lang="en">HTML</abbr></a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/ios/" rel="tag">iOS</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/java/" rel="tag">Java</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/javascript/" rel="tag">Javascript</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/microformatos/" rel="tag">Microformatos</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/navegadores/" rel="tag">Navegadores</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/php/" rel="tag"><abbr xml:lang="en" title="PHP Hypertext Pre-processor" lang="en">PHP</abbr></a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/posicionamiento-web/" rel="tag">Posicionamiento web</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/programacion/" rel="tag">Programación</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/realidad-aumentada/" rel="tag">Realidad aumentada</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/seguridad-web/" rel="tag">Seguridad web</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/servidores-web/" rel="tag">Servidores web</a></li>
+	<li><a href="http://www.arumeinformatica.es/blog/tag/usabilidad/" rel="tag">Usabilidad</a></li>
+</ul>
+<p class="ac-hidden"><a id="sk-menus-blog" name="sk-menus-blog"></a></p>
+
+<p id="mod-static-rss"><a href="http://www.arumeinformatica.es/blog/rss/">Suscríbete a las <abbr title="Really Simple Syndication" xml:lang="en" lang="en">RSS</abbr></a></p>
+<div id="adsense-160-600">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7135949180217717";
+google_ad_slot = "9356194985";
+google_ad_width = 160;
+google_ad_height = 600;
+//--></script>
+<script type="text/javascript" src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/show_ads.js"></script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="160"></iframe></ins></ins>
+</div>
+			</div>
+			<div id="content" class="clearfix">
+				
+<p id="mod-breadcrumb-text">Estás en:</p>
+
+<ul id="mod-breadcrumb">
+	<li><a href="http://www.arumeinformatica.es/">Inicio</a> &gt;</li>
+	<li><a href="http://www.arumeinformatica.es/blog/">Blog</a> &gt;</li>
+	<li><span xml:lang="en" lang="en">Java Reflection</span> (parte 2)</li>
+</ul>
+				<p class="ac-hidden"><a name="sk-content" id="sk-content"></a></p>
+				
+<h2 id="blog-details-title"><span xml:lang="en" lang="en">Java Reflection</span> (parte 2)</h2>
+<p class="blog-post-data"><span class="date"><span class="date-month"><span class="date-bottom"><span class="date-day">19</span> <abbr title="Mayo">May</abbr></span></span> <span class="date-year">2011</span></span> por <a href="http://www.arumeinformatica.es/blog/autor/santi/" title="Ver los artículos de Santi">Santi</a></p>
+<p class="blog-comments"><a href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#blog-comments">Comentarios: 7</a></p>
+<div id="adsense-468-60">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7135949180217717";
+google_ad_slot = "8332616774";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/show_ads.js"></script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="60" width="468"></iframe></ins></ins>
+</div>
+<div class="blog-text clearfix"><p class="blog-deco image_left"><img src="Java%20Reflection%20%28parte%202%29%20-%20Blog%20-%20Arume_files/java2.jpg" alt="Java"></p><p>En nuestra anterior entrada, <a href="http://www.arumeinformatica.es/blog/java-reflection-parte-1/"><span xml:lang="en" lang="en">Java Reflection</span> (parte 1)</a>,
+ comentamos cómo obtener el tipo, constructores e instancias de una 
+clase cuando no conocíamos en tiempo de compilación los detalles 
+específicos de la misma.</p><p>En este artículo, comentaremos cómo obtener y manipular los atributos y métodos de una clase.</p><p>Como ejemplo que usaremos durante nuestra explicación, definimos la siguiente clase simple:</p><pre><code>package com.test.model;
+
+public class User()
+{
+	private String alias = null;
+	public String name;
+	public String address;
+
+	public User(String name)
+	{
+		this.name = name;
+	}
+
+	public setAlias(String alias)
+	{
+		this.alias = alias;
+	}
+
+	public getAlias()
+	{
+		if (alias == null)
+		{
+			return name;
+		}
+		else
+		{
+			return alias;
+		}
+	}
+}</code></pre><p>Y supongamos que tenemos la clase almacenada en la variable <code>userClass</code>:</p><pre><code>Class userClass = Class.forName("com.test.model.User");</code></pre><h3>Atributos</h3><p>Para
+ acceder a los atributos públicos de una clase tenemos dos 
+posibilidades. Si conocemos el nombre del atributo usaremos la siguiente
+ instrucción:</p><pre><code>Field userField = userClass.getField("name");</code></pre><p>Como
+ en los casos anteriores se nos devuelve toda la información sobre el 
+atributo mediante una instancia al objeto correspondiente, en este caso 
+de tipo <code>Field</code>.</p><p>Si la clase no tuviera ningún atributo público con ese nombre, el método <code>getField()</code> lanzará una excepción <code>NoSuchFieldException</code>.</p><p>Si
+ por cualquier motivo no conocemos los nombres de los atributos, tenemos
+ una forma de obtener todos los atributos públicos de una clase de la 
+siguiente forma:</p><pre><code>Field[] userFields = userClass.getFields();</code></pre><p>La instrucción <code>getFields()</code> nos devuelve un <code>array</code> con un elemento de tipo <code>Field</code> por cada uno de los atributos públicos de la clase (en nuestro ejemplo, devolvería un <code>array</code> de 2 elementos: "<code>name</code>" y "<code>address</code>").</p><p>Las
+ dos instrucciones mencionadas hasta el momento sirven sólo para acceder
+ a los atributos públicos. Si lo que queremos es acceder a cualquier 
+atributo (incluidos los privados), necesitaremos usar los métodos <code>Class.getDeclaredField(String name)</code> (para acceder sabiendo el nombre del atributo) y <code>Class.getDeclaredFields()</code> (que nos devolverá un <code>array</code> con todos los atributos declarados en la clase: "<code>alias</code>", "<code>name</code>" y "<code>address</code>").</p><p class="exclamation">Debemos
+ tener en cuenta que estos métodos sólo nos permiten acceder a los 
+atributos declarados expresamente en la clase en cuestión, nunca 
+aquellos declarados en superclases de la misma.</p><p>Ahora que disponemos de una instancia <code>Field</code>
+ para un atributo, podemos proceder a manipularlo. Primero veremos cómo 
+obtener información sobre el mismo. Podemos obtener el nombre del 
+atributo mediante:</p><pre><code>String fieldName = userField.getName();</code></pre><p>También podemos averiguar el tipo del atributo mediante:</p><pre><code>Object fieldType = userField.getType();</code></pre><p>Si lo que nos interesa es el valor contenido en el atributo, deberemos usar:</p><pre><code>Object fieldValue = userField.get(userInstance);</code></pre><p>Como vemos, el método <code>Field.get()</code>
+ recibe un parámetro que es la instancia del objeto en cuestión del que 
+queremos averiguar el valor de su atributo. Si estuviéramos intentando 
+acceder a un método estático, debemos llamar al método con <code>null</code> como parámetro.</p><p>Si lo que queremos es cambiar el valor del atributo, escribiremos:</p><pre><code>userField.set(userInstance, value);</code></pre><p>Donde <code>value</code> es el valor que queremos asignarle (que, evidentemente, debe ser del tipo correspondiente a ese atributo) y <code>userInstance</code> es la instancia del objeto al que queremos asignarle el valor. Al igual que con <code>get()</code>, en caso de tratarse de un atributo estático, el valor de <code>userInstance</code> debe ser <code>null</code>.</p><p>Como parece lógico, los métodos anteriores (<code>get()</code> y <code>set()</code>)
+ sólo nos permiten manipular los atributos públicos de un objeto 
+(aquellos a los que tengamos acceso desde el contexto de nuestro 
+código). Pero <span xml:lang="en" lang="en">Java Reflection</span> nos 
+permite manipular incluso aquellos atributos privados a los que no 
+tendríamos acceso de forma normal. Para ello sólo hay que usar el método
+ <code>Field.setAccessible(true)</code>, que deshabilita los chequeos de acceso para ese campo en particular (para <span xml:lang="en" lang="en">Java Reflections</span> sólo). De esta forma, si en nuestro ejemplo queremos modificar el valor del atributo privado "<code>alias</code>", sólo tendremos que hacer:</p><pre><code>Object userInstance = userClass.getConstructor(new Class[] {String.class}).newInstance(new Object[] {"José González"});
+Field aliasField = userClass.getDeclaredField("alias");
+aliasField.setAccessible(true);
+aliasField.set(userInstance, "Pepe");</code></pre><h3>Métodos</h3><p>De 
+forma totalmente análoga a como accedimos a los atributos de una clase, 
+podemos acceder a todos los métodos públicos de una clase mediante:</p><pre><code>Method[] userMethods = userClass.getMethods();</code></pre><p>Como podemos adivinar del ejemplo, los métodos de una clase se almacenan en un objeto de tipo <code>Method</code>.</p><p>Para
+ acceder a un método específico no necesitamos saber sólo su nombre, si 
+no que necesitamos saber el tipo y orden de los parámetros necesarios 
+para su invocación (puesto que recordemos que la sobrecarga de 
+operadores nos permite definir varios métodos con el mismo nombre y 
+distintos parámetros). Así, para obtener el método <code>setAlias()</code> de nuestra clase de ejemplo, escribiríamos:</p><pre><code>Method userMethod = userClass.getMethod("setAlias", new Class[] {String.class});</code></pre><p>De
+ la misma forma que ocurría con los atributos, estas instrucciones sólo 
+nos devuelven los métodos públicos de una clase. Para poder acceder a 
+los métodos privados deberemos usar respectivamente <code>Class.getDeclaredMethod(String name)</code> y <code>Class.getDeclaredMethods()</code>. También disponemos de un método <code>Method.setAccessible(true)</code> para poder manipular métodos privados de una clase.</p><p>Una vez tenemos el método deseado en nuestro objeto de tipo <code>Method</code>,
+ procedemos a manipularlo. Para obtener el nombre y tipo de retorno 
+usaremos métodos análogos a los que usamos para el caso de los 
+atributos:</p><pre><code>String methodName = userMethod.getName();
+Object methodType = userMethod.getReturnType();</code></pre><p>Finalmente, podemos invocar el método deseado mediante la orden <code>Method.invoke()</code>:</p><pre><code>Object userInstance = userClass.getConstructor(new Class[] {String.class}).newInstance(new Object[] {"José González"});
+Method setAliasMethod = userClass.getMethod("setAlias", String.class);
+Method getAliasMethod = userClass.getMethod("getAlias", null);
+setAliasMethod.invoke(userInstance, "Pepe");
+String newAlias = getAliasMethod.invoke(userInstance, null);</code></pre><p>El método <code>Method.invoke()</code> debe recibir como primer parámetro la instancia en particular de la que queremos invocar el método (<code>null</code> si es un método estático) y los parámetros del método que queremos invocar (<code>null</code> o <code>array</code> vacío si no dispone de parámetros).</p><p>Puedes leer más sobre este tema en nuestro artículo <a href="http://www.arumeinformatica.es/blog/java-reflection-parte-3/"><span xml:lang="en" lang="en">Java Reflection</span> (parte 3)</a>.</p></div>
+<p class="blog-post-tags">Etiquetado en:
+ <a rel="tag" href="http://www.arumeinformatica.es/blog/tag/java/">Java</a>, <a rel="tag" href="http://www.arumeinformatica.es/blog/tag/programacion/">Programación</a></p>
+
+<h3><a name="blog-comments" id="blog-comments"></a>Comentarios</h3>
+<p>7 comentarios. <a id="blog-comment-link" href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#blog-comment">Comentar</a>.</p>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">1</span>.
+	<em>Molinero</em>
+	el 23 <abbr title="Mayo">May</abbr> 2011 a las 11:14:44</p>
+	<div class="blog-comments-text">
+		<p>Enhorabuena por el blog completo! Me alegro mucho de ver una empresa como la vuestra por estos lares y me apunto vuestro nombre.</p>	</div>
+</div>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">2</span>.
+	<em>Anónimo</em>
+	el 05 <abbr title="Septiembre">Sep</abbr> 2013 a las 17:31:30</p>
+	<div class="blog-comments-text">
+		<p>Increíble. Muy bien explicado, sencillo y útil.</p><p>Enhorabuena al autor.</p>	</div>
+</div>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">3</span>.
+	<em>Gabriel</em>
+	el 24 <abbr title="Enero">Ene</abbr> 2014 a las 22:07:42</p>
+	<div class="blog-comments-text">
+		<p>Muchas Gracias! Muy útil y muy bien explicado!</p>	</div>
+</div>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">4</span>.
+	<em>Angel Gabriel</em>
+	el 05 <abbr title="Febrero">Feb</abbr> 2014 a las 15:00:03</p>
+	<div class="blog-comments-text">
+		<p>Muchas Gracias! Muy útil y muy bien explicado!</p>	</div>
+</div>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">5</span>.
+	<em>LBVP</em>
+	el 21 <abbr title="Febrero">Feb</abbr> 2014 a las 17:12:07</p>
+	<div class="blog-comments-text">
+		<p>Excelente explicación, muchas gracias</p>	</div>
+</div>
+<div class="blog-comments-list">
+	<p class="blog-comments-data"><span class="blog-comment-id">6</span>.
+	<em>Anónimo</em>
+	el 11 <abbr title="Septiembre">Sep</abbr> 2014 a las 13:37:42</p>
+	<div class="blog-comments-text">
+		<p>Creo que en vez de </p><p>Object userInstance = userClass.getConstructor(new Class[] {String.class}).newInstance(new Object[] {"José González"});</p><p>Method setAliasMethod = userClass.getMethod("setAlias", String.class);</p><p>Method getAliasMethod = userClass.getMethod("getAlias", null);</p><p>userClass.invoke(userInstance, "Pepe");</p><p>String newAlias = userClass.invoke(userInstance, null);</p><p>debería ser:</p><p>Object userInstance = userClass.getConstructor(new Class[] {String.class}).newInstance(new Object[] {"José González"});</p><p>Method setAliasMethod = userClass.getMethod("setAlias", String.class);</p><p>Method getAliasMethod = userClass.getMethod("getAlias", null);</p><p>setAliasMethod.invoke(userInstance, "Pepe");</p><p>String newAlias = getAliasMethod.invoke(userInstance, null);</p>	</div>
+</div>
+<div class="blog-comments-list blog-comments-editor">
+	<p class="blog-comments-data"><span class="blog-comment-id">7</span>.
+	<a href="http://www.arumeinformatica.es/quienes-somos/luis/" rel="nofollow" title="Ir a la página web de Luis"><strong>Luis</strong></a>
+	el 16 <abbr title="Febrero">Feb</abbr> 2015 a las 12:59:17</p>
+	<div class="blog-comments-text">
+		<p>Hola Anónimo.</p><p>Tienes razón. Había un error en el artículo. Ya lo hemos corregido tal como has puesto.</p><p>Gracias.</p>	</div>
+</div>
+
+<h3><a name="blog-comment" id="blog-comment"></a>Comentar</h3>
+<form method="post" action="blog/java-reflection-parte-2/#blog-comment" id="blog-comments-form">
+	<p><label for="blog_comments_form_text">Comentario <abbr title="Campo obligatorio" class="required">*</abbr> </label><textarea cols="125" rows="8" id="blog_comments_form_text" name="blog_comments_form_text" class="inputbox"></textarea></p>
+		<p class="required-email"><label for="required-email">No cubrir este campo <abbr title="Campo obligatorio" class="required">*</abbr> </label><input id="required-email" name="required-email"></p>
+	<div id="blog-comment-auth" class="clearfix">
+		<fieldset class="column-left">
+			<legend>Comentar de forma anónima</legend>
+			<p class="blog-comment-help">Puedes comentar poniendo cualquier nombre o apodo, exceptuando los nombres de usuarios registrados. Máximo de 50 caracteres.</p>
+			<p><label for="blog_comments_form_alias">Nombre </label><input id="blog_comments_form_alias" name="blog_comments_form_alias" class="inputbox" value="Anónimo"></p>
+			<p class="buttons"><input name="comment-send-anonymous" value="Enviar" class="button" type="submit"></p>
+		</fieldset>
+		<fieldset class="column-right">
+			<legend>Comentar como usuario registrado</legend>
+			<p class="form-inputs"><label for="blog_comments_form_email" xml:lang="en" lang="en">Email </label><input id="blog_comments_form_email" name="blog_comments_form_email" class="inputbox"></p>
+			<p class="form-inputs"><label for="blog_comments_form_pass">Contraseña </label><input id="blog_comments_form_pass" name="blog_comments_form_pass" class="inputbox" type="password"></p>
+			<p class="buttons"><input name="comment-send-registered" value="Enviar" class="button" type="submit"></p>
+			<p class="mod-blog-user-extra"><a href="http://www.arumeinformatica.es/blog/usuarios/registrarse/">Registrarse</a>. <a class="mod-blog-user-forgotten" href="http://www.arumeinformatica.es/blog/usuarios/olvide-mi-contrasena/">¿Has olvidado tu contraseña?</a></p>
+		</fieldset>
+	</div>
+	</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+			
+<h2 class="ac-hidden">Menú secundario</h2>
+<p class="ac-hidden"><a href="http://www.arumeinformatica.es/blog/java-reflection-parte-2/#sk-footer" rel="nofollow">Saltar el menú secundario</a></p>
+<ul id="footer-menu" class="pagewidth clearfix">
+	<li class="column-left" id="footer-menu-1"><a href="http://www.arumeinformatica.es/accesibilidad/" title="Declaración de accesibilidad [8]" accesskey="8">Accesibilidad</a></li>
+	<li class="column-left" id="footer-menu-2"><a href="http://www.arumeinformatica.es/aviso-legal/" title="Formalismos necesarios [9]" accesskey="9">Aviso legal</a></li>
+	<li class="column-left" id="footer-menu-3"><a href="http://www.arumeinformatica.es/mapa-web/" title="Estructura de esta página web [0]" accesskey="0">Mapa web</a></li>
+</ul>
+<p class="ac-hidden"><a id="sk-footer" name="sk-footer"></a></p>
+	</div>
+	
+</body></html>

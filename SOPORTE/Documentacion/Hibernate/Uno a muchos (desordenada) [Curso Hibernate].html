@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" dir="ltr" lang="es"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Uno a muchos (desordenada)    [Curso Hibernate]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2013-12-03T11:56:30+0100">
+<meta name="keywords" content="unidades,03_relaciones,03_uno_a_muchos_desordenada">
+<link rel="search" type="application/opensearchdescription+xml" href="http://cursohibernate.es/lib/exe/opensearch.php" title="Curso Hibernate">
+<link rel="start" href="http://cursohibernate.es/">
+<link rel="contents" href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=index" title="Índice">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://cursohibernate.es/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://cursohibernate.es/feed.php?mode=list&amp;ns=unidades:03_relaciones">
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://cursohibernate.es/doku.php?do=export_xhtml&amp;id=unidades:03_relaciones:03_uno_a_muchos_desordenada">
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://cursohibernate.es/doku.php?do=export_raw&amp;id=unidades:03_relaciones:03_uno_a_muchos_desordenada">
+<link rel="canonical" href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada">
+<link rel="stylesheet" media="screen" type="text/css" href="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/css_002.css">
+<link rel="stylesheet" media="all" type="text/css" href="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/css.css">
+<link rel="stylesheet" media="print" type="text/css" href="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/css_003.css">
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+var NS='unidades:03_relaciones';var JSINFO = {"id":"unidades:03_relaciones:03_uno_a_muchos_desordenada","namespace":"unidades:03_relaciones"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/js.php"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+//--><!]]></script><script src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+var pageTracker = _gat._getTracker("UA-34712348-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+//--><!]]></script>
+
+  <link rel="shortcut icon" href="http://cursohibernate.es/lib/tpl/dokubook/images/favicon.ico">
+
+  
+  <!-- change link borders dynamically -->
+  <style type="text/css">
+            div.dokuwiki ul#top__nav a.edit,
+        div.dokuwiki ul#top__nav a.show,
+        div.dokuwiki ul#top__nav a.source,
+        div.dokuwiki ul#top__nav a.restore
+        {
+      border-color: #fabd23;
+      border-bottom: 1px solid #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="show">
+<div class="dokuwiki">
+  
+  <div id="sidebar_left" class="sidebar">
+    <a href="http://cursohibernate.es/" name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]">  <img class="logo" src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/dokuwiki-128.png" alt="Curso Hibernate">
+</a>
+ 
+    <span class="sb_label">navigation</span>
+<div id="navigation" class="sidebar_box">
+<div id="sb__index__tree">
+
+<ul class="idx">
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=ejercicios" class="idx_dir"><strong>ejercicios</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=patrones" class="idx_dir"><strong>patrones</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=privado" class="idx_dir"><strong>privado</strong></a></div></li>
+<li class="open"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades" class="idx_dir"><strong>unidades</strong></a></div>
+<ul class="idx">
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A01_introduccion_orm" class="idx_dir"><strong>01_introduccion_orm</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A02_hibernate" class="idx_dir"><strong>02_hibernate</strong></a></div></li>
+<li class="open"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A03_relaciones" class="idx_dir"><strong>03_relaciones</strong></a></div>
+<ul class="idx">
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:00_start" class="wikilink1" title="unidades:03_relaciones:00_start">Inicio</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:01_uno_a_uno_direccional" class="wikilink1" title="unidades:03_relaciones:01_uno_a_uno_direccional">Uno a uno (unidireccional)</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:02_uno_a_uno_bidireccional" class="wikilink1" title="unidades:03_relaciones:02_uno_a_uno_bidireccional">Uno a uno (bidireccional)</a></div></li>
+<li class="level3"><div class="li"><span class="curid"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada" class="wikilink1" title="unidades:03_relaciones:03_uno_a_muchos_desordenada">Uno a muchos (desordenada)</a></span></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:04_uno_a_muchos_ordenada" class="wikilink1" title="unidades:03_relaciones:04_uno_a_muchos_ordenada">Uno a muchos (ordenada)</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:05_muchos_a_muchos_desordenada" class="wikilink1" title="unidades:03_relaciones:05_muchos_a_muchos_desordenada">Muchos a muchos</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:06_cascade" class="wikilink1" title="unidades:03_relaciones:06_cascade">Cascade</a></div></li>
+<li class="level3"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:07_equals" class="wikilink1" title="unidades:03_relaciones:07_equals">Equals</a></div></li>
+</ul>
+</li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A04_claves_primarias_y_tipos_datos" class="idx_dir"><strong>04_claves_primarias_y_tipos_datos</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A05_hibernate_query_language" class="idx_dir"><strong>05_hibernate_query_language</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A06_objetos_validaciones" class="idx_dir"><strong>06_objetos_validaciones</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A07_arquitectura" class="idx_dir"><strong>07_arquitectura</strong></a></div></li>
+<li class="closed"><div class="li"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;idx=unidades%3A08_spring" class="idx_dir"><strong>08_spring</strong></a></div></li>
+</ul>
+</li>
+<li class="level1"><div class="li"><a href="http://cursohibernate.es/doku.php?id=referencias" class="wikilink1" title="referencias">Referencias</a></div></li>
+<li class="level1"><div class="li"><a href="http://cursohibernate.es/doku.php?id=start" class="wikilink1" title="start">Curso de Hibernate con Spring</a></div></li>
+</ul>
+</div>
+</div>
+<span class="sb_label">buscar</span>
+<div id="search">
+<form action="/doku.php" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input name="do" value="search" type="hidden"><input id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" type="text"><input value="Buscar" class="button" title="Buscar" type="submit"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form></div>
+<span class="sb_label">toolbox</span>
+<div id="toolbox" class="sidebar_box">
+<a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=index" class="action index" accesskey="x" rel="nofollow" title="Índice [X]">Índice</a><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=media" class="action media" rel="nofollow" title="Gestor de ficheros">Gestor de ficheros</a><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=recent" class="action recent" accesskey="r" rel="nofollow" title="Cambios recientes [R]">Cambios recientes</a><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=backlink" class="action backlink" rel="nofollow" title="Enlaces anteriores">Enlaces anteriores</a><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=login&amp;sectok=ef779e70a3e2cce513a6be158b407c10" class="action login" rel="nofollow" title="Conectarse">Conectarse</a><br><form class="button" method="get" action="/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada">  <div class="no">    <input value="Exportar a ODT" class="button" type="submit">    <input name="do" value="export_odt" type="hidden">    <input name="id" value="unidades:03_relaciones:03_uno_a_muchos_desordenada" type="hidden">  </div></form>
+</div>
+  </div>
+
+  <div id="dokubook_container_left">
+
+    <div class="stylehead">
+
+      <div class="header">
+                        <div class="logo">
+          <a href="http://cursohibernate.es/doku.php" name="dokuwiki__top" accesskey="h" title="[ALT+H]">Curso Hibernate</a>        </div>
+      </div>
+
+      <ul id="top__nav">
+        <li><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=edit&amp;rev=" class="action source" accesskey="v" rel="nofollow" title="Ver fuente [V]">Ver fuente</a></li>
+<li><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada&amp;do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Revisiones antiguas [O]">Revisiones antiguas</a></li>
+      </ul>
+
+    </div>
+
+    
+    <div class="page">
+
+            <div class="breadcrumbs">
+        <span class="bchead">Traza:</span> <span class="bcsep">•</span> <span class="curid"><a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:03_uno_a_muchos_desordenada" class="breadcrumbs" title="unidades:03_relaciones:03_uno_a_muchos_desordenada">Uno a muchos (desordenada)</a></span>      </div>
+      
+      
+      <!-- wikipage start -->
+      <!-- TOC START -->
+<div class="toc">
+<div style="cursor: pointer;" class="tocheader toctoggle" id="toc__header"><span class="toc_close" id="toc__toggle"><span>−</span></span>Tabla de Contenidos</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="#uno_a_muchos_desordenada" class="toc">Uno a muchos (desordenada)</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="#clases_java" class="toc">Clases Java</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#tablas" class="toc">Tablas</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#fichero_de_mapeo_hbmxml" class="toc">Fichero de mapeo ''.hbm.xml''</a></span></div>
+<ul class="toc">
+<li class="level3"><div class="li"><span class="li"><a href="#profesorhbmxml" class="toc">Profesor.hbm.xml</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="#correoelectronicohbmxml" class="toc">CorreoElectronico.hbm.xml</a></span></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><span class="li"><a href="#anotaciones" class="toc">Anotaciones</a></span></div></li>
+</ul>
+</li>
+<li class="level1"><div class="li"><span class="li"><a href="#codigo_java" class="toc">Código Java</a></span></div></li>
+<li class="level1"><div class="li"><span class="li"><a href="#referencias" class="toc">Referencias</a></span></div></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1"><a name="uno_a_muchos_desordenada" id="uno_a_muchos_desordenada">Uno a muchos (desordenada)</a></h1>
+<div class="level1">
+
+<p>
+La relación uno a muchos consiste simplemente en que un objeto <em>padre</em> tenga una lista <strong>sin ordenar</strong> de otros objetos <em>hijo</em> de forma que al persistirse el objeto principal también se persista la lista de objetos <em>hijo</em>. Esta relación también suele llamarse <em>maestro-detalle</em> o <em>padre-hijo</em>.
+</p>
+
+</div>
+
+<h2 class="sectionedit2"><a name="clases_java" id="clases_java">Clases Java</a></h2>
+<div class="level2">
+
+<p>
+Antes de entrar en cómo se implementa en Hibernate , veamos las clases Java y las tablas que definen la relación uno a muchos. 
+</p>
+
+<p>
+Para nuestro ejemplo vamos a usar las clases:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>Profesor</code></div>
+</li>
+<li class="level1"><div class="li"> <code>CorreoElectronico</code></div>
+</li>
+</ul>
+
+<p>
+Estas dos clases van a tener una relación uno a muchos.
+</p>
+<div class="code"><pre class="java code java codeShown"><span class="lno"> 1:</span> <span class="kw1">public</span> <span class="kw1">class</span> Profesor <span class="kw1">implements</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aserializable+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Serializable</span></a>  <span class="br0">{</span>
+<span class="lno"> 2:</span>     <span class="kw1">private</span> <span class="kw4">int</span> id<span class="sy0">;</span>
+<span class="lno"> 3:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> nombre<span class="sy0">;</span>
+<span class="lno"> 4:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape1<span class="sy0">;</span>
+<span class="lno"> 5:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape2<span class="sy0">;</span>
+<span class="lno"> 6:</span>     <span class="kw1">private</span> Set<span class="sy0">&lt;</span>CorreoElectronico<span class="sy0">&gt;</span> correosElectronicos<span class="sy0">;</span>
+<span class="lno"> 7:</span>
+<span class="lno"> 8:</span>
+<span class="lno"> 9:</span>     <span class="kw1">public</span> Profesor<span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+<span class="lno">10:</span>     <span class="br0">}</span>
+<span class="lno">11:</span>
+<span class="lno">12:</span>     <span class="kw1">public</span> Profesor<span class="br0">(</span><span class="kw4">int</span> id, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> nombre, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape1, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape2<span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">13:</span>         <span class="kw1">this</span>.<span class="me1">id</span> <span class="sy0">=</span> id<span class="sy0">;</span>
+<span class="lno">14:</span>         <span class="kw1">this</span>.<span class="me1">nombre</span> <span class="sy0">=</span> nombre<span class="sy0">;</span>
+<span class="lno">15:</span>         <span class="kw1">this</span>.<span class="me1">ape1</span> <span class="sy0">=</span> ape1<span class="sy0">;</span>
+<span class="lno">16:</span>         <span class="kw1">this</span>.<span class="me1">ape2</span> <span class="sy0">=</span> ape2<span class="sy0">;</span>
+<span class="lno">17:</span>     <span class="br0">}</span>
+<span class="lno">18:</span>
+<span class="lno">19:</span> <span class="br0">}</span>
+<span class="lno">20:</span>
+<span class="lno">21:</span> <span class="kw1">public</span> <span class="kw1">class</span> CorreoElectronico <span class="kw1">implements</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aserializable+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Serializable</span></a> <span class="br0">{</span>
+<span class="lno">22:</span>     <span class="kw1">private</span> <span class="kw4">int</span> idCorreo<span class="sy0">;</span>
+<span class="lno">23:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> direccionCorreo<span class="sy0">;</span>
+<span class="lno">24:</span>     <span class="kw1">private</span> Profesor profesor<span class="sy0">;</span>
+<span class="lno">25:</span>
+<span class="lno">26:</span>     <span class="kw1">public</span> CorreoElectronico<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">27:</span>
+<span class="lno">28:</span>     <span class="br0">}</span>
+<span class="lno">29:</span>
+<span class="lno">30:</span>     <span class="kw1">public</span> CorreoElectronico<span class="br0">(</span><span class="kw4">int</span> idCorreo,<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> direccionCorreo,Profesor profesor<span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">31:</span>         <span class="kw1">this</span>.<span class="me1">idCorreo</span><span class="sy0">=</span>idCorreo<span class="sy0">;</span>
+<span class="lno">32:</span>         <span class="kw1">this</span>.<span class="me1">direccionCorreo</span><span class="sy0">=</span>direccionCorreo<span class="sy0">;</span>
+<span class="lno">33:</span>         <span class="kw1">this</span>.<span class="me1">profesor</span><span class="sy0">=</span>profesor<span class="sy0">;</span>
+<span class="lno">34:</span>     <span class="br0">}</span>
+<span class="lno">35:</span> <span class="br0">}</span>
+</pre><p class="codefoot codeShown"><a name="listado_1relacion_1_a_n">Listado 1.Relación 1 a n</a></p></div>
+<p>
+En el listado 1 podemos ver cómo la clase <code>Profesor</code> tiene una propiedad llamada <code>correosElectronicos</code> de la clase <code>CorreoElectronico</code> (línea 6) y además la clase <code>CorreoElectronico</code> también posee referencia a <code>Profesor</code> ya que hemos definido que la relación es bidireccional desde <code>Profesor</code> hacia <code>Direccion</code> y viceversa.
+</p>
+
+<p>
+El mecanismo que usamos en Java para almacenar una serie de objetos <em>hijo</em> es el interfaz <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a>. No vamos a usar el interfaz <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html"><code>List</code></a> o un array ya que dichas formas implican un orden de los objetos <em>hijo</em> mientras que usando un 
+<a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a> no hay ningún tipo de orden. En la siguiente lección se explica cómo usar una lista ordenada de objetos <em>hijo</em>.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant">En la clases Java <code>Profesor</code> y <code>CorreoElectronico</code> no se han incluido los métodos get/set de cada propiedad para facilitar la lectura pero deben estar en la clase Java.
+</div><p></p>
+<p></p>
+
+<p>
+En el siguiente diagrama UML se ve que la relación desde <code>Profesor</code> hacía <code>CorreoElectronico</code> y viceversa.
+</p>
+
+<p>
+<a title="PlantUML Graph" class="media" href="http://cursohibernate.es/lib/plugins/plantuml/img.php?width=0&amp;height=0&amp;title=PlantUML%20Graph&amp;align=&amp;version=2011-07-16&amp;md5=ca28875279aa4a76047b5159554723c0"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/img_002.png" class="media" title="PlantUML Graph" alt="PlantUML Graph"></a>
+</p>
+
+</div>
+
+<h2 class="sectionedit3"><a name="tablas" id="tablas">Tablas</a></h2>
+<div class="level2">
+
+<p>
+La tablas de base de datos quedarían de la siguiente forma:
+</p>
+
+<p>
+<a title="PlantUML Graph" class="media" href="http://cursohibernate.es/lib/plugins/plantuml/img.php?width=0&amp;height=0&amp;title=PlantUML%20Graph&amp;align=&amp;version=2011-07-16&amp;md5=efc6b78fcbccd104bdea305f390a6bc3"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/img.png" class="media" title="PlantUML Graph" alt="PlantUML Graph"></a>
+</p>
+
+<p>
+Podemos ver cómo la tabla <code>CorreoElectronico</code> contiene como clave ajena la clave primaria de la tabla <code>Profesor</code> y de esa forma se establece la relación uno a muchos.
+</p>
+
+</div>
+
+<h2 class="sectionedit4"><a name="fichero_de_mapeo_hbmxml" id="fichero_de_mapeo_hbmxml">Fichero de mapeo ''.hbm.xml''</a></h2>
+<div class="level2">
+
+<p>
+Al persistir dos clases serán necesarios dos ficheros de persistencia:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>Profesor.hbm.xml</code></div>
+</li>
+<li class="level1"><div class="li"> <code>CorreoElectronico.hbm.xml</code></div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit5"><a name="profesorhbmxml" id="profesorhbmxml">Profesor.hbm.xml</a></h3>
+<div class="level3">
+
+<p>
+El fichero <code>Profesor.hbm.xml</code> quedará de la siguiente forma:
+</p>
+<div class="code"><pre class="xml code xml codeShown"><span class="lno"> 1:</span> <span class="sc3"><span class="re1">&lt;?xml</span> <span class="re0">version</span>=<span class="st0">"1.0"</span> <span class="re0">encoding</span>=<span class="st0">"UTF-8"</span><span class="re2">?&gt;</span></span>
+<span class="lno"> 2:</span> <span class="sc0">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span>
+<span class="lno"> 3:</span> <span class="sc3"><span class="re1">&lt;hibernate-mapping<span class="re2">&gt;</span></span></span>
+<span class="lno"> 4:</span>   <span class="sc3"><span class="re1">&lt;class</span> <span class="re0">name</span>=<span class="st0">"ejemplo05.Profesor"</span> <span class="re2">&gt;</span></span>
+<span class="lno"> 5:</span>     <span class="sc3"><span class="re1">&lt;id</span> <span class="re0">column</span>=<span class="st0">"Id"</span> <span class="re0">name</span>=<span class="st0">"id"</span> <span class="re0">type</span>=<span class="st0">"integer"</span><span class="re2">/&gt;</span></span>
+<span class="lno"> 6:</span>     <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"nombre"</span> <span class="re2">/&gt;</span></span>
+<span class="lno"> 7:</span>     <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"ape1"</span> <span class="re2">/&gt;</span></span>
+<span class="lno"> 8:</span>     <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"ape2"</span> <span class="re2">/&gt;</span></span>
+<span class="lno"> 9:</span>
+<span class="lno">10:</span>     <span class="sc3"><span class="re1">&lt;set</span> <span class="re0">name</span>=<span class="st0">"correosElectronicos"</span>  <span class="re0">cascade</span>=<span class="st0">"all"</span> <span class="re0">inverse</span>=<span class="st0">"true"</span>  <span class="re2">&gt;</span></span>
+<span class="lno">11:</span>         <span class="sc3"><span class="re1">&lt;key<span class="re2">&gt;</span></span></span>
+<span class="lno">12:</span>             <span class="sc3"><span class="re1">&lt;column</span> <span class="re0">name</span>=<span class="st0">"idProfesor"</span>  <span class="re2">/&gt;</span></span>
+<span class="lno">13:</span>         <span class="sc3"><span class="re1">&lt;/key<span class="re2">&gt;</span></span></span>
+<span class="lno">14:</span>         <span class="sc3"><span class="re1">&lt;one-to-many</span> <span class="re0">class</span>=<span class="st0">"ejemplo05.CorreoElectronico"</span> <span class="re2">/&gt;</span></span>
+<span class="lno">15:</span>     <span class="sc3"><span class="re1">&lt;/set<span class="re2">&gt;</span></span></span>
+<span class="lno">16:</span>   <span class="sc3"><span class="re1">&lt;/class<span class="re2">&gt;</span></span></span>
+<span class="lno">17:</span> <span class="sc3"><span class="re1">&lt;/hibernate-mapping<span class="re2">&gt;</span></span></span>
+</pre><p class="codefoot codeShown"><a name="fichero_profesorhbmxml">Fichero Profesor.hbm.xml</a></p></div>
+<p>
+El fichero básicamente contiene lo que se ha explicado en las lecciones anteriores excepto por el tag <code>&lt;set&gt;</code> (líneas 10 a 15).
+</p>
+
+</div>
+
+<h4><a name="tag_set" id="tag_set">Tag set</a></h4>
+<div class="level4">
+
+<p>
+El tag <code>&lt;set&gt;</code> se utiliza para definir una relación <em>uno a muchos</em> desordenada entre las dos clases Java. 
+</p>
+
+</div>
+
+<h5><a name="atributos" id="atributos">Atributos</a></h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> <strong>name</strong>: Es el nombre de la propiedad Java del tipo <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a> en la cual se almacenan todos los objetos <em>hijos</em>.En nuestro ejemplo el valor es <code>correosElectronicos</code> ya que es la propiedad que contiene el <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a>.</div>
+</li>
+<li class="level1"><div class="li"> <strong>cascade</strong>: Como ya hemos explicado en anteriores lecciones, este atributo indica que se realizan las mismas operaciones con el objeto <em>padre</em> que con los objetos <em>hijos</em>, es decir si uno se borra los otros también, etc. Su valor habitual es <code>all</code>.</div>
+</li>
+<li class="level1"><div class="li"> <strong>inverse</strong>: Este 
+atributo se utiliza para minimizar las SQLs que lanza Hibernate contra 
+la base de datos.En este caso concreto debe establecerse a <code>true</code> para evitar una sentencia <acronym title="Structured Query Language">SQL</acronym> de <code>UPDATE</code> por cada <em>hijo</em>.
+ Al final de esta sesión se indican enlaces donde intentan explicar 
+(desde mi punto de vista con poco éxito) el funcionamiento del atributo <code>inverse</code>. </div>
+</li>
+</ul>
+
+<p>
+</p><p></p><div class="noteclassic">Mas información sobre el atributo <code>cascade</code> en <a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:06_cascade" class="wikilink1" title="unidades:03_relaciones:06_cascade">Cascade</a>
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+La documentación de hibernate no ayuda mucho a entender el atributo <code>inverse</code>.Se muestran a continuación algunas explicaciones que se dan sobre ello:
+<p></p>
+
+<p>
+<em>Marks this collection as the “inverse” end of a bidirectional association.</em>
+</p>
+
+<p>
+<em>For you, and for Java, a bi-directional link is simply a matter of 
+setting the references on both sides correctly. Hibernate, however, does
+ not have enough information to correctly arrange <acronym title="Structured Query Language">SQL</acronym>
+ INSERT and UPDATE statements (to avoid constraint violations). Making 
+one side of the association inverse tells Hibernate to consider it a 
+mirror of the other side. That is all that is necessary for Hibernate to
+ resolve any issues that arise when transforming a directional 
+navigation model to a <acronym title="Structured Query Language">SQL</acronym>
+ database schema. The rules are straightforward: all bi-directional 
+associations need one side as inverse. In a one-to-many association it 
+has to be the many-side, and in many-to-many association you can select 
+either side.</em>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h5><a name="tags_anidados" id="tags_anidados">Tags anidados</a></h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> <strong>key</strong> Este tag contiene otro anidado llamado <code>column</code> con el atributo <code>name</code> que indica el nombre de una columna de la base de datos. Esta columna debe ser de la tabla <em>hijo</em> y ser el nombre de la clave ajena a la tabla <em>padre</em>. En nuestro ejemplo es <code>idProfesor</code> ya que es el nombre de la clave ajena en la tabla <code>CorreoElectronico</code>.</div>
+</li>
+<li class="level1"><div class="li"> <strong>one-to-many</strong> Este tag contiene el atributo <code>class</code> con el FQCN de la clase Java <em>hija</em>. En nuestro ejemplo es el nombre de la clase <code>CorreoElectronico</code> cuyo FQCN es <code>ejemplo05.CorreoElectronico</code>.</div>
+</li>
+</ul>
+
+<p>
+</p><p></p><div class="noteclassic">
+Podemos pensar que el valor del atributo <code>class</code> en el tag <code>one-to-many</code>
+ sea opcional ya que hibernate podría ser capaz de deducirlo como ha 
+hecho en otras ocasiones, sin embargo no es así. En caso de no indicarlo
+ se producirá la siguiente excepción:
+<p></p>
+<pre class="code">org.hibernate.MappingException: Association references unmapped class: null</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit6"><a name="correoelectronicohbmxml" id="correoelectronicohbmxml">CorreoElectronico.hbm.xml</a></h3>
+<div class="level3">
+
+<p>
+El fichero <code>CorreoElectronico.hbm.xml</code> quedará de la siguiente forma:
+</p>
+<div class="code"><pre class="xml code xml codeShown"><span class="lno"> 1:</span> <span class="sc3"><span class="re1">&lt;?xml</span> <span class="re0">version</span>=<span class="st0">"1.0"</span> <span class="re0">encoding</span>=<span class="st0">"UTF-8"</span><span class="re2">?&gt;</span></span>
+<span class="lno"> 2:</span> <span class="sc0">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span>
+<span class="lno"> 3:</span> <span class="sc3"><span class="re1">&lt;hibernate-mapping<span class="re2">&gt;</span></span></span>
+<span class="lno"> 4:</span>   <span class="sc3"><span class="re1">&lt;class</span> <span class="re0">name</span>=<span class="st0">"ejemplo05.CorreoElectronico"</span> <span class="re2">&gt;</span></span>
+<span class="lno"> 5:</span>     <span class="sc3"><span class="re1">&lt;id</span> <span class="re0">column</span>=<span class="st0">"IdCorreo"</span> <span class="re0">name</span>=<span class="st0">"idCorreo"</span> <span class="re0">type</span>=<span class="st0">"integer"</span><span class="re2">/&gt;</span></span>
+<span class="lno"> 6:</span>     <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"direccionCorreo"</span> <span class="re2">/&gt;</span></span>
+<span class="lno"> 7:</span>
+<span class="lno"> 8:</span>
+<span class="lno"> 9:</span>     <span class="sc3"><span class="re1">&lt;many-to-one</span> <span class="re0">name</span>=<span class="st0">"profesor"</span><span class="re2">&gt;</span></span>
+<span class="lno">10:</span>             <span class="sc3"><span class="re1">&lt;column</span> <span class="re0">name</span>=<span class="st0">"idProfesor"</span>  <span class="re2">/&gt;</span></span>
+<span class="lno">11:</span>     <span class="sc3"><span class="re1">&lt;/many-to-one<span class="re2">&gt;</span></span></span>
+<span class="lno">12:</span>
+<span class="lno">13:</span>
+<span class="lno">14:</span>   <span class="sc3"><span class="re1">&lt;/class<span class="re2">&gt;</span></span></span>
+<span class="lno">15:</span> <span class="sc3"><span class="re1">&lt;/hibernate-mapping<span class="re2">&gt;</span></span></span>
+</pre><p class="codefoot codeShown"><a name="fichero_correoelectronicohbmxml">Fichero CorreoElectronico.hbm.xml</a></p></div>
+<p>
+El fichero básicamente contiene lo que se ha explicado en las lecciones anteriores excepto por el tag <code>&lt;many-to-one&gt;</code> (líneas 9 a 11).
+</p>
+
+</div>
+
+<h4><a name="tag_many-to-one" id="tag_many-to-one">Tag many-to-one</a></h4>
+<div class="level4">
+
+<p>
+El tag <code>&lt;many-to-one&gt;</code> se utiliza para definir una relación <em>muchos a uno</em> entre las dos clases Java. 
+</p>
+
+</div>
+
+<h5><a name="atributos1" id="atributos1">Atributos</a></h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> <strong>name</strong>: Es el nombre de la propiedad Java que enlaza con el objeto <em>padre</em>. En nuestro ejemplo el valor es <code>profesor</code> ya que es la propiedad que contiene la referencia a la clase <code>Profesor</code>.</div>
+</li>
+</ul>
+
+</div>
+
+<h5><a name="tags_anidados1" id="tags_anidados1">Tags anidados</a></h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> <strong>column </strong> Este tag contiene el atributo <code>name</code> que indica el nombre de una columna de la base de datos. Esta columna debe ser de la tabla <em>hijo</em> y ser el nombre de la clave ajena a la tabla <em>padre</em>. En nuestro ejemplo es <code>idProfesor</code> ya que es el nombre de la clave ajena en la tabla <code>CorreoElectronico</code>.</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit7"><a name="anotaciones" id="anotaciones">Anotaciones</a></h2>
+<div class="level2">
+
+<p>
+Para usar notaciones deberemos modificar el código fuente de las clases Java y no usar los ficheros <code>.hbm.xml</code>.
+</p>
+
+<p>
+El código fuente de la clase <code>Profesor</code> queda de la siguiente forma:
+</p>
+<div class="code"><pre class="java code java codeShown"><span class="lno"> 1:</span> @<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aentity+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Entity</span></a>
+<span class="lno"> 2:</span> @Table<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"Profesor"</span><span class="br0">)</span>
+<span class="lno"> 3:</span> <span class="kw1">public</span> <span class="kw1">class</span> Profesor <span class="kw1">implements</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aserializable+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Serializable</span></a>  <span class="br0">{</span>
+<span class="lno"> 4:</span>
+<span class="lno"> 5:</span>     @Id
+<span class="lno"> 6:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"Id"</span><span class="br0">)</span>
+<span class="lno"> 7:</span>     <span class="kw1">private</span> <span class="kw4">int</span> id<span class="sy0">;</span>
+<span class="lno"> 8:</span>
+<span class="lno"> 9:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"nombre"</span><span class="br0">)</span>
+<span class="lno">10:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> nombre<span class="sy0">;</span>
+<span class="lno">11:</span>
+<span class="lno">12:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"ape1"</span><span class="br0">)</span>
+<span class="lno">13:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape1<span class="sy0">;</span>
+<span class="lno">14:</span>
+<span class="lno">15:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"ape2"</span><span class="br0">)</span>
+<span class="lno">16:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape2<span class="sy0">;</span>
+<span class="lno">17:</span>
+<span class="lno">18:</span>     @OneToMany<span class="br0">(</span>mappedBy<span class="sy0">=</span><span class="st0">"profesor"</span>,cascade<span class="sy0">=</span> CascadeType.<span class="me1">ALL</span><span class="br0">)</span>
+<span class="lno">19:</span>     <span class="kw1">private</span> Set<span class="sy0">&lt;</span>CorreoElectronico<span class="sy0">&gt;</span> correosElectronicos<span class="sy0">;</span>
+<span class="lno">20:</span>
+<span class="lno">21:</span>
+<span class="lno">22:</span>     <span class="kw1">public</span> Profesor<span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+<span class="lno">23:</span>     <span class="br0">}</span>
+<span class="lno">24:</span>
+<span class="lno">25:</span>     <span class="kw1">public</span> Profesor<span class="br0">(</span><span class="kw4">int</span> id, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> nombre, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape1, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> ape2<span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">26:</span>         <span class="kw1">this</span>.<span class="me1">id</span> <span class="sy0">=</span> id<span class="sy0">;</span>
+<span class="lno">27:</span>         <span class="kw1">this</span>.<span class="me1">nombre</span> <span class="sy0">=</span> nombre<span class="sy0">;</span>
+<span class="lno">28:</span>         <span class="kw1">this</span>.<span class="me1">ape1</span> <span class="sy0">=</span> ape1<span class="sy0">;</span>
+<span class="lno">29:</span>         <span class="kw1">this</span>.<span class="me1">ape2</span> <span class="sy0">=</span> ape2<span class="sy0">;</span>
+<span class="lno">30:</span>     <span class="br0">}</span>
+<span class="lno">31:</span> <span class="br0">}</span>
+</pre><p class="codefoot codeShown"><a name="clase_profesor_anotada">Clase Profesor anotada</a></p></div>
+<p>
+A la propiedad <code>correosElectronicos</code> se ha añadido una anotación para indicar la relación <em>uno a muchos</em>.
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>OneToMany</strong>:Como su nombre indica le dice a Hibernate que esta propiedad contendrá la lista de <em>hijos</em>.</div>
+<ul>
+<li class="level3"><div class="li"> <strong>mappedBy</strong>: Este atributo contendrá el nombre de la propiedad Java de la clase <em>hija</em> que enlaza con la clase <em>padre</em>. En nuestro ejemplo es el nombre de la propiedad <code>profesor</code> que se encuentra en la clase <code>CorreoElectronico</code>.</div>
+</li>
+<li class="level3"><div class="li"> <strong>cascade</strong>: Este atributo tiene el mismo significado que el del fichero de mapeo de Hibernate. Mas información en <a href="http://cursohibernate.es/doku.php?id=unidades:03_relaciones:06_cascade" class="wikilink1" title="unidades:03_relaciones:06_cascade">Cascade</a>.</div>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+El código de la clase CorreoElectronico es el siguiente:
+</p>
+<div class="code"><pre class="java code java codeShown"><span class="lno"> 1:</span> @<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aentity+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Entity</span></a>
+<span class="lno"> 2:</span> @Table<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"CorreoElectronico"</span><span class="br0">)</span>
+<span class="lno"> 3:</span> <span class="kw1">public</span> <span class="kw1">class</span> CorreoElectronico <span class="kw1">implements</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Aserializable+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Serializable</span></a> <span class="br0">{</span>
+<span class="lno"> 4:</span>
+<span class="lno"> 5:</span>     @Id
+<span class="lno"> 6:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"IdCorreo"</span><span class="br0">)</span>
+<span class="lno"> 7:</span>     <span class="kw1">private</span> <span class="kw4">int</span> idCorreo<span class="sy0">;</span>
+<span class="lno"> 8:</span>
+<span class="lno"> 9:</span>     @Column<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"DireccionCorreo"</span><span class="br0">)</span>
+<span class="lno">10:</span>     <span class="kw1">private</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> direccionCorreo<span class="sy0">;</span>
+<span class="lno">11:</span>
+<span class="lno">12:</span>     @ManyToOne
+<span class="lno">13:</span>     @JoinColumn<span class="br0">(</span>name<span class="sy0">=</span><span class="st0">"IdProfesor"</span><span class="br0">)</span>
+<span class="lno">14:</span>     <span class="kw1">private</span> Profesor profesor<span class="sy0">;</span>
+<span class="lno">15:</span>
+<span class="lno">16:</span>     <span class="kw1">public</span> CorreoElectronico<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">17:</span>
+<span class="lno">18:</span>     <span class="br0">}</span>
+<span class="lno">19:</span>
+<span class="lno">20:</span>     <span class="kw1">public</span> CorreoElectronico<span class="br0">(</span><span class="kw4">int</span> idCorreo,<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Astring+java.sun.com&amp;btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> direccionCorreo,Profesor profesor<span class="br0">)</span> <span class="br0">{</span>
+<span class="lno">21:</span>         <span class="kw1">this</span>.<span class="me1">idCorreo</span><span class="sy0">=</span>idCorreo<span class="sy0">;</span>
+<span class="lno">22:</span>         <span class="kw1">this</span>.<span class="me1">direccionCorreo</span><span class="sy0">=</span>direccionCorreo<span class="sy0">;</span>
+<span class="lno">23:</span>         <span class="kw1">this</span>.<span class="me1">profesor</span><span class="sy0">=</span>profesor<span class="sy0">;</span>
+<span class="lno">24:</span>     <span class="br0">}</span>
+<span class="lno">25:</span> <span class="br0">}</span>
+</pre><p class="codefoot codeShown"><a name="clase_correoelectronico_anotada">Clase CorreoElectronico anotada</a></p></div>
+<p>
+A la propiedad <code>profesor</code> se han añadido dos anotaciones para indicar la relación:
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>ManyToOne</strong>:Al ser el otro lado de la relación indicamos que desde este lado es una relación <em>muchos a uno</em>.</div>
+</li>
+<li class="level1"><div class="li"> <strong>JoinColumn</strong>: Indicaremos el nombre de la columna que en la tabla <em>hija</em> contiene la clave ajena a la tabla <em>padre</em>. En nuestro ejemplo es la columna de la base de datos <code>IdProfesor</code> que se encuentra en la tabla <code>CorreoElectronico</code> la cual enlaza con la tabla <code>Profesor</code>.</div>
+</li>
+</ul>
+
+</div>
+
+<h1 class="sectionedit8"><a name="codigo_java" id="codigo_java">Código Java</a></h1>
+<div class="level1">
+
+<p>
+Ahora que ya tenemos preparadas las clase Java para que puedan persistirse veamos el código necesario para persistirlas.
+</p>
+<div class="code"><pre class="java code java codeShown"><span class="lno"> 1:</span> Profesor profesor<span class="sy0">=</span><span class="kw1">new</span> Profesor<span class="br0">(</span><span class="nu0">7</span>, <span class="st0">"Sara"</span>, <span class="st0">"Barrrera"</span>, <span class="st0">"Salas"</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 2:</span> Set<span class="sy0">&lt;</span>CorreoElectronico<span class="sy0">&gt;</span> correosElectronicos<span class="sy0">=</span><span class="kw1">new</span> HashSet<span class="sy0">&lt;&gt;</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 3:</span> correosElectronicos.<span class="me1">add</span><span class="br0">(</span><span class="kw1">new</span> CorreoElectronico<span class="br0">(</span><span class="nu0">3</span>, <span class="st0">"sara@yahoo.com"</span>,profesor<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 4:</span> correosElectronicos.<span class="me1">add</span><span class="br0">(</span><span class="kw1">new</span> CorreoElectronico<span class="br0">(</span><span class="nu0">2</span>, <span class="st0">"sara@hotmail.com"</span>,profesor<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 5:</span> correosElectronicos.<span class="me1">add</span><span class="br0">(</span><span class="kw1">new</span> CorreoElectronico<span class="br0">(</span><span class="nu0">1</span>, <span class="st0">"sara@gmail.com"</span>,profesor<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 6:</span>
+<span class="lno"> 7:</span> profesor.<span class="me1">setCorreosElectronicos</span><span class="br0">(</span>correosElectronicos<span class="br0">)</span><span class="sy0">;</span>
+<span class="lno"> 8:</span>
+<span class="lno"> 9:</span> Session session<span class="sy0">=</span>sessionFactory.<span class="me1">openSession</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">10:</span> session.<span class="me1">beginTransaction</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">11:</span>
+<span class="lno">12:</span> session.<span class="me1">save</span><span class="br0">(</span>profesor<span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">13:</span>
+<span class="lno">14:</span>
+<span class="lno">15:</span> session.<span class="me1">getTransaction</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">commit</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="lno">16:</span> session.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+</pre><p class="codefoot codeShown"><a name="persistiendo_la_clase_profesor">Persistiendo la clase Profesor</a></p></div>
+<p>
+La explicación del código es la siguiente:
+</p>
+<ul>
+<li class="level1"><div class="li"> En la línea 1 se crea el objeto <code>Profesor</code></div>
+</li>
+<li class="level1"><div class="li"> En la segunda línea se crea el objeto <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html"><code>HashSet</code></a> que implementa el interfaz <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a> el cual contendrá la lista de hijos.</div>
+</li>
+<li class="level1"><div class="li"> Desde las líneas 3 a la 5 se crean los objetos <code>CorreoElectronico</code> y se añaden al <a class="javadoc" target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html"><code>Set</code></a>.</div>
+</li>
+<li class="level1"><div class="li"> En la línea 7 se establece la relación entre la lista de hijos (<code>CorreoElectronico</code>)  y el padre (<code>Profesor</code>).</div>
+</li>
+<li class="level1"><div class="li"> En la línea 12 se guarda el objeto <code>Profesor</code> y automáticamente se guardan también sus hijos.</div>
+</li>
+</ul>
+
+</div>
+
+<h1 class="sectionedit9"><a name="referencias" id="referencias">Referencias</a></h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="http://www.mkyong.com/hibernate/inverse-true-example-and-explanation/" class="urlextern" title="http://www.mkyong.com/hibernate/inverse-true-example-and-explanation/" rel="nofollow">inverse = “true” example and explanation </a>: Explicación en inglés del atributo <code>inverse</code>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="http://tadtech.blogspot.com.es/2007/02/hibernate-when-is-inversetrue-and-when.html" class="urlextern" title="http://tadtech.blogspot.com.es/2007/02/hibernate-when-is-inversetrue-and-when.html" rel="nofollow">Hibernate: When is "inverse=true" and when it's not? </a>: Otra explicación en inglés del atributo <code>inverse</code>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="http://www.mkyong.com/hibernate/different-between-cascade-and-inverse/" class="urlextern" title="http://www.mkyong.com/hibernate/different-between-cascade-and-inverse/" rel="nofollow">Different between cascade and inverse </a>: Explicación en inglés de las diferencias entre los atributos <code>cascade</code> e <code>inverse</code>.</div>
+</li>
+</ul>
+
+</div>
+
+      <!-- wikipage stop -->
+
+      <div class="meta">
+        <div class="doc">
+          unidades/03_relaciones/03_uno_a_muchos_desordenada.txt · Última modificación: 2013/12/03 11:56 por admin        </div>
+      </div>
+
+      <a href="#dokuwiki__top" class="action top" accesskey="x" rel="nofollow" title="Ir hasta arriba [X]">Ir hasta arriba</a>
+      <div class="clearer"></div>
+
+    </div>
+
+    
+    <div class="clearer"></div>
+
+    
+    <div class="stylefoot">
+          </div>
+
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="license"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/cc-by-nc-sa.png" class="medialeft licbutton" alt="CC Attribution-Noncommercial-Share Alike 3.0 Unported"></a> </div>
+  <a target="_blank" href="http://www.chimeric.de/" title="chimeric.de=chi`s home"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-chimeric-de.png" alt="chimeric.de = chi`s home" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-css.png" alt="Valid CSS" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-dw.png" alt="Driven by DokuWiki" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" border="0" height="15" width="80"></a>
+  
+  <a target="_blank" href="http://cursohibernate.es/feed.php" title="Recent changes RSS feed"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-rss.png" alt="Recent changes RSS feed" border="0" height="15" width="80"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/button-xhtml.png" alt="Valid XHTML 1.0" border="0" height="15" width="80"></a>
+</div>
+
+  </div>
+
+</div>
+<div class="no"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/indexer.gif" alt="" height="1" width="2"></div>
+
+
+<div aria-labelledby="ui-dialog-title-media__popup_content" role="dialog" tabindex="-1" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" style="display: none; z-index: 1000; outline: 0px none;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-dialog-title-media__popup_content" class="ui-dialog-title">Configuración del vínculo</span><a role="button" class="ui-dialog-titlebar-close ui-corner-all" href="#"><span class="ui-icon ui-icon-closethick">close</span></a></div><div class="ui-dialog-content ui-widget-content" id="media__popup_content"><p id="media__link"><label>Destino del vínculo</label><button title="Vínculo a la pagina de descripción" id="media__linkbtn1" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_link_lnk.png"></button><button title="Vínculo al original" id="media__linkbtn2" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_link_direct.png"></button><button title="Sin vínculo" id="media__linkbtn3" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_link_nolnk.png"></button><button title="Mostrar solo el vínculo." id="media__linkbtn4" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_link_displaylnk.png"></button></p><p id="media__align"><label>Alineación</label><button title="No use alineación." id="media__alignbtn1" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_align_noalign.png"></button><button title="Alinear imagen a la izquierda" id="media__alignbtn2" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_align_left.png"></button><button title="Alinear imagen en el centro." id="media__alignbtn3" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_align_center.png"></button><button title="Alinear imagen a la derecha." id="media__alignbtn4" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_align_right.png"></button></p><p id="media__size"><label>Tamaño de la imagen</label><button title="Versión en tamaño pequeño" id="media__sizebtn1" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_size_small.png"></button><button title="Versión en tamaño medio" id="media__sizebtn2" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_size_medium.png"></button><button title="Versión en tamaño grande" id="media__sizebtn3" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_size_large.png"></button><button title="Versión original" id="media__sizebtn4" class="button"><img src="Uno%20a%20muchos%20%28desordenada%29%20%5BCurso%20Hibernate%5D_files/media_size_original.png"></button></p><p><input value="Insertar" class="button" id="media__sendbtn" type="button"></p></div></div></body></html>

@@ -1,0 +1,476 @@
+<html><head>
+<title>Programación en castellano. Sistema de Nombrado en Java (JNDI) [Parte I]</title>
+<meta name="title" content="Programación en castellano. Sistema de Nombrado en Java (JNDI) [Parte I]">
+<meta name="DC.Title" content="Programación en castellano. Sistema de Nombrado en Java (JNDI) [Parte I]">
+<meta http-equiv="title" content="Programación en castellano. Sistema de Nombrado en Java (JNDI) [Parte I]">
+<meta name="keywords" content="PHP, LINUX, APACHE, POSTGRESQL">
+<meta name="description" content="Programación en castellano. Sistema de Nombrado en Java (JNDI) [Parte I]">
+<meta name="author" content="Programación en castellano">
+<meta name="DC.Creator" content="Programación en castellano">
+<link rev="made" href="mailto:%7Bmailautor%7D">
+<meta http-equiv="keywords" content="PHP, LINUX, APACHE, POSTGRESQL">
+<meta http-equiv="description" content="Este tutorial presenta los tópicos necesarios Entender el Sistema de Nombrado y Directorios en Java (JNDI)">
+<meta http-equiv="DC.Description" content="Este tutorial presenta los tópicos necesarios Entender el Sistema de Nombrado y Directorios en Java (JNDI)">
+<meta name="VW96.objecttype" content="Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="DC.Language" scheme="RFC1766" content="Spanish">
+<meta name="resource-type" content="document">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="Revisit" content="15 days">
+<meta name="robots" content="all">
+<style type="text/css">
+    A:link { text-decoration: none }
+    A:visited { text-decoration: none }
+    A:hover { text-decoration: underline }
+</style>
+<script language="Javascript" type="text/javascript">
+      function irA(menu){
+        if (menu.selectedIndex>0)
+          window.location.href = menu.options[menu.selectedIndex].value;
+      }
+</script>
+
+</head>
+
+<body alink="#4040F0" bgcolor="#ffffff" link="#000080" vlink="#000080"><a name="top">
+<table align="CENTER" border="0" width="610" cellpadding="0" cellspacing="0"><tbody><tr><td>
+<table align="CENTER" border="0" width="100%" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td rowspan="2" width="88"><a href="javascript:if(confirm('http://programacion.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/'" tppabs="http://programacion.com/"><img alt="Programación en castellano" src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/logoprog.jpg" tppabs="http://programacion.com/graficos/logoprog.jpg" border="0" height="106" width="88"></a></td>
+<td align="right" bgcolor="#E3DFCC" valign="middle"><a href="javascript:if(confirm('http://programacion.com/nueva_url.php%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/nueva_url.php'" tppabs="http://programacion.com/nueva_url.php"><font face="Verdana" size="1">Añadir una dirección</font></a><font face="Verdana" size="1"> | </font><a href="javascript:if(confirm('http://programacion.com/buscar.php%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/buscar.php'" tppabs="http://programacion.com/buscar.php"><font face="Verdana" size="1">Buscador</font></a><font face="Verdana" size="1"> | </font><a href="javascript:if(confirm('http://programacion.com/cursos/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/'" tppabs="http://programacion.com/cursos/"><font face="Verdana" size="1">Cursos</font></a><font face="Verdana" size="1"> | </font><a href="javascript:if(confirm('http://programacion.com/articulos/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/articulos/'" tppabs="http://programacion.com/articulos/"><font face="Verdana" size="1">Artículos</font></a><font face="Verdana" size="1"> | </font><a href="javascript:if(confirm('http://programacion.com/foros.php%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/foros.php'" tppabs="http://programacion.com/foros.php"><font face="Verdana" size="1">Foros</font></a><font face="Verdana" size="1"> | </font><a href="javascript:if(confirm('http://programacion.com/formacion.htm%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/formacion.htm'" tppabs="http://programacion.com/formacion.htm"><font face="Verdana" size="1">Formación</font></a></td>
+</tr>
+<tr>
+<td align="CENTER"><script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='adjs.php-n=ac544185-);   document.write (-&what=zone-13&target=_blank-);   document.write (-&exclude=- + document.phpAds_used);   document-49.write (' /*tpa=http://programacion.com/tutorial/jndi/48/");   document.write ("http://ad.programacion.com/adjs.php?n=ac544185");   document.write ("&what=zone:13&target=_blank");   document.write ("&exclude=" + document.phpAds_used);   document.write ("*/><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/adjs.html" *tpa="http://programacion.com/tutorial/jndi/48/http://ad.programacion.com/adjs.php?n=ac544185&amp;what=zone:13&amp;target=_blank&amp;exclude=,*/"></script>
+<noscript><a href="javascript:if(confirm('http://ad.programacion.com/adclick.php?n=ac544185  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ad.programacion.com/adclick.php?n=ac544185'" tppabs="http://ad.programacion.com/adclick.php?n=ac544185" target='_blank'><img src="adview.php-what=zone-13&target=_blank&n=ac544185.gif" tppabs="http://ad.programacion.com/adview.php?what=zone:13&target=_blank&n=ac544185" border='0' alt=''></a></noscript></td>
+</tr>
+</tbody></table>
+<table align="CENTER" border="0" width="100%" cellpadding="0" cellspacing="0">
+<tbody><tr>
+  <td tppabs="http://programacion.com/graficos/linea1.gif" background="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20(JNDI)_files/linea1.gif"><img alt="" src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/empty.gif" tppabs="http://programacion.com/graficos/empty.gif" border="0" height="10"></td>
+</tr>
+</tbody></table>
+
+<link rel="stylesheet" type="text/css" href="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/cursos.css" tppabs="http://programacion.com/cursos/cursos.css">
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td align="left" valign="top" width="100%"><p><span class="tituloMan">Sistema de Nombrado en Java (JNDI) [Parte I]</span><br><b>Autor:</b> <a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/missing.html" tppabs="http://programacion.com/tutorial/jndi/48/autor.php?id=65">Sun</a><br><b>Traductor:</b> <a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/missing.html" tppabs="http://programacion.com/tutorial/jndi/48/autor.php?id=32">Juan Antonio Palos (Ozito)</a>
+</p></td><td align="Right" valign="TOP" width="486"><font face="Verdana,Arial,sansserif" size="2"><form name="Formulario"><select name="menu" size="1" onchange="irA(this)">
+          <option selected="selected" value="">Nuestras zonas</option>
+          <option value="http://programacion.com/html">HTML en castellano</option>
+          <option value="http://programacion.com/java">Java en castellano</option>
+          <option value="http://programacion.com/asp">ASP en castellano</option>
+          <option value="http://programacion.com/php">PHP en castellano</option>
+    </select></form></font></td></tr>
+</tbody></table>
+<br>
+
+<table border="0" width="100%">
+<tbody><tr>	
+  <td align="right">
+    <a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index.htm" tppabs="http://programacion.com/tutorial/jndi/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/indice.gif" tppabs="http://programacion.com/graficos/indice.gif" border="0"></a>
+	<a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index-47.htm" tppabs="http://programacion.com/tutorial/jndi/47/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/anterior.gif" tppabs="http://programacion.com/graficos/anterior.gif" border="0"></a>
+	<a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index-49.htm" tppabs="http://programacion.com/tutorial/jndi/49/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/siguiente.gif" tppabs="http://programacion.com/graficos/siguiente.gif" border="0"></a>
+	<table align="CENTER" border="0" width="100%" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+	  <td tppabs="http://programacion.com/graficos/linea1.gif" background="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20(JNDI)_files/linea1.gif"><img alt="" src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/empty.gif" tppabs="http://programacion.com/graficos/empty.gif" border="0" height="10"></td>
+	</tr>
+	</tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+<p>En esta página:</p>
+<table bgcolor="#F5F4EB" width="100%">
+<tbody><tr>
+<td>
+<ul>
+<font face="Verdana" size="2">
+<li>
+<a href="#envsource">Especificar Propiedades de Entorno</a>
+</li>
+</font>
+<ul>
+<font face="Verdana" size="2">
+<li>
+<a href="#APPRES">Ficheros de Recursos de Aplicación</a>
+</li>
+</font>
+</ul>
+<ul>
+<font face="Verdana" size="2">
+<li>
+<a href="#SYS">Propiedades del Sistema</a>
+</li>
+</font>
+</ul>
+<ul>
+<font face="Verdana" size="2">
+<li>
+<a href="#APPLET">Parámetros de Applet</a>
+</li>
+</font>
+</ul>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<br>
+<p class="tituloCap">Especificar Propiedades de Entorno</p>
+
+<font face="verdana" size="2">
+<p>
+Podemos especificar propiedades de entorno para el JNDI usando el
+parámetro de entorno del constructor de <a href="javascript:if(confirm('http://java.sun.com/j2se/1.3/docs/api/javax/naming/InitialContext.html%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://java.sun.com/j2se/1.3/docs/api/javax/naming/InitialContext.html#InitialContext(java.util.Hashtable)'" tppabs="http://java.sun.com/j2se/1.3/docs/api/javax/naming/InitialContext.html#InitialContext(java.util.Hashtable)"><span class="codigoenlinea"><b>InitialContext</b></span></a>
+y <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/#APPRES'" tppabs="http://programacion.com/cursos/jndi/#APPRES">ficheros de recursos de aplicación</a>. También se
+podrían especificar varias propiedades de entorno JNDI usando <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/#SYS'" tppabs="http://programacion.com/cursos/jndi/#SYS">propiedades
+del sistema</a> y <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/#APPLET'" tppabs="http://programacion.com/cursos/jndi/#APPLET">parámetros de applet</a>, como se describe
+en secciones posteriores.
+</p>
+</font>
+
+
+<p class="tituloSubCap">Ficheros de Recursos de Aplicación</p>
+<font face="verdana" size="2">
+<p>
+Para simplificar la tarea de configurar el entorno necesario para una
+aplicación JNDI, podríamos distribuir <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/conceptsglossary.htm%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/conceptsglossary.htm'" tppabs="http://programacion.com/cursos/jndi/conceptsglossary.htm">ficheros
+de recursos de aplicación</a> junto con los componentes de la aplicación
+y los proveedores de servicios. Un fichero de recursos de aplicación tiene el
+nombre <span class="codigoenlinea"><b>jndi.properties</b></span>. Contiene una lista de parejas
+clave/valor presentadas en el formato de fichero de propiedades (ver <span class="codigoenlinea"><b>java.util.Properties</b></span>).
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+La clave es el nombre de la propiedad (por ejemplo, <span class="codigoenlinea"><b>java.naming.factory.object</b></span>)
+y el valor es un string en el formato definido para esa propiedad.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Aquí tenemos un ejemplo de un fichero de recursos de aplicación.
+</p>
+</font>
+<b></b>
+<pre class="codigo">java.naming.factory.object=com.sun.jndi.ldap.AttrsToCorba:com.wiz.from.Person
+java.naming.factory.state=com.sun.jndi.ldap.CorbaToAttrs:com.wiz.from.Person
+java.naming.factory.control=com.sun.jndi.ldap.ResponseControlFactory
+java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
+java.naming.provider.url=ldap://localhost:389/o=jnditutorial
+com.sun.jndi.ldap.netscape.schemaBugs=true
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Observamos que no se aplican restricciones sobre los tipos de propiedades de
+entorno que podemos tener en este fichero.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+El JNDI lee automáticamente el ficheros de recursos de aplicación desde los
+classpaths de todos los componentes y desde <b>JAVA_HOME<span class="codigoenlinea">/lib/jndi.properties</span></b>,
+donde <b>JAVA_HOME</b> es el directorio que contiene nuestro JRE (Java
+Runtime Environment). El JNDI pone las propiedades de estos ficheros a
+disposición de los proveedores de servicios y de otros componentes que
+necesiten utilizarlas. Por lo tanto estos ficheros deben considerarse como
+abiertos a todo el mundo y no deberían contener información sensible, como
+passwords, etc.
+</p>
+</font>
+
+<table align="center" border="0" cellpadding="2" cellspacing="3">
+<tbody><tr>
+<td bgcolor="#F5F4EB"><font face="verdana" size="2">
+<b>Nota:</b>
+<font face="verdana" size="2">
+<p>
+Excepto para <b>JAVA_HOME<span class="codigoenlinea">/lib/jndi.properties</span></b>, los
+ficheros de recursos de aplicación sólo se soportan cuando se usa la <a href="javascript:if(confirm('http://java.sun.com/products/jdk/1.2/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://java.sun.com/products/jdk/1.2/'" tppabs="http://java.sun.com/products/jdk/1.2/">Plataforma
+J</a><a href="javascript:if(confirm('http://java.sun.com/products/jdk/1.2/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://java.sun.com/products/jdk/1.2/'" tppabs="http://java.sun.com/products/jdk/1.2/">ava 2</a>. Si usamos el JDK
+1.1, sólo podremos ver <b>JAVA_HOME<span class="codigoenlinea">/lib/jndi.properties</span></b>.
+</p>
+</font>
+</font></td>
+</tr>
+</tbody></table>
+
+<font face="verdana" size="2">
+<p>
+Por ejemplo, abajo tenemos <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/src/AppList.java%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/src/AppList.java'" tppabs="http://programacion.com/cursos/jndi/src/AppList.java">un programa</a> que lista un contexto sin especificar ninguna propiedad de entorno en el constructor de <b><span class="codigoenlinea">InitialContext</span></b>.
+</p>
+</font>
+<b></b>
+<pre class="codigo">InitialContext ctx = new InitialContext();
+NamingEnumeration enum = ctx.list("");
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Si ejecutamos este programa con el fichero <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/src/jndi.properties%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/src/jndi.properties'" tppabs="http://programacion.com/cursos/jndi/src/jndi.properties"><span class="codigoenlinea"><b>jndi.properties</b></span></a>
+mostrado anteriormente, listará los contenidos de la entrada <span class="codigoenlinea"><b>o=jnditutorial</b></span>
+en el servidor LDAP especificado.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+El uso de ficheros de recursos de aplicación para especificar cualquier
+propiedad de entorno JNDI permite configurar al JNDI con una programación
+mínima. Usando el fichero <b>JAVA_HOME<span class="codigoenlinea">/lib/jndi.properties</span></b>,
+también podemos configurar el JNDI para todas las aplicaciones y applets JNDI
+que usen el mismo interprete Java.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Si usamos ficheros de recursos de aplicación, debemos recordar conceder a
+nuestro applet o aplicación los permisos para leer todos los ficheros de
+recursos de aplicación.
+</p>
+</font>
+
+
+
+<p class="tituloSubCap">Propiedades del Sistema</p>
+<font face="verdana" size="2">
+<p>
+Una <b>propiedad del sistema</b> es una pareja clave/valor que el entorno de
+ejecución java define para describir al usuario, en entorno del sistema y el
+sistema java. El entorno de ejecución define y usa un conjunto de propiedades
+del sistema por defecto. Se pueden poner otras propiedades a disposicion de un
+programa Java mediante la opción <span class="codigoenlinea"><b>-D</b></span> de la línea de comandos
+del intérprete java. Por ejemplo, ejecutando el intérprete de la siguiente
+forma.
+</p>
+</font>
+<b></b>
+<pre class="codigo"># java -Dmyenviron=abc Main
+</pre>
+
+<font face="verdana" size="2">
+<p>
+se añade la propiedad <span class="codigoenlinea"><b>myenviron</b></span> con el valor <span class="codigoenlinea"><b>abc</b></span>
+a la lista de propiedades del sistema visible para el programa <span class="codigoenlinea"><b>Main</b></span>.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+La clase <span class="codigoenlinea"><b>java.lang.System</b></span> contiene métodos estáticos para leer
+y actualizar propiedades del sistema. La habilidad de leer o actualizar
+cualquier propiedad del sistema está controlado por la política de seguridad
+del sistema de ejecución Java.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+El JNDI lee las siguientes propiedades estándars JNDI desde las propiedades
+del sistema.
+</p>
+</font>
+<b></b>
+<pre class="codigo">java.naming.factory.initial
+java.naming.factory.object
+java.naming.factory.state
+java.naming.factory.control
+java.naming.factory.url.pkgs
+java.naming.provider.url
+java.naming.dns.url	
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Cuando configuramos propiedades del sistema, estas propiedades de entorno
+afectan a los contextos de todas las aplicaciones o applets (si el applet tiene
+permisos para leer dichas propiedades).
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Usando el mismo programa del ejemplo de fichero de recursos de aplicación
+anterior, especificando la factoría de contexto inicial a usar dando el
+contexto inicial a utilizar en la línea de comandos. Aquí tenemos dos
+ejemplos.
+</p>
+</font>
+<b></b>
+<pre class="codigo"># java -Djava.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory \
+      -Djava.naming.provider.url=ldap://localhost:389/o=jnditutorial \
+      List
+# java -Djava.naming.factory.initial=com.sun.jndi.fscontext.RefFSContextFactory \
+      -Djava.naming.provider.url=file:/tmp \
+      List 
+</pre>
+
+<font face="verdana" size="2">
+<p>
+El primer ejemplo usa LDAP, y el segundo usa el sistema de ficheros.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Usar las propiedades del sistema para especificar propiedades de entorno
+estándar JNDI permite configurar el JNDI con una programación mínima. Sin
+embargo, probablemente sólo es conveniente usarlas desde scripts. Esto es por
+que los ítems con nombres de propiedades largos deben especificarse sobre la
+línea de comandos. También, los applets generalmente no tienen permiso para
+leer propiedades del sistema arbitrarias y debe concedersele explícitamente el
+permiso para hacerlo.
+</p>
+</font>
+
+
+
+<p class="tituloSubCap">Parámetros de Applet</p>
+<font face="verdana" size="2">
+<p>
+Podemos pasarle parámetros a un applet usando una sencilla pareja
+clave/valor. Estas se especifican en el fichero HTML que referencia al applet.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+El cómo se especifican dependen del contexto del applet. Por ejemplo, si el
+applet es referenciado desde una etiqueta <span class="codigoenlinea"><b>applet</b></span>,
+especificaremos los parámetros usando la etiqueta <span class="codigoenlinea"><b>param</b></span>. Aquí
+tenemos un <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/src/appletlist.html%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/src/appletlist.html'" tppabs="http://programacion.com/cursos/jndi/src/appletlist.html">ejemplo</a>.
+</p>
+</font>
+<b></b>
+<pre class="codigo">&lt;param 
+name=java.naming.factory.initial
+value=com.sun.jndi.ldap.LdapCtxFactory&gt;
+
+&lt;param
+name=java.naming.provider.url
+value=ldap://localhost:389/o=jnditutorial&gt;
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Si el applet es referenciado desde el <a href="javascript:if(confirm('http://java.sun.com/products/plugin/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://java.sun.com/products/plugin/'" tppabs="http://java.sun.com/products/plugin/">Java
+Plug-in</a>, especificaremos sus parámetros usando parejas de clave/valor.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Aquí tenemos un <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/src/pluginlist.html%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/src/pluginlist.html'" tppabs="http://programacion.com/cursos/jndi/src/pluginlist.html">ejemplo</a>.
+</p>
+</font>
+<b></b>
+<pre class="codigo">java.naming.provider.url="ldap://localhost:389/o=jnditutorial"
+java.naming.factory.initial="com.sun.jndi.ldap.LdapCtxFactory"
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Para que el JNDI acceda a los parámetros de un applet, debemos configurar la
+propiedad de entorno <a href="javascript:if(confirm('http://java.sun.com/j2se/1.3/docs/api/javax/naming/Context.html%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://java.sun.com/j2se/1.3/docs/api/javax/naming/Context.html#APPLET'" tppabs="http://java.sun.com/j2se/1.3/docs/api/javax/naming/Context.html#APPLET"><span class="codigoenlinea"><b>Context.APPLET</b></span></a>
+(<span class="codigoenlinea"><b>"java.naming.applet"</b></span>). El JNDI lee las siguientes
+propiedades estándars del JNDI desde los parámetros del applet.
+</p>
+</font>
+<b></b>
+<pre class="codigo">java.naming.factory.initial
+java.naming.factory.object
+java.naming.factory.state
+java.naming.factory.control
+java.naming.factory.url.pkgs
+java.naming.provider.url
+java.naming.dns.url	
+</pre>
+
+<font face="verdana" size="2">
+<p>
+Aquí tenemos un <a href="javascript:if(confirm('http://programacion.com/cursos/jndi/src/AppletList.java%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/cursos/jndi/src/AppletList.java'" tppabs="http://programacion.com/cursos/jndi/src/AppletList.java">ejemplo</a> que añade una
+propiedad (<span class="codigoenlinea"><b>"java.naming.applet"</b></span>) al entorno.
+</p>
+</font>
+<b></b>
+<pre class="codigo">// Put this applet instance into the environment
+Hashtable env = new Hashtable();
+env.put(Context.APPLET, this);
+
+// Pass the environment to the initial context constructor
+Context ctx = new InitialContext(env);
+
+// List the objects 
+NamingEnumeration enum = ctx.list(target);
+while (enum.hasMore()) {
+     out.println(enum.next());
+}
+ctx.close();
+</pre>
+
+<font face="verdana" size="2">
+<p>
+El JNDI obtiene las propiedades de entorno necesarias desde los parámetros del
+applet (mostrados anteriormente).
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Este uso de los parámetros de applets para especificar propiedades de
+entorno JNDI estándars permite configurar al JNDI&nbsp; de la misma forma que
+un applet realiza normalmente la configuración de otros subsistemas o
+componentes. Las propiedades del sistema y los ficheros de recursos de
+aplicación no son buenos mecanismos para que los applets dependan de ellos.
+</p>
+</font>
+
+<font face="verdana" size="2">
+<p>
+Porque los applets normalmente no pueden leer propiedades del sistema o ficheros
+arbitrarios (incluyendo <span class="codigoenlinea"><b>jndi.properties</b></span>).
+</p>
+</font>
+
+
+
+
+<table border="0" width="100%">
+<tbody><tr>	
+  <td align="right">
+    <a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index.htm" tppabs="http://programacion.com/tutorial/jndi/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/indice.gif" tppabs="http://programacion.com/graficos/indice.gif" border="0"></a>
+	<a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index-47.htm" tppabs="http://programacion.com/tutorial/jndi/47/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/anterior.gif" tppabs="http://programacion.com/graficos/anterior.gif" border="0"></a>
+	<a href="http://artemisa.unicauca.edu.co/%7Edabravo/jndi_esp_1/index-49.htm" tppabs="http://programacion.com/tutorial/jndi/49/"><img src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/siguiente.gif" tppabs="http://programacion.com/graficos/siguiente.gif" border="0"></a>
+    <br>
+  </td>
+</tr>
+</tbody></table>
+
+<table align="CENTER" border="0" width="100%" cellpadding="0" cellspacing="0">
+<tbody><tr>
+  <td tppabs="http://programacion.com/graficos/linea1.gif" background="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20(JNDI)_files/linea1.gif"><img alt="" src="Programaci%C3%B3n%20en%20castellano.%20Sistema%20de%20Nombrado%20en%20Java%20%28JNDI%29_files/empty.gif" tppabs="http://programacion.com/graficos/empty.gif" border="0" height="10"></td>
+</tr>
+<tr>
+<td align="right"><a href="#top"><font face="Verdana" size="1">Principio Página</font></a></td>
+</tr>
+<tr>
+<td align="center"><!-- Creditos -->
+<font face="Verdana" size="1">© 1999-2002, Programación en castellano, s.l.<br>
+<a href="javascript:if(confirm('http://programacion.com/contacto.php%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/contacto.php'" tppabs="http://programacion.com/contacto.php">Contacto</a> - <a href="javascript:if(confirm('http://programacion.com/datosleg.php%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://programacion.com/datosleg.php'" tppabs="http://programacion.com/datosleg.php">Datos legales</a></font><p align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">ReD Internet:
+<a href="javascript:if(confirm('http://www.ferca.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.ferca.com/'" tppabs="http://www.ferca.com/" target="_blank">Hospedaje Web</a> | <a href="javascript:if(confirm('http://www.misms.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.misms.com/'" tppabs="http://www.misms.com/" target="_blank">envio sms gratis</a>
+| <a href="javascript:if(confirm('http://www.salvapantallaspc.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.salvapantallaspc.com/'" tppabs="http://www.salvapantallaspc.com/" target="_blank">Salvapantallas</a> |
+<a href="javascript:if(confirm('http://www.ociohispano.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.ociohispano.com/'" tppabs="http://www.ociohispano.com/" target="_blank"><b>Fondos de Escritorio, famosas</b></a><b> </b>| <a href="javascript:if(confirm('http://www.melodias-moviles-gratis.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.melodias-moviles-gratis.com/'" tppabs="http://www.melodias-moviles-gratis.com/" target="_blank">melodias moviles gratis</a>| <a href="javascript:if(confirm('http://www.recursosgratis.com/%20%20\n\nThis%20file%20was%20not%20retrieved%20by%20Teleport%20Pro,%20because%20it%20is%20addressed%20on%20a%20domain%20or%20path%20outside%20the%20boundaries%20set%20for%20its%20Starting%20Address.%20%20\n\nDo%20you%20want%20to%20open%20it%20from%20the%20server?'))window.location='http://www.recursosgratis.com/'" tppabs="http://www.recursosgratis.com/" target="_blank">Gratis</a></font></p></td>
+</tr>
+</tbody></table>
+</td></tr></tbody></table>
+
+</a></body></html>

@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Gentium Book Basic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Gentium Book Basic'), local('GentiumBookBasic'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/IRFxB2matTxrjZt6a3FUntZP4GUu-EsApAyJMU_dJ9I.woff2) format('woff2'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/IRFxB2matTxrjZt6a3FUnsiUQA3_wO-qQTJfqhvSKS0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Gentium Book Basic';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Gentium Book Basic Bold'), local('GentiumBookBasic-Bold'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/T2vUYmWzlqUtgLYdlemGnYRjMofpY2QVEIrKQ01iDTw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/T2vUYmWzlqUtgLYdlemGnVIi2N2FDuziJMXLp6dUo54.woff) format('woff');
+}
+@font-face {
+  font-family: 'Gentium Book Basic';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Gentium Book Basic Italic'), local('GentiumBookBasic-Italic'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/qHqW2lwKO8-uTfIkh8FsUXUql-1tEtvjER-FQGS8CNg.woff2) format('woff2'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/qHqW2lwKO8-uTfIkh8FsUfrqj88NXfAsM1m2qetzTrY.woff) format('woff');
+}
+@font-face {
+  font-family: 'Gentium Book Basic';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Gentium Book Basic Bold Italic'), local('GentiumBookBasic-BoldItalic'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/632u7TMIoFDWQYUaHFUp5ANP697_9vdFBSYQK024I8k.woff2) format('woff2'), url(http://fonts.gstatic.com/s/gentiumbookbasic/v6/632u7TMIoFDWQYUaHFUp5HLdHZVRci2HdkkDqhT5urM.woff) format('woff');
+}

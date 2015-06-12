@@ -1,0 +1,941 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<title>El API Struts. Programaci&oacute;n en Castellano.</title>
+<link rel="shortcut icon" href="/templates/default/imgs/favicon.ico" />
+<meta http-equiv="title" content="El API Struts" />
+<meta http-equiv="keywords" content="APIS Java, Java, Lenguajes orientados a objeto, artículos." />
+<meta http-equiv="description" content="Descripción del API Struts, la implementación del modelo MVC de Java." />
+<meta http-equiv="DC.Description" content="Descripción del API Struts, la implementación del modelo MVC de Java." />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="title" content="El API Struts" />
+<meta name="DC.Title" content="El API Struts" />
+<meta name="author" content="Programacion en Castellano, S.L." />
+<link rel="canonical" href="http://www.programacion.net/articulo/el_api_struts_150/%7Bprefijo%7D/graficos/item-lista.gif" />
+<meta name="DC.Creator" content="Programacion en Castellano, S.L." />
+<meta name="VW96.objecttype" content="Document" />
+<meta name="DC.Language" content="Spanish" />
+<meta name="distribution" content="global" />
+<meta name="resource-type" content="document" />
+<meta name="Revisit" content="1 days" />
+<meta name="robots" content="all" />
+<meta name="encoding" content="ISO-8859-1" />
+<meta name="verify-v1" content="h4J2cgDnMSuO/sumshZPfJUHkjw7eum37PsqAjQgNyw=" />
+<link type="text/css" href="http://programacion.net/compresion/_cmp_css_5886166f2f84fb311d53078eacd9a6b6.php" rel="stylesheet" />
+<script type="text/javascript" src="http://programacion.net/compresion/_cmp_javascript_9a11ab62af035bc734bd46dff5daa9ec.php"></script>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$("dd").hide();
+			$("dt a").click(function(){
+				$("dd:visible").slideUp("slow");
+				$(this).parent().next().slideDown("slow");
+				return false;
+			});
+		});
+		
+		</script>
+</head>
+<body onload="prettyPrint();init('codetext');">
+<script type="text/javascript">
+window.google_analytics_uacct = "UA-50825266-2";
+</script>
+<div id="contenedor">
+
+<div id="header" onmouseover="solapas('',''); ">
+<div id="logo">	
+<a href="/">
+<img  src="/templates/default/css/images/logo.gif" border="0" alt="Programaci&oacute;n en castellano"/>
+</a>
+</div>
+<div id="header_banner">
+
+<script type="text/javascript">
+  ( function() {
+    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+    var unit = {"calltype":"async[2]","publisher":"fercainternet","width":728,"height":90,"sid":"programacion-728x90"};
+    var placement_id = window.CHITIKA.units.length;
+    window.CHITIKA.units.push(unit);
+    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+}());
+</script>
+<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
+</div>	
+</div>
+
+<div id="menu">
+
+<div id="solapa_5">
+<div id="solapa">
+<a title="Inicio" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="/">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Inicio
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Noticias" class="enlace_categorias"  href="/noticias">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Noticias
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Articulos" class="enlace_categorias"  href="/articulos">	
+<div class="solapa_azul_oscuro" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Articulos
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Codigo" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="/codigos">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+C&oacute;digo
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Foros" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="/foros">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Foros
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Enlaces" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="/direcciones">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Enlaces
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="formaciÃ³n y cursos" alt="formaciÃ³n y cursos" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="http://www.formacion.com" target="_blank">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Formaci&oacute;n
+</div>
+</a>
+</div>	
+</div>
+<div id="solapa_5">
+<div id="solapa">
+<a title="Anuncios" class="enlace_categorias" onmouseover="solapas('mostrar',5); "  href="/tablon">	
+<div class="solapa_verde" onmouseover="this.className='solapa_azul_oscuro';" onmouseout="this.className='solapa_verde';">
+Anuncios
+</div>
+</a>
+</div>	
+</div>
+<a href="/login"><img src="/templates/default/imgs/conecta.png" border="0" style="padding-top:15px;paddign-right:5px;"></a>
+<a href="/registro"><img src="/templates/default/imgs/registra.png" border="0" style="padding-top:15px;"></a>
+</div>
+<div id=submenu >
+<div id="menu_left" >
+</div>
+<div style="width:98%;height:40px;background-color:#1F2F42;color:#1F2F42">
+&nbsp;
+</div>
+</div>
+<div id="publicidad278">
+
+</div> 
+
+<div onmouseover="solapas('',''); " id="content">
+
+<style>
+body { font-family: Arial; font-size: 12px; }
+dl { width: 100%; }
+dl,dd { margin: 0; }
+dt { background: #1F2F42; font-size: 12px; padding: 5px; margin: 2px; color:#FFFFFF;}
+dt a { color: #FFF; text-decoration: none;}
+dd a { color: #1F2F42; text-decoration: none;}
+dd {  background: #9DBD34; }
+ul { list-style: none; padding: 5px; }
+</style>
+<div id="left_column">
+<span style="font-family:helvetica; font-size:25px; color:#2A2A2A"><b>Categor&iacute;as destacadas</b></span><hr>
+<center>
+<a href="/php" title="programacion php"><img src="/templates/default/imgs/php-logo_peqbn.jpg" onmouseout="this.src='/templates/default/imgs/php-logo_peqbn.jpg'" onmouseover="this.src='/templates/default/imgs/php-logo_peq.jpg'" border="0" alt="programacion php"></a>&nbsp;<a href="/java" title="programacion java"><img src="/templates/default/imgs/Java_Logo_peqbn.png" onmouseout="this.src='/templates/default/imgs/Java_Logo_peqbn.png'" onmouseover="this.src='/templates/default/imgs/Java_Logo_peq.png'" border="0"></a>&nbsp;<a href="/asp"><img src="/templates/default/imgs/asp_logo_peqbn.gif" onmouseout="this.src='/templates/default/imgs/asp_logo_peqbn.gif'" onmouseover="this.src='/templates/default/imgs/asp_logo_peq.gif'" border="0"></a>&nbsp;<a href="/bases-de-datos"><img src="/templates/default/imgs/database_process_peqbn.png" onmouseout="this.src='/templates/default/imgs/database_process_peqbn.png'" onmouseover="this.src='/templates/default/imgs/database_process_peq.png'" border="0"></a>&nbsp;
+</center>
+<div id="hueco_libre"></div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+style="display:inline-block;width:300px;height:600px"
+data-ad-client="ca-pub-2841178153102000"
+data-ad-slot="6785513375"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div id="hueco_libre"></div>
+
+<iframe class="velocidad.es" type="text/html" width="300" height="250" src="//velocidad.es/testdevelocidad300.html" frameborder="0" scrolling="no"></iframe>
+<div id="hueco_libre"></div>
+
+<div id="hueco_libre"></div>
+</div>
+<div id="contenedor_interior">
+<div id="center_column">	
+<div id="cabecera_seccion">
+<div id="contenidoHome" style="width:98%;">
+<div id="explicacion_cat" >
+<span style="font-family:helvetica; font-size:36px; color:#2A2A2A;">
+<b>Art&iacute;culo</b>
+<hr>
+</div>
+</div>
+</div>
+<div id="centro_seccion_vista">	
+<div id="migas">
+<a href="/" class="migassin">Inicio</a>
+<a href="/articulos">Art&iacute;culo</a>
+<a href="/articulo/poo">Lenguajes orientados a objeto</a>	
+<a href="/articulo/java">Java</a>	
+<a href="/articulo/apis">APIS Java</a>	
+</div>
+<div  id="noticia_pdf">
+<div id="texto_azul_grande_largo_pdf">
+<table><tr>
+<td valign="top">
+<div id="texto_azul_grande_largo_pdf">
+<table>
+<tr>
+<td>
+<div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #2A2A2A;color:#FFFFFF;padding:4px;margin-top:4px;font-size:25px;width:40px;">
+<center><span id="numvotos">15</span></center>
+</div>
+<center>
+<div id="botonvotar">
+<div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #A84A40;color:#FFFFFF;padding:4px;margin-top:4px;font-size:10px;width:40px;cursor:hand;cursor:pointer;" onclick="votar_articulo(150, '10.90.24.78, 10.90.24.78, 127.0.0.1')">¡votar!</div>
+</center>
+</td>
+</tr>
+</table>
+</td><td>
+<h2 style="color:#2A2A2A">&nbsp;El API Struts</h2>
+</td></tr></table>
+</div>
+</div>
+<div id="prueba3" style="float:left; width:100%;"> 
+<div id="newtext" style="color: rgb(78, 78, 78); font-size:12px;"><?xml version="1.0" encoding="iso-8859-1"?><ul><li><a href="#pagina1">Introducción a Struts</a></li><ul><li><a href="#prerequisitos">Prerequisitos</a></li></ul><ul><li><a href="#prefacio">Prefacio: Un paso hacia el pasado (o una breve historia de Struts)</a></li></ul><ul><li><a href="#mvc">El Patrón de Diseño ('MVC') Modelo-Vista-Controlador</a></li></ul><ul><li><a href="#marco">Introducción al Marco de Trabajo de Struts</a></li></ul><ul><li><a href="#elmodelo">El Modelo: Estado del Sistema y JavaBeans de la Lógica de Negocio</a></li></ul><ul><li><a href="#lavista">La Vista: Páginas JSP y Componentes de Presentación</a></li></ul><ul><li><a href="#elcontrolador">El Controlador: ActionServlet y ActionMapping</a></li></ul></ul><br />
+<a xmlns:saxon="http://icl.com/saxon" name="pagina1"></a><h2 xmlns:saxon="http://icl.com/saxon">Introducción a Struts</h2>
+<a xmlns:saxon="http://icl.com/saxon" name="prerequisitos"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> Prerequisitos</h3>
+<p>
+Esta guía de usuario está escrita para desarrolladores Web activos, y asume que tenemos conocimientos sobre como funcionan las aplicaciones Web Java. Antes de empezar, deberíamos entender los básico de estas tecnologías:
+</p>
+<ul>
+<li><b>La secuencia Solicitud/Respuesta HTTP.</b>
+<br />La fuente canónica para esto es <a href="http://www.ietf.org/rfc/rfc2616.txt?number=2616">RFC 2616 - Hypertext Transfer Protocol (HTTP/1.1)</a>.</li>
+<p></p>
+<li><b>Java Servlets</b>.
+<br />Un buen lugar para empezar es <a href="http://java.sun.com/products/jsp/product.html">Sun Servlet product page</a> y <a href="http://java.sun.com/docs/books/tutorial/">Sun Java Tutorials</a>.</li>
+<p></p>
+<li><b>JavaServer Pages (JSP)</b>.
+<br />De igual forma, un buen lugar para emepzar es la <a href="http://java.sun.com/products/jsp/product.html">Sun JSP product page</a> y <a href="http://java.sun.com/docs/books/tutorial/">Sun Java Tutorials</a>.</li>
+<p></p>
+<li><b>JavaBeans</b>.
+<br />Muchas clases Struts están escritas como JavaBeans. Si no has trabajado antes con JavaBeans, puedes ver la página 
+<a href="http://java.sun.com/products/javabeans/">Sun JavaBean product page</a> y <a href="http://java.sun.com/docs/books/tutorial/">Sun Java Tutorials</a>.</li>
+</ul>
+<p>
+Si hemos creamos aplicaciones Web sobre otras plataformas, probablemente podremos seguir, y luego visitar las referencias arriba indicadas cuando lo necesitemos. Estas son tecnologías corazón que se utilizan en casi todos los proyectos desarrollados en Java
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="prefacio"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> Prefacio: Un paso hacia el pasado (o una breve historia de Struts)</h3>
+<p>
+Cuando se inventaron los Servlets Java, muchos programadores se dieron cuenta de que eran una Buena Cosa. Eran más rápidos y más potentes que el CGI estándard, portables, y extensibles infinitamente.
+</p>
+<p>
+Pero escribir infinitas sentencias <tt>println()</tt>  para enviar HTML al navegador era tirano y problemático. La respuesta fueron las JavaServer Pages, que nos dejaron escribir servlets dentro de ellas. Ahora los desarrolladores podían mezclar fácilmente HTML con código Java, y tener todas las ventajas de los servlets. ¡El cielo era el límite!
+</p>
+<p>
+Las aplicaciones web Java se convirtieron rápidamente en "centradas-en-JSP". Esto, por sí sólo no era en una mala cosa, pero hacían poco por resolver problemas de control de flujo y otros problemas endémicos de las aplicaciones Web.
+</p>
+<p>
+Claramente se necesitaba otro modelo...
+</p>
+<p>
+Muchos desarrolladores inteligentes se dieron cuenta que las JavaServer Pages <b>Y</b> y los servlets se podrían usar <b>juntos</b> para desplegar aplicaciones web. Los servlets podrían ayudar con el control de flujo, y las JPSs podrían enfocarse en el negocio odioso de escribir HTML. Usar JSP y servlets juntos se ha dado ha conocer como el Modelo 2 (cuando usar sólo JSPs era el Modelo 1). 
+</p>
+<p>
+Por supuesto, no hay nada nuevo bajo el Sol (Sun)... y muchos han apuntado rápidamente que el Modelo 2 de JSPs sigue el clásico patrón de diseño <b>Modelo-Vista-Controlador</b> de SmallTalk. Ahora es muy común usar los terminos Modelo 2 y MVC indistintamente.
+</p>
+<p>
+El proyecto Struts lo lanzó en Mayo del 2000, Craig R. McClanahan para proporcionar un marco de trabajo MVC estándard a la comunidad Java. En Julio del 2001, se liberó <b>Struts 1.0</b>, e <b>IOHO</b>, el modelo 2 de desarrollo Java nunca será lo mismo.
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="mvc"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> El Patrón de Diseño ('MVC') Modelo-Vista-Controlador</h3>
+<p>
+En el patrón de diseño MVC, el flujo de la aplicación está dirigido por un Controlador central. El Controlador delega solicitudes - en nuestro caso, solicitudes HTTP -- a un manejador apropiado. Los manejadores están unidos a un Modelo, y cada manejador actúa como un adaptador entre la solicitud y el Modelo. El Modelo representa, o encapsula, un estado o lógica de negocio de la aplicación. Luego el control normalmente es devuelto a través del Controlador hacia la Vista apropiada. El reenvío puede determinarse consultando los conjuntos de mapeos, normalmente cargados desde una base de datos o un fichero de configuración. Esto proporciona un acoplamiento cercano entre la Vista y el Modelo, que puede hacer las aplicaciones significativamente más fáciles de crear y de mantener.
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="marco"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> Introducción al Marco de Trabajo de Struts</h3>
+<p>
+Creyendo en el patrón de diseño Modelo-Vista-Controlador, las aplicaciones <b>Struts</b> tiene tres componentes principales: un servlet controlador, que está proporcionado por el propio <b>Struts</b>, páginas JSP (la "vista"), y la lógica de negocio de la aplicación (o el "modelo"). Veamos como esto funciona todo junto.
+</p>
+<p>
+El servlet controlador <b>Struts</b> une y enruta solicitudes HTTP a otros objetos del marco de trabajo, incluyendo JavaServer Pages y subclases <tt>org.apache.struts.action.Action</tt> porporcionadas por el desarrollador <b>Struts</b>. Una vez inizializado, el controlador analiza un fichero de configuración de recursos, La configuración de recursos define (entre otras cosas) los <tt>org.apache.struts.action.ActionMapping</tt> para una aplicación. El controlador usa estos mapeos para convertir las solicitudes HTTP en acciones de aplicación.
+</p>
+<p>
+Un <tt>ActionMapping</tt> normalmente especificará:
+</p>
+<ul>
+<li><b>una path solicitado</b> (o "URI"),</li>
+<p></p>
+<li>El <b>tipo objeto</b> (subclase de <tt>Action</tt>) para actuar sobre la solicitud,</li>
+<p></p>
+<li>y otras propiedades según se necesite.</li>
+</ul>
+<p>
+El objeto <tt>Action</tt> puede manejar la solicitud y responder al cliente (normalmente un navegador Web), o indicar a que control debería ser reenviado. Por ejemplo, si un logín tiene éxito, una acción logín podría desear reenviar la petición hacia el <b>mainMenu</b>. 
+</p>
+<p>
+Los objetos <tt>Action</tt> tienen acceso al servlet controlador de la aplicación, y por eso tienen acceso a los métodos del servlet. Cuando se reenvia un control, un objeto <b>Action</b> puede reenviar indirectametne uno o más objetos compartidos, incluyendo JavaBeans, situándolos en una de las colecciones estándard compartidas por los servlets Java.
+</p>
+<p>
+Un objeto acción puede crear un bean de tarjeta de compra,  o un ítem de la tarjeta, situando el bean en la colección de sesión, y luego reenviando el control a otro mapeo. Este mapeo podría usar una página JavaServer Page para mostrar los contenidos de la tarjeta del usuario. Como cada cliente tiene su propia sesión, cada uno también tendrá su propia tarjeta de compra. En una aplicación <b>Struts</b>, la mayoría de la lógica del negocio se puede representar usando JavaBeans. Una <tt>Action</tt> puede llamar a las propiedades de un JavaBean sin conocer realmente como funciona. Esto encapsula la lógica del negocio, para que la <tt>Action</tt> pueda enfocarse en el manejo de errores y dónde reenviar el control.
+</p>
+<p>
+Los JavaBeans también se pueden usar para manejar formularios de entrada. Un problema clave en el diseño de aplicaciones Web es retener y  validar lo que el usuario ha introducido entre solicitudes. Con <b>Struts</b>, podemos definir un conjunto de clases bean formulario, subclasificando <tt>org.apache.struts.action.ActionForm</tt>, y almacenar fácilmente los datos de un formulario de entrada en estos beans formularios. El bean se graba en una de las colecciones estándard o de contexto compartidas, por eso puede ser usado por otros objetos, especialmente un objeto <tt>Action</tt>. 
+</p>
+<p>
+El bean de formulario puede usarlo una JSP para recoger datos del usuario ... por un objeto <tt>Action</tt> para validar los datos introducidos por el usuario ... y luego de nuevo por la JSP para rellenar los campos del fomulario. En el caso de validación de errores, <b>Struts</b> tiene un mecanismo compartido para lanzar y mostrar mensajes de error.
+</p>
+<p>
+Un bean de formulario <b>Struts</b> se declara en la configuración de recursos definida en un fichero fuente Java, y enlazado a un <tt>ActionMapping</tt> usando un nombre de propiedad comnún. Cuando una solicitud llama a un <b>Action</b> que usa un bean de formulario, el servlet controlador recupera o crea el bean formulario, y lo pasa el objeto <b>Action</b>. Este objeto entonces puede chequear los contenidos del bean de formulario antes de que su formulario de entrada se muestre, y también la cola de mensajes a manejar por el formulario. Cuando esta listo, el objeto <b>Action</b> puede devolver el control con un reenvio a su formulario de entrada, usando un JSP. El controlador puede responder a la solicitud HTTP y dirigir al cliente a la JavaServer Page. 
+</p>
+<p>
+El marco de trabajo <b>Struts</b> incluye etiquetas personalizadas que pueden rellenar automáticamente los campos de un formulario o un bean de formulario. Lo único que la mayoría de las páginas JSP necesitan saber sobre el resto del marco de trabajo son los nombres de los campos apropiados y dónde enviar el formulario. Los componentes como los mensajes "encolados" por el <b>Action</b> pueden salir usando una simple etiqueta personalizada. También se pueden definir otras etiquetas especificas de la aplicación para ocultar detalles de implementación de las páginas JSPs.
+</p>
+<p>
+Las etiquetas personalizadas en el marco de trabajo <b>Struts</b> están diseñadas para usar las características de internacionaización incluidas en la plataforma Java. Todas las etiquetas de campos y los mensajes pueden recuperarse desde un recurso de mensajes, y Java puede proporcionar automáticamente el recurso correcto para el idioma y país de un cliente. Para proporcionar mensajes para otro idioma, simplemente añadimos otro fichero de recurso.
+</p>
+<p>
+Junto al internacionalismo, otros beneficios de esta aproximación son las etiquetas consistentes entre formularios, y la posibilidad de revisar todas las etiquetas  y mensajes desde una localización central.
+</p>
+<p>
+Para la aplicación más simple, un objeto <b>Action</b> podría algunas veces manejar la lógica de negocio asociada con una solicitud. <b>Sin embargo, en lamayoría de los casos, un objeto Action, debería llamar a otro objeto, normalmente un JavaBean, para realizar la lógica de negocio real.</b> Esto permite al objeto <b>Action</b> enfocarse en el manejo de errores y el control de flujo, en vez de en la lógica del negocio. Para permitir su reutilizacion en otras plataformas, los JavaBeans de lógica de negocio no deberían referirse a ningún objeto de aplicación Web. El objeto <b>Action</b> debería traducir los detalles necesarios de la solicitud HTTP y pasarlos a los beans de la lógica del negocio como variables normales de Java.
+</p>
+<p>
+Por ejemplo, en una aplicación de base de datos:
+</p>
+<ul>
+<li>Un bean de lógica de negocio conectaría y consultaría la base de datos,</li>
+<p></p>
+<li>El bean de lógica de negocio devolvería el resultado al objeto <b>Action</b>,</li>
+<p></p>
+<li>El objeto <b>Action</b> almacenarçia el resultado en un bean formulario en la solicitud,</li>
+<p></p>
+<li>La JavaServer Page mostraría el resultado en un formulario HTML.</li>
+</ul>
+<p>
+Ni el objeto <b>Action</b> ni la página JSP necesitan saber (o no les importa) de dónde viene le resultado. Sólo necesitan saber cómo empaquetarlo y mostrarlo.
+</p>
+<p>
+El resto de esta guía de usuario explica varios componentes <b>Struts</b> en gran detalle. La versión <b>Struts</b> también incluye varias Guías de Desarrollo que cubren varios aspectos de los marcos de trabajo, junto con aplicaciones de ejemplo, el API estándard JavaDoc, y, por supuesto, el código fuente completo!
+</p>
+<p>
+Struts se distribuye bajo la licencia de la <b>Apache Software Foundation</b>. El código tiene copyright pero es gratuito para usarlo en cualquier aplciación. Puedes ver las especificaciones en <a href="http://www.apache.org/LICENSE-1.1">ASF license</a>.
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="elmodelo"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> El Modelo: Estado del Sistema y JavaBeans de la Lógica de Negocio</h3>
+<p>
+La parte del <b>Modelo</b> de un sistema basado en MVC puede dividirse en conceptos--el estado interno del sistema, y las acciones que pueden tomarse para cambiar el estado. En términos gramáticos, podríamos pensar en la información de estado como <b>nombres</b> (cosas) y las acciones como <b>verbos</b> (cambios del estado de esas cosas).
+</p>
+<p>
+Generalmente, nuestra aplicación representará un estado interno del sistema como un conjunto de uno o más JavaBeans, con propiedades que representan los detalles del estado. Dependiendo de la complejidad de nuestra aplciación, estos beans pueden ser autocontenidos (y saber como guardar su información de estado persistentemente de alguna forma), o podrían ser fachadas que saben cómo recuperar información de fuentes externas (como una base de datos) cuando es solicitado. Los Entity Enterprise JavaBeans (Entity EJBs) también se usan comunmente para representar estados internos.
+</p>
+<p>
+Las aplicaciones de gran escala normalmente representarán un conjunto de posibles acciones lógicas de negocio con métodos que pueden ser llamados sobre los beans que mantienen su información de estado. Por ejemplo, podríamos tener un bean de una tarjeta de compra, almacenado en el ámbito de sesión por cada usuario actual con las propiedades que representan el conjunto actual de ítems que el usuario ha decidio comprar. Este bean también podría tener un método <tt>checkOut()</tt> que autorice la tarjeta de crédito del usuario, y envíe el pedio al almacen para que sea remitido. Otros sistemas representarán las acciones disponibles de forma separada, quizas como Session Enterprise JavaBeans (Session EJBs). 
+</p>
+<p>
+Por otro lado, en algunas aplicaciones de menor escala, las acciones disponibles podrían estar embebidas dentro de clases <tt>Action</tt> que son parte del rol del Controlador. Esto es apropiado cuando la lógica es muy simple, o donde no está contemplada la reutilización de la lógica de negocio en otros entornos. El marco de trabajo <b>Struts</b> soporta cualquiera de estas aproximaciones, pero nosotros recomendamos <b>encarecidamente</b> separar la lógica de negocio ("cómo se hace") del rol que juegan las clases <tt>Action</tt>  ("que hace").
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="lavista"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> La Vista: Páginas JSP y Componentes de Presentación</h3>
+<p>
+La parte de la <b>Vista</b> de una aplicación basada en <b>Struts</b> generalmente está construida usando tecnología JavaServer Pages (JSP). Las págnas JSP pueden contener texto HTML estático (o XML) llamado "plantilla de texto", además de la habilidad de insertar contenido dinámico basado en la interpretación (en el momento de solicitud de la página) de etiquetas de acción especiales. El entorno JSP incluye un conjunto de etiquetas estándard, como <tt>&lt;jsp:useBean&gt;</tt>. Además, hay una facilidad estándard para definir nuestras propias etiquetas, que están organizadas en "librerías de etiquetas personalizadas".
+</p>
+<p>
+<b>Struts</b> incluye una extensa librería de etiquetas personalizadas que facilitan la creación de interfaces de usuario que están completamente internacionalizados, y que interactúan amigablemente con beans <tt>ActionForm</tt> que son parte del <b>Modelo</b> del sistema. El uso de estas etiquetas se explica más adelante en detalle.
+</p>
+<p>
+Además de las páginas JSP y la acción y las etiquetas personalizadas que contienen, normalmente los objetos de negocio necesitan poder dibujarse a sí mismos en HTML (o XML), basándose en su estado actual en el momento de la solicitud. La salida renderizada desde dichos objetos puede incluirse fácilmente en una página JSP resultante usando la etiqueta de acción estándard <tt>&lt;jsp:include&gt;</tt>. 
+</p>
+<a xmlns:saxon="http://icl.com/saxon" name="elcontrolador"></a><h3 xmlns:saxon="http://icl.com/saxon"><img src="{prefijo}/graficos/item-lista.gif" align="absmiddle" alt="." /> El Controlador: ActionServlet y ActionMapping</h3>
+<p>
+La parte <b>Controlador</b> de la aplicación está enfocada en las solicitudes recibidas desde el cliente (normalmente un usuario ejecutando un navegador Web), decidiendo qué función de la lógica de negocio se va a realizar, y luego delegando la responsabilidad para producir la siguiente fase del interface de usuario en un componente  <b>Vista</b> apropiado. En <b>Struts</b>, el componente principal del <b>Controlador</b> es un servlet de la clase <tt>ActionServlet</tt>. Este servlet está configurado definiendo un conjunto de <tt>ActionMappings</tt>. Un <tt>ActionMapping</tt> define un <tt>path</tt> que se compara contra la URI solicitada de la solicitud entrante, y normalmente especifica el nombre totalmente cualificado de clase de una clase <b>Action</b>. Todas las <b>Actions</b> son subclases de <tt>org.apache.struts.action.Action</tt>. Las acciones encapsulan la lógica del negocio, interpretan la salida, y por último despachan el control al componente <b>Vista</b> apropiado para la respuesta creada.
+</p>
+<p>
+<b>Struts</b> también soporta la habilidad de usar clases <tt>ActionMapping</tt> que tienen propiedades adicionales más allá de las estándard requeridas para operar el marco de trabajo. Esto nos permite almacenar información adicional específica de nuestra aplciación, pero aún utiliza las características restantes del marco de trabajo. Además, <b>Struts</b> nos permite definir nombres lógicos para los controles a los que se debería reenviar para que un método actión pueda preguntar por la página "Main Menu" (por ejemplo), sin saber el nombre real de la página JSP correspondiente. Estas características nos ayudan a separar la lógica de control (qué hacer) de la lógica de la vista (cómo se renderiza).
+</p>
+</div>
+</div>
+<div id="hueco_libre"></div>
+<div id="noticia_informacion">
+<table width="100%" style="margin-bottom:10px;">
+<tr>
+<td width="50%" align="left">&nbsp;</td>
+<td width="50%" align="right"><a href="/articulo/el_api_struts_150/2"><img src="/templates/default/imgs/sig.png" border="0"></a></td>
+</tr>
+</table>
+<div id="noticia_autor" style="width:50%">
+<table>
+<tr>
+<td><img src="/templates/default/imgs/icn_user.png"></td>
+<td>Publicado por:<br><b>									Eloy A. Esteban 
+</b><br></td>
+</tr>
+</table>
+</div>
+<div id="noticia_votos" style="width:50%">
+<table><tr>
+<td valign="top">
+<table><tr>
+<td style="cursor:hand;cursor:pointer;" onclick="ver_recomendar();"><img src="/templates/default/imgs/mail.gif"></td>
+<td align="left"><span style="color:#5784B6;">Recomendar<br>a un amigo</span></td></tr></table>
+</td><td valign="top">
+<table><tr>
+<td style="cursor:hand;cursor:pointer;" onclick="ver_redes_sociales();"><img src="/templates/default/imgs/icon_download.gif"></td>
+<td align="left"><span style="color:#529B0F;">Compartir<br>en redes</span></td></tr></table>
+</td>
+</tr></table>
+
+</div>
+<div id="email_amigo" style="float:left;display:none;">
+<form name="recomendar_amigo" method="POST" action="">
+<div style="padding-left:270px;"><img src="/templates/default/imgs/flecha_azul.PNG"></div>
+<div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #5784B6;color:#FFFFFF;padding:10px;font-size:30px;width:300px;">
+<span style="font-size:12px;" color="#FFFFFF">Email</span>&nbsp;<input name="email_friend" type="text"style="color:#383838;"  size="30" value="Escribe el correo de tu amigo" onclick="this.value='';">&nbsp;<input name="enviar" type="image" src="/templates/default/imgs/ok.PNG">
+</div>
+</form>
+</div>
+<div id="redes_sociales" style="float:left;display:none">
+<div style="padding-left:390px;"><img src="/templates/default/imgs/flecha_verde.PNG"></div>
+<div style="-moz-border-radius:5px 5px 5px 5px;margin-left:140px;background:none repeat scroll 0 0 #529B0F;color:#FFFFFF;padding:10px;font-size:30px;width:300px;"><div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #FFFFFF;color:#FFFFFF;padding:10px;font-size:30px;width:280px;"><a href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Url=http://nuevo.programacion.com/articulo/El_API_Struts_150&Title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010163003_blinklist.gif" border="0"></a><a href="http://www.propeller.com/submit/?url=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010092718_propeller2.png" border="0"></a><a href="http://reddit.com/submit?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170059_reddit.gif" border="0"></a><a href="http://slashdot.org/bookmark.pl?title=El API Struts&url=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170153_slashdot.gif" border="0"></a><a href="http://sphinn.com/index.php?c=post&m=submit&link=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170357_sphinn.png" border="0"></a><a href="http://www.stumbleupon.com/submit?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170456_stumbleupon.gif" border="0"></a><a href="http://technorati.com/faves?add=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170556_technorati.jpg" border="0"></a><a href="http://tipd.com/submit.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170642_tipd.gif" border="0"></a><a href="http://www.tumblr.com/share?v=3&u=http://nuevo.programacion.com/articulo/El_API_Struts_150&t=El API Struts&s=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170758_Tumblr.png" border="0"></a><a href="http://twitter.com/home?status=El API Struts - http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010170857_twitter.png" border="0"></a><a href="http://bookmarks.yahoo.com/toolbar/savebm?u=http://nuevo.programacion.com/articulo/El_API_Struts_150&t=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010171043_bookmark_yahoo.png" border="0"></a><a href="http://buzz.yahoo.com/submit/?submitUrl=http://nuevo.programacion.com/articulo/El_API_Struts_150&submitHeadline=El API Struts&submitSummary=Descripción del API Struts, la implementación del modelo MVC de Java.&submitCategory=science&submitAssetType=text" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010171158_yahoo-buzz.png" border="0"></a><a href="http://meneame.net/submit.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010085333_meneame.gif" border="0"></a><a href="http://tec.fresqui.com/post?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010085857_fresqui.png" border="0"></a><a href="http://blogmemes.com/post.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010090334_blogmemes.png" border="0"></a><a href="http://enchilame.com/submit.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010090424_enchilame.gif" border="0"></a><a href="http://connect.aim.com/share/?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010091843_aol.png" border="0"></a><a href="http://bitacoras.com/anotaciones/http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010090621_bitacoras.png" border="0"></a><a href="http://posterous.com/share?linkto=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts&selection=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165902_posterous.png" border="0"></a><a href="http://ping.fm/ref/?link=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts&body=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165749_ping-fm.png" border="0"></a><a href="http://www.newsvine.com/_tools/seed&save?u=http://nuevo.programacion.com/articulo/El_API_Struts_150&h=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165650_newsvine.gif" border="0"></a><a href="http://delicious.com/post?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010163431_delicious-full.jpg" border="0"></a><a href="http://www.designfloat.com/submit.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts " target="_blank" style="padding:2px;"><img src="/files/social_network/27012010163613_design_float.gif" border="0"></a><a href="http://digg.com/submit?phase=2&url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts&bodytext=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010163745_digg.jpeg" border="0"></a><a href="http://www.diigo.com/post?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts " target="_blank" style="padding:2px;"><img src="/files/social_network/27012010163943_diigo.jpeg" border="0"></a><a href="http://www.dzone.com/links/add.html?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts " target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164051_dzone.gif" border="0"></a><a href="http://www.facebook.com/share.php?u=http://nuevo.programacion.com/articulo/El_API_Struts_150&t=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164202_facebook.png" border="0"></a><a href="http://cgi.fark.com/cgi/fark/farkit.pl?h=El API Struts&u=http://nuevo.programacion.com/articulo/El_API_Struts_150 " target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164312_Fark.jpg" border="0"></a><a href="http://www.friendfeed.com/share?title=El API Struts&link=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164418_friendfeed.jpg" border="0"></a><a href="http://www.google.com/bookmarks/mark?op=edit&bkmk=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts&annotation=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164539_google_bookmarks.gif" border="0"></a><a href="http://news.ycombinator.com/submitlink?u=http://nuevo.programacion.com/articulo/El_API_Struts_150&t=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164658_hackernews.png" border="0"></a><a href="http://identi.ca/notice/new?status_textarea=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164800_Identi_ca.JPG" border="0"></a><a href="http://www.linkedin.com/shareArticle?mini=true&url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts&summary=Descripción del API Struts, la implementación del modelo MVC de Java." target="_blank" style="padding:2px;"><img src="/files/social_network/27012010164913_linkedin.jpg" border="0"></a><a href="https://favorites.live.com/quickadd.aspx?marklet=1&url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165036_livefavorites.gif" border="0"></a><a href="http://www.mister-wong.com/addurl/?bm_url=http://nuevo.programacion.com/articulo/El_API_Struts_150&bm_description=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165140_mister-wong.gif" border="0"></a><a href="http://www.mixx.com/submit?page_url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts " target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165247_mixx.jpg" border="0"></a><a href="http://www.myspace.com/Modules/PostTo/Pages/?u=http://nuevo.programacion.com/articulo/El_API_Struts_150&t=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165436_myspace.png" border="0"></a><a href="http://www.netvibes.com/share?title=El API Struts&url=http://nuevo.programacion.com/articulo/El_API_Struts_150" target="_blank" style="padding:2px;"><img src="/files/social_network/27012010165542_ico_netvibes.gif" border="0"></a><a href="http://www.sonico.com/share.php?url=http://nuevo.programacion.com/articulo/El_API_Struts_150&title=El API Struts" target="_blank" style="padding:2px;"><img src="/files/social_network/28012010091156_sonico-iso.gif" border="0"></a></div></div></div>
+</div>
+<div id="hueco_libre"></div>
+<center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+style="display:inline-block;width:336px;height:280px"
+data-ad-client="ca-pub-2841178153102000"
+data-ad-slot="7961195379"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+<div style="float:left;padding-bottom:30px;border-bottom:1px solid #a9a9a9;width:100%;">
+&nbsp;
+</div>
+<div id="list_comentarios" sytle="float:left; width:100%;">
+<div id="encabezado_comentarios"> Comentarios </div>
+<div id="hueco_libre"></div>
+<div id="list_comentarios" sytle="float:left; width:100%;">
+
+<fb:comments></fb:comments>
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+<script type="text/javascript">
+				FB.init("018423a8f9b437123d0558d16afd39c6", "/xd_receiver.htm");
+			</script>
+
+</div>
+</div>
+<div id="hueco_libre"></div>
+</div>
+</div>
+</div>
+<div id="columnaderecha" style="width:180px;float:left;">
+<div id="categorias">
+<style>
+body { font-family: Arial; font-size: 12px; }
+dl { width: 100%; }
+dl,dd { margin: 0; }
+dt { background: #1F2F42; font-size: 12px; padding: 5px; margin: 2px; color:#FFFFFF;width:160px;}
+dt a { color: #FFF; text-decoration: none;}
+dd a { color: #1F2F42; text-decoration: none;}
+dd {  background: #9DBD34; }
+ul#listacat { list-style: none; padding: 5px; width:160px;}
+</style>
+<form name="search" method="POST" action="/busqueda/">
+<input type="text" id="text_search" name="text_search" value="Buscar..." onclick="this.value='';" style="border:1px solid #CBC6BC;height:20px;">&nbsp;<input type="image" src="/templates/default/imgs/lupa.jpg">
+</form>
+<dl>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">BBDD</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/bases-de-datos">BBDD</a></li>
+<li><a href="/bdAccess" title="programaci&oacute;n Access">Access</a></li>
+<li><a href="/ado" title="programaci&oacute;n ADO">ADO</a></li>
+<li><a href="/adonet" title="programaci&oacute;n ADO.NET">ADO.NET</a></li>
+<li><a href="/DB2" title="programaci&oacute;n Base de datos de IBM">Base de datos de IBM</a></li>
+<li><a href="/FileMaker" title="programaci&oacute;n FileMaker">FileMaker</a></li>
+<li><a href="/firebird" title="programaci&oacute;n Firebird">Firebird</a></li>
+<li><a href="/maxdb" title="programaci&oacute;n MaxDB">MaxDB</a></li>
+<li><a href="/idSQLServer" title="programaci&oacute;n Microsoft SQL Server">Microsoft SQL Server</a></li>
+<li><a href="/idMySQL" title="programaci&oacute;n MySQL">MySQL</a></li>
+<li><a href="/bdOracle" title="programaci&oacute;n Oracle">Oracle</a></li>
+<li><a href="/PostgreSQL" title="programaci&oacute;n PostgreSQL">PostgreSQL</a></li>
+<li><a href="/progress" title="programaci&oacute;n Progress">Progress</a></li>
+<li><a href="/sql" title="programaci&oacute;n SQL">SQL</a></li>
+<li><a href="/sybase" title="programaci&oacute;n Sybase">Sybase</a></li>
+<li><a href="/Velneo" title="programaci&oacute;n Velneo">Velneo</a></li>
+<li><a href="/VisualFoxPro" title="programaci&oacute;n Visual FoxPro">Visual FoxPro</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Entornos de desarrollo</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/entornos">Entornos de desarrollo</a></li>
+<li><a href="/CppBuilder" title="programaci&oacute;n C++ Builder">C++ Builder</a></li>
+<li><a href="/delphi" title="programaci&oacute;n Delphi">Delphi</a></li>
+<li><a href="/otros-entornos" title="programaci&oacute;n Otros">Otros</a></li>
+<li><a href="/powerbuilder" title="programaci&oacute;n Power Builder">Power Builder</a></li>
+<li><a href="/VisualBasic" title="programaci&oacute;n Visual Basic">Visual Basic</a></li>
+<li><a href="/VisualCpp" title="programaci&oacute;n Visual C++">Visual C++</a></li>
+<li><a href="/visualstudionet" title="programaci&oacute;n Visual Studio .NET">Visual Studio .NET</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Entretenimiento</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/entretenimiento">Entretenimiento</a></li>
+<li><a href="/demos" title="programaci&oacute;n Demos">Demos</a></li>
+<li><a href="/juegos" title="programaci&oacute;n Juegos">Juegos</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Herramientas</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/herramientas">Herramientas</a></li>
+<li><a href="/compiladores" title="programaci&oacute;n Compiladores">Compiladores</a></li>
+<li><a href="/desweb" title="programaci&oacute;n Desarrollo web">Desarrollo web</a></li>
+<li ><a href="/cgis" title="programaci&oacute;n Desarrollo web">CGIs</a></li>
+<li ><a href="/editoresweb" title="programaci&oacute;n Desarrollo web">Editores Web</a></li>
+<li ><a href="/stats" title="programaci&oacute;n Desarrollo web">Estadisticas y contadores</a></li>
+<li ><a href="/imagenes" title="programaci&oacute;n Desarrollo web">Imágenes</a></li>
+<li ><a href="/navegadores" title="programaci&oacute;n Desarrollo web">Navegadores</a></li>
+<li ><a href="/otrosweb" title="programaci&oacute;n Desarrollo web">Otros recursos</a></li>
+<li ><a href="/promocion" title="programaci&oacute;n Desarrollo web">Promoción Paginas Web</a></li>
+<li ><a href="/serviciosweb" title="programaci&oacute;n Desarrollo web">Servicios web</a></li>
+<li ><a href="/validacionweb" title="programaci&oacute;n Desarrollo web">Validación y análisis de páginas Web</a></li>
+<li><a href="/editores" title="programaci&oacute;n Editores">Editores</a></li>
+<li><a href="/LotusNotes" title="programaci&oacute;n Lotus Notes & Domino">Lotus Notes & Domino</a></li>
+<li><a href="/matlab" title="programaci&oacute;n MATLAB">MATLAB</a></li>
+<li><a href="/servweb" title="programaci&oacute;n Servidores Web">Servidores Web</a></li>
+<li ><a href="/apache" title="programaci&oacute;n Servidores Web">Apache</a></li>
+<li ><a href="/cherokee" title="programaci&oacute;n Servidores Web">Cherokee</a></li>
+<li ><a href="/lighttpd" title="programaci&oacute;n Servidores Web">Lighttpd</a></li>
+<li ><a href="/nginx" title="programaci&oacute;n Servidores Web">nginx</a></li>
+<li ><a href="/tomcat" title="programaci&oacute;n Servidores Web">Tomcat</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Internet</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/internet">Internet</a></li>
+<li><a href="/asp" title="programaci&oacute;n ASP">ASP</a></li>
+<li><a href="/aspnet" title="programaci&oacute;n ASP.NET">ASP.NET</a></li>
+<li><a href="/cgi" title="programaci&oacute;n CGI">CGI</a></li>
+<li><a href="/idColdFusion" title="programaci&oacute;n ColdFusion">ColdFusion</a></li>
+<li><a href="/css" title="programaci&oacute;n CSS">CSS</a></li>
+<li><a href="/curl" title="programaci&oacute;n Curl">Curl</a></li>
+<li><a href="/flash" title="programaci&oacute;n Flash">Flash</a></li>
+<li><a href="/intGen" title="programaci&oacute;n Generales">Generales</a></li>
+<li><a href="/html" title="programaci&oacute;n HTML">HTML</a></li>
+<li><a href="/html5" title="programaci&oacute;n html 5">html 5</a></li>
+<li><a href="/php" title="programaci&oacute;n PHP">PHP</a></li>
+<li ><a href="/frameworkphp" title="programaci&oacute;n PHP">Framework en PHP</a></li>
+<li ><a href="/phpnuke" title="programaci&oacute;n PHP">PHP Nuke</a></li>
+<li><a href="/wap" title="programaci&oacute;n WAP">WAP</a></li>
+<li><a href="/XML" title="programaci&oacute;n XML">XML</a></li>
+<li ><a href="/appml" title="programaci&oacute;n XML">AppML</a></li>
+<li ><a href="/SVG" title="programaci&oacute;n XML">SVG y VML</a></li>
+<li ><a href="/idxhtml" title="programaci&oacute;n XML">XHTML</a></li>
+<li ><a href="/xsl" title="programaci&oacute;n XML">XSL, XSLT y Xpath</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Lenguajes de script</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/script">Lenguajes de script</a></li>
+<li><a href="/abap4" title="programaci&oacute;n ABAP/4">ABAP/4</a></li>
+<li><a href="/groovy" title="programaci&oacute;n Groovy">Groovy</a></li>
+<li><a href="/javascript" title="programaci&oacute;n Javascript">Javascript</a></li>
+<li><a href="/jquery" title="programaci&oacute;n Jquery">Jquery</a></li>
+<li><a href="/lua" title="programaci&oacute;n Lua">Lua</a></li>
+<li><a href="/munki" title="programaci&oacute;n Munki">Munki</a></li>
+<li><a href="/perl" title="programaci&oacute;n Perl">Perl</a></li>
+<li><a href="/python" title="programaci&oacute;n Python">Python</a></li>
+<li><a href="/vbscript" title="programaci&oacute;n VBScript">VBScript</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Lenguajes imperativos</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/imperativos">Lenguajes imperativos</a></li>
+<li><a href="/ada" title="programaci&oacute;n Ada">Ada</a></li>
+<li><a href="/c" title="programaci&oacute;n C">C</a></li>
+<li><a href="/clipper" title="programaci&oacute;n Clipper & xBase">Clipper & xBase</a></li>
+<li><a href="/cobol" title="programaci&oacute;n Cobol">Cobol</a></li>
+<li><a href="/assembler" title="programaci&oacute;n Ensamblador">Ensamblador</a></li>
+<li ><a href="/80x86" title="programaci&oacute;n Ensamblador">80x86</a></li>
+<li><a href="/euphoria" title="programaci&oacute;n Euphoria">Euphoria</a></li>
+<li><a href="/fortran" title="programaci&oacute;n Fortran">Fortran</a></li>
+<li><a href="/pascal" title="programaci&oacute;n Pascal">Pascal</a></li>
+<li><a href="/qbasic" title="programaci&oacute;n QuickBasic">QuickBasic</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Lenguajes orientados a objeto</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/poo">Lenguajes orientados a objeto</a></li>
+<li><a href="/csharp" title="programaci&oacute;n C#">C#</a></li>
+<li><a href="/cpp" title="programaci&oacute;n C++">C++</a></li>
+<li><a href="/eiffel" title="programaci&oacute;n Eiffel">Eiffel</a></li>
+<li><a href="/java" title="programaci&oacute;n Java">Java</a></li>
+<li ><a href="/Apis" title="programaci&oacute;n Java">APIS Java</a></li>
+<li ><a href="/blog" title="programaci&oacute;n Java">Blogs</a></li>
+<li ><a href="/ides" title="programaci&oacute;n Java">IDEs para Java</a></li>
+<li ><a href="/J2EE" title="programaci&oacute;n Java">J2EE</a></li>
+<li ><a href="/j2me" title="programaci&oacute;n Java">J2ME</a></li>
+<li ><a href="/J2SE" title="programaci&oacute;n Java">J2SE</a></li>
+<li ><a href="/JavaXML" title="programaci&oacute;n Java">Java y XML</a></li>
+<li ><a href="/jdbc" title="programaci&oacute;n Java">JDBC</a></li>
+<li ><a href="/JDCTECH" title="programaci&oacute;n Java">JDC TECH</a></li>
+<li ><a href="/New2Java" title="programaci&oacute;n Java">Nuevo en Java</a></li>
+<li ><a href="/Servidores" title="programaci&oacute;n Java">Servidores de Aplicaciones Java</a></li>
+<li><a href="/ruby" title="programaci&oacute;n Ruby">Ruby</a></li>
+<li><a href="/scala" title="programaci&oacute;n Scala">Scala</a></li>
+<li><a href="/smalltalk" title="programaci&oacute;n Smalltalk">Smalltalk</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Otros lenguajes</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/otros">Otros lenguajes</a></li>
+<li><a href="/erlang" title="programaci&oacute;n Erlang">Erlang</a></li>
+<li><a href="/fsharp" title="programaci&oacute;n F#">F#</a></li>
+<li><a href="/haskell" title="programaci&oacute;n Haskell">Haskell</a></li>
+<li><a href="/j" title="programaci&oacute;n J">J</a></li>
+<li><a href="/prolog" title="programaci&oacute;n Prolog">Prolog</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Plataformas</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/ssoo">Plataformas</a></li>
+<li><a href="/net" title="programaci&oacute;n .NET">.NET</a></li>
+<li ><a href="/sharepoint" title="programaci&oacute;n .NET">SharePoint</a></li>
+<li><a href="/android" title="programaci&oacute;n Android">Android</a></li>
+<li><a href="/as400" title="programaci&oacute;n AS/400">AS/400</a></li>
+<li><a href="/freebsd" title="programaci&oacute;n FreeBSD">FreeBSD</a></li>
+<li><a href="/Linux" title="programaci&oacute;n Linux">Linux</a></li>
+<li><a href="/macosx" title="programaci&oacute;n Mac OS X">Mac OS X</a></li>
+<li><a href="/os2" title="programaci&oacute;n OS/2">OS/2</a></li>
+<li><a href="/palmos" title="programaci&oacute;n PalmOS">PalmOS</a></li>
+<li><a href="/WindowsNT" title="programaci&oacute;n Windows">Windows</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Teoría</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/teoria">Teoría</a></li>
+<li><a href="/algoritmos" title="programaci&oacute;n Algoritmos">Algoritmos</a></li>
+<li><a href="/metodologia" title="programaci&oacute;n Metodología">Metodología</a></li>
+<li><a href="/oo" title="programaci&oacute;n Orientación a objetos">Orientación a objetos</a></li>
+<li><a href="/redes" title="programaci&oacute;n Redes">Redes</a></li>
+<li><a href="/bbddTeoria" title="programaci&oacute;n Teoría de bases de datos">Teoría de bases de datos</a></li>
+<li><a href="/UML" title="programaci&oacute;n UML">UML</a></li>
+</ul>
+</dd>
+<dt><a href="xinha_editor.html/"><font style="color:#FFF;font-weight:bold;">Varios</font></a><span style="text-align:right;float:right;"><img src="/templates/default/imgs/arrow_down.PNG"></span></dt>
+<dd>
+<ul  id="listacat">
+<li><a href="/varios">Varios</a></li>
+<li><a href="/cachear" title="programaci&oacute;n Cachear">Cachear</a></li>
+<li><a href="/chrome" title="programaci&oacute;n Chrome">Chrome</a></li>
+<li><a href="/firefox" title="programaci&oacute;n Firefox">Firefox</a></li>
+<li><a href="/generales" title="programaci&oacute;n Generales">Generales</a></li>
+<li><a href="/google" title="programaci&oacute;n Google">Google</a></li>
+<li><a href="/grafica" title="programaci&oacute;n Gráfica">Gráfica</a></li>
+<li><a href="/hardware" title="programaci&oacute;n Hardware">Hardware</a></li>
+<li><a href="/historia" title="programaci&oacute;n Historia">Historia</a></li>
+<li><a href="/ie9" title="programaci&oacute;n Internet Explorer 9">Internet Explorer 9</a></li>
+<li><a href="/iphone" title="programaci&oacute;n IPhone">IPhone</a></li>
+<li><a href="/personales" title="programaci&oacute;n Personales">Personales</a></li>
+<li><a href="/publicaciones" title="programaci&oacute;n Publicaciones">Publicaciones</a></li>
+<li><a href="/softlibre" title="programaci&oacute;n Software libre">Software libre</a></li>
+<li><a href="/windowsphone7" title="programaci&oacute;n Windows Phone 7">Windows Phone 7</a></li>
+<li><a href="/wordpress" title="programaci&oacute;n WordPress">WordPress</a></li>
+<li><a href="/wpf" title="programaci&oacute;n WPF">WPF</a></li>
+</ul>
+</dd>
+</dl>
+<div id="hueco_libre"></div>
+</div>
+<div id="left_column2" style="margin-top:-6px;">
+<div id="hueco_libre" style="background-color:#FFFFFF;"></div>
+<div id="explicacion_cat" style="padding:6px;background-color:#E8E7BF">
+<span style="font-family:helvetica; font-size:24px; color:#2A2A2A;">
+<b>&Uacute;ltimas noticias</b>
+<hr>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/noticia/algoritmo_del_banquero_2203" style="color:#4E4E4E;text-decoration:none;">algoritmo del banquero</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/noticia/programa_en_dev_c++_2202" style="color:#4E4E4E;text-decoration:none;">PROGRAMA EN DEV C++</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/noticia/ayuda_a_programar_c++_2201" style="color:#4E4E4E;text-decoration:none;">AYUDA A PROGRAMAR C++</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/noticia/prolog-programacion_logica_2200" style="color:#4E4E4E;text-decoration:none;">Prolog-programacion logica</a>
+</div>
+<div id="filalast" align="right" style="padding:5px;">
+<table><tr><td style="padding-right:10px;">
+<a href="/feeds_rss/rssnew.xml"><img src="/templates/default/imgs/rss-peq.gif" border="0"></a></td><td><div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #9DBD34;color:#FFFFFF;padding:4px;margin-top:4px;font-size:12px;width:50px;"><a href="/noticias" style="color:#FFFFFF;"><b>Ver m&aacute;s</b></a></div></td>
+</tr></table>
+</div>
+</div>	
+			
+<!--<div id="cabecera_seccion">
+<div id="solapa_izq"></div>
+<div id="solapa_center_pequena">LAST_NEWS</div>
+<div id="solapa_der"></div>
+</div>	
+<div id="centro_seccion_pequena">
+<div id="hueco_libre"></div>
+<div id="listado_opciones">
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif" align="left">
+</div>
+<div style="margin-left: 25px;">
+<a href="/noticia/algoritmo_del_banquero_2203">algoritmo del banquero</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif" align="left">
+</div>
+<div style="margin-left: 25px;">
+<a href="/noticia/programa_en_dev_c++_2202">PROGRAMA EN DEV C++</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif" align="left">
+</div>
+<div style="margin-left: 25px;">
+<a href="/noticia/ayuda_a_programar_c++_2201">AYUDA A PROGRAMAR C++</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif" align="left">
+</div>
+<div style="margin-left: 25px;">
+<a href="/noticia/prolog-programacion_logica_2200">Prolog-programacion logica</a>
+</div>
+</div>
+</div>
+<div id="hueco_libre"></div>
+<div id="ver_mas">
+<a href="/NEWS_URL">VIEW_MORE</a>
+</div>
+</div>
+<div id="pie_seccion">
+<div id="pie_izquierdo"></div>
+<div id="pie_centro_pequeno"></div>
+<div id="pie_derecho"></div>
+</div> -->		
+
+<div id="hueco_libre" style="background-color:#FFFFFF;"></div>
+<div id="explicacion_cat" style="padding:6px;background-color:#E8E7BF">
+<span style="font-family:helvetica; font-size:23px; color:#2A2A2A;">
+<b>&Uacute;ltimos art&iacute;culos</b>
+<hr>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/articulo/los_15_lenguajes_de_programacion_que_debes_aprender_en_este_ano_2015_989" style="color:#4E4E4E;text-decoration:none;">Los 15 lenguajes de programación que debes aprender en este año 2015</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/articulo/prism-_una_libreria_javascript_para_el_resaltado_de_codigo_en_nuestra_web_987" style="color:#4E4E4E;text-decoration:none;">Prism, una librería JavaScript para el resaltado de código en nuestra web</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/articulo/lazy_size-_una_biblioteca_javascript_para_hacer_lazy_load_en_todo_tipo_de_disenos_983" style="color:#4E4E4E;text-decoration:none;">Lazy Size, una biblioteca JavaScript para hacer lazy load en todo tipo de diseños</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/articulo/acortar_urls_con_goo_gl_y_php_978" style="color:#4E4E4E;text-decoration:none;">Acortar urls con goo.gl y PHP</a>
+</div>
+<div id="filalast" align="right" style="padding:5px;">
+<table><tr><td style="padding-right:10px;">
+<a href="/feeds_rss/rssarticle.xml"><img src="/templates/default/imgs/rss-peq.gif" border="0"></a></td><td><div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #9DBD34;color:#FFFFFF;padding:4px;margin-top:4px;font-size:12px;width:50px;"><a href="/articulos" style="color:#FFFFFF;"><b>Ver m&aacute;s</b></a></div></td>
+</tr></table>
+</div>
+</div>	
+
+<!-- <div id="cabecera_seccion">
+<div id="solapa_izq"></div>
+<div id="solapa_center_pequena">LAST_ARTICLE</div>
+<div id="solapa_der"></div>
+</div>
+<div id="centro_seccion_pequena">
+<div id="hueco_libre"></div>
+<div id="listado_opciones">
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/articulo/los_15_lenguajes_de_programacion_que_debes_aprender_en_este_ano_2015_989">Los 15 lenguajes de programación que debes aprender en este año 2015</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/articulo/prism-_una_libreria_javascript_para_el_resaltado_de_codigo_en_nuestra_web_987">Prism, una librería JavaScript para el resaltado de código en nuestra web</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/articulo/lazy_size-_una_biblioteca_javascript_para_hacer_lazy_load_en_todo_tipo_de_disenos_983">Lazy Size, una biblioteca JavaScript para hacer lazy load en todo tipo de diseños</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/articulo/acortar_urls_con_goo_gl_y_php_978">Acortar urls con goo.gl y PHP</a>
+</div>
+</div>
+</div>
+<div id="hueco_libre"></div>
+<div id="ver_mas">
+<a href="/ARTICLE_URL">VIEW_MORE</a>
+</div>
+</div>
+<div id="pie_seccion">
+<div id="pie_izquierdo"></div>
+<div id="pie_centro_pequeno"></div>
+<div id="pie_derecho"></div>
+</div> -->
+	
+<div id="hueco_libre" style="background-color:#FFFFFF;"></div>
+<div id="explicacion_cat" style="padding:6px;background-color:#E8E7BF">
+<span style="font-family:helvetica; font-size:24px; color:#2A2A2A;">
+<b>&Uacute;ltimos c&oacute;digos</b>
+<hr>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/codigo/messagebox_sencillo_con_jquery_ui_218" style="color:#4E4E4E;text-decoration:none;">MessageBox sencillo con JQuery UI</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/codigo/mascara_para_text_swt_140" style="color:#4E4E4E;text-decoration:none;">Mascara para Text (SWT)</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/codigo/convierte_cursor_de_lectura_en_cursor_de_escritura_138" style="color:#4E4E4E;text-decoration:none;">Convierte cursor de lectura en cursor de escritura</a>
+</div>
+<div id="filalast" style="border-bottom:1px solid #FFFFFF;color:#4E4E4E;font-size:12px;padding:5px;">
+&middot;&nbsp;<a href="/codigo/tres_en_raya_o_juego_del_gato_137" style="color:#4E4E4E;text-decoration:none;">Tres en Raya o Juego del Gato</a>
+</div>
+<div id="filalast" align="right" style="padding:5px;">
+<table><tr><td style="padding-right:10px;">
+<a href="/feeds_rss/rsscode.xml"><img src="/templates/default/imgs/rss-peq.gif" border="0"></a></td><td><div style="-moz-border-radius:5px 5px 5px 5px;background:none repeat scroll 0 0 #9DBD34;color:#FFFFFF;padding:4px;margin-top:4px;font-size:12px;width:50px;"><a href="/codigos" style="color:#FFFFFF;"><b>Ver m&aacute;s</b></a></div></td>
+</tr></table>
+</div>
+</div>	
+			
+<!-- <div id="cabecera_seccion">
+<div id="solapa_izq"></div>
+<div id="solapa_center_pequena">LAST_CODES</div>
+<div id="solapa_der"></div>
+</div>	
+<div id="centro_seccion_pequena">
+<div id="hueco_libre"></div>
+<div id="listado_opciones">
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/codigo/messagebox_sencillo_con_jquery_ui_218">MessageBox sencillo con JQuery UI</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/codigo/mascara_para_text_swt_140">Mascara para Text (SWT)</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/codigo/convierte_cursor_de_lectura_en_cursor_de_escritura_138">Convierte cursor de lectura en cursor de escritura</a>
+</div>
+</div>
+<div id="imagen_seccion">
+<div style="float:left; width:7px; height:5px;">
+<img src="/templates/default/css/images/ico_flecha.gif">
+</div>
+<div style="margin-left: 25px;">
+<a href="/codigo/tres_en_raya_o_juego_del_gato_137">Tres en Raya o Juego del Gato</a>
+</div>
+</div>
+</div>
+<div id="hueco_libre"></div>
+<div id="ver_mas">
+<a href="/CODE_URL">VIEW_MORE</a>
+</div>
+</div>
+<div id="pie_seccion">
+<div id="pie_izquierdo"></div>
+<div id="pie_centro_pequeno"></div>
+<div id="pie_derecho"></div>
+</div>	-->	
+
+<div id="hueco_libre" style="background-color:#FFFFFF;"></div>	
+
+</div>
+</div>
+</div>
+
+<div id="pie" style="float:left;background-image:url(/templates/default/imgs/mCbdtg.png);background-repeat:repeat-x;height:119px;width:100%;color:#FFFFFF;text-align:center;padding-top:10px;color:#CBC6BC;font-size:12px;">
+Copyright &copy; 1998-2014 Programación en Castellano. Todos los derechos reservados<br>
+<a href="/datos_legales" style="color:#CBC6BC;text-decoration:none;" title="datos legales" rel="nofollow">Datos legales</a> | <a href="/politica_de_privacidad" style="color:#CBC6BC;text-decoration:none;">Politica de privacidad</a> | <a href="/contacto" style="color:#CBC6BC;text-decoration:none;" title="contactar" rel="nofollow">Contacte con nosotros</a> | <a href="/publicidad" title="publicidad" rel="nofollow" style="color:#CBC6BC;text-decoration:none;">Publicidad</a><br><br>
+<a href="http://www.colorvivo.com" target="_blank" title="dise&ntilde;o web" style="color:#CBC6BC;text-decoration:none;" rel="nofollow">Diseño web y desarrollo web</a>. Un proyecto de los <a href="http://www.carrero.es" target="_blank" title="carrero" style="color:#CBC6BC;text-decoration:none;" rel="nofollow">hermanos Carrero.<br /><br />
+<b>Red internet</b>: <a href="http://www.stackscale.es/" target="_blank" title="cloud hosting" style="color:#CBC6BC;text-decoration:none;" rel="nofollow">cloud hosting</a><br />
+<b>M&aacute;s internet</b>: <a href="http://password.es/" target="_blank" title="password" style="color:#CBC6BC;text-decoration:none;">Password</a> | <a href="http://genfavicon.com/" target="_blank" title="generar favicon" style="color:#CBC6BC;text-decoration:none;">Favicon</a>
+</div>
+</div> 
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-50825266-2', 'programacion.net');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">clicky.init(208180);</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/208180ns.gif" /></p></noscript> 
+</body>
+</html>

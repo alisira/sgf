@@ -1,0 +1,17 @@
+
+/* /blog/css-sprites/ */
+.edit_item {background: transparent url(../images/repository/sprites_icon.png) left top no-repeat; height: 46px; margin-bottom: 5px; width: 40px;}
+.delete_item {background: transparent url(../images/repository/sprites_icon.png) -40px top no-repeat; height: 46px; margin-bottom: 5px; width: 36px;}
+.create_item {background: transparent url(../images/repository/sprites_icon.png) -76px top no-repeat; height: 46px; margin-bottom: 5px; width: 39px;}
+
+#change_icon {background: transparent url(../images/repository/sprites_icon.png) -76px top no-repeat; display: block; height: 46px; width: 39px;}
+	#change_icon:hover {background-position: -40px top; width: 36px;}
+
+/* /blog/jquery-on/ */
+.blog-test {background-color: #faf8f2; cursor: pointer; border: 1px solid #a95809; padding: 5px;}
+
+/* /blog/inline-block/ */
+.example1 ul li {background-color: #faf8f2; border: 1px solid #876823; display: inline-block; padding: 0 5px;}
+	.example1 ul.white-space-fix li {margin-right: -4px;}
+.example1 ul.zero-size {font-size: 0;}
+	.example1 ul.zero-size li {font-size: 14px;}

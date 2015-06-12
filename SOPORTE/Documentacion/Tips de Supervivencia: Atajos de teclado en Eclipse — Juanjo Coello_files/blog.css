@@ -1,0 +1,164 @@
+body {
+    font: 1em/1.2 "gentium book basic", Serif;
+    -webkit-font-smoothing: antialiased;
+    color: #444;
+    padding-top: 1em;
+    border-top: 10px solid #eee;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "open sans", Serif;
+    font-weight: bold;
+}
+
+h1 {
+    color: #212121;
+}
+
+a.title-link {
+    color: #212121;
+}
+
+.header-nav {
+    text-transform: uppercase;
+}
+
+.articles {
+    background-image: -webkit-radial-gradient(50% -2px,350px 7px,rgba(162,168,184,.45) -32%,#fff 100%);
+    padding-top: 2em;
+}
+
+.footer-content {
+    padding: 1em 0 1em !important;
+    border-top: 1px solid #f2f2f2;
+}
+
+    .footer-content ul {
+        font-size: .85em;
+        margin: 0;
+    }
+
+.post figure {
+    margin: 1.5rem -1.5rem;
+}
+
+.post figcaption {
+    margin-top: .85rem;
+    font-size: .85em;
+}
+
+.post footer {
+    margin-top: 3rem;
+    line-height: 1.8em;
+    font-size: 0.9em;
+}
+
+.pullquote {
+    text-align: center;
+    font-size: 1.5em;
+    font-style: italic;
+    border: 0;
+    margin: 1.2em 0;
+}
+
+    .pullquote p { color: #222; }
+
+.post-meta { display: block; }
+
+    .post-meta-icon { margin-right: .5em; }
+
+.shr {
+    float: right;
+    font-size: 1.5em;
+}
+
+    .shr a { color: #444; }
+    .shr a:hover { color: #888; }
+
+    .shr-button {
+        margin-right: 0px;
+        padding: 4px;
+    }
+
+/* Homepage */
+
+.home-date {
+    color: #9A9A9A;
+}
+
+.read-more:after {
+    font-family: 'FontAwesome';
+    display: inline-block;
+    font-size: 100%;
+    margin-left: .618em;
+    font-weight: normal;
+    line-height: 1em;
+    width: 1em;
+    text-align: right;
+    content: "\f0da";
+    width: auto;
+    vertical-align: middle;
+    font-size: .9em;
+}
+
+.home nav {
+    display: block;
+}
+
+.home nav .next {
+    text-transform: uppercase;
+    font-weight: 600;
+    float: right;
+}
+
+    .home nav .next:after {
+        font-family: 'FontAwesome';
+        display: inline-block;
+        margin-left: .618em;
+        font-weight: normal;
+        width: 1em;
+        text-align: right;
+        content: "\f054";
+        font-size: 1rem;
+        line-height: .4;
+    }
+
+.h-tcolor-light { color: #6f6f6f }
+
+.h-inblock {
+    display: inline-block !important;
+}
+
+.h-vspace { margin-bottom: 1rem; }
+
+    .h-vspace--m { margin-bottom: 2rem; }
+
+    .h-vspace--l { margin-bottom: 3rem; }
+
+
+@media only screen and (min-width: 40.063em) {
+
+    body {
+        font-size: 1.1em;
+        line-height: 1.4;
+    }
+
+    .inline { display: inline !important; }
+
+    .column, .columns { padding: 0 1.5rem; }
+
+}
+
+
+@media only screen and (min-width: 64.063em) {
+
+    .post figure { margin: 1.5rem 0; }
+}
+
+
+

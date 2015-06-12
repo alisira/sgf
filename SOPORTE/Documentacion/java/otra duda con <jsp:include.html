@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<link rel="stylesheet" type="text/css" href="otra%20duda%20con%20%3Cjsp:include_files/index.css">
+	<script src="otra%20duda%20con%20%3Cjsp:include_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="otra%20duda%20con%20%3Cjsp:include_files/script.js"></script>
+	<script type="text/javascript" src="otra%20duda%20con%20%3Cjsp:include_files/theme.js"></script>
+	<script type="text/javascript"><!-- // --><![CDATA[
+		var smf_theme_url = "http://foro.chuidiang.com/Themes/default";
+		var smf_default_theme_url = "http://foro.chuidiang.com/Themes/default";
+		var smf_images_url = "http://foro.chuidiang.com/Themes/default/images";
+		var smf_scripturl = "http://foro.chuidiang.com/index.php";
+		var smf_iso_case_folding = false;
+		var smf_charset = "UTF-8";
+		var ajax_notification_text = "Loading...";
+		var ajax_notification_cancel_text = "Cancel";
+	// ]]></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="otra duda con &lt;jsp:include">
+	<meta name="keywords" content="java, programación, phyton, php, j2se, j2ee, jee, c, c++">
+	<title>otra duda con &lt;jsp:include</title>
+	<link rel="canonical" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/">
+	<link rel="help" href="http://foro.chuidiang.com/help/">
+	<link rel="search" href="http://foro.chuidiang.com/search/">
+	<link rel="contents" href="http://foro.chuidiang.com/index.php">
+	<link rel="alternate" type="application/rss+xml" title="Foros Java y C/Linux - RSS" href="http://foro.chuidiang.com/.xml/?type=rss">
+	<link rel="prev" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=prev">
+	<link rel="next" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=next">
+	<link rel="index" href="http://foro.chuidiang.com/java-j2ee-y-jsp/">
+
+	<script type="text/javascript"><!-- // --><![CDATA[
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-256265-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	// ]]></script>
+</head>
+<body>
+<div id="wrapper" style="width: 90%">
+	<div id="header"><div class="frame">
+		<div id="top_section">
+			<h1 class="forumtitle">
+				<a href="http://foro.chuidiang.com/index.php"><img src="otra%20duda%20con%20%3Cjsp:include_files/serpi.gif" alt="Foros Java y C/Linux"></a>
+			</h1>
+			<img id="upshrink" src="otra%20duda%20con%20%3Cjsp:include_files/upshrink.png" alt="*" title="Encoger o expandir encabezado." style="cursor: pointer;">
+			<div id="siteslogan" class="floatright"><h1>Foro de programación</h1></div>
+		</div>
+		<div id="upper_section" class="middletext">
+			<div class="user">
+				<script type="text/javascript" src="otra%20duda%20con%20%3Cjsp:include_files/sha1.js"></script>
+				<form id="guest_form" action="http://foro.chuidiang.com/login2/" method="post" accept-charset="UTF-8" onsubmit="hashLoginPassword(this, '791e2b66e3969cc26e5aec3f0ae7f886');">
+					<div class="info">Bienvenido(a), <b>Visitante</b>. Favor de <a href="http://foro.chuidiang.com/login/">ingresar</a> o <a href="http://foro.chuidiang.com/register/">registrarse</a>.<br>¿Perdiste tu  <a href="http://foro.chuidiang.com/activate/">email de activación?</a></div>
+					<input name="user" size="10" class="input_text" type="text">
+					<input name="passwrd" size="10" class="input_password" type="password">
+					<select name="cookielength">
+						<option value="60">1 Hour</option>
+						<option value="1440">1 Day</option>
+						<option value="10080">1 Week</option>
+						<option value="43200">1 Month</option>
+						<option value="-1" selected="selected">Forever</option>
+					</select>
+					<input value="Login" class="button_submit" type="submit"><br>
+					<div class="info">Login with username, password and session length</div>
+					<input name="hash_passwrd" value="" type="hidden">
+				</form>
+			</div>
+			<div class="news normaltext">
+				<form id="search_form" action="http://foro.chuidiang.com/search2/" method="post" accept-charset="UTF-8">
+					<input name="search" class="input_text" type="text">&nbsp;
+					<input name="submit" value="Search" class="button_submit" type="submit">
+					<input name="advanced" value="0" type="hidden">
+					<input name="topic" value="272" type="hidden"></form>
+				<h2>News: </h2>
+				<p><a href="http://www.chuidiang.org/" class="bbc_link" target="_blank">Más tutoriales de java</a></p>
+			</div>
+		</div>
+		<br class="clear">
+		<script type="text/javascript"><!-- // --><![CDATA[
+			var oMainHeaderToggle = new smc_Toggle({
+				bToggleEnabled: true,
+				bCurrentlyCollapsed: false,
+				aSwappableContainers: [
+					'upper_section'
+				],
+				aSwapImages: [
+					{
+						sId: 'upshrink',
+						srcExpanded: smf_images_url + '/upshrink.png',
+						altExpanded: 'Encoger o expandir encabezado.',
+						srcCollapsed: smf_images_url + '/upshrink2.png',
+						altCollapsed: 'Encoger o expandir encabezado.'
+					}
+				],
+				oThemeOptions: {
+					bUseThemeSettings: false,
+					sOptionName: 'collapse_header',
+					sSessionVar: 'fbfb6e880c9',
+					sSessionId: '791e2b66e3969cc26e5aec3f0ae7f886'
+				},
+				oCookieOptions: {
+					bUseCookie: true,
+					sCookieName: 'upshrink'
+				}
+			});
+		// ]]></script>
+		<div id="main_menu">
+			<ul class="dropmenu" id="menu_nav">
+				<li id="button_home">
+					<a class="active firstlevel" href="http://foro.chuidiang.com/index.php">
+						<span class="last firstlevel">Home</span>
+					</a>
+				</li>
+				<li id="button_help">
+					<a class="firstlevel" href="http://foro.chuidiang.com/help/">
+						<span class="firstlevel">Help</span>
+					</a>
+				</li>
+				<li id="button_search">
+					<a class="firstlevel" href="http://foro.chuidiang.com/search/">
+						<span class="firstlevel">Search</span>
+					</a>
+				</li>
+				<li id="button_login">
+					<a class="firstlevel" href="http://foro.chuidiang.com/login/">
+						<span class="firstlevel">Login</span>
+					</a>
+				</li>
+				<li id="button_register">
+					<a class="firstlevel" href="http://foro.chuidiang.com/register/">
+						<span class="last firstlevel">Register</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<br class="clear">
+	</div></div>
+	<div id="content_section"><div class="frame">
+		<div id="main_content_section">
+	<div class="navigate_section">
+		<ul>
+			<li>
+				<a href="http://foro.chuidiang.com/index.php"><span>Foros Java y C/Linux</span></a> »
+			</li>
+			<li>
+				<a href="http://foro.chuidiang.com/index.php#c2"><span>Programación Web</span></a> »
+			</li>
+			<li>
+				<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/"><span>Java J2EE y JSP</span></a> »
+			</li>
+			<li class="last">
+				<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/"><span>otra duda con &lt;jsp:include</span></a>
+			</li>
+		</ul>
+	</div>
+			<a id="top"></a>
+			<a id="msg995"></a>
+			<div class="pagesection">
+				<div class="nextlinks"><a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=prev#new">« anterior</a> <a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=next#new">próximo »</a></div>
+		<div class="buttonlist floatright">
+			<ul>
+				<li><a class="button_strip_send" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?action=emailuser;sa=sendtopic"><span>Send this topic</span></a></li>
+				<li><a class="button_strip_print" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?action=printpage" rel="new_win nofollow"><span class="last">Print</span></a></li>
+			</ul>
+		</div>
+				<div class="pagelinks floatleft">Pages: [<strong>1</strong>] </div>
+			</div>
+			<div id="forumposts">
+				<div class="cat_bar">
+					<h3 class="catbg">
+						<img src="otra%20duda%20con%20%3Cjsp:include_files/normal_post.gif" alt="" align="bottom">
+						<span id="author">Author</span>
+						Topic: otra duda con &lt;jsp:include &nbsp;(Read 9892 times)
+					</h3>
+				</div>
+				<form action="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?action=quickmod2" method="post" accept-charset="UTF-8" name="quickModForm" id="quickModForm" style="margin: 0;" onsubmit="return oQuickModify.bInEditMode ? oQuickModify.modifySave('791e2b66e3969cc26e5aec3f0ae7f886', 'fbfb6e880c9') : false">
+				<div class="windowbg">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=108" title="View the profile of Sarandonga">Sarandonga</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_995_extra_info">
+								<li class="postgroup">Newbie</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 30</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=108"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_995">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg995/#msg995" rel="nofollow">otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong> on:</strong> Junio 18, 2007, 06:22:55 pm »</div>
+									<div id="msg_995_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_995">Hola!<br><br>Ya pregunté otra vez sobre como anidar páginas jsp en otras jsp.<br>Lo conseguí con la sentencia &lt;jsp:include page="pagina.jsp" flush="true" /&gt;<br><br>Pues bien:<br>El problema que se me plantea ahora es que sí en esa pagina.jsp llamo a clases para acceder a la base de datos, por ejemplo:<br><br>&nbsp;&lt;%!Divisas otra_divisa = new Divisa();%&gt;<br><br>y tengo un select que relleno con los valores que me devuelva esa clase<br>la
+ página no se me incluye.&nbsp; No aparece nada. Lo he probado quitando 
+las llamadas a las clases, y entonces si que se me ve el contenido de 
+pagina.jsp pero sin mostrar los datos, ya que suprimi esa llamada a 
+Divisa.<br><br>¿Por qué puede pasar esto?<br><br>Una ayudina pó favó ...&nbsp; &nbsp;<img src="otra%20duda%20con%20%3Cjsp:include_files/huh.gif" alt="???" title="Huh" class="smiley">&nbsp; <img src="otra%20duda%20con%20%3Cjsp:include_files/smiley.gif" alt=":)" title="Smiley" class="smiley"></div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_995">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				<a id="msg1003"></a>
+				<div class="windowbg2">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=3" title="View the profile of rfilgueiras">rfilgueiras</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_1003_extra_info">
+								<li class="postgroup">Jr. Member</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 79</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=3"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+										<li><a href="http://www.blog.riolambre.com/" title="Blog de programación" target="_blank" class="new_win"><img src="otra%20duda%20con%20%3Cjsp:include_files/www_sm.gif" alt="Blog de programación"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_1003">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg1003/#msg1003" rel="nofollow">Re: otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong>Reply #1 on:</strong> Junio 19, 2007, 07:44:14 am »</div>
+									<div id="msg_1003_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_1003">En principio creo que deberían 
+verse los datos sin ningún problema, aún así estoy dándole vueltas para 
+encontrar la razón por la cual tu diseño es este. Por lo que veo tienes 
+un jsp y dentro del mismo tienes otro jsp, y este último accede 
+directamente a la base de datos.<br><br>¿es así? </div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_1003">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				<a id="msg1004"></a>
+				<div class="windowbg">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=108" title="View the profile of Sarandonga">Sarandonga</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_1004_extra_info">
+								<li class="postgroup">Newbie</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 30</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=108"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_1004">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg1004/#msg1004" rel="nofollow">Re: otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong>Reply #2 on:</strong> Junio 19, 2007, 09:12:09 am »</div>
+									<div id="msg_1004_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_1004">Hola!<br><br>Sí es así. Utilizo
+ la pagina contenedora como plantilla para distribuir mejor la 
+información y luego solo varío la página a incluir<br><br>Asi mismo 
+tengo una pagina llamada cabecera.jsp desde la cual importo todas las 
+clases que necesito y no da error, así que supongo que se incluyó bien; 
+fotoencabezado.jsp que contiene una foto de encabezado y que incluyo en 
+la plantilla, por así llamarla; también un menú vertical y&nbsp; otro 
+horizontal que incluyo de la misma manera y sin problema...<br><br>Pero 
+al incluir la tabla con el meollo de la cuestión, es decir, la página 
+donde trabajo con clases, nada, no se me muestra. Se me siguen mostrando
+ la cabecera y los menús perfectamente pero no la página con la que 
+trabajo con clases... Espero haberme explicado.<br><br>Adjunto los ficheros... por si me expliké mal<br>Un saludo y gracias!!</div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_1004">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				<a id="msg1005"></a>
+				<div class="windowbg2">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=3" title="View the profile of rfilgueiras">rfilgueiras</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_1005_extra_info">
+								<li class="postgroup">Jr. Member</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 79</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=3"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+										<li><a href="http://www.blog.riolambre.com/" title="Blog de programación" target="_blank" class="new_win"><img src="otra%20duda%20con%20%3Cjsp:include_files/www_sm.gif" alt="Blog de programación"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_1005">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg1005/#msg1005" rel="nofollow">Re: otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong>Reply #3 on:</strong> Junio 19, 2007, 09:39:40 am »</div>
+									<div id="msg_1005_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_1005">En principio no le veo nada 
+extraño. Yo probaría si realmente el vector trae objetos o no los trae. 
+De todas formas también utilizaría Iterator para recorrer el vector. 
+Mira <a href="http://blog.riolambre.com/?p=61" class="bbc_link" target="_blank">http://blog.riolambre.com/?p=61</a><br><br>Saludos</div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_1005">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				<a id="msg1037"></a>
+				<div class="windowbg">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=70" title="View the profile of venkman">venkman</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_1037_extra_info">
+								<li class="postgroup">Jr. Member</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 68</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=70"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_1037">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg1037/#msg1037" rel="nofollow">Re: otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong>Reply #4 on:</strong> Junio 21, 2007, 09:28:31 am »</div>
+									<div id="msg_1037_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_1037">Creo que el problema es que no tienes clara la diferencia entre la directiva include y la acción include.<br><br>1. La acción <span style="font-family: Courier New;" class="bbc_font">&lt;jsp:include page="url" flush="true|false" /&gt;</span>.<br><br>Esta acción lo que hace es incluir en tu página el <em>resultado</em> de llamar a "url".<br><br>Es decir, que se produce realmente <strong>una llamada independiente</strong>
+ a "url" y lo que se obtenga como respuesta es lo que se incluye en la 
+página. Con esta acción puedes incluir tanto URLs locales como URLs 
+externas que no tengan nada que ver con tu aplicación. De cara a tu 
+página, da igual dónde esté o qué sea lo que se está incluyendo. Podrías
+ incluir el resultado de llamar a, por ejemplo, <a href="http://www.chuidiang.com/" class="bbc_link" target="_blank">http://www.chuidiang.com/</a> e incluir eso dentro de tu página.<br><br><br>2. La directiva <span style="font-family: Courier New;" class="bbc_font">&lt;%@ include file="url" %&gt;</span>.<br><br>La directiva include funciona de forma bastante diferente. Lo que hace es <em>insertar el fichero</em>
+ "url" tal cual dentro de tu página jsp. Como si fuera parte de ella. 
+Así, la "url" insertada tiene código Java o etiquetas JSP, se ejecutan <strong>como parte de tu página</strong>.<br><br><br>Para
+ que quede más clara la diferencia, la directiva hace la inserción en el
+ momento de traducir tu página a un servlet y compilarlo. A todos los 
+efectos, el trozo incluido está <em>dentro</em> de tu página como cualquier otro trozo de la misma.<br>La
+ acción, por el contrario, incluye "url" haciendo una nueva llamada en 
+el momento en que se pide la página. Es decir, es totalmente <em>externo</em> a ella.<br><br><br>Por lo que he visto en <span style="font-family: Courier New;" class="bbc_font">proveedoresadmin.jsp</span> estás usando <span style="font-family: Courier New;" class="bbc_font">&lt;jsp:include page="[...]/proveedoresConsulta.jsp"</span> y sin embargo, <span style="font-family: Courier New;" class="bbc_font">proveedoresConsulta.jsp</span> intenta utilizar objetos definidos en <span style="font-family: Courier New;" class="bbc_font">proveedoresadmin.jsp</span>. Eso, lógicamente no funciona.<br><br>Ahora
+ bien... la solución no creo que sea simplemente usar la directiva en 
+lugar de usar la acción. Creo que hay que ir un poco más allá. Si quien 
+usa <span style="font-family: Courier New;" class="bbc_font">otra_divisa</span>, <span style="font-family: Courier New;" class="bbc_font">nueva_divisa</span>, <span style="font-family: Courier New;" class="bbc_font">otra_formapago</span>, etc es siempre <span style="font-family: Courier New;" class="bbc_font">proveedoresConsulta.jsp</span>, ¿no sería más lógico definirlas en esa misma página?<br>Las
+ cosas quedan siempre más ordenadas y manejables si no haces depender a 
+unas páginas de otras mientras no sea estrictamente necesario. Se trata 
+de encapsular, de hacer que cada interés o aspecto sea autosuficiente e 
+independiente del resto.<br><br>Imagina que más adelante quisieras incluir <span style="font-family: Courier New;" class="bbc_font">proveedoresConsulta.jsp</span>
+ dentro de otra página distinta. Tendrías que obligar a que esa página 
+declare exactamente las mismas variables con los mismos nombres y tipos 
+que lo hacía <span style="font-family: Courier New;" class="bbc_font">proveedoresadmin.jsp</span>, lo que lleva a duplicar código. Eso nunca es bueno.<br><br>Y no sólo eso. Ahora mismo, si quieres cambiar un día el nombre de la variable <span style="font-family: Courier New;" class="bbc_font">nueva_divisa</span>
+ (por ejemplo), tienes que hacerlo en 2 ficheros distintos. Es mejor si 
+sólo está en uno. Así no te pasa que lo cambias en uno y te olvidas en 
+el otro o que si estás editando uno tienes que estar mirando el otro 
+para saber cómo llamaste a la variable tal...<br><br>En fin, que yo 
+optaría por meter esas variables donde realmente se usan, y dejar que 
+las partes que son básicamente HTML y unos includes (es decir <span style="font-family: Courier New;" class="bbc_font">proveedoresadmin.jsp</span>) no cree dependencias para las páginas incluidas.</div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_1037">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				<a id="msg1039"></a>
+				<div class="windowbg2">
+					<span class="topslice"><span></span></span>
+					<div class="post_wrapper">
+						<div class="poster">
+							<h4>
+								<a href="http://foro.chuidiang.com/profile/?u=108" title="View the profile of Sarandonga">Sarandonga</a>
+							</h4>
+							<ul class="reset smalltext" id="msg_1039_extra_info">
+								<li class="postgroup">Newbie</li>
+								<li class="stars"><img src="otra%20duda%20con%20%3Cjsp:include_files/star.gif" alt="*"></li>
+								<li class="postcount">Posts: 30</li>
+								<li class="karma">Karma: 0</li>
+								<li class="profile">
+									<ul>
+										<li><a href="http://foro.chuidiang.com/profile/?u=108"><img src="otra%20duda%20con%20%3Cjsp:include_files/profile_sm.gif" alt="View Profile" title="View Profile"></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="postarea">
+							<div class="flow_hidden">
+								<div class="keyinfo">
+									<div class="messageicon">
+										<img src="otra%20duda%20con%20%3Cjsp:include_files/xx.gif" alt="">
+									</div>
+									<h5 id="subject_1039">
+										<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/msg1039/#msg1039" rel="nofollow">Re: otra duda con &lt;jsp:include</a>
+									</h5>
+									<div class="smalltext">« <strong>Reply #5 on:</strong> Junio 21, 2007, 09:41:26 am »</div>
+									<div id="msg_1039_quick_mod"></div>
+								</div>
+							</div>
+							<div class="post">
+								<div class="inner" id="msg_1039">Olé olé!<br>Además de que con esta explicación me perfectamente claro, funciona a las mil maravillas.<br>Muchas Gracias!!!</div>
+							</div>
+						</div>
+						<div class="moderatorbar">
+							<div class="smalltext modified" id="modified_1039">
+							</div>
+							<div class="smalltext reportlinks">
+								<img src="otra%20duda%20con%20%3Cjsp:include_files/ip.gif" alt="">
+								Logged
+							</div>
+						</div>
+					</div>
+					<span class="botslice"><span></span></span>
+				</div>
+				<hr class="post_separator">
+				</form>
+			</div>
+			<a id="lastPost"></a>
+			<div class="pagesection">
+				
+		<div class="buttonlist floatright">
+			<ul>
+				<li><a class="button_strip_send" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?action=emailuser;sa=sendtopic"><span>Send this topic</span></a></li>
+				<li><a class="button_strip_print" href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?action=printpage" rel="new_win nofollow"><span class="last">Print</span></a></li>
+			</ul>
+		</div>
+				<div class="pagelinks floatleft">Pages: [<strong>1</strong>] </div>
+				<div class="nextlinks_bottom"><a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=prev#new">« anterior</a> <a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/?prev_next=next#new">próximo »</a></div>
+			</div>
+	<div class="navigate_section">
+		<ul>
+			<li>
+				<a href="http://foro.chuidiang.com/index.php"><span>Foros Java y C/Linux</span></a> »
+			</li>
+			<li>
+				<a href="http://foro.chuidiang.com/index.php#c2"><span>Programación Web</span></a> »
+			</li>
+			<li>
+				<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/"><span>Java J2EE y JSP</span></a> »
+			</li>
+			<li class="last">
+				<a href="http://foro.chuidiang.com/java-j2ee-y-jsp/otra-duda-con-ltjspinclude/"><span>otra duda con &lt;jsp:include</span></a>
+			</li>
+		</ul>
+	</div>
+			<div id="moderationbuttons"></div>
+			<div class="plainbox" id="display_jump_to"><label class="smalltext" for="display_jump_to_select">Jump to:</label> <select name="display_jump_to_select" id="display_jump_to_select" onfocus="grabJumpToContent();"><option selected="selected" value="?board=4.0">=&gt; Java J2EE y JSP</option></select>&nbsp;<input value="go" onclick="window.location.href = 'http://foro.chuidiang.com/index.php?board=4.0';" type="button"></div>
+		<br class="clear">
+				<script type="text/javascript" src="otra%20duda%20con%20%3Cjsp:include_files/topic.js"></script>
+				<script type="text/javascript"><!-- // --><![CDATA[
+					if ('XMLHttpRequest' in window)
+					{
+						var oQuickModify = new QuickModify({
+							sScriptUrl: smf_scripturl,
+							bShowModify: true,
+							iTopicId: 272,
+							sTemplateBodyEdit: '\n\t\t\t\t\t\t\t\t<div id="quick_edit_body_container" style="width: 90%">\n\t\t\t\t\t\t\t\t\t<div id="error_box" style="padding: 4px;" class="error"><' + '/div>\n\t\t\t\t\t\t\t\t\t<textarea class="editor" name="message" rows="12" style="width: 100%; margin-bottom: 10px;" tabindex="1">%body%<' + '/textarea><br />\n\t\t\t\t\t\t\t\t\t<input type="hidden" name="fbfb6e880c9" value="791e2b66e3969cc26e5aec3f0ae7f886" />\n\t\t\t\t\t\t\t\t\t<input type="hidden" name="topic" value="272" />\n\t\t\t\t\t\t\t\t\t<input type="hidden" name="msg" value="%msg_id%" />\n\t\t\t\t\t\t\t\t\t<div class="righttext">\n\t\t\t\t\t\t\t\t\t\t<input type="submit" name="post" value="Save" tabindex="2" onclick="return oQuickModify.modifySave(\'791e2b66e3969cc26e5aec3f0ae7f886\', \'fbfb6e880c9\');" accesskey="s" class="button_submit" />&nbsp;&nbsp;<input type="submit" name="cancel" value="Cancel" tabindex="3" onclick="return oQuickModify.modifyCancel();" class="button_submit" />\n\t\t\t\t\t\t\t\t\t<' + '/div>\n\t\t\t\t\t\t\t\t<' + '/div>',
+							sTemplateSubjectEdit: '<input type="text" style="width: 90%;" name="subject" value="%subject%" size="80" maxlength="80" tabindex="4" class="input_text" />',
+							sTemplateBodyNormal: '%body%',
+							sTemplateSubjectNormal: '<a hr'+'ef="http://foro.chuidiang.com/index.php'+'?topic=272.msg%msg_id%#msg%msg_id%" rel="nofollow">%subject%<' + '/a>',
+							sTemplateTopSubject: 'Topic: %subject% &nbsp;(Read 9892 times)',
+							sErrorBorderStyle: '1px solid red'
+						});
+
+						aJumpTo[aJumpTo.length] = new JumpTo({
+							sContainerId: "display_jump_to",
+							sJumpToTemplate: "<label class=\"smalltext\" for=\"%select_id%\">Jump to:<" + "/label> %dropdown_list%",
+							iCurBoardId: 4,
+							iCurBoardChildLevel: 0,
+							sCurBoardName: "Java J2EE y JSP",
+							sBoardChildLevelIndicator: "==",
+							sBoardPrefix: "=> ",
+							sCatSeparator: "-----------------------------",
+							sCatPrefix: "",
+							sGoButtonLabel: "go"
+						});
+
+						aIconLists[aIconLists.length] = new IconList({
+							sBackReference: "aIconLists[" + aIconLists.length + "]",
+							sIconIdPrefix: "msg_icon_",
+							sScriptUrl: smf_scripturl,
+							bShowModify: true,
+							iBoardId: 4,
+							iTopicId: 272,
+							sSessionId: "791e2b66e3969cc26e5aec3f0ae7f886",
+							sSessionVar: "fbfb6e880c9",
+							sLabelIconList: "Message Icon",
+							sBoxBackground: "transparent",
+							sBoxBackgroundHover: "#ffffff",
+							iBoxBorderWidthHover: 1,
+							sBoxBorderColorHover: "#adadad" ,
+							sContainerBackground: "#ffffff",
+							sContainerBorder: "1px solid #adadad",
+							sItemBorder: "1px solid #ffffff",
+							sItemBorderHover: "1px dotted gray",
+							sItemBackground: "transparent",
+							sItemBackgroundHover: "#e0e0f0"
+						});
+					}
+				// ]]></script></div>
+		ey
+	</div></div>
+	<div id="footer_section"><div class="frame">
+		<ul class="reset">
+			<li class="copyright">
+			<span class="smalltext" style="display: inline; visibility: visible; font-family: Verdana, Arial, sans-serif;"><a href="http://www.simplemachines.org/" title="Simple Machines Forum" target="_blank">Powered by SMF 2.0.6</a> | 
+<a href="http://www.simplemachines.org/about/copyright.php" title="Free Forum Software" target="_blank">SMF © 2006-2007, Simple Machines LLC</a>
+			</span></li>
+			<li><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="XHTML 1.0 válido!"><span>XHTML</span></a></li>
+			<li><a id="button_rss" href="http://foro.chuidiang.com/.xml/?type=rss" class="new_win"><span>RSS</span></a></li>
+			<li class="last"><a id="button_wap2" href="http://foro.chuidiang.com/index.php?wap2" class="new_win"><span>WAP2</span></a></li>
+		</ul>
+	</div></div>
+</div>
+</body></html>

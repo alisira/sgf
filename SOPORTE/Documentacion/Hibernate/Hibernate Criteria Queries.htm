@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Hibernate Criteria Queries</title>
+<link rel="shortcut icon" href="http://www.tutorialspoint.com/favicon.ico" type="image/x-icon">
+<meta name="description" content="Hibernate, Tutorials, Learning, Beginners, Basics, Environment, Object Relational Mapping (ORM), Query Language, Native SQL, Caching, Interceptors, Persistent Classes, Persistent Objects, Collections, Associations and components, and Hibernate tools.">
+<meta name="keywords" content="Hibernate Criteria Queries - Learn Hibernate 3.x starting from environment setup, Object Relational Mapping (ORM), Query Language, Native SQL, Caching, Interceptors, Persistent Classes, Persistent Objects, Collections, Associations and components, and Hibernate tools.">
+<!-- base href="http://www.tutorialspoint.com/" -->
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+<script src="Hibernate%20Criteria%20Queries_files/ca-pub-7133395778201029.js" type="text/javascript" async=""></script><script type="text/javascript" src="Hibernate%20Criteria%20Queries_files/jquery.js"></script>
+<script type="text/javascript" src="Hibernate%20Criteria%20Queries_files/mobile.js"></script>
+<link rel="stylesheet" type="text/css" href="Hibernate%20Criteria%20Queries_files/style.css">
+<link rel="stylesheet" type="text/css" href="Hibernate%20Criteria%20Queries_files/prettify.css">
+<script type="text/javascript" src="Hibernate%20Criteria%20Queries_files/prettify.js"></script>
+<style media="screen" type="text/css">
+#topmenu a:hover {text-decoration:none;color:#bcae79  !important;background-color:transparent;font-weight:bold;}
+#header{ 
+background:#bcae79  !important;
+}
+#topmenu
+{
+background-color:#59666c !important;
+}
+#leftcol ul.menu li.heading 
+{
+background:#bcae79 !important;
+border:1px solid #59666c  !important;
+}
+#middlecol  {min-height:1200px; padding:0px;}
+</style>
+<script src="Hibernate%20Criteria%20Queries_files/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+</script>
+</head>
+<body onload="prettyPrint()">
+<div id="header">
+<div class="wrapper">
+<h1 class="logo"><a href="http://www.tutorialspoint.com/index.htm">Tutorials Point - Simply Easy Learning</a></h1>
+<div id="search">
+<form method="get" id="searchform" name="searchform" action="http://www.google.com/search" target="_blank">
+<input name="sitesearch" value="www.tutorialspoint.com" type="hidden">
+<input name="as_q" id="s" value="Search this site..." onfocus="if (this.value == 'Search this site...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search this site...';}" type="text">
+<input value="FORID:11" name="cof" type="hidden">
+<input name="ie" value="ISO-8859-1" type="hidden">
+<input class="submit btn" src="Hibernate%20Criteria%20Queries_files/icon-search.png" alt="Go" type="image">
+</form>
+</div>
+</div>
+</div>
+<div id="topmenu">
+<div class="wrapper">
+<div id="mobileleft">
+<a href="http://www.tutorialspoint.com/index.htm" id="home"><img src="Hibernate%20Criteria%20Queries_files/home-icon.png"></a>
+</div>
+<div id="left">
+<a href="http://www.tutorialspoint.com/index.htm" target="_top">Home </a>
+<a href="http://www.tutorialspoint.com/computer_programming_tutorials.htm">Programming </a>
+<a href="http://www.tutorialspoint.com/java_technology_tutorials.htm">Java </a>
+<a href="http://www.tutorialspoint.com/web_development_tutorials.htm">Web </a>
+<a href="http://www.tutorialspoint.com/database_tutorials.htm">Databases </a>
+<a href="http://www.tutorialspoint.com/academic_tutorials.htm">Academic</a>
+<a href="http://www.tutorialspoint.com/management_tutorials.htm" title="Management Tutorials">Management</a>
+<a href="http://www.tutorialspoint.com/software_quality_tutorials.htm" title="Software Quality Tutorials">Quality</a>
+<a href="http://www.tutorialspoint.com/telecom_tutorials.htm" title="Telecom Tutorials">Telecom</a>
+<a href="http://www.tutorialspoint.com/misc_tutorials.htm">More...</a>
+</div>
+<div id="mobileright">
+<a href="#" id="pull"><img src="Hibernate%20Criteria%20Queries_files/nav-icon.png"></a>
+</div>
+<div id="right">
+<a href="http://www.tutorialspoint.com/references.htm" target="_top">REFERENCES</a> |
+<a href="http://www.tutorialspoint.com/forums/index.php" target="_top">FORUM</a> |
+<a href="http://www.tutorialspoint.com/about/index.htm" target="_top">ABOUT</a> |
+<a href="http://www.tutorialspoint.com/about/contact_us.htm" target="_top">CONTACT</a>
+</div>
+</div>
+</div>
+<div class="wrapper">
+<div id="leftcol">
+<div class="mini-logo">
+<img src="Hibernate%20Criteria%20Queries_files/hibernate-mini-logo.png" alt="Hibernate Tutorial">
+</div>
+<ul class="menu">
+<li class="heading">Hibernate Tutorial</li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/index.htm">Hibernate Home</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/orm_overview.htm">ORM Overview</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_overview.htm">Hibernate Overview</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_architecture.htm">Hibernate Architecture</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_environment.htm">Hibernate Environment</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_configuration.htm">Hibernate Configuration</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_sessions.htm">Hibernate Sessions</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_persistent_classes.htm">Hibernate Persistent Class</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_mapping_files.htm">Hibernate Mapping Files</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_mapping_types.htm">Hibernate Mapping Types</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_examples.htm">Hibernate Examples</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_or_mappings.htm">Hibernate O/R Mappings</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_annotations.htm">Hibernate Annotations</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm">Hibernate Query Language</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_criteria_queries.htm"><b>Hibernate Criteria Queries</b></a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_native_sql.htm">Hibernate Native SQL</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_caching.htm">Hibernate Caching</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_batch_processing.htm">Hibernate Batch Processing</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_interceptors.htm">Hibernate Interceptors</a></li>
+</ul>
+<ul class="menu">
+<li class="heading">Hibernate Useful Resources</li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_quick_guide.htm">Hibernate Quick Guide</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/hibernate/hibernate_useful_resources.htm">Hibernate Useful Resources</a></li>
+</ul>
+<ul class="menu">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="http://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="http://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</div><!-- leftcol -->
+<div id="middlecol">
+<!-- PRINTING STARTS HERE -->
+<div class="content">
+<h1>Hibernate Criteria Queries</h1>
+<div class="topgooglead">
+<div class="topadtag">Advertisements</div>
+<script async="" src="Hibernate%20Criteria%20Queries_files/adsbygoogle.js"></script>
+<ins data-adsbygoogle-status="done" class="adsbygoogle top_ad_slot" style="display: inline-block; width: 468px; height: 60px;" data-ad-client="ca-pub-7133395778201029" data-ad-slot="2813390526"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="60" width="468"></iframe></ins></ins></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<hr>
+<div class="pre-btn">
+<a href="http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm">Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="http://www.tutorialspoint.com/hibernate/hibernate_native_sql.htm">Next Page</a>
+</div>
+<div class="clearer"></div>
+<hr>
+<p>Hibernate provides alternate ways of manipulating objects and in turn
+ data available in RDBMS tables. One of the methods is Criteria API 
+which allows you to build up a criteria query object programmatically 
+where you can apply filtration rules and logical conditions.</p>
+<p>The Hibernate <b>Session</b> interface provides <b>createCriteria()</b> method which can be used to create a <b>Criteria</b> object that returns instances of the persistence object's class when your application executes a criteria query.</p>
+<p>Following is the simplest example of a criteria query is one which 
+will simply return every object that corresponds to the Employee class.</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+</span><span class="typ">List</span><span class="pln"> results </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span></pre>
+<h2>Restrictions with Criteria:</h2>
+<p>You can use <b>add()</b> method available for <b>Criteria</b> object 
+to add restriction for a criteria query. Following is the example to add
+ a restriction to return the records with salary is equal to 2000:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">eq</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+</span><span class="typ">List</span><span class="pln"> results </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span></pre>
+<p>Following are the few more examples covering different scenarios and can be used as per requirement:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// To get records having salary more than 2000</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">gt</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get records having salary less than 2000</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">lt</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get records having fistName starting with zara</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">like</span><span class="pun">(</span><span class="str">"firstName"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"zara%"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// Case sensitive form of the above restriction.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">ilike</span><span class="pun">(</span><span class="str">"firstName"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"zara%"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get records having salary in between 1000 and 2000</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">between</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To check if the given property is null</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">isNull</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To check if the given property is not null</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">isNotNull</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To check if the given property is empty</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">isEmpty</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To check if the given property is not empty</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">isNotEmpty</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span></pre>
+<p>You can create AND or OR conditions using LogicalExpression restrictions as follows:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+
+</span><span class="typ">Criterion</span><span class="pln"> salary </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">gt</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">);</span><span class="pln">
+</span><span class="typ">Criterion</span><span class="pln"> name </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">ilike</span><span class="pun">(</span><span class="str">"firstNname"</span><span class="pun">,</span><span class="str">"zara%"</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// To get records matching with OR condistions</span><span class="pln">
+</span><span class="typ">LogicalExpression</span><span class="pln"> orExp </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Restrictions</span><span class="pun">.</span><span class="kwd">or</span><span class="pun">(</span><span class="pln">salary</span><span class="pun">,</span><span class="pln"> name</span><span class="pun">);</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> orExp </span><span class="pun">);</span><span class="pln">
+
+
+</span><span class="com">// To get records matching with AND condistions</span><span class="pln">
+</span><span class="typ">LogicalExpression</span><span class="pln"> andExp </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Restrictions</span><span class="pun">.</span><span class="kwd">and</span><span class="pun">(</span><span class="pln">salary</span><span class="pun">,</span><span class="pln"> name</span><span class="pun">);</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> andExp </span><span class="pun">);</span><span class="pln">
+
+</span><span class="typ">List</span><span class="pln"> results </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span></pre>
+<p>Though all the above conditions can be used directly with HQL as explained in previous tutorial.</p>
+<h2>Pagination using Criteria:</h2>
+<p>There are two methods of the Criteria interface for pagination.</p>
+<table class="src">
+<tbody><tr><th style="width:5%">S.N.</th><th>Method &amp; Description</th></tr>
+<tr><td>1</td><td><b>public Criteria setFirstResult(int firstResult)</b><br>This method takes an integer that represents the first row in your result set, starting with row 0.</td></tr>
+<tr><td>2</td><td><b>public Criteria setMaxResults(int maxResults)</b><br>This method tells Hibernate to retrieve a fixed number <b>maxResults</b> of objects.</td></tr>
+</tbody></table>
+<p>Using above two methods together, we can construct a paging component
+ in our web or Swing application. Following is the example which you can
+ extend to fetch 10 rows at a time:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setFirstResult</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setMaxResults</span><span class="pun">(</span><span class="lit">10</span><span class="pun">);</span><span class="pln">
+</span><span class="typ">List</span><span class="pln"> results </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span></pre>
+<h2>Sorting the  Results:</h2>
+<p>The Criteria API provides the <b>org.hibernate.criterion.Order</b> 
+class to sort your result set in either ascending or descending order, 
+according to one of your object's properties. This example demonstrates 
+how you would use the Order class to sort the result set:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+</span><span class="com">// To get records having salary more than 2000</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">gt</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To sort records in descening order</span><span class="pln">
+crit</span><span class="pun">.</span><span class="pln">addOrder</span><span class="pun">(</span><span class="typ">Order</span><span class="pun">.</span><span class="pln">desc</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To sort records in ascending order</span><span class="pln">
+crit</span><span class="pun">.</span><span class="pln">addOrder</span><span class="pun">(</span><span class="typ">Order</span><span class="pun">.</span><span class="pln">asc</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="typ">List</span><span class="pln"> results </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span></pre>
+<h2>Projections &amp; Aggregations:</h2>
+<p>The Criteria API provides the <b>org.hibernate.criterion.Projections</b>
+ class which can be used to get average, maximum or minimum of the 
+property values.  The Projections class is similar to the Restrictions 
+class in that it provides several static factory methods for obtaining <b>Projection</b> instances.</p>
+<p>Following are the few examples covering different scenarios and can be used as per requirement:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// To get total row count.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">rowCount</span><span class="pun">());</span><span class="pln">
+
+</span><span class="com">// To get average of a property.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">avg</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get distinct count of a property.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">countDistinct</span><span class="pun">(</span><span class="str">"firstName"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get maximum of a property.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">max</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get minimum of a property.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">min</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+
+</span><span class="com">// To get sum of a property.</span><span class="pln">
+cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">sum</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span></pre>
+<h2>Criteria Queries Example:</h2>
+<p>Consider the following POJO class:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Employee</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+   </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> id</span><span class="pun">;</span><span class="pln">
+   </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> firstName</span><span class="pun">;</span><span class="pln"> 
+   </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> lastName</span><span class="pun">;</span><span class="pln">   
+   </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> salary</span><span class="pun">;</span><span class="pln">  
+
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Employee</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Employee</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> fname</span><span class="pun">,</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> lname</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> salary</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">firstName </span><span class="pun">=</span><span class="pln"> fname</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">lastName </span><span class="pun">=</span><span class="pln"> lname</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">salary </span><span class="pun">=</span><span class="pln"> salary</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> getId</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> id</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setId</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> id </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">id </span><span class="pun">=</span><span class="pln"> id</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> getFirstName</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> firstName</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setFirstName</span><span class="pun">(</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> first_name </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">firstName </span><span class="pun">=</span><span class="pln"> first_name</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> getLastName</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> lastName</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setLastName</span><span class="pun">(</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> last_name </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">lastName </span><span class="pun">=</span><span class="pln"> last_name</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> getSalary</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> salary</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setSalary</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> salary </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">salary </span><span class="pun">=</span><span class="pln"> salary</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p>Let us create the following EMPLOYEE table to store Employee objects:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="pln">create table EMPLOYEE </span><span class="pun">(</span><span class="pln">
+   id INT NOT NULL auto_increment</span><span class="pun">,</span><span class="pln">
+   first_name VARCHAR</span><span class="pun">(</span><span class="lit">20</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">default</span><span class="pln"> NULL</span><span class="pun">,</span><span class="pln">
+   last_name  VARCHAR</span><span class="pun">(</span><span class="lit">20</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">default</span><span class="pln"> NULL</span><span class="pun">,</span><span class="pln">
+   salary     INT  </span><span class="kwd">default</span><span class="pln"> NULL</span><span class="pun">,</span><span class="pln">
+   PRIMARY KEY </span><span class="pun">(</span><span class="pln">id</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">);</span></pre>
+<p>Following will be mapping file.</p>
+<pre style="" class="prettyprint prettyprinted"><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"utf-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="dec">&lt;!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><span class="pln"> 
+
+</span><span class="tag">&lt;hibernate-mapping&gt;</span><span class="pln">
+   </span><span class="tag">&lt;class</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"Employee"</span><span class="pln"> </span><span class="atn">table</span><span class="pun">=</span><span class="atv">"EMPLOYEE"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;meta</span><span class="pln"> </span><span class="atn">attribute</span><span class="pun">=</span><span class="atv">"class-description"</span><span class="tag">&gt;</span><span class="pln">
+         This class contains the employee detail. 
+      </span><span class="tag">&lt;/meta&gt;</span><span class="pln">
+      </span><span class="tag">&lt;id</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"id"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"int"</span><span class="pln"> </span><span class="atn">column</span><span class="pun">=</span><span class="atv">"id"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;generator</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"native"</span><span class="tag">/&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/id&gt;</span><span class="pln">
+      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"firstName"</span><span class="pln"> </span><span class="atn">column</span><span class="pun">=</span><span class="atv">"first_name"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"string"</span><span class="tag">/&gt;</span><span class="pln">
+      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"lastName"</span><span class="pln"> </span><span class="atn">column</span><span class="pun">=</span><span class="atv">"last_name"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"string"</span><span class="tag">/&gt;</span><span class="pln">
+      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"salary"</span><span class="pln"> </span><span class="atn">column</span><span class="pun">=</span><span class="atv">"salary"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"int"</span><span class="tag">/&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/class&gt;</span><span class="pln">
+</span><span class="tag">&lt;/hibernate-mapping&gt;</span></pre>
+<p>Finally, we will create our application class with the main() method to run the application where we will use <b>Criteria</b> queries:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="kwd">import</span><span class="pln"> java</span><span class="pun">.</span><span class="pln">util</span><span class="pun">.</span><span class="typ">List</span><span class="pun">;</span><span class="pln"> 
+</span><span class="kwd">import</span><span class="pln"> java</span><span class="pun">.</span><span class="pln">util</span><span class="pun">.</span><span class="typ">Date</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> java</span><span class="pun">.</span><span class="pln">util</span><span class="pun">.</span><span class="typ">Iterator</span><span class="pun">;</span><span class="pln"> 
+ 
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="typ">HibernateException</span><span class="pun">;</span><span class="pln"> 
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="typ">Session</span><span class="pun">;</span><span class="pln"> 
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="typ">Transaction</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="typ">SessionFactory</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="typ">Criteria</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="pln">criterion</span><span class="pun">.</span><span class="typ">Restrictions</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="pln">criterion</span><span class="pun">.</span><span class="typ">Projections</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> org</span><span class="pun">.</span><span class="pln">hibernate</span><span class="pun">.</span><span class="pln">cfg</span><span class="pun">.</span><span class="typ">Configuration</span><span class="pun">;</span><span class="pln">
+
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ManageEmployee</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+   </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="typ">SessionFactory</span><span class="pln"> factory</span><span class="pun">;</span><span class="pln"> 
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">try</span><span class="pun">{</span><span class="pln">
+         factory </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pun">().</span><span class="pln">configure</span><span class="pun">().</span><span class="pln">buildSessionFactory</span><span class="pun">();</span><span class="pln">
+      </span><span class="pun">}</span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Throwable</span><span class="pln"> ex</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+         </span><span class="typ">System</span><span class="pun">.</span><span class="pln">err</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Failed to create sessionFactory object."</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> ex</span><span class="pun">);</span><span class="pln">
+         </span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ExceptionInInitializerError</span><span class="pun">(</span><span class="pln">ex</span><span class="pun">);</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="pln">
+      </span><span class="typ">ManageEmployee</span><span class="pln"> ME </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ManageEmployee</span><span class="pun">();</span><span class="pln">
+
+      </span><span class="com">/* Add few employee records in database */</span><span class="pln">
+      </span><span class="typ">Integer</span><span class="pln"> empID1 </span><span class="pun">=</span><span class="pln"> ME</span><span class="pun">.</span><span class="pln">addEmployee</span><span class="pun">(</span><span class="str">"Zara"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"Ali"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">);</span><span class="pln">
+      </span><span class="typ">Integer</span><span class="pln"> empID2 </span><span class="pun">=</span><span class="pln"> ME</span><span class="pun">.</span><span class="pln">addEmployee</span><span class="pun">(</span><span class="str">"Daisy"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"Das"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5000</span><span class="pun">);</span><span class="pln">
+      </span><span class="typ">Integer</span><span class="pln"> empID3 </span><span class="pun">=</span><span class="pln"> ME</span><span class="pun">.</span><span class="pln">addEmployee</span><span class="pun">(</span><span class="str">"John"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"Paul"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5000</span><span class="pun">);</span><span class="pln">
+      </span><span class="typ">Integer</span><span class="pln"> empID4 </span><span class="pun">=</span><span class="pln"> ME</span><span class="pun">.</span><span class="pln">addEmployee</span><span class="pun">(</span><span class="str">"Mohd"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"Yasee"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3000</span><span class="pun">);</span><span class="pln">
+
+      </span><span class="com">/* List down all the employees */</span><span class="pln">
+      ME</span><span class="pun">.</span><span class="pln">listEmployees</span><span class="pun">();</span><span class="pln">
+
+      </span><span class="com">/* Print Total employee's count */</span><span class="pln">
+      ME</span><span class="pun">.</span><span class="pln">countEmployee</span><span class="pun">();</span><span class="pln">
+
+      </span><span class="com">/* Print Toatl salary */</span><span class="pln">
+      ME</span><span class="pun">.</span><span class="pln">totalSalary</span><span class="pun">();</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="com">/* Method to CREATE an employee in the database */</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Integer</span><span class="pln"> addEmployee</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> fname</span><span class="pun">,</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> lname</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> salary</span><span class="pun">){</span><span class="pln">
+      </span><span class="typ">Session</span><span class="pln"> session </span><span class="pun">=</span><span class="pln"> factory</span><span class="pun">.</span><span class="pln">openSession</span><span class="pun">();</span><span class="pln">
+      </span><span class="typ">Transaction</span><span class="pln"> tx </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+      </span><span class="typ">Integer</span><span class="pln"> employeeID </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">try</span><span class="pun">{</span><span class="pln">
+         tx </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">beginTransaction</span><span class="pun">();</span><span class="pln">
+         </span><span class="typ">Employee</span><span class="pln"> employee </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Employee</span><span class="pun">(</span><span class="pln">fname</span><span class="pun">,</span><span class="pln"> lname</span><span class="pun">,</span><span class="pln"> salary</span><span class="pun">);</span><span class="pln">
+         employeeID </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Integer</span><span class="pun">)</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">save</span><span class="pun">(</span><span class="pln">employee</span><span class="pun">);</span><span class="pln"> 
+         tx</span><span class="pun">.</span><span class="pln">commit</span><span class="pun">();</span><span class="pln">
+      </span><span class="pun">}</span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">HibernateException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tx</span><span class="pun">!=</span><span class="kwd">null</span><span class="pun">)</span><span class="pln"> tx</span><span class="pun">.</span><span class="pln">rollback</span><span class="pun">();</span><span class="pln">
+         e</span><span class="pun">.</span><span class="pln">printStackTrace</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         session</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> employeeID</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+
+   </span><span class="com">/* Method to  READ all the employees having salary more than 2000 */</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> listEmployees</span><span class="pun">(</span><span class="pln"> </span><span class="pun">){</span><span class="pln">
+      </span><span class="typ">Session</span><span class="pln"> session </span><span class="pun">=</span><span class="pln"> factory</span><span class="pun">.</span><span class="pln">openSession</span><span class="pun">();</span><span class="pln">
+      </span><span class="typ">Transaction</span><span class="pln"> tx </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">try</span><span class="pun">{</span><span class="pln">
+         tx </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">beginTransaction</span><span class="pun">();</span><span class="pln">
+         </span><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+         </span><span class="com">// Add restriction.</span><span class="pln">
+         cr</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="typ">Restrictions</span><span class="pun">.</span><span class="pln">gt</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">));</span><span class="pln">
+         </span><span class="typ">List</span><span class="pln"> employees </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span><span class="pln">
+
+         </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Iterator</span><span class="pln"> iterator </span><span class="pun">=</span><span class="pln"> 
+                           employees</span><span class="pun">.</span><span class="pln">iterator</span><span class="pun">();</span><span class="pln"> iterator</span><span class="pun">.</span><span class="pln">hasNext</span><span class="pun">();){</span><span class="pln">
+            </span><span class="typ">Employee</span><span class="pln"> employee </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">)</span><span class="pln"> iterator</span><span class="pun">.</span><span class="kwd">next</span><span class="pun">();</span><span class="pln"> 
+            </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="str">"First Name: "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> employee</span><span class="pun">.</span><span class="pln">getFirstName</span><span class="pun">());</span><span class="pln"> 
+            </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="str">"  Last Name: "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> employee</span><span class="pun">.</span><span class="pln">getLastName</span><span class="pun">());</span><span class="pln"> 
+            </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"  Salary: "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> employee</span><span class="pun">.</span><span class="pln">getSalary</span><span class="pun">());</span><span class="pln"> 
+         </span><span class="pun">}</span><span class="pln">
+         tx</span><span class="pun">.</span><span class="pln">commit</span><span class="pun">();</span><span class="pln">
+      </span><span class="pun">}</span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">HibernateException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tx</span><span class="pun">!=</span><span class="kwd">null</span><span class="pun">)</span><span class="pln"> tx</span><span class="pun">.</span><span class="pln">rollback</span><span class="pun">();</span><span class="pln">
+         e</span><span class="pun">.</span><span class="pln">printStackTrace</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         session</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="com">/* Method to print total number of records */</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> countEmployee</span><span class="pun">(){</span><span class="pln">
+      </span><span class="typ">Session</span><span class="pln"> session </span><span class="pun">=</span><span class="pln"> factory</span><span class="pun">.</span><span class="pln">openSession</span><span class="pun">();</span><span class="pln">
+      </span><span class="typ">Transaction</span><span class="pln"> tx </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">try</span><span class="pun">{</span><span class="pln">
+         tx </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">beginTransaction</span><span class="pun">();</span><span class="pln">
+         </span><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+
+         </span><span class="com">// To get total row count.</span><span class="pln">
+         cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">rowCount</span><span class="pun">());</span><span class="pln">
+         </span><span class="typ">List</span><span class="pln"> rowCount </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span><span class="pln">
+
+         </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Total Coint: "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> rowCount</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+         tx</span><span class="pun">.</span><span class="pln">commit</span><span class="pun">();</span><span class="pln">
+      </span><span class="pun">}</span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">HibernateException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tx</span><span class="pun">!=</span><span class="kwd">null</span><span class="pun">)</span><span class="pln"> tx</span><span class="pun">.</span><span class="pln">rollback</span><span class="pun">();</span><span class="pln">
+         e</span><span class="pun">.</span><span class="pln">printStackTrace</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         session</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+  </span><span class="com">/* Method to print sum of salaries */</span><span class="pln">
+   </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> totalSalary</span><span class="pun">(){</span><span class="pln">
+      </span><span class="typ">Session</span><span class="pln"> session </span><span class="pun">=</span><span class="pln"> factory</span><span class="pun">.</span><span class="pln">openSession</span><span class="pun">();</span><span class="pln">
+      </span><span class="typ">Transaction</span><span class="pln"> tx </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+      </span><span class="kwd">try</span><span class="pun">{</span><span class="pln">
+         tx </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">beginTransaction</span><span class="pun">();</span><span class="pln">
+         </span><span class="typ">Criteria</span><span class="pln"> cr </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">createCriteria</span><span class="pun">(</span><span class="typ">Employee</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+
+         </span><span class="com">// To get total salary.</span><span class="pln">
+         cr</span><span class="pun">.</span><span class="pln">setProjection</span><span class="pun">(</span><span class="typ">Projections</span><span class="pun">.</span><span class="pln">sum</span><span class="pun">(</span><span class="str">"salary"</span><span class="pun">));</span><span class="pln">
+         </span><span class="typ">List</span><span class="pln"> totalSalary </span><span class="pun">=</span><span class="pln"> cr</span><span class="pun">.</span><span class="pln">list</span><span class="pun">();</span><span class="pln">
+
+         </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Total Salary: "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> totalSalary</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+         tx</span><span class="pun">.</span><span class="pln">commit</span><span class="pun">();</span><span class="pln">
+      </span><span class="pun">}</span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">HibernateException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tx</span><span class="pun">!=</span><span class="kwd">null</span><span class="pun">)</span><span class="pln"> tx</span><span class="pun">.</span><span class="pln">rollback</span><span class="pun">();</span><span class="pln">
+         e</span><span class="pun">.</span><span class="pln">printStackTrace</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         session</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln"> 
+      </span><span class="pun">}</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<h2>Compilation and Execution:</h2>
+<p>Here are the steps to compile and run the above mentioned 
+application. Make sure you have set PATH and CLASSPATH appropriately 
+before proceeding for the compilation and execution.</p>
+<ul class="list">
+<li><p>Create hibernate.cfg.xml configuration file as explained in configuration chapter.</p></li>
+<li><p>Create Employee.hbm.xml mapping file as shown above.</p></li>
+<li><p>Create Employee.java source file as shown above and compile it.</p></li>
+<li><p>Create ManageEmployee.java source file as shown above and compile it.</p></li>
+<li><p>Execute ManageEmployee binary to run the program.</p></li>
+</ul>
+<p>You would get following result, and records would be created in EMPLOYEE table.</p>
+<pre style="" class="prettyprint prettyprinted"><span class="pln">$java </span><span class="typ">ManageEmployee</span><span class="pln">
+</span><span class="pun">.......</span><span class="pln">VARIOUS LOG MESSAGES WILL DISPLAY HERE</span><span class="pun">........</span><span class="pln">
+
+</span><span class="typ">First</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Daisy</span><span class="pln">  </span><span class="typ">Last</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Das</span><span class="pln">  </span><span class="typ">Salary</span><span class="pun">:</span><span class="pln"> </span><span class="lit">5000</span><span class="pln">
+</span><span class="typ">First</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">John</span><span class="pln">  </span><span class="typ">Last</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Paul</span><span class="pln">  </span><span class="typ">Salary</span><span class="pun">:</span><span class="pln"> </span><span class="lit">5000</span><span class="pln">
+</span><span class="typ">First</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Mohd</span><span class="pln">  </span><span class="typ">Last</span><span class="pln"> </span><span class="typ">Name</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Yasee</span><span class="pln">  </span><span class="typ">Salary</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3000</span><span class="pln">
+</span><span class="typ">Total</span><span class="pln"> </span><span class="typ">Coint</span><span class="pun">:</span><span class="pln"> </span><span class="lit">4</span><span class="pln">
+</span><span class="typ">Total</span><span class="pln"> </span><span class="typ">Salary</span><span class="pun">:</span><span class="pln"> </span><span class="lit">15000</span></pre>
+<p>If you check your EMPLOYEE table, it should have following records:</p>
+<pre style="" class="prettyprint prettyprinted"><span class="pln">mysql</span><span class="pun">&gt;</span><span class="pln"> </span><span class="kwd">select</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> EMPLOYEE</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">+----+------------+-----------+--------+</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> id </span><span class="pun">|</span><span class="pln"> first_name </span><span class="pun">|</span><span class="pln"> last_name </span><span class="pun">|</span><span class="pln"> salary </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">+----+------------+-----------+--------+</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">14</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Zara</span><span class="pln">       </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Ali</span><span class="pln">       </span><span class="pun">|</span><span class="pln">   </span><span class="lit">2000</span><span class="pln"> </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">15</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Daisy</span><span class="pln">      </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Das</span><span class="pln">       </span><span class="pun">|</span><span class="pln">   </span><span class="lit">5000</span><span class="pln"> </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">16</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="typ">John</span><span class="pln">       </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Paul</span><span class="pln">      </span><span class="pun">|</span><span class="pln">   </span><span class="lit">5000</span><span class="pln"> </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">17</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Mohd</span><span class="pln">       </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Yasee</span><span class="pln">     </span><span class="pun">|</span><span class="pln">   </span><span class="lit">3000</span><span class="pln"> </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">+----+------------+-----------+--------+</span><span class="pln">
+</span><span class="lit">4</span><span class="pln"> rows </span><span class="kwd">in</span><span class="pln"> </span><span class="kwd">set</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.00</span><span class="pln"> sec</span><span class="pun">)</span><span class="pln">
+
+mysql</span><span class="pun">&gt;</span></pre>
+<hr>
+<div class="pre-btn">
+<a href="http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm">Previous Page</a>
+</div>
+<div class="print-btn">
+<a href="http://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank">Print Version</a>
+</div>
+<div class="pdf-btn">
+<a href="http://www.tutorialspoint.com/hibernate/pdf/hibernate_criteria_queries.pdf" alt="Hibernate Criteria Queries" target="_blank">PDF Version</a>
+</div>
+<div class="nxt-btn">
+<a href="http://www.tutorialspoint.com/hibernate/hibernate_native_sql.htm">Next Page</a>
+</div>
+<div class="clearer"></div>
+<hr>
+</div>
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script async="" src="Hibernate%20Criteria%20Queries_files/adsbygoogle.js"></script>
+<ins data-adsbygoogle-status="done" class="adsbygoogle bottom_ad_slot" style="display: inline-block; width: 336px; height: 280px;" data-ad-client="ca-pub-7133395778201029" data-ad-slot="2952991323"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+</div><!-- middlecol -->
+<div id="rightcol">
+<!-- AddThis Button BEGIN -->
+<div class="addthis">
+<div class="addthis_toolbox addthis_default_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_twitter"></a>
+<script type="text/javascript">
+<!--
+ document.write('<a class="addthis_button_google_plusone" g:plusone:count="false"></a>');
+//-->
+</script><a class="addthis_button_google_plusone" g:plusone:count="false"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_email"></a>
+<a class="addthis_button_compact"></a>
+</div>
+<script type="text/javascript" src="Hibernate%20Criteria%20Queries_files/addthis_widget.html"></script>
+</div>
+<!-- AddThis Button END -->
+<div class="localad">
+<a rel="nofollow" href="http://www.modernindianbabynames.com/" target="_blank" title="Modern Baby Names">Modern Baby Names</a>
+</div>
+<div class="localad">
+<a rel="nofollow" href="http://www.photofuntoos.com/" target="_blank" title="Online Photo Editing">Online Photo Editing</a>
+</div>
+<div class="rightgooglead">
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript" src="Hibernate%20Criteria%20Queries_files/show_ads.js"> 
+</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="600" width="160"></iframe></ins></ins>
+</div>
+</div><!-- rightcol -->
+<div style="clear:both;"></div>
+</div><!-- wrapper -->
+<div id="footer">
+<div class="wrapper">
+<div id="bottommenu">
+<a href="http://www.tutorialspoint.com/asp.net/index.htm" target="_top">ASP.NET </a> |
+<a href="http://www.tutorialspoint.com/jquery/index.htm" target="_top">jQuery </a> |
+<a href="http://www.tutorialspoint.com/ajax/index.htm" target="_top">AJAX </a> |
+<a href="http://www.tutorialspoint.com/ant/index.htm" target="_top">ANT</a> |
+<a href="http://www.tutorialspoint.com/jsp/index.htm" target="_top">JSP </a> |
+<a href="http://www.tutorialspoint.com/servlets/index.htm" target="_top">Servlets </a> |
+<a href="http://www.tutorialspoint.com/log4j/index.htm" target="_top">log4j </a> |
+<a href="http://www.tutorialspoint.com/ibatis/index.htm" target="_top">iBATIS </a> |
+<a href="http://www.tutorialspoint.com/hibernate/index.htm" target="_top">Hibernate </a> |
+<a href="http://www.tutorialspoint.com/jdbc/index.htm" target="_top">JDBC </a> |
+<a href="http://www.tutorialspoint.com/struts_2/index.htm" target="_top">Struts </a> |
+<a href="http://www.tutorialspoint.com/html5/index.htm" target="_top">HTML5 </a> |
+<a href="http://www.tutorialspoint.com/sql/index.htm" target="_top">SQL </a> |
+<a href="http://www.tutorialspoint.com/mysql/index.htm" target="_top">MySQL </a> |
+<a href="http://www.tutorialspoint.com/cplusplus/index.htm" target="_top">C++ </a> |
+<a href="http://www.tutorialspoint.com/unix/index.htm" target="_top">UNIX </a>
+</div>
+<div id="copyright">
+<p>Copyright © 2014 by tutorialspoint. All Rights Reserved.</p>
+</div>
+</div>
+</div>
+
+</body></html>
