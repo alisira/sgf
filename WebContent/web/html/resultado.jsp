@@ -52,7 +52,7 @@
 									<td width="750">
 										<div class="events_text" align="center">
 											<div align="center">
-												<h2><bean:write name="mensaje_error"/> </h2>
+												<h2><bean:write name="mensaje"/> </h2>
 											</div>
 											<a href="/sigefirrhh">Ir al Sistema</a>
 										</div>

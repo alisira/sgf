@@ -13,7 +13,7 @@
 
 		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
 
-			if (session.getAttribute("ComproIniBean")==null){
+			if (session.getAttribute("CompromisoInicialActionBean")==null){
 				ValidadorSesion vs = new ValidadorSesion();
 				HttpServletRequest httpServletRequest = (HttpServletRequest)pageContext.getRequest();			
 				boolean temp = vs.validarPermiso(httpServletRequest);

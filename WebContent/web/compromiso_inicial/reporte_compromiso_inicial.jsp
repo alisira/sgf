@@ -8,14 +8,13 @@
 <%@ page import="sigefirrhh.sistema.ValidadorSesion" %>
 
 <% 
-
 	String rutaTemp = null;
 
 	if ((LoginSession)session.getAttribute("loginSession")!=null){
 
 		if (((LoginSession)session.getAttribute("loginSession")).isValid()) {
 
-			if (session.getAttribute("ComproIniBean")!=null){
+			if (session.getAttribute("CompromisoInicialForm")!=null){
 				
 				rutaTemp = "/" + request.getRequestURI().split("/")[1] ;
 				

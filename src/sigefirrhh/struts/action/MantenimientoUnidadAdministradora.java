@@ -64,7 +64,7 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();
 	        
-	        String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
+	        String resp = validarAcceso(request, "nuevo");
     		if (resp == "valido"){
 			        
     	        forma = (UnidadAdministradoraForm) form;
@@ -106,7 +106,7 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
     					//System.out.println(i.getCedula() + " " + i.getNombre() + " " + i.getApellido());
     	        	}
     	        }else{
-    	        	error[0] = (String) "sinresultados";
+    	        	error[0] = (String) "sinResultados";
     	        }
 	        	
 	        }else{
@@ -145,25 +145,25 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 		        	out.write(error[0].toString());
 					out.write("</error>");
 				}else{
-					System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					System.out.println(error[0]);
+					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
+					//System.out.println(error[0]);
 				}
 
 				out.write("<error>");
 				
-				if (error[0].equals("sesioncerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+				if (error[0].equals("sesionCerrada")){
+					out.write(messageResources.getMessage("errors.sesionCerrada"));
 					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosincompletos")){
-		        	out.write(messageResources.getMessage("errors.datosincompletos"));
+		        }else if(error[0].equals("datosIncompletos")){
+		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
 					fwd = "datosIncompletos";
 		        }else if(error[0].equals("errorcomunicacion")){
 		        	out.write(messageResources.getMessage("errors.comunicacion"));
 					fwd = "error";
-	        	}else if(error[0].equals("sinresultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
-	        	}else if(error[0].equals("erroraplicacion")){
+	        	}else if(error[0].equals("sinResultados")){
+	        		out.write(messageResources.getMessage("errors.sinResultados"));
+	        		fwd = "sinResultados";
+	        	}else if(error[0].equals("errorAplicacion")){
 	        		out.write(messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
 		        }

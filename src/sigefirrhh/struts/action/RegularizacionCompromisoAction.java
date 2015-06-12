@@ -16,6 +16,8 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -40,6 +42,7 @@ import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
+import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
 import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
 
@@ -76,17 +79,16 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		messageResources = getResources(request);
     		
 		try {			
-			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;			
-			String resp = validarAcceso(request);
+			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
     		if (resp == "valido"){
+    			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;	
     			OpcionDAO opcionDAO = new OpcionDAOImple();
 				CriterioBusqueda criterio =new CriterioBusqueda();
 				criterio.addAno(ano);
 				criterio.addIdOpcion(1129);//Hay que buscar modelar la base de datos para que este id sea buscado de acuerdo al proceso actual
 				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
 				request.setAttribute("Opcion", listadoOpcion);
-				request.setAttribute("ano", ano);
-				request.getSession().setAttribute("RegularizacionCompromisoBean", null);
+				request.setAttribute("ano", ano);				
 				forma.setTituloApli("Buscar Expediente de Compromiso");
 				fwd = "apruebaNuevo";
     		}else{
@@ -94,7 +96,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
     		}
 	
 		} catch (Exception e) {
-			error[0] = (String) "erroraplicacion";
+			error[0] = (String) "errorAplicacion";
 			error[1]= e;	
 
 		} finally{
@@ -112,7 +114,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 					fwd = "sesionCerrada";					
 				}else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";     	
-	        	}else if(error[0].equals("erroraplicacion")){
+	        	}else if(error[0].equals("errorAplicacion")){
 	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));	        		
 	        		fwd = "error";
 		        }
@@ -123,14 +125,14 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	}
 	
 	
-	public ActionForward nuevo2(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+	public ActionForward cargar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 						
 		error= new Object[2];
 		messageResources = getResources(request);		
     		
 		try {
 			
-			String resp = validarAcceso(request);
+			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
     		if (resp == "valido"){
 	        		
         		TipoDocumentoDAOImple tipoDocumentoDAO = new TipoDocumentoDAOImple();					
@@ -182,7 +184,6 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 				request.setAttribute("TipoDocumento", listaTipoDocu);
 				request.setAttribute("ano", ano);
 				request.setAttribute("titulo", "Regularizacion de Compromiso");
-				request.getSession().setAttribute("ReguComproBean", null);
 				
 				fwd ="apruebaNuevo";
 	        	
@@ -191,7 +192,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	        }
 	
 		} catch (Exception e) {
-			error[0] = (String) "erroraplicacion";
+			error[0] = (String) "errorAplicacion";
 			error[1]= e;
 
 		} finally{			
@@ -207,19 +208,19 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 
 				out.write("<error>");
 				
-				if (error[0].equals("sesioncerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+				if (error[0].equals("sesionCerrada")){
+					out.write(messageResources.getMessage("errors.sesionCerrada"));
 					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosincompletos")){
-		        	out.write(messageResources.getMessage("errors.datosincompletos"));
+		        }else if(error[0].equals("datosIncompletos")){
+		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
 					fwd = "datosIncompletos";
 		        }else if(error[0].equals("errorcomunicacion")){
 		        	out.write(messageResources.getMessage("errors.comunicacion"));
 					fwd = "error";
-	        	}else if(error[0].equals("sinresultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
-	        	}else if(error[0].equals("erroraplicacion")){
+	        	}else if(error[0].equals("sinResultados")){
+	        		out.write(messageResources.getMessage("errors.sinResultados"));
+	        		fwd = "sinResultados";
+	        	}else if(error[0].equals("errorAplicacion")){
 	        		out.write(messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
 		        }
@@ -299,11 +300,11 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 					
 			
 	        	}else{
-	        		error[0] = (String) "sesioncerrada";
+	        		error[0] = (String) "sesionCerrada";
 		        }
 	        	
 	        }else{
-        		error[0] = (String) "sesioncerrada";
+        		error[0] = (String) "sesionCerrada";
 	        }
 
 		} catch (NestedSQLException e) {
@@ -319,7 +320,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 			error[1]= e;
 						
 		} catch (Exception e) {
-			error[0] = (String) "erroraplicacion";
+			error[0] = (String) "errorAplicacion";
 			error[1]= e;
 
 		} finally{
@@ -344,12 +345,12 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 
 				out.write("<error>");
 				
-				if (error[0].equals("sesioncerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+				if (error[0].equals("sesionCerrada")){
+					out.write(messageResources.getMessage("errors.sesionCerrada"));
 					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosincompletos")){
-		        	out.write(messageResources.getMessage("errors.datosincompletos"));
-		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.datosincompletos"));
+		        }else if(error[0].equals("datosIncompletos")){
+		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
+		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.datosIncompletos"));
 					fwd = "datosIncompletos";
 		        }else if(error[0].equals("errorcomunicacion")){
 		        	out.write(messageResources.getMessage("errors.comunicacion"));
@@ -359,10 +360,10 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		        	out.write(messageResources.getMessage("errors.data"));
 		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.data"));
 					fwd = "error";
-	        	}else if(error[0].equals("sinresultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
-	        	}else if(error[0].equals("erroraplicacion")){
+	        	}else if(error[0].equals("sinResultados")){
+	        		out.write(messageResources.getMessage("errors.sinResultados"));
+	        		fwd = "sinResultados";
+	        	}else if(error[0].equals("errorAplicacion")){
 	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
 	        		out.write(messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
@@ -383,18 +384,31 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	}
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request) {
+	public String validarAcceso(HttpServletRequest request, String funcion) {
 		String resp= null;
 		
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
+        		
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			resp ="valido";
+        			
+        			if (funcion.equals("nuevo")){
+            			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
+            			resp ="valido";
+        			}else{
+    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
+    						resp ="valido";
+            			}else{
+            				resp ="sesionCerrada";
+            			}
+        			}	
+            			
         		}else{
         			resp ="sinPermiso";
         		}
+        		
         	}else{
         		resp ="sesionCerrada";
 	        }	        	
@@ -404,4 +418,5 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		
 		return resp;
 	}
+	
 }

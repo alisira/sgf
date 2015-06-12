@@ -38,9 +38,16 @@ public class CompromisoInicialDAOImple extends GenericDAOImplHibernate implement
     	}
 	}
 
+	
 	@Override
-	public int actualizarCompromisoInicial(CompromisoInicial record)
-			throws PSQLException, Exception, SQLException, NestedSQLException {
+	public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, Exception, SQLException, NestedSQLException {
+		Integer lista = (Integer) getSqlMapClientTemplate().queryForObject("actualizarCompromisoInicial", record);
+		if (lista==null) lista = 0;		
+        return lista;
+	}
+	
+	
+	public int actualizarCompromisoInicial_porsi(CompromisoInicial record)	throws PSQLException, Exception, SQLException, NestedSQLException {
 		
 		int resultado = 0;
     	
@@ -67,15 +74,6 @@ public class CompromisoInicialDAOImple extends GenericDAOImplHibernate implement
 
   	   	return resultado;  	
 	}
-
-	public Integer actualizarCompromisoInicial2(CompromisoInicial record) throws PSQLException, Exception, SQLException, NestedSQLException {
-		Integer lista = (Integer) getSqlMapClientTemplate().queryForObject("actualizarCompromisoInicial", record);
-		if (lista==null) lista = 0;
-		
-        return lista;
-	}
-	
-	
 	
 
 }

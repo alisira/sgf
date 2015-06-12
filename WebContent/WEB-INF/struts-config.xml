@@ -54,7 +54,7 @@
 
     <global-forwards>
         <forward name="error" path="/web/html/error.jsp" />
-        <forward name="exito" path="/web/html/exito.html"/>
+        <forward name="exito" path="/web/html/resultado.jsp"/>
     	<forward name="errorConexion" path="/web/html/error_DB.html" />
     	<forward name="sesionCerrada" path="/error.html" />
     	<forward name="sinPermiso" path="/sinpermiso.jsp" />

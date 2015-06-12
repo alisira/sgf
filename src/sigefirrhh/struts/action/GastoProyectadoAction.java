@@ -12,12 +12,6 @@ import sigecof.clDisponibilidadPresupuestaria;
 */
 
 
-
-
-
-
-
-
 import sigefirrhh.base.estructura.Organismo;
 
 
@@ -145,7 +139,7 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 						//b++;
 					}
 				}else{						
-					error[0] = (String) "sinresultados";
+					error[0] = (String) "sinResultados";
 				}
 	        	
 	        }else{
@@ -179,20 +173,20 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 				}else{
 					
 					out.write("<error>");
-					if (error[0].equals("sesioncerrada")){			        	
+					if (error[0].equals("sesionCerrada")){			        	
 			        	out.write("Por razones de seguridad su sesion ha sido cerrada, favor iniciar sesion desde pagina inicial, gracias" );
 						fwd = "sesionCerrada";
-			        }else if(error[0].equals("datosincompletos")){
+			        }else if(error[0].equals("datosIncompletos")){
 			        	out.write("Datos Incompletos, favor corregir, gracias" );
 						fwd = "datosIncompletos";
-			        }else if(error[0].equals("sinresultados")){			        	
+			        }else if(error[0].equals("sinResultados")){			        	
 			        	out.write("Busqueda no Obtuvo resultados, vuelva a intentar");						
-						fwd = "sinresultados";
+						fwd = "sinResultados";
 			        }
 					out.write("</error>");
 
-					System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					System.out.println(error[0]);
+					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
+					//System.out.println(error[0]);
 				}
 				
 			}
@@ -207,14 +201,14 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 	@Override
 	public String validarAcceso(HttpServletRequest request, String funcion) {
 		String resp= null;
-		
+
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-        		
+
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			
+
         			if (funcion.equals("nuevo")){
             			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
             			resp ="valido";
@@ -224,19 +218,19 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
             			}else{
             				resp ="sesionCerrada";
             			}
-        			}	
-            			
+        			}
+
         		}else{
         			resp ="sinPermiso";
         		}
-        		
+
         	}else{
         		resp ="sesionCerrada";
 	        }	        	
         }else{
         	resp ="sesionCerrada";
         }  
-		
+
 		return resp;
 	}
 }

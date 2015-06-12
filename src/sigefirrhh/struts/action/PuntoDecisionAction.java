@@ -76,21 +76,15 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
 					//System.out.println(error[0]);
 				}
-
-				//out.write("<error>");
 				
-				if (error[0].equals("sesionCerrada")){
-					//out.write(messageResources.getMessage("errors.sesioncerrada"));
+				if (error[0].equals("sesionCerrada")){					
 					fwd = "sesionCerrada";
-				}else if (error[0].equals("sinPermiso")){
-					//out.write(messageResources.getMessage("errors.sesioncerrada"));
+				}else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
 	        	}else if(error[0].equals("errorAplicacion")){
-	        		//out.write(messageResources.getMessage("errors.aplicacion"));
+	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
 		        }
-
-				//out.write("</error>");
 
 			}
 		}
@@ -100,7 +94,6 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	
 	
 	public ActionForward buscar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);
 		error= new Object[2];
 		messageResources = getResources(request);					
@@ -163,10 +156,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 			error[0] = (String) "errorAplicacion";
 			error[1]= e;
 
-		} finally{			
-
-			System.out.println("ommfd " + error[0]);
-			
+		} finally{
 			
 			if (((String) error[0]) != null){
 				if (error[1] != null){
@@ -180,7 +170,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				out.write("<error>");
 				
 				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+					out.write(messageResources.getMessage("errors.sesionCerrada"));
 					fwd = "sesionCerrada";
 	        	}else if(error[0].equals("errorAplicacion")){
 	        		out.write(messageResources.getMessage("errors.aplicacion"));
@@ -189,8 +179,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					out.write(messageResources.getMessage("errors.sinPermiso"));
 					fwd = "sinPermiso";
 		        }else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
+	        		out.write(messageResources.getMessage("errors.sinResultados"));
+	        		fwd = "sinResultados";
 		        }
 
 				out.write("</error>");
@@ -214,11 +204,6 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 		try {			
 			
 			session = request.getSession();
-			out = response.getWriter();
-	        response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");
 			
 	        String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
     		if (resp == "valido"){
@@ -246,11 +231,11 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
     		}    
 			
 		} catch (Exception e) {
-			error[0] = (String) "erroraplicacion";
+			error[0] = (String) "errorAplicacion";
 			error[1]= e;
 
-		} finally{			
-
+		} finally{
+			
 			if (((String) error[0]) != null){
 				if (error[1] != null){
 					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
@@ -267,15 +252,12 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	        		fwd = "error";
 		        }else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
-		        }else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
+		        }else if(error[0].equals("sinResultados")){	        		
+	        		fwd = "sinResultados";
 		        }
 				
 			}
 			
-			//out.write("</root>");
-			//out.flush();
 		}
 		return mapping.findForward(fwd);		
 	}
@@ -285,14 +267,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 		error= new Object[2];
 		messageResources = getResources(request);		
 		try {
-			session = request.getSession();
-			out = response.getWriter();
-	        response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");
 			session = request.getSession();			
-			
 			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 
 			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -312,25 +287,25 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	        					compromisoInicial.setEstatus(forma.getDecision());
 
 	        					int resultado;
-	        					CompromisoInicialDAOImple compromisoInicialDAO = new CompromisoInicialDAOImple();
-	    						//resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
-	    						resultado = compromisoInicialDAO.actualizarCompromisoInicial2(compromisoInicial);
+	        					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();	    						
+	    						resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
 
 	    						//System.out.println("resultado: " + resultado);
 	    						request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
+	    						request.setAttribute("mensaje", messageResources.getMessage("mensaje.exito"));
 	    						fwd = "exito";
 
 	        				}else{
-	        					error[0] = (String) "datosincompletos";
+	        					error[0] = (String) "datosIncompletos";
 			        		}
 	        			}else{
-	        				error[0] = (String) "datosincompletos";
+	        				error[0] = (String) "datosIncompletos";
 		        		}
 	        		}else{
-	        			error[0] = (String) "datosincompletos";
+	        			error[0] = (String) "datosIncompletos";
 	        		}
         		}else{
-        			error[0] = (String) "datosincompletos";
+        			error[0] = (String) "datosIncompletos";
         		}        		
         	}else{
         		error[0] = resp;
@@ -338,7 +313,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 	       
 			
 		} catch (Exception e) {
-			error[0] = (String) "erroraplicacion";
+			error[0] = (String) "errorAplicacion";
 			error[1]= e;
 		
 		} finally{			
@@ -352,30 +327,17 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					//System.out.println(error[0]);
 				}
 
-				out.write("<error>");
-				
-				if (error[0].equals("sesioncerrada")){
-					out.write(messageResources.getMessage("errors.sesioncerrada"));
+				if (error[0].equals("sesionCerrada")){					
 					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosincompletos")){
-		        	out.write(messageResources.getMessage("errors.datosincompletos"));
-					fwd = "datosIncompletos";
-		        }else if(error[0].equals("errorcomunicacion")){
-		        	out.write(messageResources.getMessage("errors.comunicacion"));
-					fwd = "error";
-	        	}else if(error[0].equals("sinresultados")){
-	        		out.write(messageResources.getMessage("errors.sinresultados"));
-	        		fwd = "sinresultados";
-	        	}else if(error[0].equals("erroraplicacion")){
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
+				}else if (error[0].equals("sinPermiso")){					
+					fwd = "sinPermiso";
+	        	}else if(error[0].equals("errorAplicacion")){
+	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
 	        		fwd = "error";
-		        }
-				
-				out.write("</error>");
+	        	}else if(error[0].equals("datosIncompletos")){
+					fwd = "datosIncompletos";		        
+		        }				
 			}
-			
-			//out.write("</root>");
-			//out.flush();
 		}
 
 		//if (request.getHeader("content-type") == null){//Si el request es de un ajax
