@@ -19,6 +19,7 @@ import org.apache.struts.util.MessageResources;
 import sigefirrhh.base.estructura.Organismo;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.persistencia.modelo.Expediente;
 import sigefirrhh.persistencia.modelo.Opcion;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
@@ -132,18 +133,18 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				criterio.addAno(ano);
 				criterio.addEstatus(forma.getEstatus());					
 				
-				ExpedienteDAO compromisoInicialDAO = new ExpedienteDAOImple();
-				List<Expediente> listadoExpediente = (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterio, "CompromisoInicial" );				
+				ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
+				List<Opcion> listadoExpediente = (List<Opcion>) expedienteDAO.buscarExpedienteOpcion(criterio);
 				
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		        
-		        if (listadoCompromisoInicial.size() > 0){
-		        	for (int i = 0;i < listadoCompromisoInicial.size(); i++){
-						out.write("<expediente>" + listadoCompromisoInicial.get(i).getExpediente() + "</expediente>");
-						out.write("<fecha_reg>" + formatter.format(listadoCompromisoInicial.get(i).getFechaRegistro()) + "</fecha_reg>");
+		        if (listadoExpediente.size() > 0){
+		        	for (int i = 0;i < listadoExpediente.size(); i++){
+						out.write("<expediente>" + listadoExpediente.get(i).getExpediente() + "</expediente>");
+						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");
 						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
 						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
-						out.write("<observacion>" + listadoCompromisoInicial.get(i).getObservacion() + "</observacion>");
+						out.write("<observacion>" + listadoExpediente.get(i).getObservacion() + "</observacion>");
 						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
 					}
 		       }else{

@@ -1,14 +1,8 @@
 package sigefirrhh.struts.actionForm;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
-public class ParametrosBusquedaForm extends ActionForm{
-    
+public class ParametrosBusquedaForm extends ActionForm{    
 	
 	private static final long serialVersionUID = 7519218840547369255L;
 	private String expediente;
@@ -269,20 +263,13 @@ public class ParametrosBusquedaForm extends ActionForm{
 	public void setFechaDesde(String fechaDesde) {
 		this.fechaDesde = fechaDesde;
 	}
+	
 	public String getFechaHasta() {
 		return fechaHasta;
 	}
+	
 	public void setFechaHasta(String fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
-	
-   
-	public ActionErrors validateE(ActionMapping map,
-                                  HttpServletRequest req){
-        ActionErrors errors = new ActionErrors();
-        if((getTituloApli() == null) )
-            errors.add("titulo", new ActionMessage("error.nombre"));
-        return errors;
-    }
 	
 }

@@ -10,13 +10,32 @@
 	   <result column="id_opcion" property="idOpcion" jdbcType="INTEGER" />
 	   <result column="id_organismo" property="idOrganismo" jdbcType="INTEGER" />	   
 	   <result column="estatus" property="estatus" jdbcType="INTEGER" />
-	   <result column="fecha_reg" property="fechaReg" jdbcType="DATE" />
+	   <result column="fecha_reg" property="fechaRegistro" jdbcType="DATE" />
 	   <result column="observacion" property="observacion" jdbcType="VARCHAR" />
 	 </resultMap>
   
 	<select id="buscarExpediente" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" resultMap="ResultMap">
     	select * from expediente
-  	</select>
+    	<dynamic prepend="WHERE">
+	    	<isNotNull prepend="AND" property="expediente" >
+				<iterate property="expediente" open="expediente in (" close=")"	conjunction="," >
+					#expediente[]#
+				</iterate>
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="ano" >
+				<iterate property="ano" open="ano in (" close=")"	conjunction="," >
+					#ano[]#
+				</iterate>
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="estatus" >
+				<iterate property="estatus" open="estatus in (" close=")"	conjunction="," >
+					#estatus[]#
+				</iterate>
+			</isNotNull>
+	    </dynamic>
+  	</select>	
   
   <statement id="guardarExpediente" parameterClass="sigefirrhh.persistencia.modelo.Expediente" resultClass="Integer">
 
@@ -37,7 +56,7 @@
 	      <isNotNull prepend="," property="estatus">
 	        estatus
 	      </isNotNull>
-	      <isNotNull prepend="," property="fechaReg">
+	      <isNotNull prepend="," property="fechaRegistro">
 	        fecha_reg
 	      </isNotNull>
 	      <isNotNull prepend="," property="idOrganismo">
@@ -65,8 +84,8 @@
 	      <isNotNull prepend="," property="estatus">
 	        #estatus:INTEGER#
 	      </isNotNull>
-	      <isNotNull prepend="," property="fechaReg">
-	        #fechaReg:DATE#
+	      <isNotNull prepend="," property="fechaRegistro">
+	        #fechaRegistro:DATE#
 	      </isNotNull>
 	      <isNotNull prepend="," property="idOrganismo">
 	        #idOrganismo:INTEGER#
@@ -77,8 +96,6 @@
 	      )
 	    </dynamic>
 	    returning  expediente
-  </statement>	
-  
-  
+  </statement>
   
 </sqlMap>

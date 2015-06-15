@@ -14,10 +14,9 @@ public class Expediente implements Serializable  {
 	private Integer ano;
 	private Integer idUsuario;
 	private Integer estatus;
-	private Date fechaReg;
+	private Date fechaRegistro;
     private Integer idOpcion;
     private String observacion;
-    
     
     private Integer idOrganismo;
 
@@ -68,21 +67,21 @@ public class Expediente implements Serializable  {
 	public void setEstatus(Integer estatus) {
 		this.estatus = estatus;
 	}
-
-	public Date getFechaReg() {
-		return fechaReg;
-	}
-
-	public void setFechaReg(Date fechaReg) {
-		this.fechaReg = fechaReg;
-	}
-
+	
 	public Integer getIdOpcion() {
 		return idOpcion;
 	}
 
 	public void setIdOpcion(Integer idOpcion) {
 		this.idOpcion = idOpcion;
+	}
+
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}    
 	
 }

@@ -13,11 +13,15 @@
     <result column="tipo" property="tipo" jdbcType="VARCHAR" />
     <result column="uri" property="uri" jdbcType="VARCHAR" />
     <result column="jerarquia" property="jerarquia" jdbcType="VARCHAR" />
+	<result column="expediente" property="expediente" jdbcType="INTEGER" />	
+	<result column="fecha_reg" property="fechaRegistro" jdbcType="DATE" />
+	<result column="observacion" property="observacion" jdbcType="VARCHAR" />
+	  
   </resultMap>
   
   <select id="buscarOpcion" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
     <!--realizado el 21-04-15 15:20:44 .-->
-		SELECT id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, estatus
+		SELECT id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, estatus, 0 as expediente, '' as observacion, '2100-01-01' as fecha_reg
 			FROM opcion 
 		where 
 		jerarquia is not null and estatus = 'A'
@@ -43,7 +47,7 @@
   
   <select id="buscarOpcionxRol" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
     <!--realizado el 21-04-15 15:20:44 .-->
-	    SELECT op.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia
+	    SELECT op.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, '' as expediente
 			FROM  public.rol, public.opcion op, public.rolopcion
 			WHERE 
 			  op.id_opcion = rolopcion.id_opcion AND
@@ -69,29 +73,37 @@
   	</select>
   
 	<select id="buscarOpcionExpediente" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
-	  	SELECT distinct opcion.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, opcion.estatus,
-			opcion.descripcion,   expediente.ano,   expediente.estatus
-		FROM public.expediente,  public.opcion
+	  	SELECT distinct o.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, o.estatus,
+			o.descripcion,   e.ano,   e.estatus, e.expediente, e.observacion, e.fecha_reg
+		FROM expediente e,  opcion o
 		WHERE 
-			expediente.id_opcion = opcion.id_opcion
-		  	and opcion.estatus = 'A'
-		<isParameterPresent >
+			e.id_opcion = o.id_opcion
 		
 			<isNotNull prepend="AND" property="uri" >
-				<iterate property="uri" open="uri in (" close=")" conjunction="," >
+				<iterate property="uri" open="o.uri in (" close=")" conjunction="," >
 					#uri[]#
 				</iterate>
 			</isNotNull>
 			
 			<isNotNull prepend="AND" property="ano" >
-				<iterate property="ano" open="ano in (" close=")" conjunction="," >
+				<iterate property="ano" open="e.ano in (" close=")" conjunction="," >
 					#ano[]#
 				</iterate>
 			</isNotNull>			
-		
-		</isParameterPresent>
+			
+			<isNotNull prepend="AND" property="expediente" >
+				<iterate property="expediente" open="e.expediente in (" close=")"	conjunction="," >
+					#expediente[]#
+				</iterate>
+			</isNotNull>
+								
+			<isNotNull prepend="AND" property="estatus" >
+				<iterate property="estatus" open="e.estatus in (" close=")"	conjunction="," >
+					#estatus[]#
+				</iterate>
+			</isNotNull>
 	
-		ORDER BY opcion.descripcion, expediente.ano
+		ORDER BY o.descripcion, e.ano
    </select>
    
 </sqlMap>

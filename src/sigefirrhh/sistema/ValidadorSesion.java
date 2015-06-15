@@ -159,7 +159,7 @@ public class ValidadorSesion {
 				}
 				listadoOpcion = (List<Opcion>) OpcionDAO.buscar(criterio, "OpcionxRol");	
 			}else{
-				listadoOpcion = (List<Opcion>) OpcionDAO.buscar(null, "Opcion");	
+				listadoOpcion = (List<Opcion>) OpcionDAO.buscar(null, "Opcion");
 			}			
 			
 			String vtOpciones[][] = new String[listadoOpcion.size()][3]; 
