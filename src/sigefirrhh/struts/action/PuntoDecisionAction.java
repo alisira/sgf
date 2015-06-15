@@ -2,7 +2,6 @@ package sigefirrhh.struts.action;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +22,10 @@ import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.Opcion;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
+import sigefirrhh.persistencia.dao.ExpedienteDAO;
 import sigefirrhh.persistencia.dao.OpcionDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
+import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
@@ -131,8 +132,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				criterio.addAno(ano);
 				criterio.addEstatus(forma.getEstatus());					
 				
-				CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
-				List<CompromisoInicial> listadoCompromisoInicial = (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterio, "CompromisoInicial" );				
+				ExpedienteDAO compromisoInicialDAO = new ExpedienteDAOImple();
+				List<Expediente> listadoExpediente = (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterio, "CompromisoInicial" );				
 				
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		        
