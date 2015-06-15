@@ -263,6 +263,9 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 
 		} finally{
 			
+			
+			error[0].equals("errorAplicacion");
+			
 			if (((String) error[0]) != null){
 				/*try {					
 					//if (SMC != null){
