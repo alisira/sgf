@@ -8,7 +8,7 @@ select (select count(*) from compromisoinicialdetalle), (select count(*) from co
 
 
 select * from expediente 
-select * from compromisoinicial 
+select expediente, estatus  from compromisoinicial order by expediente
 
 
 update compromisoinicial set estatus = 0
