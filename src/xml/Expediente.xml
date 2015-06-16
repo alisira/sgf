@@ -98,4 +98,44 @@
 	    returning  expediente
   </statement>
   
+	<statement id="actualizarExpediente"  parameterClass="sigefirrhh.persistencia.modelo.Expediente" resultClass="Integer">
+		UPDATE expediente
+		 
+		<dynamic prepend="SET"> 
+	      	<isNotNull prepend="," property="expediente">
+	        	expediente= #expediente:INTEGER#
+	      	</isNotNull>
+	      	<isNotNull prepend="," property="ano">
+	        	ano=#ano:INTEGER#
+	      	</isNotNull>	      	      
+	      	<isNotNull prepend="," property="estatus">
+	        	estatus =  #estatus:INTEGER#
+	      	</isNotNull>
+	      	<isNotNull prepend="," property="fechaRegistro">
+	        	fecha_registro = #fechaRegistro:DATE#
+	      	</isNotNull>
+	    </dynamic>
+	    
+	    <dynamic prepend="WHERE">
+	    	<isNotNull prepend="AND" property="expediente" >
+				expediente= #expediente:INTEGER#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="ano" >
+				ano=#ano:INTEGER#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="idExpediente" >
+				id_expediente =  #idExpediente#
+			</isNotNull>
+				
+			<isNotNull prepend="AND" property="idOrganismo" >
+				id_organismo =  #idOrganismo:INTEGER#
+			</isNotNull> 
+	    </dynamic>
+	    RETURNING expediente
+	    
+	</statement>	
+  
+  
 </sqlMap>

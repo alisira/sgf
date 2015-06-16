@@ -157,7 +157,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        	
  		        	Expediente expediente = new Expediente();
  		        	expediente.setExpediente(0);
-					expediente.setFechaReg(fecha);
+					expediente.setFechaRegistro(fecha);
 					expediente.setAno(ano);
 					expediente.setEstatus(1);
 					expediente.setIdUsuario(idUsuario);

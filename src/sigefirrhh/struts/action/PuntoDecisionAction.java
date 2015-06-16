@@ -17,15 +17,11 @@ import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.util.MessageResources;
 
 import sigefirrhh.base.estructura.Organismo;
-import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
-import sigefirrhh.persistencia.modelo.Expediente;
 import sigefirrhh.persistencia.modelo.Opcion;
 import sigefirrhh.login.LoginSession;
-import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
 import sigefirrhh.persistencia.dao.OpcionDAO;
-import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
 import sigefirrhh.sistema.ValidadorSesion;
@@ -212,14 +208,14 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					
 				ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 				
-				Pdd pddCompromiso = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
+				Pdd pdd = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
 				
 				Organismo org = new Organismo();
 				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 				
-				String urlReporte =  pddCompromiso.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo());
+				String urlReporte =  pdd.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo());
 				
-				Map<Integer, String> opciones = pddCompromiso.opciones();
+				Map<Integer, String> opciones = pdd.opciones();
 				
 				request.setAttribute("Opciones", opciones);				
 				request.setAttribute("urlReporte", urlReporte);
@@ -277,29 +273,20 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
         		if (forma.getExpediente() != null ){		        		
 	        		if (forma.getExpediente() != null ){
 	        			if (forma.getProceso()!= null ){
-	        				if (forma.getProceso().equals("pddCompromiso") ){
+	        				
+	        				Pdd pdd = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
+	        				
+	        				Organismo org = new Organismo();
+	        				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 
-	        					Organismo org = new Organismo();
-	        					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();	
-	        					
-	        					CompromisoInicial compromisoInicial = new CompromisoInicial();
-	        					compromisoInicial.setExpediente(Integer.parseInt(forma.getExpediente()));
-	        					compromisoInicial.setAno(ano);
-	        					compromisoInicial.setIdOrganismo((int) (long)org.getIdOrganismo());
-	        					compromisoInicial.setEstatus(forma.getDecision());
+	        				int resultado = pdd.actualizaEstatus(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo(), forma.getDecision());
 
-	        					int resultado;
-	        					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();	    						
-	    						resultado = compromisoInicialDAO.actualizarCompromisoInicial(compromisoInicial);
+    						//System.out.println("resultado: " + resultado);
+    						request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
+    						request.setAttribute("mensaje", messageResources.getMessage("mensaje.exito"));
+    						fwd = "resultado";
 
-	    						//System.out.println("resultado: " + resultado);
-	    						request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
-	    						request.setAttribute("mensaje", messageResources.getMessage("mensaje.exito"));
-	    						fwd = "exito";
-
-	        				}else{
-	        					error[0] = (String) "datosIncompletos";
-			        		}
+	        				
 	        			}else{
 	        				error[0] = (String) "datosIncompletos";
 		        		}

@@ -13,11 +13,6 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
-
-
-
-
-
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -42,7 +37,6 @@ import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
-import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
 import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
 
@@ -124,7 +118,6 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
 	}
 	
-	
 	public ActionForward cargar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 						
 		error= new Object[2];
@@ -140,7 +133,8 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 				
 				//Recupera la data del maestro compromiso
 				CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
-				criterioBusqueda.addExpediente(51);					
+				criterioBusqueda.addExpediente(51);
+				criterioBusqueda.addEstatus(1);
 				CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
 				List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");
 				
@@ -161,12 +155,12 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 				//Crea un form y carga los datos del encabezado
 				CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
 				comIni.setAno(ano);
-				comIni.setDenoTipoFondo("Xfondo");					
+				comIni.setDenoTipoFondo("Xfondo");
 				comIni.setDocumento(compromisoInicial.get(0).getDocumento());
 				comIni.setCodUnidadAdministradora((unidadAdministradora.get(0).getCodUnidadAdministradora()));
 				comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
 				comIni.setObservacion(compromisoInicial.get(0).getObservacion());
-				comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());					
+				comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());
 				
 				//Carga los datos del detalle
 				for (int c=0;c<compromisoInicialDetalle.size();c++){
@@ -266,7 +260,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 						int idUsuario = 1;
 	 		        	
 						Expediente expediente = new Expediente();
-						expediente.setFechaReg(fecha);
+						expediente.setFechaRegistro(fecha);
 						expediente.setAno(ano);				
 						expediente.setEstatus(1);
 						expediente.setIdUsuario(idUsuario);

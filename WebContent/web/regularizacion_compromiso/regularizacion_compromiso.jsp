@@ -45,7 +45,7 @@
 
 
 		<script type="text/javascript" language="JavaScript">		
-			    document.title = "<bean:write name="titulo"/>" ;		
+			    document.title = "<bean:write name="RegularizacionCompromisoForm" property="tituloApli"/>" ;		
 		</script>
 
 		<script language="javascript" src="<%=rutaTemp %>/js/jquery.dataTables.min.js"></script>

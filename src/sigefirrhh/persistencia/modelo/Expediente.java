@@ -11,15 +11,15 @@ public class Expediente implements Serializable  {
 	private static final long serialVersionUID = -8112858268063606114L;		
     
 	private Integer expediente; 
+	private Integer idExpediente;
 	private Integer ano;
 	private Integer idUsuario;
 	private Integer estatus;
 	private Date fechaRegistro;
     private Integer idOpcion;
-    private String observacion;
-    
+    private String observacion;    
     private Integer idOrganismo;
-
+    
 	public Integer getIdOrganismo() {
 		return idOrganismo;
 	}
@@ -82,6 +82,14 @@ public class Expediente implements Serializable  {
 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	public Integer getIdExpediente() {
+		return idExpediente;
+	}
+
+	public void setIdExpediente(Integer idExpediente) {
+		this.idExpediente = idExpediente;
 	}    
 	
 }

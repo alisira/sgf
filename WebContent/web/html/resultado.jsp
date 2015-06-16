@@ -1,7 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page import="sigefirrhh.login.LoginSession" %>
 
 <% 
@@ -53,8 +53,7 @@
 										<div class="events_text" align="center">
 											<div align="center">
 												<h2><bean:write name="mensaje"/> </h2>
-											</div>
-											<a href="/sigefirrhh">Ir al Sistema</a>
+											</div>											
 										</div>
 									</td>
 								</tr>
@@ -63,7 +62,6 @@
 						</td>
 						<td width="45" height="223" background="../images/home_r3_c3.jpg"></td>
 					</tr>
-				  
 				</tbody>
 			</table>
 		</div>

@@ -232,9 +232,9 @@
         #fechaRegistro:DATE#
       </isNotNull>
       )      
-    </dynamic>
-    returning id_compromiso_inicial
-  </statement>
+    	</dynamic>
+    	returning id_compromiso_inicial
+  	</statement>
   
 	<statement id="actualizarCompromisoInicial"  parameterClass="sigefirrhh.persistencia.modelo.CompromisoInicial" resultClass="Integer">
 		UPDATE compromisoinicial
