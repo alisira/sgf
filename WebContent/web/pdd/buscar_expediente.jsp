@@ -70,26 +70,27 @@
 	                    <label class="conte_label">Numero Expediente: <input name="textoBuscado" id="textoBuscado" size="25" class="inputtext" type="text"></label>
 	                </div>				
 
-	                <div class="conte_div_right">
-	                    
-	                    <label class="conte_label">Tipo de Expediente: </label>
-	                    
-	                    <html:select name="ParametrosBusquedaForm" property="idOpcion" tabindex="0" style="width: 240px;" styleId="idOpcion">	                    	
-	                    	<logic:iterate name="Opcion" id="td">
-								<option	value=<bean:write name="td" property="idOpcion"/>>
-									<bean:write name="td" property="descripcion" />
-								</option>
-							</logic:iterate>	                    	
-						</html:select>
-							                     
-	                </div>
-
 					<html:form action="/puntoDecision" method="post" styleId="ParametrosBusquedaForm" >
+		                <div class="conte_div_right">
+		                    
+		                    <label class="conte_label">Tipo de Expediente: </label>
+		                    
+		                    <html:select name="ParametrosBusquedaForm" property="idOpcion" tabindex="0" style="width: 240px;" styleId="idOpcion">	                    	
+		                    	<logic:iterate name="Opcion" id="td">
+									<option	value=<bean:write name="td" property="idOpcion"/>>
+										<bean:write name="td" property="descripcion" />
+									</option>
+								</logic:iterate>	                    	
+							</html:select>
+								                     
+		                </div>
+
+					
 						<input type="hidden" id="expediente" name="expediente" value="" /> 
 						<input type="hidden" id="proceso" name="proceso" value="" />
 						<input type="hidden" id="accion" name="accion" value="" /> 
 		                <div class="conte_div_right" style="width: 98%;" >
-		                    <input name="btnBuscar"id="btnBuscar" value="Buscar" onclick="" type="button">		                  
+		                    <input name="botonBuscarExpediente" id="botonBuscarExpediente" value="Buscar" onclick="" type="button">		                  
 		                </div>	               
 	                </html:form>
 

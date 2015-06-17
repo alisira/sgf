@@ -401,21 +401,6 @@
                         								required="true" /><f:verbatim><span class="required"> *</span></f:verbatim>                        						<f:verbatim></td>
                         					</tr></f:verbatim>
                         					
-                        					
-                        					<f:verbatim><tr>
-                        						<td>
-                        							URI
-                        						</td>
-                        						<td></f:verbatim>
-					                        		<h:inputText
-	                        							id="uri"
-	                        							size="65"
-                        								value="#{opcionForm.opcion.uri}"
-                        								readonly="#{!opcionForm.editing}"
-                        								onkeypress="return keyEnterCheck(event, this)"                        								
-                        								required="true" /><f:verbatim><span class="required"> *</span></f:verbatim>                        						<f:verbatim></td>
-                        					</tr></f:verbatim>
-                        					
                         					<f:verbatim><tr>
                         						<td>
                         							Tipo

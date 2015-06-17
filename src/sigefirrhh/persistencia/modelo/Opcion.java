@@ -9,12 +9,13 @@ public class Opcion {
     private String descripcion;
     private String ruta;    
     private String tipo;
-    private String uri;
+    private String jerarquia;
+    private String estatus;
+    
     private Integer expediente;
     private Date fechaRegistro;   
     private String observacion;    
-    private String jerarquia;
-    private String estatus;
+    
     
 
     public Integer getExpediente() {
@@ -168,14 +169,6 @@ public class Opcion {
     public void setJerarquia(String jerarquia) {
         this.jerarquia = jerarquia == null ? null : jerarquia.trim();
     }
-
-	public String getUri() {
-		return uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
 
 	public String getEstatus() {
 		return estatus;

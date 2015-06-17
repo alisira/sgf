@@ -12,6 +12,7 @@ ALTER TABLE opcion ALTER COLUMN jerarquia SET NOT NULL;
 ALTER TABLE opcion ALTER COLUMN ruta SET NOT NULL;
 update opcion set uri = null where uri is null or uri = '' or uri = 'N/A';
 alter table opcion add CONSTRAINT opcion_uri unique(uri);
+ALTER TABLE opcion  DROP COLUMN uri;
 alter table opcion add CONSTRAINT opcion_ruta unique(ruta);
 
 --rollback;

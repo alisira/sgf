@@ -53,7 +53,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				criterio.addAno(ano);
 				criterio.addEstatusStr("A");
 				criterio.setGrupo("descripcion");
-				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
+				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionUsadoenExpediente(criterio);
 				request.setAttribute("Opcion", listadoOpcion);
 				request.setAttribute("ano", ano);
 				forma.setTituloApli("Buscar Expediente Punto de Decision ");
@@ -129,7 +129,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 				criterio.addIdOrganismo((int) org.getIdOrganismo());
 				criterio.addAno(ano);
-				criterio.addEstatus(forma.getEstatus());					
+				criterio.addEstatus(forma.getEstatus());
+				criterio.addIdOpcion(forma.getIdOpcion());
 				
 				ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
 				List<Opcion> listadoExpediente = (List<Opcion>) expedienteDAO.buscarExpedienteOpcion(criterio);
@@ -139,7 +140,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 		        if (listadoExpediente.size() > 0){
 		        	for (int i = 0;i < listadoExpediente.size(); i++){
 						out.write("<expediente>" + listadoExpediente.get(i).getExpediente() + "</expediente>");
-						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");
+						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");						
 						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
 						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
 						out.write("<observacion>" + listadoExpediente.get(i).getObservacion() + "</observacion>");

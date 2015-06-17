@@ -1,0 +1,16 @@
+			<resultMaps>
+  <resultMap id="select-product-result" class="product">
+    <result property="id" column="PRD_ID"/>
+    <result property="description" column="PRD_DESCRIPTION"/>
+    <result property="category" resultMapping="Category.CategoryResult" />
+  </resultMap>
+</resultMaps>
+
+<statements>
+  <statement id="selectProduct" parameterClass="int" resultMap="select-product-result">
+    select *
+    from PRODUCT, CATEGORY
+    where PRD_CAT_ID=CAT_ID
+    and PRD_ID = #value#
+  </statement>
+</statements>

@@ -35,12 +35,6 @@
 				</iterate>
 			</isNotNull>
 			
-			<isNotNull prepend="AND" property="uri" >
-				<iterate property="uri" open="uri in (" close=")"	conjunction="," >
-					#uri[]#
-				</iterate>
-			</isNotNull>
-			
 			<isNotNull prepend="AND" property="ruta" >
 				<iterate property="ruta" open="ruta in (" close=")"	conjunction="," >
 					#ruta[]#

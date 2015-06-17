@@ -28,16 +28,16 @@ public class ValidadorSesion {
 		List<Opcion> listadoOpcion = null;
 		
 		try {
-			String uri = null;
+			String ruta = null;
 			CriterioBusqueda criterio = new CriterioBusqueda();
 			
 			if (request.getRequestURI().indexOf(".do") != -1){					
-				uri = request.getServletPath().replace("/", "");
-				criterio.addRuta(uri);					
+				ruta = request.getServletPath().replace("/", "");
+				criterio.addRuta(ruta);					
 			}else{
-				uri = request.getRequestURI().substring(12);
-				uri = uri.substring(0,uri.length()-4);
-				criterio.addUri(uri);
+				ruta = request.getRequestURI().substring(12);
+				ruta = ruta.substring(0,ruta.length()-4);
+				criterio.addRuta(ruta);
 			}
 			criterio.addEstatusStr("A");
 			//criterio.addUri("marca 1");
@@ -84,17 +84,17 @@ public class ValidadorSesion {
 					
 				
 				//System.out.println("URL completo " + request.getRequestURI());
-				String uri = null;
+				String ruta = null;
 				CriterioBusqueda criterio = new CriterioBusqueda();
 				
 				//Evalua desde donde viene el request (un jsp que searia un jsf o desde un action de struts)				
 				if (request.getRequestURI().indexOf(".do") != -1){					
-					uri = request.getServletPath().replace("/", "");
-					criterio.addRuta(uri);					
+					ruta = request.getServletPath().replace("/", "");
+					criterio.addRuta(ruta);					
 				}else{
-					uri = request.getRequestURI().substring(12);
-					uri = uri.substring(0,uri.length()-4);
-					criterio.addUri(uri);
+					ruta = request.getRequestURI().substring(12);
+					ruta = ruta.substring(0,ruta.length()-4);
+					criterio.addRuta(ruta);
 				}						
 
 				Collection colUsuarioRol = new ArrayList();

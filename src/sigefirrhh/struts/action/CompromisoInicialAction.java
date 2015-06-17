@@ -56,7 +56,6 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	PrintWriter out = null;	
 	MessageResources messageResources = null;
 	
-	
 	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 						
 		error= new Object[2];

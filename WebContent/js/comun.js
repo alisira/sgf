@@ -40,8 +40,11 @@ $(document).ready(function(){
     	}    	
     });
     
-    $("#btnBuscar").click(function(){
-    	
+    /*Funcion generica que sirve para invocar a una busqueda ajax cuando los fomularios solo faltan por incluir un parametro en la busqueda
+	 * se debe incluir en el formulario un boton con el nombre btnBuscar y un input tipo text de id textoBuscado
+	 */
+    
+    $("#btnBuscar").click(function(){    	
     	textoBuscar = document.getElementById("textoBuscado").value;
     	borrarFilas('tablaDetalle');
     	addNode('tablaDetalle', "Busqueda en proceso, favor esperar, gracias_%_"+100, "", "", "", "", "","");  

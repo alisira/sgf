@@ -35,14 +35,14 @@ public class Opcion  implements java.io.Serializable {
 	*/
 	private long idOpcion;
 	/**
-	 * Código Opcion
+	 * CÃ³digo Opcion
 	* @jdo.field
 	* 	persistence-modifier="persistent"
 	* @jdo.field-vendor-extension vendor-name="jpox"
 	* 	key="length" value="max 15"
 	* @efordoclet-application
 	* 	find="form:true; max:15"
-	* 	data="title:Código; required:true"
+	* 	data="title:CÃ³digo; required:true"
 	*/
 	private String codigoOpcion;
 	/**
@@ -53,7 +53,7 @@ public class Opcion  implements java.io.Serializable {
 	* 	key="length" value="max 60"
 	* @efordoclet-application
 	* 	find="form:true; type:like; max:60"
-	* 	data="title:Descripción; required:true; max:60"
+	* 	data="title:DescripciÃ³n; required:true; max:60"
 	*/
 	private String descripcion;
 	/**
@@ -77,7 +77,6 @@ public class Opcion  implements java.io.Serializable {
 	*/
 	private String tipo;
 	private String jerarquia;
-	private String uri;
 	
 	public String toString(){
 		return codigoOpcion + " - " + descripcion + " - " + tipo;
@@ -143,14 +142,6 @@ public class Opcion  implements java.io.Serializable {
 
 	public void setJerarquia(String jerarquia) {
 		this.jerarquia = jerarquia;
-	}
-
-	public String getUri() {		
-		return uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
 	}
 
 }

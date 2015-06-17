@@ -1,7 +1,7 @@
 var textoBuscar='';
 
 $(document).ready(function(){	
-	objeBusqueda = new ObjetoBusqueda('/puntoDecision.do', actualizaListaExpedientes, "expediente", 'accion=buscar&estatus=0&expediente=');
+	objeBusqueda = new ObjetoBusqueda('/puntoDecision.do', actualizaListaExpedientes, "expediente", 'accion=buscar&estatus=0&');
 	
 	function actualizaListaExpedientes(req){
 		
@@ -21,6 +21,17 @@ $(document).ready(function(){
 	    	document.getElementById("accion").value = "imprimir";
 	    	form.submit();
 		})
+		
 	}
+	
+	/*Funcion que invoca a una busqueda ajax de los expedientes del tipo seleccionado en el combo pendientes
+	 * 
+	 */
+	$("#botonBuscarExpediente").click(function(){		
+		textoBuscar = 'idOpcion=' + document.getElementById("idOpcion").value + '&expediente=' + document.getElementById("textoBuscado").value;		
+    	borrarFilas('tablaDetalle');
+    	addNode('tablaDetalle', "Busqueda en proceso, favor esperar, gracias_%_"+100, "", "", "", "", "","");  
+		invocaAjax(getContextPath() + objeBusqueda.urlListaActua, actualizaLista, objeBusqueda.parametros+textoBuscar);
+    });
 		
 });
