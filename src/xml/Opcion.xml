@@ -77,7 +77,8 @@
   	</select>
   
 	<select id="buscarOpcionExpediente" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
-	  	SELECT distinct o.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, o.estatus,
+	  	SELECT
+	  		 o.id_opcion, codigo_opcion, descripcion, ruta, tipo, uri, jerarquia, o.estatus,
 			o.descripcion,   e.ano,   e.estatus, e.expediente, e.observacion, e.fecha_reg
 		FROM expediente e,  opcion o
 		WHERE 
@@ -95,12 +96,35 @@
 				</iterate>
 			</isNotNull>			
 			
+			<resultMaps>
+  <resultMap id="select-product-result" class="product">
+    <result property="id" column="PRD_ID"/>
+    <result property="description" column="PRD_DESCRIPTION"/>
+    <result property="category" resultMapping="Category.CategoryResult" />
+  </resultMap>
+</resultMaps>
+
+<statements>
+  <statement id="selectProduct" parameterClass="int" resultMap="select-product-result">
+    select *
+    from PRODUCT, CATEGORY
+    where PRD_CAT_ID=CAT_ID
+    and PRD_ID = #value#
+  </statement>
+</statements>
+			
 			<isNotNull prepend="AND" property="expediente" >
 				<iterate property="expediente" open="e.expediente in (" close=")"	conjunction="," >
 					#expediente[]#
 				</iterate>
 			</isNotNull>
-								
+						
+			<isNotNull prepend="AND" property="estatusStr" >
+				<iterate property="estatusStr" open="o.estatus in (" close=")"	conjunction="," >
+					#estatusStr[]#
+				</iterate>
+			</isNotNull>
+
 			<isNotNull prepend="AND" property="estatus" >
 				<iterate property="estatus" open="e.estatus in (" close=")"	conjunction="," >
 					#estatus[]#

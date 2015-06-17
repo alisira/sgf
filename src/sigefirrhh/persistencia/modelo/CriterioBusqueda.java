@@ -44,6 +44,8 @@ public class CriterioBusqueda {
 	private List<Long> idRol;
 	private List<String> uri;
 	private List<String> ruta;
+	
+	private String grupo;
     
 	public CriterioBusqueda(){
     	this.codFrecuenPago = new  ArrayList<Integer>();
@@ -349,6 +351,14 @@ public class CriterioBusqueda {
 	}
 	public void addUri(String uri) {
 		this.uri.add(uri);
+	}
+
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
     
 }

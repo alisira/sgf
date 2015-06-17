@@ -51,6 +51,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
     			OpcionDAO opcionDAO = new OpcionDAOImple();
 				CriterioBusqueda criterio =new CriterioBusqueda();
 				criterio.addAno(ano);
+				criterio.addEstatusStr("A");
+				criterio.setGrupo("descripcion");
 				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
 				request.setAttribute("Opcion", listadoOpcion);
 				request.setAttribute("ano", ano);
