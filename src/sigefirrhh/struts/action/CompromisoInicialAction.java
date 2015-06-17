@@ -159,7 +159,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        	expediente.setExpediente(0);
 					expediente.setFechaRegistro(fecha);
 					expediente.setAno(ano);
-					expediente.setEstatus(1);
+					expediente.setEstatus(0);
 					expediente.setIdUsuario(idUsuario);
 					expediente.setObservacion(formaPeti.getObservacion());
 					expediente.setIdOrganismo((int) org.getIdOrganismo());
@@ -262,9 +262,6 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 			error[1]= e;
 
 		} finally{
-			
-			
-			error[0].equals("errorAplicacion");
 			
 			if (((String) error[0]) != null){
 				/*try {					

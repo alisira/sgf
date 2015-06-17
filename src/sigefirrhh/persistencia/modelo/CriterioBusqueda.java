@@ -12,6 +12,7 @@ public class CriterioBusqueda {
     private List<Integer> ano;   
     private List<Integer> tarea;
     private List<Integer> estatus;
+    private List<String> estatusStr;    
     private List<Integer> idUnidadAdministradora;
     private List<Integer> idCuentadante;
     private List<Integer> idTipoPago;
@@ -80,8 +81,18 @@ public class CriterioBusqueda {
         this.idRol = new ArrayList<Long>();	
     	this.uri= new  ArrayList<String>();
     	this.idCompromisoInicialDetalle= new ArrayList<Integer>();
-    	this.ruta= new  ArrayList<String>();
+    	this.ruta= new  ArrayList<String>();    	
+    	this.estatusStr = new  ArrayList<String>();
+    	
     }
+	
+	public List<String> getEstatusStr() {
+		return this.estatusStr;
+	}
+	public void addEstatusStr(String estatus) {
+		this.estatusStr.add(estatus);
+	}
+	
 	
 	public List<String> getRuta() {
 		return this.ruta;

@@ -14,6 +14,8 @@ public class Opcion {
     private Date fechaRegistro;   
     private String observacion;    
     private String jerarquia;
+    private String estatus;
+    
 
     public Integer getExpediente() {
 		return expediente;
@@ -173,5 +175,13 @@ public class Opcion {
 
 	public void setUri(String uri) {
 		this.uri = uri;
+	}
+
+	public String getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 }
