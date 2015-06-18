@@ -57,20 +57,26 @@
   
   <select id="buscarOpcionxRol" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
     <!--realizado el 21-04-15 15:20:44 .-->
-	    SELECT op.id_opcion, codigo_opcion, descripcion, ruta, tipo,  jerarquia
-			FROM  public.rol, public.opcion op, public.rolopcion
+	    SELECT o.id_opcion, codigo_opcion, descripcion, ruta, tipo,  jerarquia
+			FROM  public.rol, public.opcion o, public.rolopcion
 			WHERE 
-			  op.id_opcion = rolopcion.id_opcion AND
+			  o.id_opcion = rolopcion.id_opcion AND
 			  rolopcion.id_rol = rol.id_rol and
-			  op.jerarquia is not null 
+			  o.jerarquia is not null 
     
 		<isNotNull prepend="AND" property="idRol" >
 			<iterate property="idRol" open="rol.id_rol in (" close=")"	conjunction="," >
 				#idRol[]#
 			</iterate>
 		</isNotNull>
+		
+		<isNotNull prepend="AND" property="descripcion" >
+			<iterate property="estatus" open="o.descripcion in (" close=")"	conjunction="," >
+				#descripcion[]#
+			</iterate>
+		</isNotNull>
 	
-   		 order by op.jerarquia
+   		 order by o.jerarquia
   	</select>
   
 	<select id="buscarOpcionExpediente" resultMap="OpcionEx" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >
@@ -110,6 +116,12 @@
 					#estatus[]#
 				</iterate>
 			</isNotNull>
+			
+			<isNotNull prepend="AND" property="descripcion" >
+				<iterate property="descripcion" open="o.descripcion in (" close=")"	conjunction="," >
+					#descripcion[]#
+				</iterate>
+			</isNotNull>
 	
 		ORDER BY o.descripcion, e.ano
    </select>
@@ -141,6 +153,12 @@
 			<isNotNull prepend="AND" property="estatus" >
 				<iterate property="estatus" open="e.estatus in (" close=")"	conjunction="," >
 					#estatus[]#
+				</iterate>
+			</isNotNull>
+			
+			<isNotNull prepend="AND" property="descripcion" >
+				<iterate property="estatus" open="o.descripcion in (" close=")"	conjunction="," >
+					#descripcion[]#
 				</iterate>
 			</isNotNull>
 	

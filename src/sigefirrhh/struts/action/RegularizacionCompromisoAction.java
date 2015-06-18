@@ -13,6 +13,7 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -37,6 +38,7 @@ import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
+import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
 import sigefirrhh.struts.actionForm.RegularizacionCompromisoForm;
 import sigefirrhh.struts.addons.Comun;
 
@@ -79,11 +81,17 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
     			OpcionDAO opcionDAO = new OpcionDAOImple();
 				CriterioBusqueda criterio =new CriterioBusqueda();
 				criterio.addAno(ano);
-				criterio.addIdOpcion(1129);//Hay que buscar modelar la base de datos para que este id sea buscado de acuerdo al proceso actual
-				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionExpediente(criterio);
-				request.setAttribute("Opcion", listadoOpcion);
-				request.setAttribute("ano", ano);				
+				criterio.addDescripcion("compromisoInicial.do");//Hay que buscar modelar la base de datos para que este id sea buscado de acuerdo al proceso actual
+				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionUsadoenExpediente(criterio);
+				
+				ParametrosBusquedaForm pb= new ParametrosBusquedaForm();
+				pb.setTituloApli("Regularizacion de Compromiso");
 				forma.setTituloApli("Buscar Expediente de Compromiso");
+				
+				request.setAttribute("Opcion", listadoOpcion);
+				request.setAttribute("ano", ano);
+				request.setAttribute("ParametrosBusquedaForm", pb);
+				
 				fwd = "apruebaNuevo";
     		}else{
     			error[0] = resp;
