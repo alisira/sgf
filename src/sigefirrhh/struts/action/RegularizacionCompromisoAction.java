@@ -14,6 +14,7 @@ import sigecof.CompromisoInicialDTO;
 */
 
 
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -51,6 +52,7 @@ import com.ibatis.common.jdbc.exception.NestedSQLException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -62,19 +64,19 @@ import sigefirrhh.base.estructura.Organismo;
  */
 public class RegularizacionCompromisoAction extends DispatchAction implements Serializable, Comun {
 
-	private static final long serialVersionUID = 6333610918451615896L;	
+	private static final long serialVersionUID = 6333610918451615896L;
 	HttpSession session = null;
 	String fwd = null;
 	Object[] error= null;
-	PrintWriter out = null;	
+	PrintWriter out = null;
 	MessageResources messageResources = null;
 	
-public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 		
 		error= new Object[2];
 		messageResources = getResources(request);
     		
-		try {			
+		try {
 			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
     		if (resp == "valido"){
     			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;	
@@ -84,13 +86,11 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 				criterio.addDescripcion("compromisoInicial.do");//Hay que buscar modelar la base de datos para que este id sea buscado de acuerdo al proceso actual
 				List<Opcion> listadoOpcion = (List<Opcion>) opcionDAO.buscarOpcionUsadoenExpediente(criterio);
 				
-				ParametrosBusquedaForm pb= new ParametrosBusquedaForm();
-				pb.setTituloApli("Regularizacion de Compromiso");
-				forma.setTituloApli("Buscar Expediente de Compromiso");
-				
+				ParametrosBusquedaForm parametrosBusquedaForm= new ParametrosBusquedaForm();
+				forma.setTituloApli("Buscar Expediente de Compromiso");				
 				request.setAttribute("Opcion", listadoOpcion);
 				request.setAttribute("ano", ano);
-				request.setAttribute("ParametrosBusquedaForm", pb);
+				request.setAttribute("ParametrosBusquedaForm", parametrosBusquedaForm);
 				
 				fwd = "apruebaNuevo";
     		}else{
@@ -124,6 +124,111 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		}
 		return mapping.findForward(fwd);	
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
+	}
+	
+	public ActionForward buscar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);
+		error= new Object[2];
+		messageResources = getResources(request);					
+		try{			
+			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
+			session = request.getSession();
+			out = response.getWriter();
+	        response.setContentType("text/xml");
+	        response.setHeader("Cache-Control", "no-cache");
+	        response.setStatus(HttpServletResponse.SC_OK);
+	        out.write("<root>");
+	        
+	        CriterioBusqueda criterio = new CriterioBusqueda();
+	        String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
+    		if (resp == "valido"){
+				if (forma.getExpediente() !=null){
+					String tempExpe = "";
+					if (!forma.getExpediente().equals("")){						
+						tempExpe = String.valueOf(forma.getExpediente());
+						if (tempExpe.indexOf(' ') != -1){
+							for (int i = 0; i < tempExpe.trim().split("\\ ").length; i++) {
+								if (tempExpe.trim().split("\\ ")[i].trim().length() > 0){									
+									criterio.addExpediente(Integer.parseInt(tempExpe.trim().split("\\ ")[i].trim()));
+								}
+							}							
+						}else{
+							criterio.addExpediente(Integer.parseInt(tempExpe.trim()));		
+						}
+					}									
+				}
+				
+				Organismo org = new Organismo();
+				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+				criterio.addIdOrganismo((int) org.getIdOrganismo());
+				criterio.addAno(ano);
+				criterio.addEstatus(forma.getEstatus());
+				criterio.addIdOpcion(forma.getIdOpcion());
+				
+				ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
+				List<Opcion> listadoExpediente = (List<Opcion>) expedienteDAO.buscarExpedienteOpcion(criterio);
+				
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		        
+		        if (listadoExpediente.size() > 0){
+		        	for (int i = 0;i < listadoExpediente.size(); i++){
+						out.write("<expediente>" + listadoExpediente.get(i).getExpediente() + "</expediente>");
+						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");						
+						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
+						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
+						out.write("<observacion>" + listadoExpediente.get(i).getObservacion() + "</observacion>");
+						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
+					}
+		       }else{
+		    	   error[0] = (String) "sinResultados";
+		       }
+    		}else{
+    			error[0] = resp;
+    		}
+						
+		} catch (Exception e) {
+			error[0] = (String) "errorAplicacion";
+			error[1]= e;
+
+		} finally{
+			
+			if (((String) error[0]) != null){
+				if (error[1] != null){
+					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+					((Throwable) error[1]).printStackTrace();					
+				}else{
+					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
+					//System.out.println(error[0]);
+				}
+
+				out.write("<error>");
+				
+				if (error[0].equals("sesionCerrada")){
+					out.write(messageResources.getMessage("errors.sesionCerrada"));
+					fwd = "sesionCerrada";
+	        	}else if(error[0].equals("errorAplicacion")){
+	        		out.write(messageResources.getMessage("errors.aplicacion"));
+	        		fwd = "error";
+		        }else if (error[0].equals("sinPermiso")){
+					out.write(messageResources.getMessage("errors.sinPermiso"));
+					fwd = "sinPermiso";
+		        }else if(error[0].equals("sinResultados")){
+	        		out.write(messageResources.getMessage("errors.sinResultados"));
+	        		fwd = "sinResultados";
+		        }
+
+				out.write("</error>");
+
+			}
+		}
+
+		//if (request.getHeader("content-type") == null){//Si el request es de un ajax entonces es null
+			out.write("</root>");
+			out.flush();
+			return null;
+		//}else{
+		//	return mapping.findForward(fwd);
+		//}
 	}
 	
 	public ActionForward cargar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
