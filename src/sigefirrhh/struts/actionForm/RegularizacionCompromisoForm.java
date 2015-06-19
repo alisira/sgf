@@ -31,6 +31,7 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private Date fechaRegistro;
     private String origenPresupuestario;
     private String tituloApli;
+    private Integer idOpcion;
     
     //Detalle
     private Integer ff[];
@@ -440,5 +441,13 @@ public class RegularizacionCompromisoForm extends ActionForm{
         this.fechaRegistro=null;
         this.origenPresupuestario=null;
     }
+
+	public Integer getIdOpcion() {
+		return idOpcion;
+	}
+
+	public void setIdOpcion(Integer idOpcion) {
+		this.idOpcion = idOpcion;
+	}
     
 }

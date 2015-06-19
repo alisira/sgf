@@ -141,8 +141,8 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 		        	for (int i = 0;i < listadoExpediente.size(); i++){
 						out.write("<expediente>" + listadoExpediente.get(i).getExpediente() + "</expediente>");
 						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");						
-						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
-						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
+						out.write("<cod_proceso>" + listadoExpediente.get(i).getRuta().replace(".do", "_do") + "</cod_proceso>");
+						out.write("<deno_proceso>" + listadoExpediente.get(i).getDescripcion() + "</deno_proceso>");
 						out.write("<observacion>" + listadoExpediente.get(i).getObservacion() + "</observacion>");
 						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
 					}
@@ -213,19 +213,23 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				
 				Pdd pdd = (Pdd) ContenedorPDD.getComponents(forma.getProceso());
 				
-				Organismo org = new Organismo();
-				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-				
-				String urlReporte =  pdd.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo());
-				
-				Map<Integer, String> opciones = pdd.opciones();
-				
-				request.setAttribute("Opciones", opciones);				
-				request.setAttribute("urlReporte", urlReporte);
-				request.setAttribute("expediente", forma.getExpediente());
-				request.setAttribute("proceso", forma.getProceso());
-				request.setAttribute("ano", ano);
-	        	fwd = "aprobarImprimir";
+				if (pdd!= null){
+					Organismo org = new Organismo();
+					org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+					
+					String urlReporte =  pdd.urlReporte(Integer.parseInt(forma.getExpediente()), ano, (int) org.getIdOrganismo());
+					
+					Map<Integer, String> opciones = pdd.opciones();
+					
+					request.setAttribute("Opciones", opciones);				
+					request.setAttribute("urlReporte", urlReporte);
+					request.setAttribute("expediente", forma.getExpediente());
+					request.setAttribute("proceso", forma.getProceso());
+					request.setAttribute("ano", ano);
+		        	fwd = "aprobarImprimir";
+				}else{
+					error[0] = "pddNoFound";
+				}				
 		
         	}else{
     			error[0] = resp;
@@ -249,12 +253,17 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 				if (error[0].equals("sesionCerrada")){
 					fwd = "sesionCerrada";
 	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
+	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+	        		fwd = "resultado";
 		        }else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
 		        }else if(error[0].equals("sinResultados")){	        		
 	        		fwd = "sinResultados";
+		        }else if(error[0].equals("pddNoFound")){
+	        		request.setAttribute("mensaje", "PDD No encontrado, disculpe las molestias, consulte al administrador");
+	        		fwd = "resultado";	        		
+		        }else{	        		
+	        		this.nuevo(mapping, form, request, response);//habilitar cuando el error se pueda manejar 
 		        }
 				
 			}

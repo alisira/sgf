@@ -15,6 +15,7 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -131,13 +132,13 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 		error= new Object[2];
 		messageResources = getResources(request);					
 		try{			
-			ParametrosBusquedaForm forma = (ParametrosBusquedaForm) form;
 			session = request.getSession();
 			out = response.getWriter();
 	        response.setContentType("text/xml");
 	        response.setHeader("Cache-Control", "no-cache");
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        out.write("<root>");
+	        RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();
 	        String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -162,8 +163,8 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 				criterio.addIdOrganismo((int) org.getIdOrganismo());
 				criterio.addAno(ano);
-				criterio.addEstatus(forma.getEstatus());
-				criterio.addIdOpcion(forma.getIdOpcion());
+				criterio.addEstatus(1);//Estatus Aprobado
+				criterio.addDescripcion("compromisoInicial.do");
 				
 				ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
 				List<Opcion> listadoExpediente = (List<Opcion>) expedienteDAO.buscarExpedienteOpcion(criterio);
@@ -174,8 +175,8 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 		        	for (int i = 0;i < listadoExpediente.size(); i++){
 						out.write("<expediente>" + listadoExpediente.get(i).getExpediente() + "</expediente>");
 						out.write("<fecha_reg>" + formatter.format(listadoExpediente.get(i).getFechaRegistro()) + "</fecha_reg>");						
-						out.write("<cod_proceso>" + "pddCompromiso" + "</cod_proceso>");
-						out.write("<deno_proceso>" + "Compromiso Inicial" + "</deno_proceso>");
+						out.write("<cod_proceso>" + listadoExpediente.get(i).getCodigoOpcion() + "</cod_proceso>");
+						out.write("<deno_proceso>" + listadoExpediente.get(i).getDescripcion() + "</deno_proceso>");
 						out.write("<observacion>" + listadoExpediente.get(i).getObservacion() + "</observacion>");
 						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
 					}
@@ -195,7 +196,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 			if (((String) error[0]) != null){
 				if (error[1] != null){
 					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
+					((Throwable) error[1]).printStackTrace();
 				}else{
 					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
 					//System.out.println(error[0]);
@@ -208,7 +209,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 					fwd = "sesionCerrada";
 	        	}else if(error[0].equals("errorAplicacion")){
 	        		out.write(messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
+	        		fwd = "error";	        	
 		        }else if (error[0].equals("sinPermiso")){
 					out.write(messageResources.getMessage("errors.sinPermiso"));
 					fwd = "sinPermiso";

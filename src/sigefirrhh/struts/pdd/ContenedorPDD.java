@@ -11,7 +11,7 @@ public class ContenedorPDD {
 		components = new HashMap<String, Object>();
 		
 		Pdd pddCompromiso = new PddCompromisoImp();
-		components.put("pddCompromiso", pddCompromiso);
+		components.put("compromisoInicial_do", pddCompromiso);
 		return components;
 		
 	}
