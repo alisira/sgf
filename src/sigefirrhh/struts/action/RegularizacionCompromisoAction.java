@@ -16,6 +16,8 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -273,7 +275,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
 				List<CompromisoInicialDetalle> compromisoInicialDetalle= (List<CompromisoInicialDetalle>) compromisoInicialDetalleDAO.buscarExt(criterioBusqueda);					
 
-				//Crea un form y carga los datos del encabezado
+				//Crea un form y carga los datos del maestro
 				CompromisoInicialForm comIni = new CompromisoInicialForm(compromisoInicialDetalle.size());
 				comIni.setAno(ano);
 				comIni.setDenoTipoFondo("Xfondo");
@@ -282,17 +284,19 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				comIni.setDenoUniAdmi(unidadAdministradora.get(0).getDenominacion());
 				comIni.setObservacion(compromisoInicial.get(0).getObservacion());
 				comIni.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());
+				forma.setIdCompromisoInicial(compromisoInicial.get(0).getIdCompromisoInicial());
+				
 				
 				//Carga los datos del detalle
 				for (int c=0;c<compromisoInicialDetalle.size();c++){
-					comIni.setFf(compromisoInicialDetalle.get(0).getFf(),c);
-					comIni.setCodCatePresu(compromisoInicialDetalle.get(0).getCodCatePresu(),c);
-					comIni.setCodUel(compromisoInicialDetalle.get(0).getCodUnidadEjecutora() ,c);
-				    comIni.setDenoUel(compromisoInicialDetalle.get(0).getDenoUnidadEjecutora(),c);
-				    comIni.setPartida(compromisoInicialDetalle.get(0).getCodPartida(),c);
-				    comIni.setDenoPartida(compromisoInicialDetalle.get(0).getDenoPartida(),c);
+					comIni.setFf(compromisoInicialDetalle.get(c).getFf(),c);
+					comIni.setCodCatePresu(compromisoInicialDetalle.get(c).getCodCatePresu(),c);
+					comIni.setCodUel(compromisoInicialDetalle.get(c).getCodUnidadEjecutora() ,c);
+				    comIni.setDenoUel(compromisoInicialDetalle.get(c).getDenoUnidadEjecutora(),c);
+				    comIni.setPartida(compromisoInicialDetalle.get(c).getCodPartida(),c);
+				    comIni.setDenoPartida(compromisoInicialDetalle.get(c).getDenoPartida(),c);
 				    comIni.setDispo(500.0,c);
-				    comIni.setMonto(compromisoInicialDetalle.get(0).getMonto(),c);
+				    comIni.setMonto(compromisoInicialDetalle.get(c).getMonto(),c);
 				}
 				
 				request.setAttribute("Compromiso", comIni);
@@ -300,7 +304,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				request.setAttribute("ano", ano);				
 				forma.setTituloApli("Regularizacion de Compromiso");	
 				
-				fwd ="apruebaNuevo";
+				fwd ="apruebaCarga";
 	        	
         	}else{
         		error[0] = resp;
@@ -379,17 +383,19 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 						Integer expeResul = 0;
 						Date fecha = new Date();
 						int idUsuario = 1;
-	 		        	
-						Expediente expediente = new Expediente();
+						
+						Expediente expediente = new Expediente();	 		        	
 						expediente.setFechaRegistro(fecha);
-						expediente.setAno(ano);				
-						expediente.setEstatus(1);
+						expediente.setAno(ano);
+						expediente.setEstatus(0);
 						expediente.setIdUsuario(idUsuario);
 						expediente.setObservacion(formaPeti.getObservacion());
 						expediente.setIdOrganismo((int) org.getIdOrganismo());
-						expediente.setIdOpcion(55);
+						ValidadorSesion vs = new ValidadorSesion();
+						Integer idOpcion = vs.getIdOpcion(request);
+						expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
 						ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
-						expeResul = (Integer) expedienteDAO.guardar(expediente);
+						expeResul = (Integer) expedienteDAO.guardar(expediente);						
 						
 	 		        	RegularizacionCompromisoDAO regularizacionCompromisoDAO = new RegularizacionCompromisoDAOImple();
 						
@@ -408,8 +414,12 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 						Integer idReguCompro;
 						idReguCompro = (Integer) regularizacionCompromisoDAO.guardar(regularizacionCompromiso);
 						
+						for (int x = 0; x  < formaPeti.getMontoRegularizar().length ; x++){
+							System.out.println(formaPeti.getMontoRegularizar(x));
+						}
 						
 						
+						fwd ="apruebaGuardar";
 		 		       		
 					}						
 					

@@ -87,3 +87,95 @@ clasificacionpersonal cper, trabajador t, conceptofijo cf, concepto c, tipoperso
  group by ctapre.id_cuenta_presupuesto, ctapre.cod_presupuesto, ctapre.descripcion,  uel.id_unidad_ejecutora, uel.cod_unidad_ejecutora, uel.nombre,   
  uelesp.categoria_presupuesto, pue.id_fuente_financiamiento, pue.id_partida_uel_especifica, dep.id_organismo   
  order by  uelesp.categoria_presupuesto, ctapre.cod_presupuesto  
+ 
+ 
+ -- Table: compromisoinicialregularizacion
+
+-- DROP TABLE compromisoinicialregularizacion;
+
+CREATE TABLE compromisoinicialregularizacion
+(
+  id_compromiso_inicial_regularizacion serial NOT NULL, -- id de la tabla de regularización de CI
+  id_compromiso_inicial integer NOT NULL, -- id del compromiso inicial que fue regularizado
+  id_tipo_documento integer, -- identificador del documento
+  documento character varying(10), -- numero del documento
+  observacion integer, -- observacion del compromiso
+  origen_presupuestario character varying(1), -- Origen presupuestario del compromiso. Puede ser:...
+  gaceta_cred_adicional character varying(10), -- numero de la gaceta del credito adicional
+  decreto_cred_adicional character varying(10), -- decreto del credito adicional
+  fecha_cred_adicional date, -- fecha del creditod adicional
+  gaceta_rectificacion character varying(10), -- nro de la gaceta de rectificacion
+  decreto_rectificacion character varying(10), -- numero de decreto de la rectificacion
+  fecha_rectificacion date, -- fecha de la rectificacion
+  tarea integer NOT NULL, -- identificardo para la traza por compromiso
+  fecha_registro date, -- fecha del registro
+  estatus integer NOT NULL, -- indica si esta activo (1) o inactivo (0)
+  CONSTRAINT id_compromiso_inicial_sigecof_regularizacion PRIMARY KEY (id_compromiso_inicial_regularizacion),
+  CONSTRAINT compromiso_inicial_sicecof_re_id_compromiso_inicial_siceco_fkey FOREIGN KEY (id_compromiso_inicial)
+      REFERENCES compromisoinicial (id_compromiso_inicial) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT id_tipo_documento FOREIGN KEY (id_tipo_documento)
+      REFERENCES tipodocumento (id_tipo_documento) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT compromisoinicialregularizacion_estatus_check CHECK (estatus = 1 OR estatus = 0),
+  CONSTRAINT origen_presupuestario CHECK (origen_presupuestario::text = '1'::text OR origen_presupuestario::text = '2'::text OR origen_presupuestario::text = '3'::text)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE compromisoinicialregularizacion
+  OWNER TO postgres;
+COMMENT ON TABLE compromisoinicialregularizacion
+  IS 'esta tabla lleva el registro del compromiso inicial, el cual es enviado al sigecof. Asi mismo guarda los datos del mismo que son enviados por el sigecof. La lista de imputaciones por compromiso son almacenadas en la tabla compromiso_inicial_sicecof_imputaciones';
+COMMENT ON COLUMN compromisoinicialregularizacion.id_compromiso_inicial_regularizacion IS 'id de la tabla de regularización de CI';
+COMMENT ON COLUMN compromisoinicialregularizacion.id_compromiso_inicial IS 'id del compromiso inicial que fue regularizado';
+COMMENT ON COLUMN compromisoinicialregularizacion.id_tipo_documento IS 'identificador del documento ';
+COMMENT ON COLUMN compromisoinicialregularizacion.documento IS 'numero del documento';
+COMMENT ON COLUMN compromisoinicialregularizacion.observacion IS 'observacion del compromiso';
+COMMENT ON COLUMN compromisoinicialregularizacion.origen_presupuestario IS 'Origen presupuestario del compromiso. Puede ser:
+1= Monto Ley
+2= Credito Adicional
+3= Rectificacion
+Para el caso de Credito Adicional y Rectificacion se requieren los siguientes satos: numero de gaceta, numero de resolucion y fecha de la gaceta';
+COMMENT ON COLUMN compromisoinicialregularizacion.gaceta_cred_adicional IS 'numero de la gaceta del credito adicional';
+COMMENT ON COLUMN compromisoinicialregularizacion.decreto_cred_adicional IS 'decreto del credito adicional';
+COMMENT ON COLUMN compromisoinicialregularizacion.fecha_cred_adicional IS 'fecha del creditod adicional';
+COMMENT ON COLUMN compromisoinicialregularizacion.gaceta_rectificacion IS 'nro de la gaceta de rectificacion';
+COMMENT ON COLUMN compromisoinicialregularizacion.decreto_rectificacion IS 'numero de decreto de la rectificacion';
+COMMENT ON COLUMN compromisoinicialregularizacion.fecha_rectificacion IS 'fecha de la rectificacion';
+COMMENT ON COLUMN compromisoinicialregularizacion.tarea IS 'identificardo para la traza por compromiso';
+COMMENT ON COLUMN compromisoinicialregularizacion.fecha_registro IS 'fecha del registro';
+COMMENT ON COLUMN compromisoinicialregularizacion.estatus IS 'indica si esta activo (1) o inactivo (0)';
+
+
+-- Table: compromisoinicialdetalleregularizacion
+
+-- DROP TABLE compromisoinicialdetalleregularizacion;
+
+CREATE TABLE compromisoinicialdetalleregularizacion
+(
+  id_compromiso_inicial_detalle_regularizacion serial NOT NULL, -- id del registro
+  id_compromiso_inicial_detalle integer NOT NULL, -- id de la imputacion a regularizar
+  monto double precision NOT NULL DEFAULT 0,
+  tarea integer NOT NULL, -- identificardo para la traza de la imputacion
+  fecha_registro date, -- fecha del registro
+  estatus integer NOT NULL, -- indica si esta activo (1) o inactivo (0)
+  CONSTRAINT id_compromiso_inicial_detalle_regularizacion PRIMARY KEY (id_compromiso_inicial_detalle_regularizacion),
+  CONSTRAINT id_compromiso_inicial_detalle FOREIGN KEY (id_compromiso_inicial_detalle)
+      REFERENCES compromisoinicialdetalle (id_compromiso_inicial_detalle) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT compromisoinicialdetalle_estatus_check CHECK (estatus = 1 OR estatus = 0)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE compromisoinicialdetalleregularizacion
+  OWNER TO postgres;
+COMMENT ON COLUMN compromisoinicialdetalleregularizacion.id_compromiso_inicial_detalle_regularizacion IS 'id del registro';
+COMMENT ON COLUMN compromisoinicialdetalleregularizacion.id_compromiso_inicial_detalle IS 'id de la imputacion a regularizar';
+COMMENT ON COLUMN compromisoinicialdetalleregularizacion.tarea IS 'identificardo para la traza de la imputacion';
+COMMENT ON COLUMN compromisoinicialdetalleregularizacion.fecha_registro IS 'fecha del registro';
+COMMENT ON COLUMN compromisoinicialdetalleregularizacion.estatus IS 'indica si esta activo (1) o inactivo (0)';
+
+
+

@@ -41,7 +41,8 @@ public class RegularizacionCompromisoForm extends ActionForm{
     private String partida[];
     private String denoPartida[];
     private Double dispo[];
-    private Double monto[];    
+    private Double monto[];
+    private Double montoRegularizar[];
 
     
     public String getTituloApli() {
@@ -448,6 +449,18 @@ public class RegularizacionCompromisoForm extends ActionForm{
 
 	public void setExpediente(Integer expediente) {
 		this.expediente = expediente;
+	}
+
+	public Double[] getMontoRegularizar() {
+		return montoRegularizar;
+	}
+	
+	public Double getMontoRegularizar(Integer indice) {
+		return montoRegularizar[indice];
+	}
+
+	public void setMontoRegularizar(Double montoRegularizar[]) {
+		this.montoRegularizar = montoRegularizar;
 	}
     
 }

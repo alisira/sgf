@@ -40,10 +40,8 @@
   <statement id="guardarExpediente" parameterClass="sigefirrhh.persistencia.modelo.Expediente" resultClass="Integer">
 
 	    insert into public.expediente
-	    <dynamic prepend="(">
-	      <isNotNull prepend="," property="expediente">
-	        expediente
-	      </isNotNull>
+	    <dynamic prepend="(">	      
+	        expediente,	      
 	      <isNotNull prepend="," property="ano">
 	        ano
 	      </isNotNull>
@@ -69,12 +67,13 @@
 	    </dynamic>
 	    values
 	    <dynamic prepend="(">
-	      <isNotNull prepend="," property="expediente">
-	        (SELECT COALESCE(MAX (expediente), 0) + 1  FROM expediente WHERE ano = #ano:INTEGER# and id_organismo= #idOrganismo:INTEGER# )
-	      </isNotNull>
-	      <isNotNull prepend="," property="ano">
-	        #ano:INTEGER#
-	      </isNotNull>
+	      
+        	(SELECT COALESCE(MAX (expediente), 0) + 1  FROM expediente WHERE ano = #ano:INTEGER# and id_organismo= #idOrganismo:INTEGER# )
+        	,
+	      
+	      	<isNotNull prepend="," property="ano">
+	        	#ano:INTEGER#
+	      	</isNotNull>
 	      <isNotNull prepend="," property="idUsuario">
 	        #idUsuario:INTEGER#
 	      </isNotNull>

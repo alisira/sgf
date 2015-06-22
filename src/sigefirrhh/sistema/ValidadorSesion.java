@@ -40,9 +40,6 @@ public class ValidadorSesion {
 				criterio.addRuta(ruta);
 			}
 			criterio.addEstatusStr("A");
-			//criterio.addUri("marca 1");
-			
-			System.out.println("marca 1");
 		
 			listadoOpcion = (List<Opcion>) OpcionDAO.buscar(criterio, "Opcion");
 		} catch (SQLException e) {
@@ -51,9 +48,8 @@ public class ValidadorSesion {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}		
 		
-		System.out.println(listadoOpcion.size());
 		return listadoOpcion.get(0).getIdOpcion();
 		
 	}

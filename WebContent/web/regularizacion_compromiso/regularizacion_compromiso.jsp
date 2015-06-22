@@ -173,10 +173,8 @@
 											</script>						                       
 										</td>
 										
-										<td class="detalle_right">
-											<script type="text/javascript">
-												document.write(formato_numerico(0.00)); 
-											</script>						                       
+										<td class="detalle_right">											
+											<input name="montoRegularizar" type="text" size="12" >										                       
 										</td>
 										
 																  

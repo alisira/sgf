@@ -66,7 +66,7 @@
             <forward name="apruebaGuardar" path="/web/compromiso_inicial/reporte_compromiso_inicial.jsp" redirect="true"/>
         </action>
         
-        <action path="/regularizacionCompromiso" type="sigefirrhh.struts.action.RegularizacionCompromisoAction" parameter="accion" name="RegularizacionCompromisoForm">
+        <action path="/regularizacionCompromiso" type="sigefirrhh.struts.action.RegularizacionCompromisoAction" parameter="accion" name="RegularizacionCompromisoForm"  scope="session">
             <forward name="apruebaNuevo" path="/web/regularizacion_compromiso/buscar_expediente_compro.jsp" />
             <forward name="apruebaCarga" path="/web/regularizacion_compromiso/regularizacion_compromiso.jsp" />
             <forward name="apruebaGuardar" path="/web/regularizacion_compromiso/reporte_regularizacion_compromiso.jsp" redirect="true"/>
