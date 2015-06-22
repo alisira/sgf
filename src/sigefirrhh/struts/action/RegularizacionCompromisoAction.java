@@ -164,7 +164,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				criterio.addIdOrganismo((int) org.getIdOrganismo());
 				criterio.addAno(ano);
 				criterio.addEstatus(1);//Estatus Aprobado
-				criterio.addDescripcion("compromisoInicial.do");
+				criterio.addRuta("compromisoInicial.do");
 				
 				ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
 				List<Opcion> listadoExpediente = (List<Opcion>) expedienteDAO.buscarExpedienteOpcion(criterio);
@@ -241,14 +241,21 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 			
 			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
     		if (resp == "valido"){
-	        		
+	        	
+    			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;
+    			
         		TipoDocumentoDAOImple tipoDocumentoDAO = new TipoDocumentoDAOImple();					
 				List<TipoDocumento> listaTipoDocu= (List<TipoDocumento>) tipoDocumentoDAO.buscarTipoDocuTempo();
 				
+				Organismo org = new Organismo();
+				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+				
 				//Recupera la data del maestro compromiso
 				CriterioBusqueda criterioBusqueda = new CriterioBusqueda();
-				criterioBusqueda.addExpediente(51);
+				criterioBusqueda.addExpediente(forma.getExpediente());
 				criterioBusqueda.addEstatus(1);
+				criterioBusqueda.addIdOrganismo((int) org.getIdOrganismo());
+				criterioBusqueda.addAno(ano);
 				CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
 				List<CompromisoInicial> compromisoInicial= (List<CompromisoInicial>) compromisoInicialDAO.buscar(criterioBusqueda, "CompromisoInicial");
 				
@@ -290,8 +297,8 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				
 				request.setAttribute("Compromiso", comIni);
 				request.setAttribute("TipoDocumento", listaTipoDocu);
-				request.setAttribute("ano", ano);
-				request.setAttribute("titulo", "Regularizacion de Compromiso");
+				request.setAttribute("ano", ano);				
+				forma.setTituloApli("Regularizacion de Compromiso");	
 				
 				fwd ="apruebaNuevo";
 	        	

@@ -15,10 +15,10 @@ $(document).ready(function(){
 		}
 		
 		$("#tablaDetalle tr").click(function(){
-			var form = document.forms['ParametrosBusquedaForm'];
+			var form = document.forms['RegularizacionCompromisoForm'];
 	        document.getElementById("expediente").value = this.cells[0].textContent;//Primera columna de la tabla
 	    	document.getElementById("proceso").value = this.cells[4].textContent;//Columna oculta de la tabla
-	    	document.getElementById("accion").value = "imprimir";
+	    	document.getElementById("accion").value = "cargar";
 	    	form.submit();
 		})
 		

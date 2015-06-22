@@ -13,7 +13,7 @@ public class RegularizacionCompromisoForm extends ActionForm{
 
     private Integer idCompromisoInicial;
     private Integer idRegularizacionCompromisoInicial;
-    private Long expediente;
+    private Integer expediente;
     private Long compromiso;
     private Integer ano;
     private Integer tarea;
@@ -146,14 +146,6 @@ public class RegularizacionCompromisoForm extends ActionForm{
 
     public void setIdRegularizacionCompromisoInicial(Integer idRegularizacionCompromisoInicial) {
         this.idRegularizacionCompromisoInicial = idRegularizacionCompromisoInicial;
-    }
-
-    public Long getExpediente() {
-        return expediente;
-    }
-
-    public void setExpediente(Long expediente) {
-        this.expediente = expediente;
     }
     
     public Long getCompromiso() {
@@ -424,7 +416,7 @@ public class RegularizacionCompromisoForm extends ActionForm{
     public void reset(ActionMapping map, HttpServletRequest req){
         this.idCompromisoInicial=null;    
         this.idRegularizacionCompromisoInicial=null;    
-        this.expediente=null;
+        this.setExpediente(null);
         this.compromiso=null;
         this.ano=null;
         this.tarea=null;
@@ -448,6 +440,14 @@ public class RegularizacionCompromisoForm extends ActionForm{
 
 	public void setIdOpcion(Integer idOpcion) {
 		this.idOpcion = idOpcion;
+	}
+
+	public Integer getExpediente() {
+		return expediente;
+	}
+
+	public void setExpediente(Integer expediente) {
+		this.expediente = expediente;
 	}
     
 }

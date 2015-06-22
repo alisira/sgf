@@ -51,7 +51,7 @@
 	<body class="app" >
 	
 		<div id="pagina" align="center">
-			<html:form action="/regularizacionCompromiso" method="post" styleId="ParametrosBusquedaForm" >
+			<html:form action="/regularizacionCompromiso" method="post" styleId="RegularizacionCompromisoForm" >
 		
 				<div id="estatus_expediente" style="text-align: center; background-color: #FFFFFF;opacity: 1.00; top: 200px; z-index: 9999; display: block; color: #666666; width:56%;" >					
 	

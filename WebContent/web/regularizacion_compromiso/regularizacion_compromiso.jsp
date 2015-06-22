@@ -1,5 +1,3 @@
-
-
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %> 
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
@@ -43,7 +41,6 @@
 	
 %>
 
-
 		<script type="text/javascript" language="JavaScript">		
 			    document.title = "<bean:write name="RegularizacionCompromisoForm" property="tituloApli"/>" ;		
 		</script>
@@ -58,7 +55,7 @@
 		
 			<div id="contenido">	
 			
-			<html:form action="/regularizacionCompromiso" method="post"> <!-- <form id="resumenNominaInicial" name="resumenNominaInicial" action="" method="post"> -->
+			<html:form action="/regularizacionCompromiso" method="post">
 				<jsp:include page="../compromiso_inicial/origen_presupuestario.jsp" />
 								
 				<input name="tablavacia" id="tablavacia" value="SI" type="hidden">
