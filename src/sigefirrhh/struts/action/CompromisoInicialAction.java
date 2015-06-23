@@ -96,8 +96,8 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				}else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
 	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
+	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+	        		fwd = "respuestaProceso";
 		        }
 			}
 		}
@@ -250,6 +250,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        	
  		        }else{
  		        	error[0] = (String) "sinResultados";
+ 		        	//throw new Exception("sinResultados");
  		       	}	
 	        	
 	        }else{
@@ -263,15 +264,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 		} finally{
 			
 			if (((String) error[0]) != null){
-				/*try {					
-					//if (SMC != null){
-					//	SMC.endTransaction();
-					//	fwd = "error";
-					//}				
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}*/
-				
+								
 				if (error[1] != null){
 					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
 					((Throwable) error[1]).printStackTrace();					
@@ -285,8 +278,8 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				}else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
 	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
+	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+	        		fwd = "respuestaProceso";
 		        }
 			}
 		}	

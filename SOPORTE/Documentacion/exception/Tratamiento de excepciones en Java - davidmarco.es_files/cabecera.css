@@ -1,0 +1,192 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#divHeader {
+    background-color: rgb(21,112,166);
+}
+
+#divHeaderArriba {
+	/* background-color: #5094CA; */
+}
+
+#divLogo {
+	position: relative;
+	padding-left: 36px;
+	padding-top: 22px;
+	padding-bottom: 18px;
+}
+
+#divHeaderMedio {
+	width: 100%;
+	display: table;
+}
+
+#divHeaderMedio > #divNavegacion, #divEnlaces {
+	display: table-cell;
+}
+
+#divNavegacion {
+	width: 60%;	
+	/* background-color: orange; */
+}
+
+#divNavegacion ul {
+	margin-top: 0em;
+	margin-bottom: 0em;
+	padding-left: 36px;
+}
+
+#divNavegacion ul .menuitem {
+    list-style-type: none;
+    display: inline-block;
+    
+    /*
+    padding-right: 15px;
+    margin-right: 5px;
+    
+    font-weight: 400;
+	font-size: 16px;
+	*/
+	
+    color: white;
+    cursor: pointer;
+    
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+#divNavegacion ul .menuitem:hover {
+    position: relative;
+
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+/*
+#divNavegacion ul li .menuitemMarca {
+	height: 5px;
+	width: 100%;
+}
+
+#divNavegacion ul .menuitemSeleccionado > .menuitemMarca {
+	background-color: orange;
+}
+
+#divNavegacion ul .menuitem:hover > .menuitemMarca {
+	background-color: orange;
+}
+
+#divNavegacion ul .menuitemSeleccionado:before {
+    color: Tomato;    
+}
+*/
+
+#divNavegacion ul li {
+	display: block;
+    float: left;
+    
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/*
+#divNavegacion ul li:before {
+	position: relative;  
+    bottom: 1px;
+    
+    content: "\00BB \0020";
+    
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+*/
+
+#divNavegacion ul li:hover {
+	
+}
+
+/*
+#divNavegacion ul li:hover:before {
+    color: Tomato;
+    
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+*/
+
+#divNavegacion ul li a {
+	text-decoration: none;
+	color: white;
+}
+
+#divEnlaces {
+	width: 40%;
+	padding-right: 36px;
+	
+	vertical-align: middle;
+	text-align: right;
+	
+	/* background-color: yellow; */
+}
+
+#divEnlaces a {
+	text-decoration: none;
+	margin-left: 4%;
+}
+
+#divEnlaces a i {
+	color: #A2B5CD;
+	background-color: rgb(21,112,166);
+	
+	-webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+#divEnlaces a i:hover {
+	color: white;
+	background-color: rgb(21,112,166);
+	
+	-webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+#divHeaderAbajo {
+	background-color: white;
+	height: 28px;
+}
+
+#divTooltip {
+	padding-right: 36px;
+	
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9em;
+	text-align: right;
+	color: rgb(21,112,166);
+	height: 100%;
+	
+	/* background-color: yellow; */
+}
+
+.menuitem {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: 1.2em;
+}
+
+.menuitemColor1:hover, li[class*="menuitemColor1 menuitemSeleccionado"] {
+	background-color: #3299CC;
+}
+
+.menuitemColor2:hover, li[class*="menuitemColor2 menuitemSeleccionado"] {
+	background-color: #6CA6CD;
+}
+
+.menuitemColor3:hover, li[class*="menuitemColor3 menuitemSeleccionado"] {	
+	background-color: #9BC4E2;
+}

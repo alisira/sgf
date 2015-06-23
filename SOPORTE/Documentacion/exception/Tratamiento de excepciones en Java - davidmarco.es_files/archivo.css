@@ -1,0 +1,84 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
+
+#contenedorArchivo {
+	display: table;
+	padding-top: 10px;
+}
+
+#menuArchivo {
+	width: 200px;
+	padding-right: 36px;
+}
+
+#menuArchivo h2 {
+	margin-top: 0px;
+	margin-bottom: -20px;
+	padding-left: 8px;
+	font-weight: 400;
+}
+
+#menuArchivo ul {
+	margin-top: 24px;
+    list-style: none;
+}
+
+#menuArchivo ul li:before {
+    content: "\00BB \0020";
+}
+
+#menuArchivo ul li:hover {
+	background-color: rgb(232, 232, 232);
+}
+
+#contenidoArchivo ul li a {
+	color: rgb(102, 102, 102);
+}
+
+#contenidoArchivo ul li a:hover {
+	color: rgb(21, 112, 166);
+}
+
+#separadorVertical {
+	display: table-cell;
+	border-left: 1px solid rgb(192, 192, 192);
+}
+
+#contenidoArchivo {	
+	display: table-cell;
+	vertical-align: top;
+}
+
+#contenidoArchivo ul {
+	margin-top: 0px;
+	list-style: none;
+}
+
+#contenidoArchivo ul li {
+	margin-bottom: 2px;
+}
+
+#contenidoArchivo ul li:before {
+	content: "";
+}
+
+#contenidoArchivo ul li a:hover {
+	text-decoration: underline;
+}
+
+.archivoitem {
+	padding-left: 8px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	
+	border-radius: 6px;	
+	cursor: pointer;
+	
+	-webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+.archivoitemSeleccionado {
+	color: white;
+	background-color: rgb(212, 212, 212);
+}
+

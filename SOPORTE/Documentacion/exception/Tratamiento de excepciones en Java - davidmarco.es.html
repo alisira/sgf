@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html><head>
+        <title>Tratamiento de excepciones en Java - davidmarco.es</title>
+        
+        <link rel="icon" type="image/x-icon" href="http://www.davidmarco.es/imagenes/favicon.ico">
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+        <meta name="”viewport”" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/cabecera.css">
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/contenido.css">
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/pie.css">
+        
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/archivo.css">
+        <link rel="stylesheet" type="text/css" href="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/sobreMi.css">
+        
+        
+  		<script async="" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/cbgapi.loaded_0"></script><script type="text/javascript" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/jquery-1.js"></script>
+  		<script type="text/javascript" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/jquery-ui.js"></script>
+        
+        <script gapi_processed="true" type="text/javascript" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/plusone.js">
+      		{"parsetags": "explicit"}
+    	</script>
+    	
+    	<!--[if lt IE 9]>
+			<script src="/js/html5shiv.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+    	<header>
+    		<div id="divHeader">    		
+    			<div id="divHeaderArriba">
+    				<div id="divLogo">
+    					<img alt="logo" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/logo.png">
+    					<!-- 
+    					<svg width="450" height="50">
+  							<rect x="0" y="0" rx="15" ry="15" width="48" height="45" style="fill:white; opacity:1"></rect>
+  							<text x="3" y="32" font-family="Sans" font-size="26" fill="#1570A6" font-style="italic">dm</text>
+  							<text x="58" y="34" font-family="Sans" font-size="32" fill="white">davidmarco.es</text>
+						</svg>
+						-->
+    				</div>
+    			</div> 
+    			  			
+    			<div id="divHeaderMedio">
+    				<div id="divNavegacion">
+    					<ul>
+                   			<li id="menuitemBlog" class="menuitem menuitemColor1 R{isBlogSeleccionado}">
+                   				<a href="http://www.davidmarco.es/blog">Blog</a>
+                   				<!-- <div id="divMarcaBlog" class="menuitemMarca "></div> -->
+                   			</li>
+                 	    	<li id="menuitemArchivo" class="menuitem menuitemColor2 R{isArchivoSeleccionado}">
+                 	    		<a href="http://www.davidmarco.es/archivo">Archivo</a>
+                 	    		<!-- <div id="divMarcaBlog" class="menuitemMarca "></div> -->
+                 	    	
+                 	    	</li>
+                        	<li id="menuitemSobremi" class="menuitem menuitemColor3 R{isSobremiSeleccionado}">
+                        		<a href="http://www.davidmarco.es/sobre-mi">Sobre mí</a>
+                        		<!-- <div id="divMarcaBlog" class="menuitemMarca "></div> -->
+                        	</li>
+                    	</ul>
+    				</div>
+					<div id="divEnlaces">
+						<a href="http://www.linkedin.com/in/davidmarcoes" target="_blank">
+							<i class="fa fa-linkedin fa-1x" data-infoicono="Únete a mi red en LinkedIn"></i>
+						</a>
+						<a href="https://plus.google.com/+davidmarcoes" target="_blank">
+							<i class="fa fa-google-plus fa-1x" data-infoicono="Añádeme a tus círculos en Google+"></i>
+						</a>
+						<a href="https://twitter.com/davidmarcoes" target="_blank">
+							<i class="fa fa-twitter fa-1x" data-infoicono="Sígueme en Twitter"></i>	
+						</a> 
+						<a href="http://www.davidmarco.es/rss/blog.xml" target="_blank">
+							<i class="fa fa-rss fa-1x" data-infoicono="Suscríbete a mi feed RSS"></i>
+						</a> 
+						<a href="mailto:correo@davidmarco.es">
+							<i class="fa fa-envelope" data-infoicono="Envíame un correo electrónico"></i>
+						</a>				
+					</div>
+				</div>	
+
+    			<div id="divHeaderAbajo">
+    				<div id="divTooltip"></div>
+    			</div>	
+    		</div>
+    	</header>
+    	
+    	<div id="divContenidoPagina">    		
+    		<div id="contenedorArticulo">			<div class="divArticle">
+    			<article>
+    				<div class="divArticleArriba">
+    					<div class="divArticleArribaIzda">
+    						<div class="divTituloArticulo">
+								<h1>Tratamiento de excepciones en Java</h1>
+							</div>
+							<div class="divFechaArticulo">
+								<time datetime="2012-07-16">Lunes, 16 de Julio de 2012</time>
+							</div>    						
+    					</div>
+
+    					<div class="divArticleArribaDcha">
+    						<div class="divPlusone">
+								<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 60px;"><iframe title="+1" data-gapiattached="true" src="Tratamiento%20de%20excepciones%20en%20Java%20-%20davidmarco.es_files/fastbutton.html" name="I0_1435090998686" id="I0_1435090998686" vspace="0" tabindex="0" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 60px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+							</div>
+    					</div>
+    				</div>
+    				
+    				<div class="clear"></div>
+		
+					<div class="divArticleAbajo">		
+						<div class="divContenidoArticulo"><p>El tratamiento de excepciones en Java es un mecanismo del lenguaje que permite gestionar errores y situaciones <i>excepcionales</i>. Debido a que el tratamiento de excepciones es uno de los pilares fundamentales del lenguaje, todo programador sabe como <i>lanzarlas</i> y <i>capturarlas</i>,
+ pero (como cualquier aspecto fundamental en programación) es necesario 
+conocer con cierta profundidad el propósito por el cual tenemos 
+disponible dicho mecanismo, además de hacer un uso correcto de esta 
+funcionalidad. En este artículo vamos a ver ambos aspectos: el <i>qué</i> y el <i>cómo</i>.</p>
+
+<section>
+	<h2>1. Concepto de excepción</h2>
+	<p>Una excepción en Java (así como en otros muchos lenguajes de 
+programación) es un error o situación excepcional que se produce durante
+ la ejecución de un programa. Algunos ejemplos de errores y situaciones 
+excepcionales son:</p>
+	<ul>
+		<li>Leer un fichero que no existe</li>
+		<li>Acceder al valor N de una colección que contiene menos de N elementos</li>
+		<li>Enviar/recibir información por red mientras se produce una perdida de conectividad</li>
+	</ul>
+	<p>Todas las excepciones en Java se representan, como vamos a ver en la
+ siguiente sección, a través de objetos que heredan, en última 
+instancia, de la clase <code>java.lang.Throwable</code>.</p>
+</section>
+
+<section>
+	<h2>2. Tipos de excepciones</h2>
+	<p>El lenguaje Java diferencia claramente entre tres tipos de excepciones: errores, comprobadas (en adelante <i>checked</i>) y no comprobadas (en adelante <i>unchecked</i>).
+ El gráfico que se muestra a continuación muestra el árbol de herencia 
+de las excepciones en Java (se omite el paquete de todas las que 
+aparecen, que es <code>java.lang</code>):</p>
+	<pre>			Throwable 
+			    | 
+		___________________________ 
+		|                         | 
+	      Error                   Exception 
+		|                         |                             
+	       ···              ______________________ 
+			        |                    | 
+			       ···            RuntimeException 
+						     | 
+						    ···
+	</pre>
+	<p>La clase principal de la cual heredan todas las excepciones Java es <code>Throwable</code>. De ella nacen dos ramas: <code>Error</code> y <code>Exception</code>.
+ La primera representa errores de una magnitud tal que una aplicación 
+nunca debería intentar realizar nada con ellos (como errores de la JVM, 
+desbordamientos de buffer, etc) y que por tanto no tienen cabida en este
+ artículo. La segunda rama, encabezada por <code>Exception</code>, representa aquellos errores que normalmente <i>si</i> solemos gestionar, y a los que comunmente solemos llamar <i>excepciones</i>.</p>
+	<p>De <code>Exception</code> nacen múltiples ramas: <code>ClassNotFoundException</code>, <code>IOException</code>, <code>ParseException</code>, <code>SQLException</code> y otras muchas, todas ellas de tipo checked. La única <i>excepción</i> (valga la redundancia) es <code>RuntimeException</code> que es de tipo unchecked y encabeza todas las de este tipo.</p>
+	<p>A pesar de que la diferencia entre las excepciones de tipo checked y
+ unchecked es muy importante, es también a menudo uno de los aspectos 
+menos entendidos dentro del tratamiento de excepciones. Veamos cada una 
+de ellas con un poco más de detalle.</p>
+</section>
+
+<section>
+
+</section>
+	<h2>3. Excepciones checked</h2>
+	<p>Una excepción de tipo checked representa un error del cual 
+técnicamente podemos recuperarnos. Por ejemplo, una operación de 
+lectura/escritura en disco puede fallar porque el fichero no exista, 
+porque este se encuentre bloqueado por otra aplicación, etc. Todos estas
+ situaciones, además de ser inherentes al propósito del código que las 
+lanza (lectura/escritura en disco) son totalmente ajenas al propio 
+código, y deben ser (y de hecho son) declaradas y manejadas mediante 
+excepciones de tipo checked y sus mecanismos de control.</p>
+	<p>En ciertos momentos, a pesar de la promesa de <i>recuperabilidad</i>,
+ nuestro código no estará preparado para gestionar la situación de 
+error, o simplemente no será su responsabilidad. En estos casos lo más 
+razonable es relanzar la excepción y confiar en que un método superior 
+en la cadena de llamadas sepa gestionarla.</p>
+	<p>Por tanto, todas las excepciones de tipo checked deben ser 
+capturadas o relanzadas. En el primer caso, utilizamos el más que 
+conocido bloque <code>try-catch</code>:</p>
+	<pre>import java.io.FileWriter; 
+import java.io.IOException; 
+
+public class Main { 
+    public static void main(String[] args) {         
+        FileWriter fichero; 
+        try { 
+            // Las siguientes dos líneas pueden lanzar una excepción de tipo IOException 
+            fichero = new FileWriter("ruta"); 
+            fichero.write("Esto se escribirá en el fichero"); 
+        } catch (IOException ioex) { 
+            // Aquí capturamos cualquier excepción IOException que se lance (incluidas sus subclases) 
+            ioex.printStackTrace(); 
+        } 
+         
+    } 
+}
+	</pre>
+	<p>En caso de querer relanzar la excepción, debemos declarar dicha 
+intención en la firma del método que contiene las sentencias que lanzan 
+la excepción, y lo hacemos mediante la claúsula throws:</p>
+	<pre>import java.io.FileWriter; 
+import java.io.IOException; 
+
+public class Main { 
+    // En lugar de capturar una posible excepción, la relanzamos 
+    public static void main(String[] args) throws IOException {         
+        FileWriter fichero = new FileWriter("ruta"); 
+        fichero.write("Esto se escribirá en el fichero");     
+    } 
+}
+	</pre>
+	<p>Hay que tener presente que cuando se relanza una excepción estamos 
+forzando al código cliente de nuestro método a capturarla o relanzarla. 
+Una excepción que sea relanzada una y otra vez <i>hacia arriba</i> 
+terminará llegando al método primigenio y, en caso de no ser capturada 
+por éste, producirá la finalización de su hilo de ejecución (thread).</p>
+	<p>La dos preguntas que debemos hacernos en este momento es: ¿Cuándo 
+capturar una excepción? ¿Cuándo relanzarla? La respuesta es muy simple. 
+Capturamos una excepción cuando:</p>
+	<ul>
+		<li>Podemos recuperarnos del error y continuar con la ejecución</li>
+		<li>Queremos registrar el error</li>
+		<li>Queremos relanzar el error con un tipo de excepción distinto</li>
+	</ul>
+	<p>En definitiva, cuando tenemos que realizar algún tratamiento del propio error. Por contra, relanzamos una excepción cuando:</p>
+	<ul>
+		<li>No es competencia nuestra ningún tratamiento de ningún tipo sobre el error que se ha producido</li>
+	</ul>
+
+
+<section>
+	<h2>4. Excepciones unchecked</h2>
+	<p>Una excepción de tipo unchecked representa un error de programación.
+ Uno de los ejemplos más tipicos es el de intentar leer en un array de N
+ elementos un elemento que se encuentra en una posición mayor que N:</p>
+	<pre>int[] numerosPrimos = {1, 3, 5, 7, 9, 11, 13, 17, 19, 23};    // Array de diez elementos 
+int undecimoPrimo = numerosPrimos[10];    // Accedemos al undécimo elemento mediante el literal numérico 10 
+	</pre>
+	<p>El código anterior accede a una posición inexistente dentro del array, y su ejecución lanzará la excepción unchecked <code>ArrayIndexOutOfBoundsException</code>
+ (excepción de índice de array fuera de límite). Esto es claramente un 
+error de programación, ya que el código debería haber comprobado el 
+tamaño del array antes de intentar acceder a una posición concreta:</p>
+	<pre>int[] numerosPrimos = {1, 3, 5, 7, 9, 11, 13, 17, 19, 23}; 
+int indiceUndecimoPrimo = 10; 
+
+if(indiceUndecimoPrimo &gt; numerosPrimos.length) { 
+    System.out.println("El índice proporcionado (" + indiceUndecimoPrimo + ") es mayor que el tamaño del array (" + numerosPrimos.length + ")"); 
+} else { 
+    int undecimoPrimo = numerosPrimos[indiceUndecimoPrimo]; 
+    // ... 
+} 
+	</pre>
+	<p>El código anterior no sólo valida el tamaño de la colección antes de
+ acceder a una posición concreta (el proposito fundamental del ejemplo),
+ sino que <a href="http://www.davidmarco.es/articulo/usando-buenos-nombres">evita el uso de literales numéricos</a> asignando el índice del array a una variable bien nombrada.</p>
+	<p>El aspecto más destacado de las excepciones de tipo unchecked es que
+ no deben ser forzosamente declaradas ni capturadas (en otras palabras, 
+no son comprobadas). Por ello no son necesarios bloques <code>try-catch</code>
+ ni declarar formalmente en la firma del método el lanzamiento de 
+excepciones de este tipo. Ésto, por supuesto, también afecta a métodos 
+y/o clases más <i>hacia arriba</i> en la cadena invocante.</p>
+</section>
+
+<section>
+	<h2>5. Creando nuestras propias excepciones</h2>
+	<p>Aprovechando dos de las características más importantes de Java, la 
+herencia y el polimorfismo, podemos crear nuestras propias excepciones 
+de forma muy simple:</p>
+	<pre>class CreditoInsuficienteException extends Exception { 
+    // ... 
+}
+	</pre>
+	<p>La clase del código anterior extiende a <code>Exception</code> y por
+ tanto representa una excepción de tipo checked. Tal como su nombre 
+indica, sería lanzada cuando durante una operación comercial no exista 
+suficiente crédito. Esta situación excepcional es inherente a nuestra 
+transacción comercial y no se genera por un defecto de código (no es un 
+error de programación), y por tanto debe gestionarse con anterioridad:</p>
+	<pre>class CarritoDeLaCompra { 
+    // ... 
+     
+    public void pagarCompraConTarjeta() { 
+        try { 
+            TarjetaDeCredito tarjetaPreferida = cliente.getTarjetaDeCreditoPreferida(); 
+            tarjetaPreferida.realizarPago(getImporteCompra()); 
+            cliente.enviarEmailConfirmación(); 
+        } catch(CreditoInsuficienteException ciex) { 
+            // Informamos al usuario de crédito insuficiente 
+        } 
+    } 
+}
+	</pre>
+	<p>Si por el contrario deseamos crear una excepción de tipo unchecked, debemos hacer que nuestra clase extienda (como no) de <code>RuntimeException</code>. Volviendo al último ejemplo, podríamos pensar que <code>CreditoInsuficienteException</code> podría ser declarada como una excepción de tipo unchecked, ya que <i>siempre</i>
+ es posible validar el saldo de la tarjeta de credito con anterioridad 
+al pago (como haciamos con los índices del array). Sin embargo esto no 
+siempre es posible ni razonable ya que:</p>
+	<ul>
+		<li>No disponemos del código fuente, sólo somos clientes de una librería escrita por terceros</li>
+		<li>Aunque dispusieramos del código fuente, no deberíamos estar 
+autorizados a conocer el credito disponible de ningún cliente (esto es 
+información muy sensible y por tanto, confidencial)</li>
+	</ul>
+	<p>Antes de escribir tus propias excepciones, piensa detenidamente en 
+que grupo encaja mejor su responsabilidad (checked vs unchecked). 
+Programa siempre de forma inteligente.</p>
+</section>
+
+<section>
+	<h2>6. Malas prácticas de uso</h2>
+	<p>Para convertirnos en <i>maestros</i> de las excepciones, debemos 
+evitar el uso de aquellas malas practicas que se han generalizado a los 
+largo de los años (y por supuesto no inventar las nuestras...). La 
+primera que vamos a ver es la más peligrosa y, a pesar de ello, también 
+la más común:</p>
+	<pre>try { 
+    // Código que declara lanzar excepciónes 
+} catch(Exception ex) {}
+	</pre>
+	<p>El código anterior ignorará cualquier excepción que se lance dentro del bloque <code>try</code>, o mejor dicho, capturará toda excepción lanzada dentro del bloque <code>try</code> pero la silenciará no haciendo nada (frustrando así el principal propósito de la gestión de excepciones checked: <i>gestiónala o relánzala</i>).
+ Cualquier error de diseño, de programación o de funcionamiento en esas 
+lineas de código pasará inadvertido tanto para el programador como para 
+el usuario. Lo mínimamente aceptable dentro de un bloque <code>catch</code> es un mensaje de log informando del error:</p>
+	<pre>try { 
+    // Código que declara lanzar excepciónes 
+} catch(Exception ex) { 
+    logging.log("Se ha producido el siguiente error: " + ex.getMessage()); 
+    logging.log("Se continua la ejecución"); 
+}
+	</pre>
+	<p>Algo más razonable sería pintar una traza completa del error mediante uno de los métodos informativos de <code>Throwable</code>:</p>
+	<pre>try { 
+    // Código que declara lanzar excepciónes 
+} catch(Excepcion ex) { 
+    ex.printStackTrace();    // Podemos añadir cualquier tratamiento adicional antes y/o después de esta línea 
+}
+	</pre>
+	<p>Otro abuso del mecanismo de tratamiento de excepciones es cuando se 
+está intentando escribir código que mejore el rendimiento de la 
+aplicación:</p>
+	<pre>try { 
+    int i = 0; 
+    while(true) { 
+        System.out.println(numerosPrimos[i++]); 
+    } 
+} catch(ArrayIndexOutOfBoundsException aioobex) {}
+	</pre>
+	<p>El ejemplo anterior itera nuestro fabuloso array de números primos 
+sin preocuparse de los límites del array (tal como haría de manera 
+formal un bucle <code>for</code>) hasta sobrepasar el índice máximo, momento en el cual se lanzará una excepción de tipo <code>ArrayIndexOutOfBoundsException</code> que será capturada y silenciada. Esto es un error porque:</p>
+	<ul>
+		<li>El tratamiento de excepciones está diseñado para gestionar excepciones y no para realizar optimizaciones</li>
+		<li>El código dentro de bloques try-catch no dispone de ciertas 
+optimizaciones de las JVM más modernas (por ejemplo, y aplicable a 
+nuestro caso, iteración de colecciones)</li>
+		<li>El resultado es estéticamente horrible</li>
+	</ul>
+	<p>Otro error común se produce cuando estamos creando nuestra propia 
+librería de excepciones y nos excedemos declarando excepciones checked. 
+Las excepciones checked son fabulosas ya que, al contrario que los 
+códigos <code>return</code> de lenguajes como C, fuerzan al programador a
+ manejar condiciones excepcionales, mejorando así la legibilidad del 
+código. Sin embargo, esta obligación puede llegar a <i>cargar</i> el código cliente:</p>
+	<pre>try { 
+    // Código que declara lanzar muchas excepciónes 
+} catch(UnTipoDeException ex1) { 
+    // Gestionar... 
+} catch(OtroTipoDeException ex2) { 
+    // Gestionar... 
+} catch(OtroTipoMasDeException ex3) { 
+    // Gestionar... 
+} catch(OtroTipoTodaviaMasDeException ex3) { 
+    // Gestionar... 
+}
+	</pre>
+	<p>El código anterior suele abrumar, y el cliente acabará tentado por la siguiente alternativa:</p>
+	<pre>try { 
+    // Código que declara lanzar muchas excepciónes 
+} catch(Exception ex) { 
+    // Gestionar cualquier excepcion, pues todas heredan de Exception 
+    // Perdemos la ventaja de gestionar condiciones excepcionales concretas
+} 
+	</pre>
+	<p>Por ello, debes pensar detenidamente si tu excepción es de tipo 
+checked o unchecked. Recuerda, cualquier situación excepcional que deje 
+la aplicación en un estado irrecuperable y/o no sea inherente al 
+proposito del código que la produce debe ser declarada como una 
+excepción de tipo unchecked.</p>
+	<p>La siguiente mala práctica que vamos a ver está intimamente 
+relacionada con la anterior, y es la de lanzar excepciones de forma 
+generica:</p>
+	<pre>public void miMetodo() throws Exception { 
+    // Código que declara lanzar muchas excepciones. 
+    // Sin embargo, en la firma del método declaramos lanzar una única super-clase de todas éllas 
+}
+	</pre>
+	<p>Nunca hagas lo anterior. Sé que lo has hecho. Yo reconozco haberlo 
+hecho también en el pasado. Y es un absoluto ERROR. Los clientes de tu 
+método no sabrán jamás con que condiciones especiales se pueden 
+encontrar, y por tanto no podrán gestionarlas; no tendrán más remedio 
+que informar del error y detener la ejecución.</p>
+	<p>Por último existe una técnica para convertir toda excepción checked en unchecked:</p>
+	<pre>public void noLanzoExcepcionesChecked() { 
+    try { 
+        // Código que lanza una o más excepciones de tipo checked 
+    } catch(Exception ex) { 
+        throw new RuntimeException("Se ha producido una excepción con el mensaje: " + ex.getMessage(), ex); 
+    } 
+}
+	</pre>
+	<p>El método del código anterior convierte cualquier excepción de tipo 
+checked en una excepción de tipo unchecked, de manera que ningún cliente
+ suyo esté forzado a declarar/gestionar ninguna de ellas. En los últimos
+ años ha crecido una comunidad de usuarios Java que abogan por eliminar 
+el sistema de excepciones checked, que es justo lo que hace el código 
+anterior. Si alguno de estos usuarios me lee, probablemente discrepe con
+ mi idea de incluir dicho código (o cualquiera de sus variantes con 
+menos ámbito de alcance y por tanto menos agresiva) dentro de lo que yo 
+considero malas prácticas. Donde, y me incluyo en este grupo, unos vemos
+ ventajas sobre el tratamiento de excepciones de tipo checked (porque 
+nos da control sobre los errores que se producen a través de estructuras
+ basadas en código legible y con un proposito claro), ellos ven 
+desventajas (sobrecarga del lenguaje y en última instancia del código 
+con una funcionalidad que, y en esto estoy de acuerdo, no es 
+absolutamente perfecta). Existe actualmente un debate abierto sobre la 
+verdadera utilidad de las excepciones checked. Tal vez en próximas 
+versiones de Java (o en el próximo gran lenguaje orientado a objetos) se
+ elimine cualquier concepto actual de <i>error comprobado</i>, pero en el momento actual no es así.</p>
+	<p>Personalmente considero el ejemplo anterior no un abuso del 
+lenguaje, si no un verdadero mal uso. La razón es todavía peor a la del 
+penúltimo ejemplo (¡aquel que te dije no hacer nunca!): no sólo estamos 
+aniquilando toda posibilidad de un tratamiendo de excepciones que sea 
+razonablemente útil, sino que lo más probable es que nuestra <i>nueva</i> y <i>flamante</i>
+ excepción uncheked vaya subiendo hacia arriba en la cadena de llamadas y
+ termine deteniendo el hilo de ejecución actual (puesto que, como ya 
+sabes, éstas no tienen porqué ser gestionadas de forma obligatoria). A 
+efectos prácticos, la única verdadera posibilidad de que sea capturada 
+es que alguien haya declarado un bloque <code>catch</code> que declare capturar <code>Exception</code> (lo cual ya hemos dicho que es otro mal uso):</p>
+	<pre>class MiClaseCliente() { 
+    public void miMetodoCliente() { 
+        try { 
+            obj.noLanzoExcepcionesChecked(); 
+        } catch(Exception ex) { 
+            // Bloque catch extremadamente genérico (mal uso) 
+            // Capturamos RuntimeException porque hereda de Exception (¿casualidad?) 
+            // El bloque try debe lanzar al menos una excepción checked (o este bloque es ilegal) 
+            // ¿Cuantos niveles estoy por encima del origen de la excepción convertida? 
+            // ¿Y si no existiera ningún bloque como este? Detención del thread (podría haberse evitado)             
+        } 
+    } 
+}
+	</pre>
+	<p>Existen ciertas situaciones en las que la conversión de una o más 
+excepciones de tipo checked en unchecked es útil o práctica, pero son 
+situaciones tan concretas y a menudo tan complejas y potencialmente 
+peligrosas que no voy entrar en ningún tipo de detalle sobre éllas. Mi 
+consejo final es: ¡NO CONVIERTAS EXCEPCIONES CHECKED EN UNCHECKED! 
+(salvo que realmente sepas lo que haces).</p>
+</section>
+
+<section>
+	<h2>7. Recomendaciones de uso</h2>
+	<p>Hay algunos principios de uso que debemos ver desde la perspectiva del <i>haz esto</i>, en lugar del <i>no hagas esto</i>.
+ Esto, que además de ser un pensamiento más positivo, me permite a mi 
+añadir una sección más al artículo (:P) y a ti presumir de conocer tanto
+ las malas como las buenas prácticas del uso de excepciones. Ahí es 
+nada.</p>
+	<p>Un buen uso del tratamiento de excepciones es usar excepciones que 
+ya existen, en lugar de crear las tuyas propias, siempre que ambas 
+fueran a cumplir el mismo cometido (que es básicamente informar y, en 
+caso de las checked, obligar a gestionar). Se suelen usar excepciones 
+que ya existen cuando se dispone de un profundo conociento del API que 
+se está usando (en otras palabras, <i>experiencia</i>). Si un argumento pasado a uno de tus métodos no es del tipo esperado, o no tiene el formato correcto, lanza una excepción <code>IllegarArgumentException</code> en lugar de crear tu propia excepción. Esto es bueno porque:</p>
+	<ul>
+		<li>Uno de los pilares de Java es la reutilización de código (no reinventes la rueda)</li>
+		<li>Tu código es más universal (<code>FormatoInvalidoException</code> puede no significar nada para un germanoparlante)</li>
+	</ul>
+	<p>Otra recomendación que no suele llevarse a cabo nunca o casi nunca 
+es la de lanzar excepciónes acordes al nivel de abstracción en el que 
+nos encontramos. Imaginemos una seríe de clases que actuan como capas, 
+una encima de otra (cuanto más arriba más abstracta, cuanto más abajo 
+más concreta). Cuando se produce un error en las capas más bajas y éste 
+se propaga hacia arriba, llega un momento en que dicho error 
+representando una condición excepcional muy concreta se encuentra en un 
+contexto muy abstracto. Esto tiene básicamente tres problemas: el 
+primero, que <i>puede ser</i> importante, es que estamos contaminando el API de las capas superiores con suciedad de las inferiores. El segundo, que <i>es</i>
+ importante, es que estamos desvelando detalles de nuestra 
+implementación muchos niveles por encima de lo deseable. El último 
+problema, que <i>es</i> importante y <i>puede ser</i> critico, es que si
+ en el futuro deseamos intercambiar una de las capas más concretas y 
+ésta ha cambiado su implementación, todas las capas por encima se <i>romperán</i>. Por tanto, debemos lanzar excepciones apropiadas a la abstracción en la que nos encontramos:</p>
+	<pre>try { 
+    // Código que declara lanzar excepciones de bajo nivel 
+} catch(BajoNivelException bnex) { 
+    throw new AltoNivelException("Mensaje"); 
+}
+	</pre>
+	<p>Por último, y para terminar con esta sección y (casi) con este 
+artículo, debes documentar adecuadamente las excepciones que lanza tu 
+código. Para ello, detalla en tus Javadoc todas las excepciones que 
+lanzan tus métodos, informando que condiciones van a provocar el 
+lanzamiento de cada una de ellas:</p>
+	<pre>/** 
+* @author David Marco 
+* @throws MiExcepcion se lanza en caso de producirse [...] condición especial. 
+*/ 
+public class MiClase throws MiExcepcion { 
+    // ... 
+}
+	</pre>
+</section>
+
+<section>
+	<h2>Resumen</h2>
+	<p>Como con otros temas tratados con anterioridad, el tratamiento de 
+excepciones en Java podría merecer perfectamente un volumen entero de 
+una enciclopedia sobre programación. En este artículo he intentado 
+exponer los aspectos que considero más importantes, y algunos que 
+considero tan útiles como (por desgracia) desconocidos.</p>
+	<p>Como siempre os invito a poneros en contacto conmigo con cualquier 
+tema relacionado con mis artículos, como sugerencias, correcciones y por
+ supuesto críticas. También como siempre os doy las gracias por el apoyo
+ y agradecimiento que me brindáis constantemente a través del correo 
+electrónico.</p>
+	<p>¡Felices try-catch!</p>
+</section></div>
+					</div>					
+    			</article>
+    		</div>
+    		<hr></div>
+
+    	</div>
+    	
+    	<footer>
+    		<div id="divFooter" data-ispaginaanterior="R{isPaginaAnterior}" data-numpaginaanterior="R{numPaginaAnterior}" data-ispaginaposterior="R{isPaginaPosterior}" data-numpaginaposterior="R{numPaginaPosterior}" data-isvolver="true">	
+       		<a id="volver" href="http://www.davidmarco.es/blog">Ir al blog</a></div>
+        </footer>
+    	
+    	<script type="text/javascript">
+    		// Botón +1
+    		gapi.plusone.go("content");
+
+			// Formateo de código 
+			// TODO conectar AdB con OpenShift y gestionar entradas desde el editor
+    		window.onload = function() {
+    			$(".xml").each(function() {
+    				// JQuery text(valor) escapa caracteres < y > 
+     				// de código XML/HTML que queremos mostrar
+     				$(this).text($(this).html());
+    			});
+    		
+    			$("pre:not(.xml)").each(function() {
+    				// Escape de caracteres < y > que no pertenecen
+    				// a código XML/HTML
+     				$(this).val().replace("<", "&lt;");
+     				$(this).val().replace(">", "&gt;");
+     			});        		
+    		}
+    
+			// Lógica de navegación
+    		$(document).ready(function() {
+    			var divFooter = $("#divFooter");
+    			if (divFooter.attr("data-isPaginaAnterior") == "true") {
+    				divFooter.append("<a id='paginaAnterior' href='/blog/" + divFooter.attr("data-numPaginaAnterior") + "'>Más nuevos</a>");
+    	    	}
+    		
+    			if (divFooter.attr("data-isPaginaPosterior") == "true") {
+    				divFooter.append("<a id='paginaPosterior' href='/blog/" + divFooter.attr("data-numPaginaPosterior") + "'>Más antiguos</a>");
+      		  	}
+    		
+    			if (divFooter.attr("data-isVolver") == "true") {
+    				var href;
+    			
+    				// Gestión del mensaje del botón 'Volver' al cargar artículo
+    				var urlBase = "davidmarco.es";
+    				var urlBlog = urlBase + "/blog";
+    				var urlArchivo = urlBase + "/archivo";
+    				var urlArticulo = urlBase + "/articulo";
+    			
+    				var urlAnterior = document.referrer;        			
+    				if ((urlAnterior.indexOf(urlBlog) == -1) 
+    						&& (urlAnterior.indexOf(urlArchivo) == -1) 
+    						&& (urlAnterior.indexOf(urlArticulo) == -1)) {
+    				
+    					aHref = "/blog";  
+    					aTexto = "Ir al blog";
+    				} else {
+    					aHref = "javascript: history.go(-1)";
+    				
+    					if (urlAnterior.indexOf(urlBlog) != -1) {
+    						aTexto = "Volver al blog";
+    					} else if (urlAnterior.indexOf(urlArchivo) != -1) {
+    						aTexto = "Volver al archivo";
+    					} else if (urlAnterior.indexOf(urlArticulo) != -1) {
+    						aTexto = "Volver al artículo previo";
+    					} else {
+    						// Esto no debería ocurrir, en caso afirmativo estamos dejando de
+    						// gestionar una url interna que enlaza con el artículo actual
+    						aTexto = "Volver";
+    					}
+    				}
+    			
+    				divFooter.append("<a id='volver' href='" + aHref + "'>" + aTexto + "</a>");
+    			}
+    		});
+
+    		// Gestión del menuitem seleccionado (excepto al mostrar un artículo)
+			if (document.URL.indexOf("/articulo") == -1) {				
+        		var menuitemSeleccionado = "R{menuitemSeleccionado}";
+        		$(".menuitem").hover(
+       	    		function () {
+                		if (!$(this).hasClass("menuitemSeleccionado")) {
+                   		 	$("#" + menuitemSeleccionado).removeClass("menuitemSeleccionado");
+                		}
+            		},
+            		function () {
+                		$("#" + menuitemSeleccionado).addClass("menuitemSeleccionado");
+            		}
+        		);
+			}
+        	
+    		$(".fa").hover(function() {
+        		$("#divTooltip").text($(this).attr("data-infoIcono"));
+        	}, function() {
+        		$("#divTooltip").empty();
+        	});
+    	</script>  
+    
+ </body></html>

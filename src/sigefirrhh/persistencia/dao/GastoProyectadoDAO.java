@@ -12,6 +12,6 @@ import com.ibatis.common.jdbc.exception.NestedSQLException;
 
 public interface GastoProyectadoDAO extends GenericDAO {		
 	
-	public List<GastoProyectado> proyectarGasto(CriterioBusqueda parametros) throws PSQLException, Exception, SQLException,NestedSQLException;
+	public List<GastoProyectado> proyectarGasto(CriterioBusqueda parametros) throws PSQLException, SQLException, NestedSQLException;
 	   	   
 }

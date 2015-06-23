@@ -73,6 +73,9 @@ sigefirrhh/base/ubicacion/Pais.jsf
 	
 	String[] c = request.getParameterValues("accion");
 
+--Excepciones varias
+	throw new IllegalArgumentException("message no puede ser null");
+	throw new RuntimeException("Error de lógica");
 
 --Clase ejemplo conexion jdbc
 	package sigefirrhh.ibatis.dao;

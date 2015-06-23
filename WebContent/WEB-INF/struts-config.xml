@@ -52,9 +52,8 @@
     
     </global-exceptions>
 
-    <global-forwards>
-        <forward name="error" path="/web/html/error.jsp" />
-        <forward name="resultado" path="/web/html/resultado.jsp"/>
+    <global-forwards>        
+        <forward name="respuestaProceso" path="/web/html/respuesta_proceso.jsp"/>
     	<forward name="errorConexion" path="/web/html/error_DB.html" />
     	<forward name="sesionCerrada" path="/error.html" />
     	<forward name="sinPermiso" path="/sinpermiso.jsp" />

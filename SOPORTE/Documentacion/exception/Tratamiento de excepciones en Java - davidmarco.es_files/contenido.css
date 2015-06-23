@@ -1,0 +1,189 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
+
+
+#divContenidoPagina {
+	position: relative;
+	padding-left: 36px;
+    padding-right: 36px;
+}
+
+.divArticle {	
+	margin-top: 0em;
+	margin-bottom: 0em;
+	
+	/* background-color: red; */
+}
+
+.divArticleArriba {
+
+}
+
+.divArticleArribaIzda {
+	float: left;	
+	width: 80%;
+}
+
+.divArticleArribaDcha {
+	float: right;
+}
+
+.divArticleAbajo {
+
+}
+
+.divTituloArticulo {
+	
+}
+
+.divTituloArticulo h1 {
+	margin-top: 0em;
+	margin-bottom: 0em;
+	
+	color: rgb(21,112,166);
+}
+
+.divFechaArticulo {
+	margin-bottom: 1.2em;
+	/* background-color: DarkGray; */
+}
+
+.divPlusone {
+	margin-top: 8px;
+	
+	/* background-color: White; */
+}
+
+.divContenidoArticulo {	
+	/* background-color: AliceBlue; */
+}
+
+.divContenidoArticulo ul li, .divContenidoArticulo section ul li {
+    list-style: none;
+}
+
+.divContenidoArticulo ul li:before, .divContenidoArticulo section ul li:before {
+    content: "\00BB \0020";
+}
+
+.clear {
+	clear: both;
+}
+
+code, pre {
+	font-family:Consolas, monospace;    
+}
+
+code {
+	font-size: 0.9em;
+}
+
+pre {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 20px;
+	padding-bottom: 8px;
+	background-color: rgb(244,244,244);
+	
+	font-size: 0.8em;
+	
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+h1, h2, time, p, li, blockquote {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2 {
+	font-weight: 300;	
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h1 a, h2 {
+	color: rgb(102,102,102);
+}
+
+h1 a:hover {	
+	color: rgb(21,112,166); 
+}
+
+h2 {
+	font-size: 1.3em;
+	margin-bottom: 
+}
+
+time {
+	margin-bottom: 10px;
+	font-size: 0.9em;
+	font-weight: 400;
+	font-style: italic;;
+	color: rgb(102,102,102);
+}
+
+p, li, blockquote {
+	font-size: 0.9em;
+}
+
+p {
+	text-align: justify;
+}
+
+li ul li {
+	font-size: 1.0em;
+}
+
+blockquote {
+	font-style: italic;
+}
+
+hr {	
+	margin-bottom: 28px;
+	height: 1px;
+	border: 0px none;
+	
+	background-color: rgb(212, 212, 212);
+	color: rgb(212, 212, 212);	
+}
+
+a {
+	text-decoration: none;
+	color: rgb(21,112,166); 
+}
+
+section h2 {
+	margin-top: 1.2em;
+	margin-bottom: -0.4em;
+}
+
+table {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: 20px;
+		
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	font-size: 0.9em;
+	border-left: 1px solid black;
+}
+
+th {
+	padding-left: 6px;
+	padding-right: 6px;
+	border-bottom: 1px solid black;
+	
+	font-family:Consolas, monospace;
+	font-weight: 800;    
+}
+
+td {
+	padding-left: 6px;	
+	
+	font-family:Consolas, monospace;
+	font-weight: 400;
+}

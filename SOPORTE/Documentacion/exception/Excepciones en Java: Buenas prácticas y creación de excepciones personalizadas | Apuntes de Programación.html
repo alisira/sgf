@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<title>Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas | Apuntes de Programación</title>
+<meta name="description" content="Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas">
+<link rel="alternate" type="application/rss+xml" title="Apuntes de Programación RSS Feed" href="http://programacion.jias.es/feed/">
+<link rel="alternate" type="application/atom+xml" title="Apuntes de Programación Atom Feed" href="http://programacion.jias.es/feed/atom/"> 
+<link rel="pingback" href="http://programacion.jias.es/xmlrpc.php">
+
+<link rel="stylesheet" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/style.css" type="text/css">
+<link rel="stylesheet" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/comment-style.css" type="text/css">
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="http://programacion.jias.es/wp-content/themes/monochrome/ie6.css" type="text/css" />
+<![endif]--> 
+<link rel="stylesheet" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/width_1100px.css" type="text/css">
+<style type="text/css">
+.post img, .post a img { border:1px solid #ccc; padding:5px; margin:0 10px 0 0;  background:#f2f2f2; }
+.post a:hover img { border:1px solid #38a1e5; background:#9cd1e1; }
+.post img.wp-smiley { border:0px; padding:0px; margin:0px; background:none; }
+</style>
+
+ 
+<link rel="alternate" type="application/rss+xml" title="Apuntes de Programación » Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas RSS de los comentarios" href="http://programacion.jias.es/2012/01/excepciones-en-java-buenas-practicas-creacion-de-excepciones-personalizadas/feed/">
+<link rel="stylesheet" id="cntctfrmStylesheet-css" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/contact_form_style.css" type="text/css" media="all">
+<link rel="stylesheet" id="core3.0-css" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shCore.css" type="text/css" media="all">
+<link rel="stylesheet" id="core-Eclipse3.0-css" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shCoreEclipse.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-Eclipse3.0-css" href="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shThemeEclipse.css" type="text/css" media="all">
+<script src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/l10n.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/jquery.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/comment-reply.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/external-tracking.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://programacion.jias.es/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://programacion.jias.es/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="Apuntes de Programación" href="http://programacion.jias.es/">
+<link rel="start" title="Dar nombre a un bucle en ESQL" href="http://programacion.jias.es/2011/08/dar-nombre-a-un-bucle-en-esql-2/">
+<link rel="prev" title="¿Cómo es posible mostrar la fecha de modificación de un fichero alojado en el servidor con JavaScript?" href="http://programacion.jias.es/2012/01/%c2%bfcomo-es-posible-mostrar-la-fecha-de-modificacion-de-fichero-con-javascript/">
+<link rel="next" title="¿Qué hay de nuevo en Message Broker 8?" href="http://programacion.jias.es/2012/01/%c2%bfque-hay-de-nuevo-en-message-broker-8/">
+<meta name="generator" content="WordPress 3.2.1">
+<link rel="canonical" href="http://programacion.jias.es/2012/01/excepciones-en-java-buenas-practicas-creacion-de-excepciones-personalizadas/">
+<link rel="shortlink" href="http://programacion.jias.es/?p=704">
+
+<!-- WP SyntaxHighlighter Ver.1.6.5 CSS for code Begin -->
+<style type="text/css">
+.syntaxhighlighter,
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+font-size: 12px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter table caption {
+/* For Title(Caption) */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter.nogutter td.code .line {
+/* Set the left padding space when no-gutter in ver. 3.0 */  
+padding-left: 3px !important;
+}
+
+.syntaxhighlighter {
+/* For Chrome/Safari(WebKit) */  
+/* Hide the superfluous vertical scrollbar in ver. 3.0 */  
+overflow-y: hidden !important;
+padding: 1px !important;
+}
+</style>
+<!-- WP SyntaxHighlighter Ver.1.6.5 CSS for code End -->
+<!-- Google Analytics Tracking by Google Analyticator 6.2: http://ronaldheft.com/code/analyticator/ -->
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-26446319-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/scroll.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/jscript.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/comment.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+
+ <div id="header">
+
+  <div id="header_top">
+
+   <div id="logo">
+       <a href="http://programacion.jias.es/">Apuntes de Programación</a>
+    <h1>IBM WebSphere / ESQL / Java / C / SAP / Web / Moviles</h1>
+      </div>
+
+      <div class="header_menu">
+    <ul class="menu">
+     <li class="page_item first_menu"><a href="http://programacion.jias.es/">INICIO</a></li>
+     <li class="page_item page-item-199"><a href="http://programacion.jias.es/contacto/" title="Contacto">Contacto</a></li>
+<li class="page_item page-item-420 last_menu"><a href="http://programacion.jias.es/web-personal/" title="Web Personal">Web Personal</a></li>
+    </ul>
+   </div>
+   
+  </div>
+
+  </div><!-- #header end -->  <div id="contents" class="clearfix">
+
+   <div id="left_col">
+
+        <div id="header_meta">
+     <ul id="bread_crumb" class="clearfix">
+      <li id="bc_home"><a href="http://programacion.jias.es/">INICIO</a></li>
+      <li id="bc_cat"><a href="http://programacion.jias.es/category/poo/" title="Ver todas las entradas en POO" rel="category tag">POO</a></li>
+      <li>Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas</li>
+     </ul>
+    </div>
+    
+
+    <div class="post clearfix" id="single_post">
+     <div class="post_content_wrapper">
+      <h2 class="post_title"><span>Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas</span></h2>
+      <div class="post_content">
+       <ul>
+<li><u>BUENAS PRÁCTICAS:</u></li>
+</ul>
+<p>Algunas buenas prácticas sobre el tratamiento de excepciones son las siguientes:</p>
+<ol>
+<li>No muestres por consola los errores, si no, <strong>usa un sistema de log</strong>. Es decir, nunca uses <em>System.out</em> o <em>System.err</em>.</li>
+<li>Pon un sólo <strong>try</strong> y varios <strong>catch</strong> en 
+el código siempre que sea posible, y en los catch captura y traza todas 
+las excepciones. Ordenalos desde el más específico hasta el menos 
+específico y usa la parte <strong>finally</strong> para liberar recursos, como conexiones o ficheros.</li>
+<li>Cuando escribas en el log, <strong>escribe información significativa</strong>, como los parámetros recibidos por el método, lo trivial. El nombre del método, por ejemplo, ya se verá en la traza.</li>
+<li>Al trazar, no concatenes el mensaje de la excepción, <strong>vuelca la excepción en sí</strong> (toda la traza).</li>
+<li>Un método <strong>no debería declararse como <em>throws Exception</em></strong>,
+ ya que enmascara todas las excepciones, sin permitir gestionar el error
+ concreto. No pasa nada, por ejemplo, por que se lancen varias 
+excepciones: <em>throws IOException</em>, <em>MiOtraException</em>… De esta forma, el que la invoque sabrá a qué tipos de error se debe enfrentar.</li>
+</ol>
+<p><span id="more-704"></span></p>
+<ul>
+<li><u>EXCEPCIONES PERSONALIZADAS:</u></li>
+</ul>
+<p>A veces, en nuestros programas necesitamos crearnos nuestras propias 
+excepciones y jugar con ellas. Cuando necesitamos crear excepciones en 
+Java, para ello, procedemos a hacer lo siguiente:</p>
+<p>Antes de nada, creamos una clase que extienda de <strong>Exception</strong>, llamada en este caso <strong>MiExcepcion</strong> y que contenga el tratamiento de la excepción:</p>
+<div><div id="highlighter_18579" class="syntaxhighlighter  notranslate java"><div class="toolbar"><span><a href="#" class="toolbar_item command_expandSource expandSource">+ expand source</a></span><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">package</code> <code class="java plain">javaapplication1;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">MiExcepcion </code><code class="java keyword">extends</code> <code class="java plain">Exception{</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">// Constructor</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java plain">MiExcepcion(){};</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">// Excepcion: Error Provocado</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java plain">String excErrorPersonalizado(){</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">return</code> <code class="java string">"Error provocado."</code><code class="java plain">;</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number11 index10 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>Y ahora en el código de nuestra aplicación, lanzaremos una excepción de este tipo:</p>
+<div><div id="highlighter_682556" class="syntaxhighlighter  notranslate java"><div class="toolbar"><span><a href="#" class="toolbar_item command_expandSource expandSource">+ expand source</a></span><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">package</code> <code class="java plain">javaapplication1;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">JavaApplication1 {</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java keyword">static</code> <code class="java keyword">void</code> <code class="java plain">main(String[] args) {</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">try</code><code class="java plain">{</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">System.out.println(</code><code class="java string">"Provocando un error en 3, 2, 1..."</code><code class="java plain">);</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">throw</code> <code class="java keyword">new</code> <code class="java plain">MiExcepcion();</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code><code class="java keyword">catch</code><code class="java plain">(MiExcepcion ex){</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">System.out.println(ex.excErrorPersonalizado());</code></div><div class="line number11 index10 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number13 index12 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>El resultado por consola el siguiente:</p>
+<p><a href="http://programacion.jias.es/wp-content/uploads/2012/01/JavaApplication1-NetBeans-IDE-7.1.jpg"><img src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/JavaApplication1-NetBeans-IDE-7.jpg" alt="" title="JavaApplication1 - NetBeans IDE 7.1" class="aligncenter size-full wp-image-709" height="67" width="281"></a></p>
+             </div>
+     </div>
+     <dl class="post_meta">
+        <dt class="meta_date">2012</dt>
+         <dd class="post_date">01<span>/24</span></dd>
+                <dt>CATEGORIA</dt>
+         <dd><a href="http://programacion.jias.es/category/poo/" title="Ver todas las entradas en POO" rel="category tag">POO</a></dd>
+                 <dt>ETIQUETAS</dt><dd><a href="http://programacion.jias.es/tag/best-practices/" rel="tag">Best Practices</a><br><a href="http://programacion.jias.es/tag/java/" rel="tag">Java</a></dd>                <dt class="meta_comment"><a href="http://programacion.jias.es/2012/01/excepciones-en-java-buenas-practicas-creacion-de-excepciones-personalizadas/#respond" title="Comentarios en Excepciones en Java: Buenas prácticas y creación de excepciones personalizadas">Escribir un comentario</a></dt>
+             </dl>
+    </div>
+
+
+    <div id="comments_wrapper">
+     <div id="comments">
+
+
+
+
+
+ <div id="comment_header" class="clearfix">
+
+  <ul id="comment_header_left">
+   <li id="add_comment"><a href="#respond">Escribir un comentario</a></li>
+   <li id="comment_feed"><a href="http://programacion.jias.es/comments/feed/" title="RSS de los comentarios">RSS de los comentarios</a></li>
+  </ul>
+
+  <ul id="comment_header_right">
+    <li id="trackback_switch"><a href="javascript:void(0);">Enlaces ( 0 )</a></li>
+    <li id="comment_switch" class="comment_switch_active"><a href="javascript:void(0);">Comentarios ( 0 )</a></li>
+  </ul>
+
+
+ </div><!-- comment_header END -->
+
+
+<div id="comment_area">
+<!-- start commnet -->
+<ol class="commentlist">
+	<li class="comment even_comment"><div class="comment-content"><p>Aun no hay comentarios.</p></div></li>
+	</ol>
+<!-- comments END -->
+
+
+</div><!-- #comment-list END -->
+
+
+<div id="trackback_area">
+<!-- start trackback -->
+
+<div id="trackback_url_wrapper">
+<label for="trackback_url">URL del enlace</label>
+<input name="trackback_url" id="trackback_url" size="60" value="http://programacion.jias.es/2012/01/excepciones-en-java-buenas-practicas-creacion-de-excepciones-personalizadas/trackback/" readonly="readonly" onfocus="this.select()" type="text">
+</div>
+
+<ol class="commentlist">
+
+<li class="comment"><div class="comment-content"><p>Aun no hay enlaces.</p></div></li>
+</ol>
+<!-- trackback end -->
+</div><!-- #trackbacklist END -->
+
+
+
+
+
+
+<div class="comment_form_wrapper" id="respond">
+ Has de estar <a href="http://programacion.jias.es/wp-login.php">conectado</a> para escribir un comentario.</div>
+
+
+
+
+</div><!-- #comment end -->    </div>
+
+        <div id="previous_next_post" class="clearfix">
+     <p id="previous_post"><a href="http://programacion.jias.es/2012/01/%c2%bfcomo-es-posible-mostrar-la-fecha-de-modificacion-de-fichero-con-javascript/" rel="prev">¿Cómo es posible mostrar la fecha de modificación de un fichero alojado en el servidor con JavaScript?</a></p>
+     <p id="next_post"><a href="http://programacion.jias.es/2012/01/%c2%bfque-hay-de-nuevo-en-message-broker-8/" rel="next">¿Qué hay de nuevo en Message Broker 8?</a></p>
+    </div>
+    
+   </div><!-- #left_col end -->
+
+   <div id="right_col">
+  
+    <div id="information_area" class="clearfix">
+   <div class="side_box first_side_box" id="information">
+    <h3>SOCIAL</h3>
+    <div id="information_contents">Contacta conmigo a través de:
+<center><a href="http://www.linkedin.com/profile/view?id=105440829" title="LinkedIn"><img alt="LinkedIn" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/linkedin.png"></a> <a href="http://twitter.com/#%21/joseiacedo" title="Twitter"><img alt="Twitter" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/twitter.png"></a> </center></div>
+   </div>
+      <div id="entries_rss">
+    <a href="http://programacion.jias.es/feed/" title="RSS de las entradas">CANAL RSS</a>
+   </div>
+     </div>
+  
+    <div class="side_box" id="search_area_top">
+   <div id="search_area" class="clearfix">
+        <form method="get" id="searchform" action="http://programacion.jias.es/">
+     <div><input value="Buscar" name="s" id="search_input" onfocus="this.value=''; changefc('white');" type="text"></div>
+     <div><input src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/search_button.gif" alt="Buscar en este blog" title="Buscar en este blog" id="search_button" type="image"></div>
+    </form>
+       </div>
+     </div>
+  
+  <div class="side_box" id="categories-5">
+<h3>Categorías</h3>
+		<ul>
+	<li class="cat-item cat-item-28"><a href="http://programacion.jias.es/category/analisis-y-arquitectura/" title="Ver todas las entradas archivadas en Analisis y Arquitectura">Analisis y Arquitectura</a> (4)
+</li>
+	<li class="cat-item cat-item-37"><a href="http://programacion.jias.es/category/bbdd/" title="Ver todas las entradas archivadas en BBDD">BBDD</a> (14)
+</li>
+	<li class="cat-item cat-item-59"><a href="http://programacion.jias.es/category/direccion-de-equipos/" title="Ver todas las entradas archivadas en Direccion de Equipos">Direccion de Equipos</a> (1)
+</li>
+	<li class="cat-item cat-item-22"><a href="http://programacion.jias.es/category/ficheros/" title="Ver todas las entradas archivadas en Ficheros">Ficheros</a> (11)
+</li>
+	<li class="cat-item cat-item-58"><a href="http://programacion.jias.es/category/frases/" title="Ver todas las entradas archivadas en Frases">Frases</a> (3)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://programacion.jias.es/category/ibm-websphere-message-broker-y-mq/" title="Ver todas las entradas archivadas en IBM WebSphere Message Broker y MQ">IBM WebSphere Message Broker y MQ</a> (46)
+</li>
+	<li class="cat-item cat-item-64"><a href="http://programacion.jias.es/category/metodologia/" title="Ver todas las entradas archivadas en Metodología">Metodología</a> (1)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://programacion.jias.es/category/moviles/" title="Ver todas las entradas archivadas en Moviles">Moviles</a> (3)
+</li>
+	<li class="cat-item cat-item-36"><a href="http://programacion.jias.es/category/poo/" title="Ver todas las entradas archivadas en POO">POO</a> (21)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://programacion.jias.es/category/sap/" title="Ver todas las entradas archivadas en SAP">SAP</a> (3)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://programacion.jias.es/category/sin-categoria/" title="Ver todas las entradas archivadas en Sin categoría">Sin categoría</a> (2)
+</li>
+	<li class="cat-item cat-item-17"><a href="http://programacion.jias.es/category/sistemas-operativos/" title="Ver todas las entradas archivadas en Sistemas Operativos">Sistemas Operativos</a> (5)
+</li>
+	<li class="cat-item cat-item-40"><a href="http://programacion.jias.es/category/software/" title="Ver todas las entradas archivadas en Software">Software</a> (6)
+</li>
+	<li style="margin-bottom: 0px;" class="cat-item cat-item-11"><a href="http://programacion.jias.es/category/web/" title="Ver todas las entradas archivadas en Web">Web</a> (28)
+</li>
+		</ul>
+</div>
+<div class="side_box" id="tag_cloud-5">
+<h3>Etiquetas</h3>
+<div class="tagcloud"><a href="http://programacion.jias.es/tag/android/" class="tag-link-14" title="3 temas" style="font-size: 11.620689655172pt;">Android</a>
+<a href="http://programacion.jias.es/tag/best-practices/" class="tag-link-47" title="7 temas" style="font-size: 15.241379310345pt;">Best Practices</a>
+<a href="http://programacion.jias.es/tag/c-ansi/" class="tag-link-69" title="1 tema" style="font-size: 8pt;">C ANSI</a>
+<a href="http://programacion.jias.es/tag/certificados/" class="tag-link-55" title="1 tema" style="font-size: 8pt;">Certificados</a>
+<a href="http://programacion.jias.es/tag/cloud-computing/" class="tag-link-63" title="1 tema" style="font-size: 8pt;">Cloud Computing</a>
+<a href="http://programacion.jias.es/tag/css/" class="tag-link-16" title="7 temas" style="font-size: 15.241379310345pt;">CSS</a>
+<a href="http://programacion.jias.es/tag/direccion/" class="tag-link-60" title="1 tema" style="font-size: 8pt;">Direccion</a>
+<a href="http://programacion.jias.es/tag/diseno/" class="tag-link-62" title="1 tema" style="font-size: 8pt;">Diseño</a>
+<a href="http://programacion.jias.es/tag/ejb/" class="tag-link-23" title="1 tema" style="font-size: 8pt;">EJB</a>
+<a href="http://programacion.jias.es/tag/esql/" class="tag-link-5" title="17 temas" style="font-size: 19.586206896552pt;">ESQL</a>
+<a href="http://programacion.jias.es/tag/excel/" class="tag-link-43" title="1 tema" style="font-size: 8pt;">Excel</a>
+<a href="http://programacion.jias.es/tag/html/" class="tag-link-9" title="4 temas" style="font-size: 12.827586206897pt;">HTML</a>
+<a href="http://programacion.jias.es/tag/java/" class="tag-link-12" title="28 temas" style="font-size: 22pt;">Java</a>
+<a href="http://programacion.jias.es/tag/javascript/" class="tag-link-25" title="5 temas" style="font-size: 13.793103448276pt;">JavaScript</a>
+<a href="http://programacion.jias.es/tag/jdom/" class="tag-link-44" title="2 temas" style="font-size: 10.172413793103pt;">JDOM</a>
+<a href="http://programacion.jias.es/tag/jsp/" class="tag-link-33" title="1 tema" style="font-size: 8pt;">JSP</a>
+<a href="http://programacion.jias.es/tag/kanban/" class="tag-link-66" title="1 tema" style="font-size: 8pt;">Kanban</a>
+<a href="http://programacion.jias.es/tag/liderazgo/" class="tag-link-61" title="1 tema" style="font-size: 8pt;">Liderazgo</a>
+<a href="http://programacion.jias.es/tag/linux/" class="tag-link-50" title="1 tema" style="font-size: 8pt;">Linux</a>
+<a href="http://programacion.jias.es/tag/log4j/" class="tag-link-46" title="2 temas" style="font-size: 10.172413793103pt;">Log4j</a>
+<a href="http://programacion.jias.es/tag/notepad/" class="tag-link-41" title="1 tema" style="font-size: 8pt;">Notepad++</a>
+<a href="http://programacion.jias.es/tag/odbc/" class="tag-link-48" title="1 tema" style="font-size: 8pt;">ODBC</a>
+<a href="http://programacion.jias.es/tag/oracle/" class="tag-link-38" title="13 temas" style="font-size: 18.258620689655pt;">Oracle</a>
+<a href="http://programacion.jias.es/tag/patrones-diseno/" class="tag-link-42" title="1 tema" style="font-size: 8pt;">Patrones Diseño</a>
+<a href="http://programacion.jias.es/tag/performance/" class="tag-link-53" title="1 tema" style="font-size: 8pt;">Performance</a>
+<a href="http://programacion.jias.es/tag/php/" class="tag-link-21" title="9 temas" style="font-size: 16.448275862069pt;">PHP</a>
+<a href="http://programacion.jias.es/tag/plsql/" class="tag-link-39" title="9 temas" style="font-size: 16.448275862069pt;">PL/SQL</a>
+<a href="http://programacion.jias.es/tag/responsive-design/" class="tag-link-68" title="2 temas" style="font-size: 10.172413793103pt;">Responsive Design</a>
+<a href="http://programacion.jias.es/tag/sap/" class="tag-link-7" title="1 tema" style="font-size: 8pt;">SAP</a>
+<a href="http://programacion.jias.es/tag/scripts/" class="tag-link-19" title="3 temas" style="font-size: 11.620689655172pt;">Scripts</a>
+<a href="http://programacion.jias.es/tag/scrum/" class="tag-link-65" title="1 tema" style="font-size: 8pt;">Scrum</a>
+<a href="http://programacion.jias.es/tag/seguridad/" class="tag-link-30" title="2 temas" style="font-size: 10.172413793103pt;">Seguridad</a>
+<a href="http://programacion.jias.es/tag/seo/" class="tag-link-10" title="4 temas" style="font-size: 12.827586206897pt;">SEO</a>
+<a href="http://programacion.jias.es/tag/servlets/" class="tag-link-32" title="1 tema" style="font-size: 8pt;">Servlets</a>
+<a href="http://programacion.jias.es/tag/soa/" class="tag-link-56" title="1 tema" style="font-size: 8pt;">SOA</a>
+<a href="http://programacion.jias.es/tag/soap-ui/" class="tag-link-49" title="1 tema" style="font-size: 8pt;">SOAP UI</a>
+<a href="http://programacion.jias.es/tag/spring-framework/" class="tag-link-35" title="1 tema" style="font-size: 8pt;">Spring Framework</a>
+<a href="http://programacion.jias.es/tag/sql/" class="tag-link-18" title="1 tema" style="font-size: 8pt;">SQL</a>
+<a href="http://programacion.jias.es/tag/ssl/" class="tag-link-54" title="1 tema" style="font-size: 8pt;">SSL</a>
+<a href="http://programacion.jias.es/tag/twitter-bootstrap-framework/" class="tag-link-67" title="2 temas" style="font-size: 10.172413793103pt;">Twitter Bootstrap Framework</a>
+<a href="http://programacion.jias.es/tag/vm/" class="tag-link-20" title="1 tema" style="font-size: 8pt;">VM</a>
+<a href="http://programacion.jias.es/tag/web-xml/" class="tag-link-34" title="1 tema" style="font-size: 8pt;">web.xml</a>
+<a href="http://programacion.jias.es/tag/web-services/" class="tag-link-24" title="7 temas" style="font-size: 15.241379310345pt;">Web Services</a>
+<a href="http://programacion.jias.es/tag/xml/" class="tag-link-45" title="3 temas" style="font-size: 11.620689655172pt;">XML</a></div>
+</div>
+<div class="side_box" id="linkcat-27">
+<h3>Lenguajes de Programación</h3>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.dosideas.com/wiki/Buenas_Practicas_De_Configuracion_De_Spring" target="_blank">Buenas prácticas de configuracion de Spring</a></li>
+<li><a href="http://c.conclase.net/" target="_blank">C con clase</a></li>
+<li><a href="http://www.cokeandcode.com/index.html?page=tutorials" target="_blank">Coke and Code: Tutorials</a></li>
+<li><a href="http://preparandoscjp.wordpress.com/guia-rapida/" title="Guía Rápida a la Certificación Java 6 Programmer" target="_blank">Guía Rápida a la Certificación Java 6 Programmer</a></li>
+<li><a href="http://zetcode.com/tutorials/javagamestutorial/" target="_blank">Java 2D games tutorial</a></li>
+<li><a href="http://www.javahispano.org/" target="_blank">Java Hispano</a></li>
+<li><a href="http://www.symfony-project.org/book/1_0/" target="_blank">The Definitive Guide to Symfony (PHP)</a></li>
+<li><a href="http://www.programacionfacil.com/java:start" target="_blank">Tutorial Java: Swing, Applets, Servlets, JSP</a></li>
+<li><a href="http://www.w3.org/TR/2002/REC-xhtml1-20020801/" target="_blank">Tutorial XHTML</a></li>
+<li style="margin-bottom: 0px;"><a href="http://www.w3schools.com/xpath/default.asp" target="_blank">Tutorial XPath</a></li>
+
+	</ul>
+</div>
+
+<div class="side_box" id="linkcat-13">
+<h3>Moviles</h3>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://developer.android.com/index.html" target="_blank">Android Developers</a></li>
+<li><a href="http://www.puntogeek.com/2011/06/12/curso-android-todo-lo-que-necesitas-para-empezar/" target="_blank">Curso Android: Todo lo que necesitas para empezar</a></li>
+<li style="margin-bottom: 0px;"><a href="http://ipodtoucher55.blogspot.com/2010/12/installing-ios-sdk-and-xcode-on-windows.html" target="_blank">Installing iOS SDK and Xcode on Windows 7 [Updated]</a></li>
+
+	</ul>
+</div>
+
+<div class="side_box" id="linkcat-15">
+<h3>Otros</h3>
+
+	<ul class="xoxo blogroll">
+<li style="margin-bottom: 0px;"><a href="http://petr-mitrichev.blogspot.com.es/" target="_blank">Algorithm Problems for Dummies – Petr Mitrichev's Blog</a></li>
+
+	</ul>
+</div>
+
+<div class="side_box" id="linkcat-11">
+<h3>Web</h3>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.jqjacobs.net/web/color_graphics.html">Creating a Web Page – Color and Graphics by James Q. Jacobs</a></li>
+<li><a href="http://www.colorzilla.com/gradient-editor/" target="_blank">Generador de gradientes CSS3</a></li>
+<li><a href="http://www.creativasfera.com/guia-de-introduccion-a-css3-para-principiantes" target="_blank">Introducción a CSS3 (Principiantes)</a></li>
+<li><a href="http://colorschemedesigner.com/" target="_blank">Paleta de colores Web</a></li>
+<li><a href="http://www.w3schools.com/css/" target="_blank">Tutorial CSS</a></li>
+<li><a href="http://www.desarrolloweb.com/manuales/css3.html" target="_blank">Tutorial CSS3</a></li>
+<li><a href="http://www.desarrolloweb.com/manuales/manual-jquery.html" target="_blank">Tutorial jQuery</a></li>
+<li><a href="http://www.blogtecnologico.net/tutorial-seo/">Tutorial SEO</a></li>
+<li style="margin-bottom: 0px;"><a href="http://docs.webplatform.org/wiki/Main_Page" target="_blank">Web Platform Docs</a></li>
+
+	</ul>
+</div>
+
+<div class="side_box" id="linkcat-26">
+<h3>WMB / WMQ</h3>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.ibm.com/developerworks/websphere/library/techarticles/0803_shen/0803_shen.html" target="_blank">Convenciones de Código ESQL</a></li>
+<li><a href="http://www.ibm.com/developerworks/websphere/library/techarticles/0806_mcmullan/0806_mcmullan.html" target="_blank">File handling in WebSphere Message Broker V6.1</a></li>
+<li><a href="http://www.ibm.com/developerworks/websphere/library/techarticles/0911_fan/0911_fan.html" target="_blank">Generating events in WMB for transaction monitoring and auditing</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?uid=swg21165821" target="_blank">How does the message broker handle XML message encoding</a></li>
+<li><a href="http://www.webspheretools.com/sites/webspheretools.nsf/bycategory%21openview&amp;restricttocategory=websphere%20message%20broker&amp;count=5000" target="_blank">Installing WMB by Steve Robinson</a></li>
+<li><a href="http://www.ibm.com/developerworks/websphere/library/techarticles/1105_ghosh/1105_ghosh.html?ca=drs-" target="_blank">Integrating with TCP/IP using WebSphere Message Broker</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?uid=swg27024193" target="_blank">Knowledge Collection: Execution Group for WMB</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?uid=swg27024192" target="_blank">Knowledge Collection: Installation for WMB</a></li>
+<li><a href="http://websphere-messagebroker.blogspot.com/" target="_blank">Message Broker Blog by Joseph A. Raj</a></li>
+<li><a href="http://publib.boulder.ibm.com/infocenter/wmqv6/v6r0/topic/com.ibm.mq.amqzao.doc/fm12040_.htm" target="_blank">MQ Reason Codes</a></li>
+<li><a href="http://mqseries.net/" target="_blank">MQ Series</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?uid=swg27006041" target="_blank">Recommended fixes for WebSphere Message Broker</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?rs=203&amp;uid=swg24000637" target="_blank">RFHUtil</a></li>
+<li><a href="http://techish.com/blog/category/ibm-websphere-mq/">TECHISH Blogs</a></li>
+<li><a href="http://www-01.ibm.com/support/docview.wss?uid=swg27007197" target="_blank">WebSphere MQ – SupportPacs by Product</a></li>
+<li style="margin-bottom: 0px;"><a href="http://www.ibm.com/developerworks/websphere/zones/businessintegration/wmb.html" target="_blank">WMB Developer Resources Page</a></li>
+
+	</ul>
+</div>
+
+
+  
+</div><!-- #right_col end -->
+  </div><!-- #contents end -->
+
+  <div id="footer">
+   <ul id="copyright">
+    <li style="background:none;">
+                Copyright ©&nbsp; 2011-2015     &nbsp;<a href="http://programacion.jias.es/">Apuntes de Programación</a></li>
+    <li><a href="http://www.mono-lab.net/">Theme designed by mono-lab</a></li>
+    <li><a href="http://wordpress.org/">Powered by WordPress</a></li>
+   </ul>
+  </div>
+ 
+</div><!-- #wrapper end -->
+
+
+
+<!-- WP SyntaxHighlighter Ver.1.6.5 Begin -->
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shCore.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shLegacy.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shAutoloader.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushAppleScript.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushAS3.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushBash.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushColdFusion.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushCpp.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushCSharp.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushCss.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushDelphi.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushDiff.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushErlang.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushGroovy.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushJava.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushJavaFX.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushJScript.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushPerl.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushPhp.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushPlain.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushPython.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushRuby.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushSass.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushScala.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushSql.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushVb.js"></script>
+<script type="text/javascript" src="Excepciones%20en%20Java:%20Buenas%20pr%C3%A1cticas%20y%20creaci%C3%B3n%20de%20excepciones%20personalizadas%20%7C%20Apuntes%20de%20Programaci%C3%B3n_files/shBrushXml.js"></script>
+<script type="text/javascript">//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0"
+	,"as3 actionscript3	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0"
+	,"bash shell	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0"
+	,"cf coldfusion	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0"
+	,"cpp c	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0"
+	,"c# c-sharp csharp	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0"
+	,"css	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0"
+	,"delphi pas pascal	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0"
+	,"diff patch	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0"
+	,"erl erlang	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0"
+	,"groovy	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0"
+	,"java	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0"
+	,"jfx javafx	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0"
+	,"js jscript javascript	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0"
+	,"perl pl	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0"
+	,"php	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0"
+	,"plain text	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0"
+	,"ps powershell	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0"
+	,"py python	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0"
+	,"rails ror ruby rb	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0"
+	,"sass scss	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0"
+	,"scala	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0"
+	,"sql	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0"
+	,"vb vbnet	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0"
+	,"xml xhtml xslt html	http://programacion.jias.es/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = true;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = true;
+ SyntaxHighlighter.config.stripBrs = true;
+ SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = "Can't find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn't configured for html-script option: ";
+	SyntaxHighlighter.all();
+	dp.SyntaxHighlighter.HighlightAll('code')
+//]]></script>
+<!-- WP SyntaxHighlighter Ver.1.6.5 End -->
+<div id="su-footer-links" style="text-align: center;"></div>
+</body></html>

@@ -254,14 +254,14 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
 					fwd = "sesionCerrada";
 	        	}else if(error[0].equals("errorAplicacion")){
 	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "resultado";
+	        		fwd = "respuestaProceso";
 		        }else if (error[0].equals("sinPermiso")){					
 					fwd = "sinPermiso";
 		        }else if(error[0].equals("sinResultados")){	        		
 	        		fwd = "sinResultados";
 		        }else if(error[0].equals("pddNoFound")){
 	        		request.setAttribute("mensaje", "PDD No encontrado, disculpe las molestias, consulte al administrador");
-	        		fwd = "resultado";	        		
+	        		fwd = "respuestaProceso";	        		
 		        }else{	        		
 	        		this.nuevo(mapping, form, request, response);//habilitar cuando el error se pueda manejar 
 		        }
@@ -296,7 +296,7 @@ public class PuntoDecisionAction extends DispatchAction implements Serializable,
     						//System.out.println("resultado: " + resultado);
     						request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
     						request.setAttribute("mensaje", messageResources.getMessage("mensaje.exito"));
-    						fwd = "resultado";
+    						fwd = "respuestaProceso";
 
 	        				
 	        			}else{
