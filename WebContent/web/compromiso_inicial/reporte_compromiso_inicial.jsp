@@ -45,9 +45,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">		
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		
-		<script type="text/javascript" src="<%=rutaTemp %>/js/jquery-2.1.1.min.js"></script>
-		<script language="javascript" src="<%=rutaTemp %>/js/comun.js"></script>
-		
 		<link rel="STYLESHEET" href="<%=rutaTemp %>/estilos/estilo-impresion.css" media="print" type="text/css">
 		<link rel="STYLESHEET" href="<%=rutaTemp %>/estilos/comun.css" media="screen" type="text/css">
 

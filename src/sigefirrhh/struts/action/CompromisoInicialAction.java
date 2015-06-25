@@ -12,6 +12,9 @@ import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
 
+
+
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -27,6 +30,7 @@ import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
 import sigefirrhh.persistencia.modelo.GastoProyectado;
+import sigefirrhh.sistema.ExcepcionSigefirrhh;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
 import sigefirrhh.struts.addons.Comun;
@@ -51,19 +55,18 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 
 	private static final long serialVersionUID = 6333610918451615896L;	
 	HttpSession session = null;
-	String fwd = null;
-	Object[] error= null;
+	String fwd = null;	
 	PrintWriter out = null;	
 	MessageResources messageResources = null;
 	
 	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 						
-		error= new Object[2];
+		
 		messageResources = getResources(request);		
     		
 		try {
-			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
-    		if (resp == "valido"){
+			
+			if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
     			List<TipoDocumento> tipoDocumentos = new ArrayList<TipoDocumento>();
 				tipoDocumentos.add(new TipoDocumento(0, "Resumen de Nomina"));
 				tipoDocumentos.add(new TipoDocumento(1, "Memorandum"));
@@ -71,36 +74,27 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				request.setAttribute("TipoDocumentos", tipoDocumentos);
 				request.setAttribute("ano", ano);				
 				fwd ="apruebaNuevo";
-
-    		}else{
-    			error[0] = resp;
-    		}        	
-        
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;
-
-		} finally{			
-
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-
-				if (error[0].equals("sesionCerrada")){					
-					fwd = "sesionCerrada";
-				}else if (error[0].equals("sinPermiso")){					
-					fwd = "sinPermiso";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "respuestaProceso";
-		        }
-			}
+    		} 			
+			
+		} catch (ExcepcionSigefirrhh e) {
+			
+			if (e.toString().equals("sesionCerrada")){				
+				fwd = e.toString();	
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+				fwd = "datosIncompletos";
+	        }else if(e.toString().equals("sinResultados")){
+				fwd = "sinResultados";
+	        }else if (e.toString().equals("sinPermiso")){					
+	        	fwd = e.toString();	
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+    		fwd = "respuestaProceso";		
 		}
+		
 		return mapping.findForward(fwd);	
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
 		
@@ -108,7 +102,6 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	
 	public ActionForward guardar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {		
 		
-		error= new Object[2];
 		messageResources = getResources(request);
 		
 		try {
@@ -117,9 +110,8 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        Organismo org = new Organismo();
 
 			CriterioBusqueda criterio = new CriterioBusqueda();
-
-			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
-    		if (resp == "valido"){
+			
+    		if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
 					
 				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
 				CompromisoInicialForm formaPeti = (CompromisoInicialForm ) form;
@@ -214,7 +206,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	 		        		
 	 		        		expeResul = (Integer) compromisoInicialDetalleDAO.guardar(compromisoInicialDetalle);
 	 		        		if (expeResul.equals(Integer.valueOf(0)) || expeResul == null){
-	 							throw new Exception("Error 1 Desconocido en ResumenNominaInicialAction");
+	 							throw new RuntimeException("Error Desconocido en ResumenNominaInicialAction");
 	 						}
 	 		        		mensajeSigecof[i]="Imputacion guardada exitosamente";
 						}else{
@@ -248,79 +240,66 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        	request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
  		        	fwd = "apruebaGuardar";
  		        	
- 		        }else{
- 		        	error[0] = (String) "sinResultados";
- 		        	//throw new Exception("sinResultados");
- 		       	}	
-	        	
-	        }else{
-	        	error[0] = resp;
-	        }
-		
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;
-
-		} finally{
+ 		        }else{ 		        	
+ 		        	throw new ExcepcionSigefirrhh("sinResultados");
+ 		       	}		        	
+	        }		
+    		
+		} catch (ExcepcionSigefirrhh e) {
 			
-			if (((String) error[0]) != null){
-								
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-
-				if (error[0].equals("sesionCerrada")){					
-					fwd = "sesionCerrada";
-				}else if (error[0].equals("sinPermiso")){					
-					fwd = "sinPermiso";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "respuestaProceso";
-		        }
-			}
-		}	
+			if (e.toString().equals("sesionCerrada")){				
+				fwd = e.toString();	
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+				fwd = "datosIncompletos";
+	        }else if(e.toString().equals("sinResultados")){
+				fwd = "sinResultados";
+	        }else if (e.toString().equals("sinPermiso")){					
+				fwd = "sinPermiso";
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+    		fwd = "respuestaProceso";				
+		
+		}
 		
 		return mapping.findForward(fwd);
 		
 	}
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) {
-		String resp= null;
-		
+	public boolean validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {		
+
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-        		
+
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			
+
         			if (funcion.equals("nuevo")){
             			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
-            			resp ="valido";
         			}else{
-    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
-    						resp ="valido";
-            			}else{
-            				resp ="sesionCerrada";
+    					if (!(boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){    					
+            				throw new ExcepcionSigefirrhh("sesionCerrada");
             			}
-        			}	
-            			
+        			}
+
         		}else{
-        			resp ="sinPermiso";
+        			throw new ExcepcionSigefirrhh("sinPermiso");
         		}
-        		
+
         	}else{
-        		resp ="sesionCerrada";
+        		throw new ExcepcionSigefirrhh("sesionCerrada");
 	        }	        	
         }else{
-        	resp ="sesionCerrada";
+        	throw new ExcepcionSigefirrhh("sesionCerrada");
         }  
-		
-		return resp;
+
+		return true;
 	}
+	
 }
+

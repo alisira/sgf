@@ -70,8 +70,8 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 	}
 
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) {
-		return null;
+	public boolean validarAcceso(HttpServletRequest request, String funcion) {
+		return false;
 	}
     
     /*public List listar(Object entity)  {//Recuerda ponerlo en la interface

@@ -3,6 +3,7 @@ package sigefirrhh.struts.action;
 //import
 
 import org.apache.struts.action.*;
+import org.apache.struts.util.MessageResources;
 import org.postgresql.util.PSQLException;
 
 /*
@@ -10,8 +11,6 @@ import sigecof.ConsultaDisponibilidadPresupuestaria;
 import sigecof.DisponibilidadPresupuestariaDTO;
 import sigecof.clDisponibilidadPresupuestaria;
 */
-
-
 
 import sigefirrhh.base.estructura.Organismo;
 
@@ -45,14 +44,16 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 	private static final long serialVersionUID = -4298746168227316826L;
 	
 	HttpSession session = null;
-	String fwd = null;		
-	Object[] error= null;		
+	String fwd = null;			
 	PrintWriter out = null;
+	MessageResources messageResources = null;	
+		
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {				
 
 		HttpSession session = request.getSession();
-		Object[] error= new Object[2];
+		messageResources = getResources(request);
+		String errorTem = null;//Variable que guarda temporalmente el mensaje de excepcion en el caso
 	
 		try {
 			
@@ -64,9 +65,8 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 			
 			CriterioBusqueda criterio = new CriterioBusqueda();
 			//System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			
-			String resp = validarAcceso(request, "nuevo");
-    		if (resp == "valido"){
+						
+    		if (validarAcceso(request, "nuevo")){
 			
 		        GastoProyectadoForm forma = (GastoProyectadoForm) form;					
 				
@@ -141,84 +141,57 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 						//b++;
 					}
 				}else{						
-					error[0] = (String) "sinResultados";
-				}
-	        	
-	        }else{
-	        	error[0] = resp;
+					throw new ExcepcionSigefirrhh("sinResultados");
+				}	        
 	        }
 		
-		} catch (NestedSQLException e) {				
-			error[0] = (String) "Error de comunicacion con el servidor, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;
+		} catch (NestedSQLException e) {
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			errorTem = messageResources.getMessage("errors.comunicacion");
+			
 		} catch (PSQLException e) {				
-			error[0] = (String) "PSQLException Error de comunicacion con el servidor, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
+			
 		} catch (SQLException e) {
-			error[0] = (String) "SQLException Error de comunicacion con el servidor, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;
-		} catch (ExcepcionSigefirrhh e) {
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
 			
-			if (error[0].equals("sesionCerrada")){			        	
-	        	out.write("Por razones de seguridad su sesion ha sido cerrada, favor iniciar sesion desde pagina inicial, gracias" );
-				fwd = "sesionCerrada";
-	        }else if(error[0].equals("datosIncompletos")){
-	        	out.write("Datos Incompletos, favor corregir, gracias" );
-				fwd = "datosIncompletos";
-	        }else if(error[0].equals("sinResultados")){			        	
-	        	out.write("Busqueda no Obtuvo resultados, vuelva a intentar");						
-				fwd = "sinResultados";
-	        }
+		} catch (ExcepcionSigefirrhh e) {			
 			
-			e.to
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;
-		} catch (Exception e) {
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;
-				
-		} finally{
+			if (e.toString().equals("sesionCerrada")){
+				errorTem = messageResources.getMessage("errors.sesionCerrada");
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+	        	errorTem = messageResources.getMessage("errors.datosIncompletos");				
+	        }else if(e.toString().equals("sinResultados")){
+	        	errorTem = messageResources.getMessage("errors.sinResultados");				
+	        }			
 			
-			
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();
-					out.write("<error>");
-		        	out.write(error[0].toString());
-					out.write("</error>");
-					fwd = "error";
-				}else{
-					
-					out.write("<error>");
-					if (error[0].equals("sesionCerrada")){			        	
-			        	out.write("Por razones de seguridad su sesion ha sido cerrada, favor iniciar sesion desde pagina inicial, gracias" );
-						fwd = "sesionCerrada";
-			        }else if(error[0].equals("datosIncompletos")){
-			        	out.write("Datos Incompletos, favor corregir, gracias" );
-						fwd = "datosIncompletos";
-			        }else if(error[0].equals("sinResultados")){			        	
-			        	out.write("Busqueda no Obtuvo resultados, vuelva a intentar");						
-						fwd = "sinResultados";
-			        }
-					out.write("</error>");
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
 
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-				
+		} finally{
+
+			if (errorTem != null){				
+				out.write("<error>");        	
+				out.write(errorTem);
+				out.write("</error>");		
 			}
-			
+
 			out.write("</root>");
 			out.flush();
 		}
 		
 		return null;
 	}
-	
+		
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {
-		String resp= null;
+	public boolean validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {		
 
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
@@ -229,28 +202,25 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 
         			if (funcion.equals("nuevo")){
             			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
-            			resp ="valido";
         			}else{
-    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
-    						resp ="valido";
-            			}else{
-            				resp ="sesionCerrada";
+    					if (!(boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){    					
             				throw new ExcepcionSigefirrhh("sesionCerrada");
             			}
         			}
 
         		}else{
-        			resp ="sinPermiso";
+        			throw new ExcepcionSigefirrhh("sinPermiso");
         		}
 
         	}else{
-        		resp ="sesionCerrada";
+        		throw new ExcepcionSigefirrhh("sesionCerrada");
 	        }	        	
         }else{
-        	resp ="sesionCerrada";
+        	throw new ExcepcionSigefirrhh("sesionCerrada");
         }  
 
-		return resp;
+		return true;
 	}
+	
 }
 

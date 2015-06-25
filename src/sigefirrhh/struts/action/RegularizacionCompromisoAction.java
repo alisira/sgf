@@ -3,7 +3,6 @@ package sigefirrhh.struts.action;
 import org.apache.struts.action.*;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.util.MessageResources;
-import org.postgresql.util.PSQLException;
 
 /*
 import sigecof.DisponibilidadPresupuestariaDTO;
@@ -14,16 +13,10 @@ import sigecof.CompromisoInicialDTO;
 */
 
 
-
-
-
-
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
-import sigefirrhh.persistencia.modelo.Expediente;
 import sigefirrhh.persistencia.modelo.Opcion;
-import sigefirrhh.persistencia.modelo.RegularizacionCompromiso;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
 import sigefirrhh.login.LoginSession;
 import sigefirrhh.persistencia.modelo.TipoDocumento;
@@ -31,15 +24,14 @@ import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
 import sigefirrhh.persistencia.dao.OpcionDAO;
-import sigefirrhh.persistencia.dao.RegularizacionCompromisoDAO;
 import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
-import sigefirrhh.persistencia.dao.imple.RegularizacionCompromisoDAOImple;
 import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
+import sigefirrhh.sistema.ExcepcionSigefirrhh;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.CompromisoInicialForm;
 import sigefirrhh.struts.actionForm.ParametrosBusquedaForm;
@@ -50,13 +42,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ibatis.common.jdbc.exception.NestedSQLException;
-
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import sigefirrhh.base.estructura.Organismo;
@@ -69,19 +57,16 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 
 	private static final long serialVersionUID = 6333610918451615896L;
 	HttpSession session = null;
-	String fwd = null;
-	Object[] error= null;
+	String fwd = null;	
 	PrintWriter out = null;
 	MessageResources messageResources = null;
 	
-	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {		
 		
-		error= new Object[2];
 		messageResources = getResources(request);
     		
 		try {
-			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
-    		if (resp == "valido"){
+			if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
     			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;	
     			OpcionDAO opcionDAO = new OpcionDAOImple();
 				CriterioBusqueda criterio =new CriterioBusqueda();
@@ -95,44 +80,37 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				request.setAttribute("ano", ano);
 				request.setAttribute("ParametrosBusquedaForm", parametrosBusquedaForm);
 				
-				fwd = "apruebaNuevo";
-    		}else{
-    			error[0] = resp;
+				fwd = "apruebaNuevo";    		
     		}
 	
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;	
-
-		} finally{
-
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-
-				if (error[0].equals("sesionCerrada")){				
-					fwd = "sesionCerrada";					
-				}else if (error[0].equals("sinPermiso")){					
-					fwd = "sinPermiso";     	
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));	        		
-	        		fwd = "error";
-		        }
-			}
+		} catch (ExcepcionSigefirrhh e) {
+			
+			if (e.toString().equals("sesionCerrada")){				
+				fwd = e.toString();	
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+				fwd = "datosIncompletos";
+	        }else if(e.toString().equals("sinResultados")){
+				fwd = "sinResultados";
+	        }else if (e.toString().equals("sinPermiso")){					
+	        	fwd = e.toString();	
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+    		fwd = "respuestaProceso";		
 		}
+		
 		return mapping.findForward(fwd);	
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
 	}
 	
 	public ActionForward buscar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);
-		error= new Object[2];
-		messageResources = getResources(request);					
+		//System.out.println("Se Valido al usuario: en " + this.getClass().getName() +  " a las " + hora);		
+		messageResources = getResources(request);
+		String errorTem = null;//Variable que guarda temporalmente el mensaje de excepcion en el caso
+		
 		try{			
 			session = request.getSession();
 			out = response.getWriter();
@@ -143,8 +121,7 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 	        RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;
 	        
 	        CriterioBusqueda criterio = new CriterioBusqueda();
-	        String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
-    		if (resp == "valido"){
+	        if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
 				if (forma.getExpediente() !=null){
 					String tempExpe = "";
 					if (!forma.getExpediente().equals("")){						
@@ -183,66 +160,48 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 						//System.out.println(i.getAno() + " " + i.getMonto()  + " " + i.getCodUnidadEjecutora());
 					}
 		       }else{
-		    	   error[0] = (String) "sinResultados";
-		       }
-    		}else{
-    			error[0] = resp;
+		    	   throw new ExcepcionSigefirrhh("sinResultados");
+		       }    		
     		}
 						
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;
+		} catch (ExcepcionSigefirrhh e) {			
+			
+			if (e.toString().equals("sesionCerrada")){
+				errorTem = messageResources.getMessage("errors.sesionCerrada");
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+	        	errorTem = messageResources.getMessage("errors.datosIncompletos");				
+	        }else if(e.toString().equals("sinResultados")){
+	        	errorTem = messageResources.getMessage("errors.sinResultados");				
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
 
 		} finally{
-			
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
 
-				out.write("<error>");
-				
-				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesionCerrada"));
-					fwd = "sesionCerrada";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";	        	
-		        }else if (error[0].equals("sinPermiso")){
-					out.write(messageResources.getMessage("errors.sinPermiso"));
-					fwd = "sinPermiso";
-		        }else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinResultados"));
-	        		fwd = "sinResultados";
-		        }
-
-				out.write("</error>");
-
+			if (errorTem != null){				
+				out.write("<error>");        	
+				out.write(errorTem);
+				out.write("</error>");		
 			}
-		}
 
-		//if (request.getHeader("content-type") == null){//Si el request es de un ajax entonces es null
 			out.write("</root>");
 			out.flush();
-			return null;
-		//}else{
-		//	return mapping.findForward(fwd);
-		//}
+		}
+		
+		return null;
+
 	}
 	
 	public ActionForward cargar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-						
-		error= new Object[2];
+		
 		messageResources = getResources(request);		
     		
 		try {
 			
-			String resp = validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName());
-    		if (resp == "valido"){
+			if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
 	        	
     			RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm) form;
     			
@@ -304,244 +263,63 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 				request.setAttribute("ano", ano);				
 				forma.setTituloApli("Regularizacion de Compromiso");	
 				
-				fwd ="apruebaCarga";
-	        	
-        	}else{
-        		error[0] = resp;
+				fwd ="apruebaCarga";	        	
+        	
 	        }
-	
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;
-
-		} finally{			
-
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-
-				out.write("<error>");
-				
-				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesionCerrada"));
-					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosIncompletos")){
-		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
-					fwd = "datosIncompletos";
-		        }else if(error[0].equals("errorcomunicacion")){
-		        	out.write(messageResources.getMessage("errors.comunicacion"));
-					fwd = "error";
-	        	}else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinResultados"));
-	        		fwd = "sinResultados";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
-		        }
-
-				out.write("</error>");
-
-			}
+			
+		} catch (ExcepcionSigefirrhh e) {
+			
+			if (e.toString().equals("sesionCerrada")){				
+				fwd = e.toString();	
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+				fwd = "datosIncompletos";
+	        }else if(e.toString().equals("sinResultados")){
+				fwd = "sinResultados";
+	        }else if (e.toString().equals("sinPermiso")){					
+	        	fwd = e.toString();	
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+    		fwd = "respuestaProceso";		
 		}
+		
 		return mapping.findForward(fwd);	
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
-		
-	}
-	
-	public ActionForward guardar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {		
-		
-		error= new Object[2];
-		messageResources = getResources(request);		
-		
-		try {		
-			
-			session = request.getSession();
-			out = response.getWriter();
-	        response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");
-	        Organismo org = new Organismo();
-			org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
-			RegularizacionCompromisoForm formaPeti = (RegularizacionCompromisoForm ) form;			
-			CriterioBusqueda criterio = new CriterioBusqueda();
-
-	        if ( session.getAttribute("loginSession") != null){
-	        	if (((LoginSession) session.getAttribute("loginSession")).isValid()){			
-
-					if (request.getSession().getAttribute("ReguComproBean") != null){
-						System.out.println("Posiblemente le dio atras, debe iniciar proceso desde el menu inicial");
-						fwd = "sesionCerrada";						
-
-					}else{							
-
-						Integer expeResul = 0;
-						Date fecha = new Date();
-						int idUsuario = 1;
-						
-						Expediente expediente = new Expediente();	 		        	
-						expediente.setFechaRegistro(fecha);
-						expediente.setAno(ano);
-						expediente.setEstatus(0);
-						expediente.setIdUsuario(idUsuario);
-						expediente.setObservacion(formaPeti.getObservacion());
-						expediente.setIdOrganismo((int) org.getIdOrganismo());
-						ValidadorSesion vs = new ValidadorSesion();
-						Integer idOpcion = vs.getIdOpcion(request);
-						expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
-						ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
-						expeResul = (Integer) expedienteDAO.guardar(expediente);						
-						
-	 		        	RegularizacionCompromisoDAO regularizacionCompromisoDAO = new RegularizacionCompromisoDAOImple();
-						
-	 		        	RegularizacionCompromiso regularizacionCompromiso = new RegularizacionCompromiso();
-	 		        	regularizacionCompromiso = (RegularizacionCompromiso) regularizacionCompromiso.llenarBean(regularizacionCompromiso,formaPeti);
-						
-	 		        	regularizacionCompromiso.setAno(ano);
-	 		        	regularizacionCompromiso.setExpediente(expeResul);
-	 		        	regularizacionCompromiso.setEstatus(0);
-	 		        	regularizacionCompromiso.setFechaRegistro(fecha);
-	 		        	regularizacionCompromiso.setTarea(1);
-	 		        	
-	 		        	regularizacionCompromiso.setIdCompromisoInicial(formaPeti.getIdCompromisoInicial());
-	 		        	regularizacionCompromiso.setIdOrganismo((int) org.getIdOrganismo());
-							
-						Integer idReguCompro;
-						idReguCompro = (Integer) regularizacionCompromisoDAO.guardar(regularizacionCompromiso);
-						
-						for (int x = 0; x  < formaPeti.getMontoRegularizar().length ; x++){
-							System.out.println(formaPeti.getMontoRegularizar(x));
-						}
-						
-						
-						fwd ="apruebaGuardar";
-		 		       		
-					}						
-					
-			
-	        	}else{
-	        		error[0] = (String) "sesionCerrada";
-		        }
-	        	
-	        }else{
-        		error[0] = (String) "sesionCerrada";
-	        }
-
-		} catch (NestedSQLException e) {
-			error[0] = (String) "errorData";
-			error[1]= e;
-						
-		} catch (PSQLException e) {
-			error[0] = (String) "errorData";
-			error[1]= e;
-						
-		} catch (SQLException e) {
-			error[0] = (String) "errorcomunicacion";
-			error[1]= e;
-						
-		} catch (Exception e) {
-			error[0] = (String) "errorAplicacion";
-			error[1]= e;
-
-		} finally{
-			
-			if (((String) error[0]) != null){
-				/*try {					
-					//if (SMC != null){
-					//	SMC.endTransaction();
-					//	fwd = "error";
-					//}				
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}*/
-				
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();					
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
-
-				out.write("<error>");
-				
-				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesionCerrada"));
-					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosIncompletos")){
-		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
-		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.datosIncompletos"));
-					fwd = "datosIncompletos";
-		        }else if(error[0].equals("errorcomunicacion")){
-		        	out.write(messageResources.getMessage("errors.comunicacion"));
-		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.comunicacion"));
-					fwd = "error";
-		        }else if(error[0].equals("errorData")){
-		        	out.write(messageResources.getMessage("errors.data"));
-		        	request.setAttribute("mensaje_error", messageResources.getMessage("errors.data"));
-					fwd = "error";
-	        	}else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinResultados"));
-	        		fwd = "sinResultados";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		request.setAttribute("mensaje_error", messageResources.getMessage("errors.aplicacion"));
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
-		        }
-				out.write("</error>");
-			}
-		}
-
-		//System.out.println(request.getHeader("content-type"));
-		
-		if (request.getHeader("content-type") == null){//Si el request es de un ajax el valor sera nulo
-			out.write("</root>");
-			out.flush();
-			return null;
-		}else{
-			return mapping.findForward(fwd);
-		}
-	}
+	}	
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) {
-		String resp= null;
-		
+	public boolean validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {		
+
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-        		
+
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			
+
         			if (funcion.equals("nuevo")){
             			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
-            			resp ="valido";
         			}else{
-    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
-    						resp ="valido";
-            			}else{
-            				resp ="sesionCerrada";
+    					if (!(boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){    					
+            				throw new ExcepcionSigefirrhh("sesionCerrada");
             			}
-        			}	
-            			
+        			}
+
         		}else{
-        			resp ="sinPermiso";
+        			throw new ExcepcionSigefirrhh("sinPermiso");
         		}
-        		
+
         	}else{
-        		resp ="sesionCerrada";
+        		throw new ExcepcionSigefirrhh("sesionCerrada");
 	        }	        	
         }else{
-        	resp ="sesionCerrada";
+        	throw new ExcepcionSigefirrhh("sesionCerrada");
         }  
-		
-		return resp;
+
+		return true;
 	}
 	
 }

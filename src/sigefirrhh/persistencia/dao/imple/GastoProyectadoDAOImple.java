@@ -18,29 +18,27 @@ public class GastoProyectadoDAOImple extends GenericDAOImplHibernate implements 
         super();
     }
     
-    
-    public List<GastoProyectado> proyectarGasto(CriterioBusqueda parametros) throws PSQLException, Exception, SQLException,NestedSQLException {
-    	    	
-    	if (parametros.getAno() == null ){
-    		throw new Exception("Favor llenar el ano");    	
-    	}    	
-    	if (parametros.getCodFrecuenPago() == null ){
-   		 	throw new Exception("Favor llenar la frecuencia de pago");    	
-    	}    	
-    	if (parametros.getMesesCalcu() == null ){
-    		throw new Exception("Favor llenar los meses a calcular");      		 
+    public List<GastoProyectado> proyectarGasto(CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException,NestedSQLException {
+    		
+		if (criterioBusqueda.getAno().size() < 1 ) {
+    		throw new RuntimeException("Favor llenar el ano");    	
     	}
-    	if (parametros.getSemaCalcu() == null ){
-    		throw new Exception("Favor llenar las semanas a calcular");       
-       	}
-    	
-    	if (parametros.getQuinceCalcu() == null ){
-    		throw new Exception("Favor llenar las quincenas a calcular");       	
+		if (criterioBusqueda.getCodFrecuenPago().size() < 1 ) {    	
+   		 	throw new RuntimeException("Favor llenar la frecuencia de pago");    	
+    	}    	
+    	if (criterioBusqueda.getMesesCalcu().size() < 1 ) {    	
+    		throw new RuntimeException("Favor llenar los meses a calcular");      		 
+    	}
+    	if (criterioBusqueda.getSemaCalcu().size() < 1 ) {    	
+    		throw new RuntimeException("Favor llenar las semanas a calcular");       
+       	}    	
+    	if (criterioBusqueda.getQuinceCalcu().size() < 1 ) {    	
+    		throw new RuntimeException("Favor llenar las quincenas a calcular");       	
        	}
     	
     	List<GastoProyectado> record =null;
     	
-		record = (List<GastoProyectado>) getSqlMapClient().queryForList("gasto_proyectado", parametros);		
+		record = (List<GastoProyectado>) getSqlMapClient().queryForList("gasto_proyectado", criterioBusqueda);		
     	
         return record;
     }

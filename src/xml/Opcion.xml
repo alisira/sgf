@@ -129,7 +129,7 @@
 				</iterate>
 			</isNotNull>
 				
-		ORDER BY o.descripcion, e.ano
+		ORDER BY o.descripcion, e.ano, e.expediente
    </select>
    
    <select id="buscarOpcionUsadoenExpediente" resultMap="Opcion" parameterClass="sigefirrhh.persistencia.modelo.CriterioBusqueda" >

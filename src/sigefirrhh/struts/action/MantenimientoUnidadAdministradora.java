@@ -24,6 +24,7 @@ import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
+import sigefirrhh.sistema.ExcepcionSigefirrhh;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.UnidadAdministradoraForm;
 import sigefirrhh.struts.addons.Comun;
@@ -42,16 +43,15 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 	HttpSession session = null;
 	String fwd = null;	
 	PrintWriter out = null;
-	Object[] error= null;
 	SqlMapClient SMC = null;
 	MessageResources messageResources = null;
     
 	public ActionForward buscar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)throws Exception {
     	    	
     	HttpSession session = request.getSession();    	
-    	UnidadAdministradoraForm forma = null;		
-		error= new Object[2];	
-		messageResources = getResources(request);		
+    	UnidadAdministradoraForm forma = null;
+		messageResources = getResources(request);
+		String errorTem = null;//Variable que guarda temporalmente el mensaje de excepcion en el caso
 		
 		try {			
 			
@@ -62,10 +62,9 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        out.write("<root>");	    
 	        
-	        CriterioBusqueda criterio = new CriterioBusqueda();
-	        
-	        String resp = validarAcceso(request, "nuevo");
-    		if (resp == "valido"){
+	        CriterioBusqueda criterio = new CriterioBusqueda();	        
+	      
+    		if (validarAcceso(request, "nuevo")){
 			        
     	        forma = (UnidadAdministradoraForm) form;
     				    			
@@ -106,71 +105,54 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
     					//System.out.println(i.getCedula() + " " + i.getNombre() + " " + i.getApellido());
     	        	}
     	        }else{
-    	        	error[0] = (String) "sinResultados";
-    	        }
-	        	
-	        }else{
-	        	error[0] = resp;
+    	        	throw new ExcepcionSigefirrhh("sinResultados");
+    	        }	      
 	        }
 	        
 		}catch (NullPointerException e){
 			
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias t1";
-			error[1]= e;
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			errorTem = messageResources.getMessage("errors.aplicacion");    		
 						
 		} catch (NestedSQLException e) {
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias t2";
-			error[1]= e;
-						
-		} catch (PSQLException e) {
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias t3";
-			error[1]= e;
-						
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			errorTem = messageResources.getMessage("errors.comunicacion");
+			
+		} catch (PSQLException e) {				
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
+			
 		} catch (SQLException e) {
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias t4";
-			error[1]= e;
-						
-		} catch (Exception e) {
-			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias t5";
-			error[1]= e;
-				
-		} finally{	
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
 			
-		
-			if (((String) error[0]) != null){
-				if (error[1] != null){
-					System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-					((Throwable) error[1]).printStackTrace();
-					out.write("<error>");
-		        	out.write(error[0].toString());
-					out.write("</error>");
-				}else{
-					//System.out.println("Incidencia: " + this.getClass().getName() + " a las " + hora);
-					//System.out.println(error[0]);
-				}
+		} catch (ExcepcionSigefirrhh e) {			
+			
+			if (e.toString().equals("sesionCerrada")){
+				errorTem = messageResources.getMessage("errors.sesionCerrada");
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+	        	errorTem = messageResources.getMessage("errors.datosIncompletos");				
+	        }else if(e.toString().equals("sinResultados")){
+	        	errorTem = messageResources.getMessage("errors.sinResultados");				
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();			
+			errorTem = messageResources.getMessage("errors.aplicacion");
 
-				out.write("<error>");
-				
-				if (error[0].equals("sesionCerrada")){
-					out.write(messageResources.getMessage("errors.sesionCerrada"));
-					fwd = "sesionCerrada";
-		        }else if(error[0].equals("datosIncompletos")){
-		        	out.write(messageResources.getMessage("errors.datosIncompletos"));
-					fwd = "datosIncompletos";
-		        }else if(error[0].equals("errorcomunicacion")){
-		        	out.write(messageResources.getMessage("errors.comunicacion"));
-					fwd = "error";
-	        	}else if(error[0].equals("sinResultados")){
-	        		out.write(messageResources.getMessage("errors.sinResultados"));
-	        		fwd = "sinResultados";
-	        	}else if(error[0].equals("errorAplicacion")){
-	        		out.write(messageResources.getMessage("errors.aplicacion"));
-	        		fwd = "error";
-		        }
-				
-				out.write("</error>");
+		} finally{
+
+			if (errorTem != null){
+				out.write("<error>");        	
+				out.write(errorTem);
+				out.write("</error>");		
 			}
-			
+
 			out.write("</root>");
 			out.flush();
 		}
@@ -180,39 +162,35 @@ public class MantenimientoUnidadAdministradora extends DispatchAction  implement
     }	
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) {
-		String resp= null;
-		
+	public boolean validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {		
+
 		HttpSession session = request.getSession();
         if (session.getAttribute("loginSession") != null){
         	if (((LoginSession) session.getAttribute("loginSession")).isValid()){
-        		
+
         		ValidadorSesion vs = new ValidadorSesion();
         		if (vs.validarPermiso(request)){
-        			
+
         			if (funcion.equals("nuevo")){
             			request.getSession().setAttribute(this.getClass().getName() +"Bean", true);
-            			resp ="valido";
         			}else{
-    					if ((boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){
-    						resp ="valido";
-            			}else{
-            				resp ="sesionCerrada";
+    					if (!(boolean) request.getSession().getAttribute(this.getClass().getName() +"Bean")){    					
+            				throw new ExcepcionSigefirrhh("sesionCerrada");
             			}
-        			}	
-            			
+        			}
+
         		}else{
-        			resp ="sinPermiso";
+        			throw new ExcepcionSigefirrhh("sinPermiso");
         		}
-        		
+
         	}else{
-        		resp ="sesionCerrada";
+        		throw new ExcepcionSigefirrhh("sesionCerrada");
 	        }	        	
         }else{
-        	resp ="sesionCerrada";
+        	throw new ExcepcionSigefirrhh("sesionCerrada");
         }  
-		
-		return resp;
+
+		return true;
 	}
 	
 }
