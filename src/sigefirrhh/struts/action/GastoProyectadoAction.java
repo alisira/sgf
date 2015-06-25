@@ -12,6 +12,7 @@ import sigecof.clDisponibilidadPresupuestaria;
 */
 
 
+
 import sigefirrhh.base.estructura.Organismo;
 
 
@@ -21,6 +22,7 @@ import sigefirrhh.persistencia.dao.GastoProyectadoDAO;
 import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
 import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.sistema.ExcepcionSigefirrhh;
 import sigefirrhh.sistema.ValidadorSesion;
 import sigefirrhh.struts.actionForm.GastoProyectadoForm;
 import sigefirrhh.struts.addons.Comun;
@@ -154,7 +156,23 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 			error[1]= e;
 		} catch (SQLException e) {
 			error[0] = (String) "SQLException Error de comunicacion con el servidor, comuniquese con el administrador, disculpe las molestias";
-			error[1]= e;			
+			error[1]= e;
+		} catch (ExcepcionSigefirrhh e) {
+			
+			if (error[0].equals("sesionCerrada")){			        	
+	        	out.write("Por razones de seguridad su sesion ha sido cerrada, favor iniciar sesion desde pagina inicial, gracias" );
+				fwd = "sesionCerrada";
+	        }else if(error[0].equals("datosIncompletos")){
+	        	out.write("Datos Incompletos, favor corregir, gracias" );
+				fwd = "datosIncompletos";
+	        }else if(error[0].equals("sinResultados")){			        	
+	        	out.write("Busqueda no Obtuvo resultados, vuelva a intentar");						
+				fwd = "sinResultados";
+	        }
+			
+			e.to
+			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias";
+			error[1]= e;
 		} catch (Exception e) {
 			error[0] = (String) "Error de aplicacion, comuniquese con el administrador, disculpe las molestias";
 			error[1]= e;
@@ -199,7 +217,7 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
 	}
 	
 	@Override
-	public String validarAcceso(HttpServletRequest request, String funcion) {
+	public String validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {
 		String resp= null;
 
 		HttpSession session = request.getSession();
@@ -217,6 +235,7 @@ public class GastoProyectadoAction extends Action  implements Serializable, Comu
     						resp ="valido";
             			}else{
             				resp ="sesionCerrada";
+            				throw new ExcepcionSigefirrhh("sesionCerrada");
             			}
         			}
 

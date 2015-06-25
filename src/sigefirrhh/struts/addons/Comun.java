@@ -6,9 +6,11 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sigefirrhh.sistema.ExcepcionSigefirrhh;
+
 public interface Comun {
 	
-	public String validarAcceso(HttpServletRequest request, String funcion);
+	public String validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh;
 	// Obtenemos la hora
 	Locale l = new Locale("es","VE");
 	Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Caracas"),l);
