@@ -13,9 +13,12 @@ import sigecof.CompromisoInicialDTO;
 */
 
 
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
+import sigefirrhh.persistencia.modelo.Expediente;
+import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.persistencia.modelo.Opcion;
 import sigefirrhh.persistencia.modelo.UnidadAdministradora;
 import sigefirrhh.login.LoginSession;
@@ -23,11 +26,13 @@ import sigefirrhh.persistencia.modelo.TipoDocumento;
 import sigefirrhh.persistencia.dao.CompromisoInicialDAO;
 import sigefirrhh.persistencia.dao.CompromisoInicialDetalleDAO;
 import sigefirrhh.persistencia.dao.ExpedienteDAO;
+import sigefirrhh.persistencia.dao.GastoProyectadoDAO;
 import sigefirrhh.persistencia.dao.OpcionDAO;
 import sigefirrhh.persistencia.dao.UnidadAdministradoraDAO;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
+import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
 import sigefirrhh.persistencia.dao.imple.OpcionDAOImple;
 import sigefirrhh.persistencia.dao.imple.TipoDocumentoDAOImple;
 import sigefirrhh.persistencia.dao.imple.UnidadAdministradoraDAOImple;
@@ -45,6 +50,7 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import sigefirrhh.base.estructura.Organismo;
@@ -289,6 +295,152 @@ public class RegularizacionCompromisoAction extends DispatchAction implements Se
 		return mapping.findForward(fwd);	
 		//fwd = new ActionForward("AprobarReg", "/imprimirResumenInicial.do?expediente=" + expeResul +"&ano="+ano, verdadero);		
 	}	
+	
+public ActionForward guardar(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {		
+		
+		messageResources = getResources(request);
+		
+		try {
+
+			session = request.getSession();			
+	        Organismo org = new Organismo();
+
+			CriterioBusqueda criterio = new CriterioBusqueda();
+			
+    		if (validarAcceso(request, Thread.currentThread().getStackTrace()[1].getMethodName())){
+					
+				org = ((LoginSession) session.getAttribute("loginSession")).getOrganismo();
+				RegularizacionCompromisoForm forma = (RegularizacionCompromisoForm ) form;
+
+				Integer expeResul = 0;
+				Date fecha = new Date();
+
+				int idUsuario = 1;
+
+				criterio.addIdOrganismo((int) org.getIdOrganismo());
+				criterio.addAno(ano);
+ 		        	
+ 		        	Expediente expediente = new Expediente();
+ 		        	expediente.setExpediente(0);
+					expediente.setFechaRegistro(fecha);
+					expediente.setAno(ano);
+					expediente.setEstatus(0);
+					expediente.setIdUsuario(idUsuario);
+					expediente.setObservacion(formaPeti.getObservacion());
+					expediente.setIdOrganismo((int) org.getIdOrganismo());
+					
+					ValidadorSesion vs = new ValidadorSesion();
+					Integer idOpcion = vs.getIdOpcion(request);
+					expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
+					ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
+					expeResul = (Integer) expedienteDAO.guardar(expediente);					
+ 		        	
+ 		        	Double montoTotal = 0.0;
+					
+					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
+					CompromisoInicial compromisoInicial = new CompromisoInicial();
+					compromisoInicial = (CompromisoInicial ) compromisoInicial.llenarBean(compromisoInicial,formaPeti);						
+					compromisoInicial.setAno(ano);
+					compromisoInicial.setExpediente(expeResul);
+					compromisoInicial.setEstatus(0);
+					compromisoInicial.setFechaRegistro(fecha);
+					compromisoInicial.setTarea(1);
+					compromisoInicial.setIdCuentadante(1);
+					compromisoInicial.setIdOrganismo((int) org.getIdOrganismo());						
+					compromisoInicial.setCompromiso(9999);
+					compromisoInicial.setIdTipoPago(1);
+					compromisoInicial.setIdUnidadAdministradora(idUnidadAdministadora);
+					
+					Integer idCompromisoInicial;
+					idCompromisoInicial = (Integer) compromisoInicialDAO.guardar(compromisoInicial);
+					
+					CompromisoInicialDetalleDAO compromisoInicialDetalleDAO = new CompromisoInicialDetalleDAOImple();
+					CompromisoInicialDetalle compromisoInicialDetalle= new CompromisoInicialDetalle();
+					
+					//Arreglos temporales que seran metidos en el form temporales 
+					Integer[] ff = new Integer [listaGastoProyec.size()];
+					Integer[] codCatePresu = new Integer [listaGastoProyec.size()];
+					Integer[] codUel = new Integer [listaGastoProyec.size()];
+					String[] denoUel = new String [listaGastoProyec.size()];
+					String[] partida = new String [listaGastoProyec.size()];
+					String[] denoPartida = new String [listaGastoProyec.size()];
+					String[] mensajeSigecof = new String [listaGastoProyec.size()];
+					Double[] dispo = new Double [listaGastoProyec.size()];
+					Double[] monto = new Double [listaGastoProyec.size()];
+					
+					for (int i = 0;i < listaGastoProyec.size(); i++){
+						
+						//aqui agrego las clases del webservice y hago la llamada a la disponibilidad presupuestaria
+						double dispoPresu = 3000000.0;//
+ 		        		
+						if (dispoPresu > listaGastoProyec.get(i).getMonto()){
+							compromisoInicialDetalle.setIdCompromisoInicial(idCompromisoInicial);
+	 		        		compromisoInicialDetalle.setIdPartidaUelEspecifica(listaGastoProyec.get(i).getIdPartidaUelEspecifica());
+	 		        		compromisoInicialDetalle.setFf(1);
+	 		        		compromisoInicialDetalle.setMonto(listaGastoProyec.get(i).getMonto());
+	 		        		
+	 		        		expeResul = (Integer) compromisoInicialDetalleDAO.guardar(compromisoInicialDetalle);
+	 		        		if (expeResul.equals(Integer.valueOf(0)) || expeResul == null){
+	 							throw new RuntimeException("Error Desconocido en ResumenNominaInicialAction");
+	 						}
+	 		        		mensajeSigecof[i]="Imputacion guardada exitosamente";
+						}else{
+							mensajeSigecof[i]="Imputacion no posee imputacion presupuestaria";
+						}
+						
+						ff[i]= listaGastoProyec.get(i).getFf();
+						codCatePresu[i]= (listaGastoProyec.get(i).getCodCatePresu());
+						codUel[i]= (listaGastoProyec.get(i).getCodUnidadEjecutora() );
+					    denoUel[i]= (listaGastoProyec.get(i).getDenoUnidadEjecutora());
+					    partida[i]= (listaGastoProyec.get(i).getCodPartida());
+					    denoPartida[i]= (listaGastoProyec.get(i).getDenoPartida());
+					    dispo[i]= (dispoPresu);
+					    monto[i]= (listaGastoProyec.get(i).getMonto());
+					    montoTotal += listaGastoProyec.get(i).getMonto();
+ 		        	}
+					
+					formaPeti.setFf(ff);
+				    formaPeti.setCodCatePresu(codCatePresu);
+				    formaPeti.setCodUel(codUel);
+				    formaPeti.setDenoUel(denoUel);
+				    formaPeti.setPartida(partida);
+				    formaPeti.setDenoPartida(denoPartida);
+				    formaPeti.setDispo(dispo);
+				    formaPeti.setMonto(monto);							
+					formaPeti.setExpediente(expeResul);
+					formaPeti.setFechaRegistro(fecha);
+					formaPeti.setMensajeSigecof(mensajeSigecof);
+ 		        	
+ 		        	formaPeti.setTotalResumen(montoTotal);
+ 		        	request.getSession().setAttribute(this.getClass().getName() +"Bean", false);
+ 		        	fwd = "apruebaGuardar";
+ 		        	
+ 		       
+	        }		
+    		
+		} catch (ExcepcionSigefirrhh e) {
+			
+			if (e.toString().equals("sesionCerrada")){				
+				fwd = e.toString();	
+	        }else if(e.toString().equals("datosIncompletos")){	        	
+				fwd = "datosIncompletos";
+	        }else if(e.toString().equals("sinResultados")){
+				fwd = "sinResultados";
+	        }else if (e.toString().equals("sinPermiso")){					
+				fwd = "sinPermiso";
+	        }			
+			
+		} catch (Exception e) {			
+			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
+			e.printStackTrace();
+			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
+    		fwd = "respuestaProceso";				
+		
+		}
+		
+		return mapping.findForward(fwd);
+		
+	}
 	
 	@Override
 	public boolean validarAcceso(HttpServletRequest request, String funcion) throws ExcepcionSigefirrhh {		

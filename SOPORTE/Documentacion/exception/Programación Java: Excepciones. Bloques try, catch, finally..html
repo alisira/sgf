@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+<html style="height: 100%;" class="v2" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><head><style type="text/css">
+.barrademenu {
+margin: 0;
+padding: 0;
+float: left; width: 106%;
+font-family: Tahoma;
+font-size:20px;
+font-weight: normal;
+color: #0000FF;
+margin-top: 0px;
+border-bottom: 2px solid black;
+border-top: 2px solid black;
+background: #d9ead3;
+}
+.barrademenu li {display: inline;
+color:#0000ff;
+}
+.barrademenu li a, .solidblockmenu li a:visited {
+float: left;
+padding: 4px 15px;
+text-decoration: none;
+color: white;
+border-right: 2px solid black;
+outline: none;
+background: #d9ead3;
+}
+.barrademenu li a:hover {
+color: #0000ff;
+background: #d9ead3;
+outline: none;
+}
+</style>
+
+<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+<meta content="width=1100" name="viewport">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/ga.js" async="" type="text/javascript"></script><script async="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cbgapi.loaded_2"></script><script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/ca-pub-3431641712419274.js" type="text/javascript" async=""></script><script async="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cbgapi.loaded_1"></script><script async="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cbgapi.loaded_0"></script><script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/all.html" id="facebook-jssdk"></script><script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://puntocomnoesunlenguaje.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Programación Java - Atom" href="http://puntocomnoesunlenguaje.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Programación Java - RSS" href="http://puntocomnoesunlenguaje.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Programación Java - Atom" href="http://www.blogger.com/feeds/3756682660522124367/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Programación Java - Atom" href="http://puntocomnoesunlenguaje.blogspot.com/feeds/3399081622761750118/comments/default">
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/2235482369-ieretrofit.js"></script>
+<![endif]-->
+<link href="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-excepciones-ejemplos.jpg" rel="image_src">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Programación Java: Excepciones. Bloques try, catch, finally.</title>
+<link type="text/css" rel="stylesheet" href="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/16153472-css_bundle_v2.html">
+<link type="text/css" rel="stylesheet" href="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/authorization.html">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Simple
+Designer: Josh Peterson
+URL:      www.noaesthetic.com
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="keycolor" description="Main Color" type="color" default="#66bbdd"/>
+<Group description="Page Text" selector="body">
+<Variable name="body.font" description="Font" type="font"
+default="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="body.text.color" description="Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Backgrounds" selector=".body-fauxcolumns-outer">
+<Variable name="body.background.color" description="Outer Background" type="color" default="#66bbdd"/>
+<Variable name="content.background.color" description="Main Background" type="color" default="#ffffff"/>
+<Variable name="header.background.color" description="Header Background" type="color" default="transparent"/>
+</Group>
+<Group description="Links" selector=".main-outer">
+<Variable name="link.color" description="Link Color" type="color" default="#2288bb"/>
+<Variable name="link.visited.color" description="Visited Color" type="color" default="#888888"/>
+<Variable name="link.hover.color" description="Hover Color" type="color" default="#33aaff"/>
+</Group>
+<Group description="Blog Title" selector=".header h1">
+<Variable name="header.font" description="Font" type="font"
+default="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="header.text.color" description="Title Color" type="color" default="#3399bb" />
+</Group>
+<Group description="Blog Description" selector=".header .description">
+<Variable name="description.text.color" description="Description Color" type="color"
+default="#777777" />
+</Group>
+<Group description="Tabs Text" selector=".tabs-inner .widget li a">
+<Variable name="tabs.font" description="Font" type="font"
+default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="tabs.text.color" description="Text Color" type="color" default="#999999"/>
+<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000"/>
+</Group>
+<Group description="Tabs Background" selector=".tabs-outer .PageList">
+<Variable name="tabs.background.color" description="Background Color" type="color" default="#f5f5f5"/>
+<Variable name="tabs.selected.background.color" description="Selected Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Post Title" selector="h3.post-title, .comments h4">
+<Variable name="post.title.font" description="Font" type="font"
+default="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+</Group>
+<Group description="Date Header" selector=".date-header">
+<Variable name="date.header.color" description="Text Color" type="color"
+default="#222222"/>
+<Variable name="date.header.background.color" description="Background Color" type="color"
+default="transparent"/>
+</Group>
+<Group description="Post Footer" selector=".post-footer">
+<Variable name="post.footer.text.color" description="Text Color" type="color" default="#666666"/>
+<Variable name="post.footer.background.color" description="Background Color" type="color"
+default="#f9f9f9"/>
+<Variable name="post.footer.border.color" description="Shadow Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Gadgets" selector="h2">
+<Variable name="widget.title.font" description="Title Font" type="font"
+default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000"/>
+<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#999999"/>
+</Group>
+<Group description="Images" selector=".main-inner">
+<Variable name="image.background.color" description="Background Color" type="color" default="#ffffff"/>
+<Variable name="image.border.color" description="Border Color" type="color" default="#eeeeee"/>
+<Variable name="image.text.color" description="Caption Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Accents" selector=".content-inner">
+<Variable name="body.rule.color" description="Separator Line Color" type="color" default="#eeeeee"/>
+<Variable name="tabs.border.color" description="Tabs Border Color" type="color" default="#eeeeee"/>
+</Group>
+<Variable name="body.background" description="Body Background" type="background"
+color="#ffffff" default="$(color) none repeat scroll top left"/>
+<Variable name="body.background.override" description="Body Background Override" type="string" default=""/>
+<Variable name="body.background.gradient.cap" description="Body Gradient Cap" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="body.background.gradient.tile" description="Body Gradient Tile" type="url"
+default="url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png)"/>
+<Variable name="content.background.color.selector" description="Content Background Color Selector" type="string" default=".content-inner"/>
+<Variable name="content.padding" description="Content Padding" type="length" default="10px"/>
+<Variable name="content.padding.horizontal" description="Content Horizontal Padding" type="length" default="0px"/>
+<Variable name="content.shadow.spread" description="Content Shadow Spread" type="length" default="40px"/>
+<Variable name="content.shadow.spread.webkit" description="Content Shadow Spread (WebKit)" type="length" default="5px"/>
+<Variable name="content.shadow.spread.ie" description="Content Shadow Spread (IE)" type="length" default="10px"/>
+<Variable name="main.border.width" description="Main Border Width" type="length" default="0"/>
+<Variable name="header.background.gradient" description="Header Gradient" type="url" default="none"/>
+<Variable name="header.shadow.offset.left" description="Header Shadow Offset Left" type="length" default="-1px"/>
+<Variable name="header.shadow.offset.top" description="Header Shadow Offset Top" type="length" default="-1px"/>
+<Variable name="header.shadow.spread" description="Header Shadow Spread" type="length" default="1px"/>
+<Variable name="header.padding" description="Header Padding" type="length" default="30px"/>
+<Variable name="header.border.size" description="Header Border Size" type="length" default="1px"/>
+<Variable name="header.bottom.border.size" description="Header Bottom Border Size" type="length" default="1px"/>
+<Variable name="header.border.horizontalsize" description="Header Horizontal Border Size" type="length" default="0"/>
+<Variable name="description.text.size" description="Description Text Size" type="string" default="100%"/>
+<Variable name="tabs.margin.top" description="Tabs Margin Top" type="length" default="0" />
+<Variable name="tabs.margin.side" description="Tabs Side Margin" type="length" default="30px" />
+<Variable name="tabs.background.gradient" description="Tabs Background Gradient" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="tabs.border.width" description="Tabs Border Width" type="length" default="1px"/>
+<Variable name="tabs.bevel.border.width" description="Tabs Bevel Border Width" type="length" default="1px"/>
+<Variable name="date.header.padding" description="Date Header Padding" type="string" default="inherit"/>
+<Variable name="date.header.letterspacing" description="Date Header Letter Spacing" type="string" default="inherit"/>
+<Variable name="date.header.margin" description="Date Header Margin" type="string" default="inherit"/>
+<Variable name="post.margin.bottom" description="Post Bottom Margin" type="length" default="25px"/>
+<Variable name="image.border.small.size" description="Image Border Small Size" type="length" default="2px"/>
+<Variable name="image.border.large.size" description="Image Border Large Size" type="length" default="5px"/>
+<Variable name="page.width.selector" description="Page Width Selector" type="string" default=".region-inner"/>
+<Variable name="page.width" description="Page Width" type="string" default="auto"/>
+<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px"/>
+<Variable name="main.padding" description="Main Padding" type="length" default="15px"/>
+<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px"/>
+<Variable name="main.padding.bottom" description="Main Padding Bottom" type="length" default="30px"/>
+<Variable name="paging.background"
+color="#ffffff"
+description="Background of blog paging area" type="background"
+default="transparent none no-repeat scroll top center"/>
+<Variable name="footer.bevel" description="Bevel border length of footer" type="length" default="0"/>
+<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
+default="transparent none repeat scroll top left"/>
+<Variable name="mobile.background.size" description="Mobile Background Size" type="string" default="auto"/>
+<Variable name="mobile.button.color" description="Mobile Button Color" type="color" default="#ffffff" />
+<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left"/>
+<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right"/>
+*/
+/* Content
+----------------------------------------------- */
+body, .body-fauxcolumn-outer {
+font: normal normal 12px Verdana, Geneva, sans-serif;
+color: #222222;
+background: #667edd none repeat scroll top left;
+padding: 0 0px 0px 0px;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+a:link {
+text-decoration:none;
+color: #213abb;
+}
+a:visited {
+text-decoration:none;
+color: #888888;
+}
+a:hover {
+text-decoration:underline;
+color: #3243ff;
+}
+.body-fauxcolumn-outer .fauxcolumn-inner {
+background: transparent url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png) repeat scroll top left;
+_background-image: none;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 400px;
+width: 100%;
+background: #667edd none repeat scroll top left;
+}
+.body-fauxcolumn-outer .cap-top .cap-left {
+width: 100%;
+background: transparent url(//www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll top left;
+_background-image: none;
+}
+.content-outer {
+-moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 10px #333333;
+box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+margin-bottom: 1px;
+}
+.content-inner {
+padding: 10px 10px;
+}
+.content-inner {
+background-color: #ffffff;
+}
+/* Header
+----------------------------------------------- */
+.header {width:77%; float: left; margin:0 auto 1%;}
+.header2 {width:23%; float: left; margin:0 auto 1%;}
+.header-outer {
+background: #ffffff none repeat-x scroll 0 -400px;
+_background-image: none;
+height:110px; /*alto asignado cabecera*/
+}
+.Header h1 {
+font: normal normal 38px Verdana, Geneva, sans-serif;
+color: #3254bb;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, .2);
+}
+.Header h1 a {
+color: #3254bb;
+}
+.Header .description {
+font-size: 100%;
+color: #20124d;
+}
+.header-inner .Header .titlewrapper {
+padding: 0px 10px;
+}
+.header-inner .Header .descriptionwrapper {
+padding: 0px 10px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section:first-child {
+border-top: 1px solid #eeeeee;
+}
+.tabs-inner .section:first-child ul {
+margin-top: -1px;
+border-top: 1px solid #eeeeee;
+border-left: 0 solid #eeeeee;
+border-right: 0 solid #eeeeee;
+}
+.tabs-inner .widget ul {
+background: #f5f5f5 url(//www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll 0 -800px;
+_background-image: none;
+border-bottom: 1px solid #eeeeee;
+margin-top: 0;
+margin-left: -30px;
+margin-right: -30px;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .6em 1em;
+font: normal 14px Verdana, Geneva, sans-serif;
+color: #363752;
+border-left: 1px solid #ffffff;
+border-right: 1px solid #eeeeee;
+}
+.tabs-inner .widget li:first-child a {
+border-left: none;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #000000;
+background-color: #eeeeee;
+text-decoration: none;
+}
+/* Columns
+----------------------------------------------- */
+.main-outer {
+border-top: 0 solid #eeeeee;
+}
+.fauxcolumn-left-outer .fauxcolumn-inner {
+border-right: 1px solid #eeeeee;
+}
+.fauxcolumn-right-outer .fauxcolumn-inner {
+border-left: 1px solid #eeeeee;
+width: 100%;
+}
+.main-inner .column-center-inner,
+.main-inner .column-left-inner,
+.main-inner .column-right-inner {
+padding: 0 2px;
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+margin: 0 0 1em 0;
+font: normal bold 11px Verdana, Geneva, sans-serif;
+color: #170b37;
+text-transform: uppercase;
+}
+/* Widgets
+----------------------------------------------- */
+.widget .zippy {
+color: #999999;
+text-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
+}
+.widget .popular-posts ul {
+list-style: none;
+}
+/* Posts
+----------------------------------------------- */
+.date-header span {
+background-color: transparent;
+color: #222222;
+padding: inherit;
+letter-spacing: inherit;
+margin: inherit;
+}
+.main-inner {
+padding-top: 0px;
+padding-bottom: 30px;
+}
+.main-inner .column-center-inner {
+padding: 0 5px;
+}
+.main-inner .column-center-inner .section {
+margin: 0 5px;
+}
+.post {
+margin: 0 0 25px 0;
+}
+h3.post-title, .comments h4 {
+font: normal normal 22px Verdana, Geneva, sans-serif;
+margin: .75em 0 0;
+}
+.post-body {
+font-size: 110%;
+line-height: 1.4;
+position: relative;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 2px;
+background: #ffffff;
+border: 1px solid #eeeeee;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 5px;
+}
+.post-body .tr-caption-container {
+color: #222222;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+.post-header {
+margin: 0 0 1.5em;
+line-height: 1.6;
+font-size: 90%;
+}
+.post-footer {
+margin: 20px -2px 0;
+padding: 5px 10px;
+color: #666666;
+background-color: #f9f9f9;
+border-bottom: 1px solid #eeeeee;
+line-height: 1.6;
+font-size: 90%;
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: 1px solid #eeeeee;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+#comments .avatar-image-container img {
+border: 1px solid #eeeeee;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #999999;
+border-bottom: 1px solid #999999;
+}
+.comments .comment-thread.inline-thread {
+background-color: #f9f9f9;
+}
+.comments .continue {
+border-top: 2px solid #999999;
+}
+/* Accents
+---------------------------------------------- */
+.section-columns td.columns-cell {
+border-left: 1px solid #eeeeee;
+}
+.blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.blog-pager-older-link, .home-link,
+.blog-pager-newer-link {
+background-color: #ffffff;
+padding: 5px;
+}
+.footer-outer {
+border-top: 0 dashed #bbbbbb;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+.mobile .body-fauxcolumn-outer .cap-top {
+background-size: 100% auto;
+}
+.mobile .content-outer {
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+padding: 0 40px;
+}
+body.mobile .AdSense {
+margin: 0 -40px;
+}
+.mobile .tabs-inner .widget ul {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .post {
+margin: 0;
+}
+.mobile .main-inner .column-center-inner .section {
+margin: 0;
+}
+.mobile .date-header span {
+padding: 0.1em 10px;
+margin: 0 -10px;
+}
+.mobile h3.post-title {
+margin: 0;
+}
+.mobile .blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.mobile .footer-outer {
+border-top: none;
+}
+.mobile .main-inner, .mobile .footer-inner {
+background-color: #ffffff;
+}
+.mobile-index-contents {
+color: #222222;
+}
+.mobile-link-button {
+background-color: #213abb;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .section:first-child {
+border-top: none;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background-color: transparent;
+color: #38761d;
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #eeeeee;
+}
+
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body {
+min-width: 1005px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 1005px;
+max-width: 1005px;
+_width: 1005px;
+}
+.main-inner .columns {
+padding-left: 0;
+padding-right: 230px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0;
+right: 230px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0") -
+parseInt("230px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 230px;
+}
+.main-inner .column-left-outer {
+width: 0;
+right: 100%;
+margin-left: -0;
+}
+.main-inner .column-right-outer {
+width: 230px;
+margin-right: -230px;
+margin-top: 10px;
+margin-left: 0px;
+text-align: justify;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+--></style>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/google_top_exp.js" type="text/javascript"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0} </style><link href="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/translateelement.css" charset="UTF-8" rel="stylesheet" type="text/css"><script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/main_es.js" charset="UTF-8" type="text/javascript"></script><script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/element_main.js" charset="UTF-8" type="text/javascript"></script></head>
+<body style="position: relative; min-height: 100%; top: 0px;" class="">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/navbar.xhtml" name="navbar-iframe" id="navbar-iframe" vspace="0" tabindex="0" style="" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<script gapi_processed="true" type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\0753756682660522124367\46blogName\75Programaci%C3%B3n+Java\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75//puntocomnoesunlenguaje.blogspot.com/search\46blogLocale\75es\46v\0752\46homepageUrl\75http://puntocomnoesunlenguaje.blogspot.com/\46targetPostID\0753399081622761750118\46blogPostOrPageUrl\75http://puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html\46vt\75-8599435709074590141',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div class="body-fauxcolumns">
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content">
+<div class="content-fauxcolumns">
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content-outer">
+<div class="content-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class="content-inner">
+<header>
+<div class="header-outer">
+<div class="header-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://puntocomnoesunlenguaje.blogspot.com/">Programación Java</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Tutorial Java. 
+Aprende a programar con Java desde cero.</span></p>
+</div>
+</div>
+</div></div>
+<div class="header2 section" id="header2"><div class="widget HTML" id="HTML5">
+<div class="widget-content">
+<div style="margin: 15px 0px 5px -230px;">
+<form action="http://www.google.es" id="cse-search-box">
+  <div>
+    <input name="cx" value="partner-pub-3431641712419274:9092199080" type="hidden">
+    <input name="ie" value="UTF-8" type="hidden">
+    <input style="background: url(&quot;http://cse.google.es/cse/intl/es/images/google_custom_search_watermark.gif&quot;) no-repeat scroll left center rgb(255, 255, 255);" name="q" size="45" type="text">
+    <input name="sa" value="Buscar" type="submit">
+  </div>
+<input value="puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html" name="siteurl" type="hidden"><input name="ref" type="hidden"><input name="ss" type="hidden"></form>
+
+<script type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/brand"></script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=HTML&amp;widgetId=HTML5&amp;action=editWidget&amp;sectionId=header2" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML5"));' target="configHTML5" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+<div style="clear: both;"></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</header>
+<div class="tabs-outer">
+<div class="tabs-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs section" id="crosscol"><div class="widget PageList" id="PageList1">
+<h2>Páginas</h2>
+<div class="widget-content">
+<ul>
+<li><a href="http://puntocomnoesunlenguaje.blogspot.com/">Última entrada</a></li>
+<li><a href="http://puntocomnoesunlenguaje.blogspot.com/p/teoria_7.html">Teoría</a></li>
+<li><a href="http://puntocomnoesunlenguaje.blogspot.com/p/ejercicios.html">Ejercicios</a></li>
+<li><a href="http://puntocomnoesunlenguaje.blogspot.com/p/blog-page.html">Ejercicios POO</a></li>
+<li><a href="http://ejercicioscpp.blogspot.com/p/teoria.html">C++</a></li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=PageList&amp;widgetId=PageList1&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("PageList1"));' target="configPageList1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+<div class="tabs section" id="crosscol-overflow"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="main-outer">
+<div class="main-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<a name="3399081622761750118"></a>
+<h3 class="post-title entry-title" itemprop="name">
+Excepciones. Bloques try, catch, finally.
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-3399081622761750118" itemprop="articleBody">
+<div style="margin: 5px 5px 5px -9px;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3431641712419274";
+google_ad_host = "pub-1556223355139109";
+/* Enlaces Cabecera */
+google_ad_slot = "4016197882";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/show_ads.js">
+</script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="728"></iframe></ins></ins>
+</div>
+<div style="background: #ffffff; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Una </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>excepción</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+es una </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>situación
+anómala</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+que puede provocar que el programa no funcione de forma correcta o
+termine de forma inesperada.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ejemplos
+de situaciones que provocan una excepción:</span></span></div>
+<ul>
+<li><div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">No
+ hay memoria disponible para asignar</span></span></div>
+</li>
+<li><div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Acceso
+ a un elemento de un array fuera de rango</span></span></div>
+</li>
+<li><div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Leer
+ por teclado un dato de un tipo distinto al esperado</span></span></div>
+</li>
+<li><div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Error
+ al abrir un fichero</span></span></div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">División por cero</span></span></div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Problemas de Hardware</span></span></div>
+</li>
+</ul>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Si
+la excepción no se trata, el manejador de excepciones realiza lo
+siguiente: </b></span></span></span>
+</div>
+<ul>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Muestra </span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">la
+ descripción de la excepción. </span></span></span>
+ </div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Muestra la traza de la
+ pila de llamadas.</span></span></div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Provoca el final del
+ programa.</span></span></div>
+</li>
+</ul>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ejemplos de código Java que
+provocan una excepción:</span></span></div>
+<br>
+<div style="margin-top: 0.21cm;" align="JUSTIFY">
+</div>
+<table class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;" align="center" cellpadding="0" cellspacing="0"><tbody>
+<tr><td style="text-align: center;"><a href="http://2.bp.blogspot.com/-tCviFatBC2g/U0Vuz_i3LsI/AAAAAAAAAWw/YUp0yPT4aYc/s1600/java-excepciones-ejemplos.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-excepciones-ejemplos.jpg" border="0"></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><span style="font-family: Verdana,sans-serif;">Ejemplos de excepciones en Java</span></td></tr>
+</tbody></table>
+<div class="western" style="background: transparent; border: none; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El
+manejo de excepciones proporciona una </span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>separación
+entre el código básico y el código que maneja los errores</b></span></span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">,
+haciéndolo más legible.</span></span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Utilizando
+excepciones se consigue:</span></span></div>
+<ul>
+<li><div style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Separar
+ las instrucciones del programa de las del tratamiento de errores. </span></span>
+ </div>
+</li>
+<li><div style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Evitar
+ llenar el código del programa de instrucciones de comprobación
+ (if, switch, etc).</span></span></div>
+</li>
+<li><div style="margin-bottom: 0cm; margin-top: 0.07cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El
+ código es más simple de escribir ya que no se fuerza al
+ programador a comprobar los errores constantemente. </span></span>
+ </div>
+</li>
+</ul>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>¿Qué
+ocurre cuando se produce una excepción?</b></span></span></span></div>
+<div class="western" style="margin-left: 0.75cm; margin-top: 0.21cm; text-indent: -0.75cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando ocurre una
+excepción:</span></span></div>
+<ul>
+<li><div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La
+ Máquina Virtual Java crea un </span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><i><b>objeto
+ excepción</b></i></span></span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+ y lo lanza. El objeto excepción creado contiene información sobre
+ el error. La ejecución normal del programa se detiene.</span></span></span></div>
+</li>
+<li><div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El
+ sistema busca en el método donde se ha producido la excepción un
+ manejador de excepciones que capture ese objeto y trate la
+ excepción. </span></span>
+ </div>
+</li>
+<li><div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Si
+ el método no contiene un manejador para la excepción se busca en
+ el método que llamó a este y así sucesivamente en toda la pila de
+ llamadas.</span></span></div>
+</li>
+<li><div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando
+ se encuentra un manejador apropiado se le pasa la excepción. Un
+ manejador de excepciones es considerado apropiado si el tipo de
+ objeto excepción lanzado es compatible al tipo que puede manejar. </span></span>
+ </div>
+</li>
+<li><div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Si
+ no se encuentra un manejador adecuado la Máquina Virtual Java
+ muestra el error y acaba el programa.</span></span></div>
+</li>
+</ul>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div class="western" style="background: #ffffff; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>JERARQUÍA
+DE EXCEPCIONES</b></span></span></div>
+<div style="background: transparent; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Todas las excepciones
+lanzadas automáticamente en un programa Java son objetos de la clase</span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Throwable</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+o de alguna de sus clases derivadas.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La
+clase Throwable deriva directamente de Object y tiene dos clases
+derivadas directas: </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Error</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+y </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Exception</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Resumen
+de la jerarquía de clases derivadas de Throwable.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-JGK77cC3lW8/U0Vv3YYM1hI/AAAAAAAAAW0/HIm7B0y5Ot8/s1600/java-jerarquia-excepciones.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-jerarquia-excepciones.jpg" border="0"></a></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Imagen
+obtenida de</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span><span style="color: navy;"><span lang="zxx"><u><a class="western" href="http://www.iro.umontreal.ca/%7Epift1025/bigjava/Ch15/ch15.html"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="es-ES">http://www.iro.umontreal.ca/~pift1025/bigjava/Ch15/ch15.html</span></span></span></a></u></span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La
+clase Error está relacionada con errores de la máquina virtual de
+Java. Generalmente estos errores no dependen del programador por lo
+que no nos debemos preocupar por tratarlos, por ejemplo
+</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">OutOfMemoryError,
+StackOverflowError, errores de hardware, etc.</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">En
+la clase Exception se encuentran las excepciones que se pueden lanzar
+en una aplicación. Tiene varias subclases entre ellas:</span></span></div>
+<ul>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">RuntimeException:
+ excepciones lanzadas durante la ejecución del programa. Por
+ ejemplo: ArithmeticExcepcion, NullPointerException,
+ ArrayIndexOutOfBoundsException, etc. Pertenecen al paquete
+ java.lang.</span></span></div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">IOException:
+ excepciones lanzadas al ejecutar una operación de entrada-salida.
+ Pertenecen al paquete java.io.</span></span></div>
+</li>
+<li><div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">ClassNotFoundException:
+ excdepción lanzada cuando una aplicación intenta cargar una clase
+ pero no se encuentra el fichero .class correspondiente</span></span></div>
+</li>
+</ul>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Métodos
+de la clase Throwable</b></span></span></span></div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Trebuchet MS, sans-serif;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Throwable</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+</b></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">es la
+clase de la que derivan todos los demás tipos de excepciones. </span></span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Tiene los siguientes
+constructores:</span></span></div>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Throwable()</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+genera un objeto de la clase con un mensaje de error nulo.</span></span></div>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Throwable
+(String </b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>mensaje</b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>)</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+genera un objeto de la clase con un mensaje.</span></span></div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Trebuchet MS, sans-serif;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Los
+métodos de </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Throwable</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+</b></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">están
+disponibles en todas las clases que derivan de ella. </span></span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Algunos de estos
+métodos son:</span></span></div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Trebuchet MS, sans-serif;"><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>String
+getMessage()</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+</b></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Devuelve
+el mensaje que se asoció al objeto cuando se creó.</span></span></span></div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Trebuchet MS, sans-serif;"><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>String
+toString()</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+</b></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Devuelve</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+una descripción del objeto. Suele indicar el nombre de la clase y el
+texto de </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">getMessage().
+</span></span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Trebuchet MS, sans-serif;"><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>void
+printStackTrace()</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+Es el método invocado por la máquina virtual cuando se produce una
+excepción del tipo RuntimeException. Aparece un listado con toda la
+pila de llamadas a métodos hasta que se llega al que provocó la
+excepción.</span></span></span></div>
+<div class="western" style="background: #ffffff; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>TRATAMIENTO
+DE EXCEPCIONES</b></span></span></div>
+<div style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Bloques
+try – catch - finally</span></span></div>
+<div style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Un
+programa que trate las excepciones debe realizar lo siguientes pasos:</span></span></div>
+<div style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">1.
+Se </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>intenta</b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>(</b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>try</b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>)</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+ejecutar un bloque de código.</span></span></div>
+<div style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">2.
+Si se produce una circunstancia excepcional se </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>lanza</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>(
+throw )</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+una excepción. En caso contrario el programa sigue su curso normal.</span></span></div>
+<div style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">3.
+Si se ha lanzado una excepción, la ejecución del programa es
+desviada al </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>manejador
+de excepciones</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+donde la excepción se </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>captura</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>(
+catch )</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+y se decide qué hacer al respecto.</span></span></div>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El esquema general en
+Java es:</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>try</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">{</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+       <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//Instrucciones
+que se intentan ejecutar, si se produce una</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+       <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//situación
+inesperada se lanza una excepción</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>catch(tipoExcepcion
+e)</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">{</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//Instrucciones
+para tratar esta excepción</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>catch(otroTipoExcepcion
+e)</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">{</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//Instrucciones
+para tratar esta excepción</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//Se pueden escribir
+tantos bloques catch como sean necesarios</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>finally</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">{</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">// instrucciones
+que se ejecutarán siempre después de un bloque try </span></span>
+</div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">// se haya
+producido o no una excepción</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="float: right; margin: 5px 5px 5px 5px;">
+<script type="text/javascript">
+<!--
+google_ad_client = "ca-pub-3431641712419274";
+/* Rectángulo grande */
+google_ad_slot = "4122224211";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/show_ads.js" type="text/javascript">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins>
+</div>
+<div class="western" style="background: transparent; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Bloque
+try:</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">En
+el bloque try se encuentran las</span></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+instrucciones que pueden lanzar una excepción. </b></span></span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Solamente
+se pueden capturar las excepciones lanzadas dentro de un bloque try.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Una
+excepción se puede lanzar de forma automática o mediante la palabra
+reservada </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>throw</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando
+se lanza la excepción se transfiere la ejecución del programa desde
+el punto donde </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>se
+lanza</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+la excepción a otro punto donde </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>se
+captura</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+la excepción. </span></span>
+</div>
+<div class="western" style="background: transparent; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Bloque
+catch:</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Es
+el bloque de código donde se captura la excepción. El bloque catch
+es el </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>manejador</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+o </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>handler</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+de la excepción. Aquí se decide qué hacer con la excepción
+capturada. Puede haber varios bloques catch relacionados con un
+bloque try.</span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Una vez finalizado un
+bloque catch la ejecución no vuelve al punto donde se lanzó la
+excepción. La ejecución continúa por la primera instrucción a
+continuación de los bloques catch.</span></span></div>
+<div class="western" style="background: transparent; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Bloque
+finally:</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span>
+</div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Es opcional.</span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Debe aparecer a
+continuación de los bloques catch.</span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">También puede aparecer
+a continuación de un bloque try si no hay bloques catch.</span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La ejecución de sus
+instrucciones queda garantizada independientemente de que el bloque
+try acabe o no su ejecución incluso en estos casos:</span></span></div>
+<ul>
+<li><div class="western" style="background: transparent; margin-bottom: 0cm; margin-top: 0.21cm; orphans: 2; widows: 2;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Aunque el bloque try
+ tenga una sentencia return, continue o break, se ejecutará el
+ bloque finally</span></span></div>
+</li>
+<li><div class="western" style="background: transparent; margin-bottom: 0cm; margin-top: 0.21cm; orphans: 2; widows: 2;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando se haya lanzado
+ una excepción que ha sido capturada por un bloque catch. El finally
+ se ejecuta después del catch correspondiente.</span></span></div>
+</li>
+<li><div class="western" style="background: transparent; margin-bottom: 0cm; margin-top: 0.21cm; orphans: 2; widows: 2;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Si se ha lanzado una
+ excepción que no ha sido capturada, se ejecuta el finally antes de
+ acabar el programa.</span></span></div>
+</li>
+</ul>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Un bloque finally se
+usa para dejar un estado consistente después de ejecutar el bloque
+try.    </span></span>
+</div>
+<div class="western" style="font-weight: normal; margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Un ejemplo de uso de
+bloques finally puede ser cuando estamos tratando con ficheros y se
+produce una excepción. Podemos escribir un bloque finally para
+cerrar el fichero. Este bloque se ejecutará siempre y se liberarán
+los recursos ocupados por el fichero.</span></span></div>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Ejemplo
+de tratamiento de excepciones:</b></span></span></span></div>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El siguiente programa
+lee un número entero y lo muestra. Si en la instrucción
+sc.nextInt() se introduce un número de otro tipo o un carácter, se
+lanza una excepción InputMismatchException que es capturada por el
+bloque catch. En este bloque se realizan las instrucciones necesarias
+para resolver la situación y que el programa pueda continuar.</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public static void
+main(String[] args) {</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">        </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">Scanner
+sc = new Scanner(System.in);</span></span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">        </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">int
+n;</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">        </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">do{</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">            </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">try{</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.print("Introduce
+un número entero &gt; 0: ");</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n
+= sc.nextInt();   </span></span></span>
+</div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Número
+introducido: " + n);</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">            </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch(InputMismatchException
+e){</span></span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">sc.nextLine();</span></span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n
+= 0;</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">                </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Debe
+introducir un número entero " + e.toString());               </span></span></span>
+</div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">            </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: black;">        </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}while(n&lt;=0);</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: black;">    </span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></span></div>
+<div class="western" style="background: transparent; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Ejemplo
+de tratamiento de excepciones:</b></span></span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+Excepción lanzada en un método y tratada en el que método que lo
+ha llamado.</span></span></span></div>
+<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-YI4QVWVq0-M/U2IreNcXc1I/AAAAAAAAAX0/huHncLuV2io/s1600/java-ejemplo-excepcion.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-ejemplo-excepcion.jpg" border="0"></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<br>
+<div class="western" style="margin-bottom: 0.2cm; margin-top: 0.2cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La salida del programa
+es:</span></span></div>
+<div style="background: #eeeeee; margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">4</span></span></div>
+<div style="background: #eeeeee; margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">2</span></span></div>
+<div style="background: #eeeeee; margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">6</span></span></div>
+<div style="background: #eeeeee; margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ha
+intentado acceder a una posición fuera del array</span></span></div>
+<div class="western" style="background: transparent; margin-bottom: 0.21cm; margin-top: 0.41cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>CAPTURAR
+EXCEPCIONES</b></span></span></div>
+<div style="float: right; margin: 5px 5px 5px 5px;">
+<script type="text/javascript">
+<!--
+google_ad_client = "ca-pub-3431641712419274";
+/* Rectángulo grande */
+google_ad_slot = "4122224211";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/show_ads.js" type="text/javascript">
+</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Un
+bloque try puede estar seguido de varios bloques catch, tantos como
+excepciones diferentes queramos manejar.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La estructura y el
+comportamiento de un bloque </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">catch</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+son similares al de un método.</span></span></div>
+<div style="border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>La
+excepción es capturada por el bloque </b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>catch</b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+cuyo argumento coincida con el tipo de objeto lanzado</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La búsqueda de
+coincidencia se realiza sucesivamente sobre los bloques </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">catch</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+en el orden en que aparecen en el código hasta que aparece la
+primera concordancia. </span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando acaba la
+ejecución de este bloque, el programa continúa después del último
+de los cach que sigan al bloque </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">try</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+que lanzó la excepción. </span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Ejemplo
+de tratamiento de excepciones </b></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>con
+varios catch:</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">En
+este programa se controla el error producido si se introduce un dato
+no entero y si se intenta acceder a una posición fuera del array.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-WG5ayCnM5eI/U0VySdcYX0I/AAAAAAAAAXI/21oXyJYZgTU/s1600/java-excepciones-try-catch.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-excepciones-try-catch.jpg" border="0"></a></div>
+<br>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">El
+sistema de control de excepciones puede ser anidado a cualquier
+nivel.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Debe
+mantenerse la regla de que un bloque </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">try</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+debe ser seguido por un </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">catch.</span></span></span></b></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Pueden
+existir secuencias </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">try-catch</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+dentro de bloques </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">try</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+y de bloques </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">catch</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Ejemplo
+de secuencias anidadas en el bloque try:</b></span></span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY" lang="en-GB">
+<br></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">public
+void metodo(){</span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp; <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">...</span></span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">try{&nbsp;
+  </span></span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">try{</span></span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">catch(tipoExcepcion
+e){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">catch(tipoExcepcion
+e) </span></span><span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">{&nbsp;&nbsp;&nbsp;
+</span></span></span>
+</div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">...</span></span></span></div>
+<div style="background: transparent; margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Ejemplo
+de secuencias anidadas en el bloque catch</b></span></span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+<br></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">public
+void metodo(){</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp; <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">try{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp; <span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">catch(tipoExcepcion
+e){&nbsp;&nbsp;&nbsp; </span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">try{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">catch(tipoExcepcion
+e1){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">...</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span><span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;"><span lang="en-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span>
+</div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Courier New, monospace;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB"><b>Ejemplo
+de </b></span></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB"><b>anidamiento
+de bloques try-catch</b></span></span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB"><b>:</b></span></span></span></span></div>
+<div style="margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public static void
+main(String[] args) {</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">Scanner
+sc = new Scanner(System.in);</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">int
+n1, n2;</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">try
+{</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.print("Introduce
+un número: ");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">n1
+= sc.nextInt();</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">try
+{</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">System.out.print("Introduce
+otro número: ");</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">n2
+= sc.nextInt();</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">System.out.println(n1
++ " / " + n2 + " = " + n1/(double)n2);</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch
+(InputMismatchException e) {</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">sc.nextLine();</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n2
+= 0;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Debe
+introducir un número");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch
+(ArithmeticException e) {</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">sc.nextLine();</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n2
+= 0;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("No
+se puede dividir por cero");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch
+(InputMismatchException e) {</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">sc.nextLine();</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n1 = 0;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Debe
+introducir un número");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}</span></span></span></div>
+<div style="margin-bottom: 0cm;" align="JUSTIFY">
+</div>
+<div style="margin-bottom: 0.18cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cada
+catch debe tener como parámetro un objeto de la clase Throwable, de
+una clase derivada de ella o de una clase definida por el
+programador.</span></span></div>
+<div style="margin-bottom: 0.18cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Cuando
+se lanza una excepción se captura por el primer bloque catch cuyo
+parámetro sea de la misma clase que el objeto excepción o de una
+clase base directa o indirecta. Por este motivo, </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>es
+importante el orden en que se coloquen los bloques catch</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.
+</span></span>
+</div>
+<div style="background: transparent; border: none; margin-bottom: 0.18cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>Las
+excepciones más genéricas se deben capturar al final</b></span></span></span></div>
+<div style="background: transparent; border: none; margin-bottom: 0.18cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Si no es necesario
+tratar excepciones concretas de forma específica se puede poner un
+<span style="color: navy;"><b>bloque catch de una clase base que las
+capture todas y las trate de forma general</b></span>. Esto se conoce
+como captura genérica de excepciones.</span></span></div>
+<div style="margin-bottom: 0.18cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ejemplo
+de captura genérica de excepciones:</span></span></div>
+<div style="margin-bottom: 0.18cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Al
+programa anterior le añadiremos un nuevo bloque catch con un
+parámetro de tipo Exception. Este bloque se debe colocar al final ya
+que si se pone al principio capturaría cualquiera de las otras dos
+excepciones sin que sus bloques catch pudieran llegar a ejecutarse
+nunca. </span></span>
+</div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">public
+static void main(String[] args) {</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">Scanner
+sc = new Scanner(System.in);</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">int
+[] array = {4,2,6,7};</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">int
+n;</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">boolean
+repetir = false;</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">do{</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">try{</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">repetir
+= false;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.print("Introduce
+un número entero &gt; 0 y &lt; " + array.length + " ");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n =
+sc.nextInt();   </span></span>
+</div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Valor
+en la posición " + n + ": " + array[n]);</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch(InputMismatchException
+e){</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">sc.nextLine();</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">n = 0;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Debe
+introducir un número entero "); </span></span>
+</div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">repetir
+= true;</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}catch(IndexOutOfBoundsException
+e){</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Debe
+introducir un número entero &gt; 0 y &lt; " + array.length + "
+");     </span></span>
+</div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">repetir
+= true;</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}</span>catch(Exception
+e){</span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>
+//resto de excepciones de tipo Exception y derivadas</b></span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Error
+inesperado " + e.toString());     </span></span>
+</div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">repetir
+= true;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}while(repetir);</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="margin-bottom: 0cm;" align="JUSTIFY">
+<br></div>
+<div class="western" style="background: transparent; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>EXCEPCIONES
+ MARCADAS Y NO MARCADAS (checked y unchecked)</b></span></span></div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Excepciones no marcadas
+(unchecked) son aquellas que no estamos obligados a tratar. Pertenecen a la clase
+Error y a sus clases derivadas y a la clase RuntimeException y sus
+clases derivadas. </span></span>
+</div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Excepciones marcadas
+(checked) son aquellas que estamos obligados a tratar. Son todas las clases
+derivadas de la clase Exception excepto las derivadas de
+RuntimeException. </span></span>
+</div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>El
+compilador Java obliga a declarar o capturar las excepciones
+marcadas.</b></span></span></span></div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="color: black;"><span style="font-weight: normal;">El
+compilador muestra un mensaje de error s</span></span>i no se tratan
+o no se declara que son lanzadas de forma explícita.</span></span></div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<br></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-8M04GOfr3G4/U0V1HHiavII/AAAAAAAAAXU/wgCjwgLPIxs/s1600/java-excepciones-checked-unchecked.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-excepciones-checked-unchecked.jpg" border="0"></a></div>
+<div class="western" style="margin-bottom: 0.1cm; margin-top: 0.1cm;" align="JUSTIFY">
+<br></div>
+<div class="western" style="background: transparent; margin-bottom: 0.21cm; margin-top: 0.31cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>DECLARAR
+ EXCEPCIONES</b></span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La declaración de las
+excepciones que puede lanzar un método se realiza escribiendo la
+palabra </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>throws</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+seguida del nombre de las excepciones separadas por comas.</span></span></div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Por ejemplo, la
+instrucción System.in.read() para leer un carácter lanza una
+excepción de tipo IOException que debemos capturar o declarar. </span></span>
+</div>
+<div class="western" style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">En este ejemplo no se
+captura la excepción por lo que estamos obligados a declararla:</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">public
+static void main(String[] args) </span></span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB"><b>throws</b></span></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">
+IOException{</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">char
+car;</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">System.out.println("Introduce
+un carácter");</span></span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">car
+= (char)System.in.read();           </span></span></span>
+</div>
+<div class="western" style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="margin-bottom: 0cm;" align="JUSTIFY">
+<br></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La
+declaración de excepciones permite escribir métodos que no capturan
+las excepciones marcadas que se puedan producir. </span></span>
+</div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Una
+excepción no capturada se lanza para que la trate algún método de
+la pila de llamadas.</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+</div>
+<div class="western" style="background: transparent; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>LANZAR
+ EXCEPCIONES</b></span></span></div>
+<div class="western" style="margin-bottom: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Java
+permite al programador lanzar excepciones mediante la palabra
+reservada </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>throw</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div class="western" style="background: #eeeeee; border: none; margin-top: 0.21cm; padding: 0cm;" align="JUSTIFY">
+<span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">throw
+</span></span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><i>objetoExcepcion</i></span></span></span><span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">;</span></span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La
+excepción que se lanza es un objeto, por lo que hay que crearlo como
+cualquier otro objeto mediante new.</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ejemplo:</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">if(n==0) throw new
+ArithmeticException("División por cero");</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: black;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="es-ES">Si
+en un método se usa la cláusula throw para lanzar un tipo de
+excepción marcada debe indicarse en su declaración con la cláusula
+throws.</span></span></span></span></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-KZ6qJhTMLxg/U0V1-qfzxoI/AAAAAAAAAXc/jYb5sDIheYA/s1600/java-lanzar-excepciones.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-lanzar-excepciones.jpg" border="0"></a></div>
+<div class="western" style="background: transparent; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="es-ES"></span></span><b>RELANZAR
+ EXCEPCIONES</b></span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Si
+se ha capturado una excepción es posible desde el bloque catch
+relanzar la excepción (el mismo objeto recibido en el bloque </span></span><b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span style="font-weight: normal;">catch</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">)
+utilizando la instrucción </span></span><b><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">throw</span></span></span></b><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">
+</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><i>objetoExcepción</i></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Ejemplo. Relanzar una
+excepción desde un método al método main:</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm;" align="JUSTIFY" lang="en-GB">
+<br></div>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-4FZ-RY08A2o/U0V3BIE4PtI/AAAAAAAAAXk/wwJAItR9mAM/s1600/java-throw-relanzar-excepciones.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/java-throw-relanzar-excepciones.jpg" border="0"></a></div>
+<br>
+<div class="western" style="background: transparent; margin-bottom: 0.21cm; margin-top: 0.41cm;" align="JUSTIFY">
+<span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><b>CREAR
+ NUESTRAS PROPIAS EXCEPCIONES</b></span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Aunque Java proporciona
+una gran cantidad de excepciones, en algunas ocasiones necesitaremos
+crear excepciones propias. </span></span>
+</div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Las excepciones propias
+deben ser </span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><b>subclases
+de la clase Exception</b></span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">.</span></span></div>
+<div style="margin-bottom: 0cm; margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Normalmente crearemos
+excepciones propias cuando queramos manejar excepciones no
+contempladas por la librería estándar de Java. Por ejemplo, vamos a
+crear un tipo de excepción llamado ValorNoValido que se lanzará
+cuando el valor utilizado en una determinada operación no sea
+correcto.</span></span></div>
+<div style="background: transparent; margin-bottom: 0.3cm; margin-top: 0.31cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">La clase podría ser la
+siguiente:</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public class
+ValorNoValido extends Exception{</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public
+ValorNoValido(){</span></span>
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public
+ValorNoValido(String cadena){</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">super(cadena);
+</span></span><span style="color: navy;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">//Llama
+al constructor de Exception y le pasa el contenido de cadena</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="margin-top: 0.21cm; page-break-before: auto;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">Un
+programa para probar la excepción creada podría ser este:</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public static void
+main(String[] args) {</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">try {</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">double x
+= leerValor();</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">System.out.println("Raiz
+cuadrada de " + x + " = " + Math.sqrt(x));</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}catch
+(ValorNoValido e) {</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">System.out.println(e.getMessage());</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">}</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<br></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY" lang="en-GB">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">public static double
+leerValor() throws ValorNoValido {</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">Scanner
+sc = new Scanner(System.in);</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">System.out.print("Introduce
+número &gt; 0 ");</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;"><span lang="en-GB">double
+n = sc.nextDouble();</span></span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">if (n &lt;= 0)
+{</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">throw
+new ValorNoValido("El número debe ser positivo");</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">return n;</span></span></div>
+<div style="background: #eeeeee; border: none; margin-bottom: 0cm; padding: 0cm;" align="JUSTIFY">
+<span style="font-family: Verdana, sans-serif;"><span style="font-size: 10pt;">}</span></span></div>
+<div class="western" style="margin-top: 0.21cm;" align="JUSTIFY">
+<br></div>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1"><span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-629717709">
+<a href="http://www.blogger.com/post-edit.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;from=pencil" title="Editar entrada">
+<img alt="" class="icon-action" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_edit_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="http://www.blogger.com/share-post.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;target=email" target="_blank" title="Enviar por correo electrónico"><span class="share-button-link-text">Enviar por correo electrónico</span></a><a class="goog-inline-block share-button sb-blog" href="http://www.blogger.com/share-post.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;target=blog" onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target="_blank" title="Escribe un blog"><span class="share-button-link-text">Escribe un blog</span></a><a class="goog-inline-block share-button sb-twitter" href="http://www.blogger.com/share-post.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;target=twitter" target="_blank" title="Compartir con Twitter"><span class="share-button-link-text">Compartir con Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="http://www.blogger.com/share-post.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;target=facebook" onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target="_blank" title="Compartir con Facebook"><span class="share-button-link-text">Compartir con Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="http://www.blogger.com/share-post.g?blogID=3756682660522124367&amp;postID=3399081622761750118&amp;target=pinterest" target="_blank" title="Compartir en Pinterest"><span class="share-button-link-text">Compartir en Pinterest</span></a><div class="goog-inline-block dummy-container"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/fastbutton.html" name="I0_1435345400348" id="I0_1435345400348" vspace="0" tabindex="0" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2"><span class="post-labels">
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3"><span class="post-location">
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>No hay comentarios:</h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="avatar-comment-indent" id="comments-block">
+</dl>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">Publicar un comentario en la entrada</h4>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=3756682660522124367&amp;postID=3399081622761750118" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" id="comment-editor" name="comment-editor" src="" frameborder="0" height="410" width="100%"></iframe>
+<script type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/3369861379-comment_from_post_iframe.html"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://puntocomnoesunlenguaje.blogspot.com/2014/07/herencia-en-java.html" id="Blog1_blog-pager-newer-link" title="Entrada más reciente">Entrada más reciente</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://puntocomnoesunlenguaje.blogspot.com/2013/12/clase-object-java.html" id="Blog1_blog-pager-older-link" title="Entrada antigua">Entrada antigua</a>
+</span>
+<a class="home-link" href="http://puntocomnoesunlenguaje.blogspot.com/">Página principal</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Suscribirse a:
+<a class="feed-link" href="http://puntocomnoesunlenguaje.blogspot.com/feeds/3399081622761750118/comments/default" target="_blank" type="application/atom+xml">Enviar comentarios (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'es'};</script>
+</div></div>
+</div>
+</div>
+<div class="column-left-outer">
+<div class="column-left-inner">
+<aside>
+</aside>
+</div>
+</div>
+<div class="column-right-outer">
+<div class="column-right-inner">
+<aside>
+<div class="sidebar section" id="sidebar-right-1"><div class="widget HTML" id="HTML3">
+<h2 class="title">Compártelo</h2>
+<div class="widget-content">
+<div class="fb-like" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+<script gapi_processed="true" type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/plusone.js"></script>
+<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 60px;"><iframe title="+1" data-gapiattached="true" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/fastbutton_002.html" name="I0_1435345401187" id="I0_1435345401187" vspace="0" tabindex="0" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 60px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/widgets.html" type="text/javascript"></script>
+<a class="twitter-share-button" data-count="vertical" expr:data-text="data:post.title" expr:data-url="data:post.url" data-related="" href="http://twitter.com/share">Tweet</a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=HTML&amp;widgetId=HTML3&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML3"));' target="configHTML3" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget PopularPosts" id="PopularPosts1">
+<h2>Entradas populares</h2>
+<div class="widget-content popular-posts">
+<ul>
+<li>
+<div class="item-content">
+<div class="item-thumbnail">
+<a href="http://puntocomnoesunlenguaje.blogspot.com/2012/12/arraylist-en-java.html" target="_blank">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/ArrayList-java-1.JPG" border="0" height="72" width="72">
+</a>
+</div>
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/12/arraylist-en-java.html">Java ArrayList. Estructura dinámica de datos</a></div>
+<div class="item-snippet"> DECLARACIÓN Y CREACIÓN DE UN ARRAYLIST   De 
+forma general un ArrayList en Java se crea de la siguiente forma:   
+ArrayList nombreArray = new...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/08/java-scanner.html">Java Scanner para lectura de datos</a></div>
+<div class="item-snippet"> La clase Scanner está disponible a partir de 
+Java 5 y facilita la lectura de datos en los programas Java.   Primero 
+veremos varios ejemplos...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-thumbnail">
+<a href="http://puntocomnoesunlenguaje.blogspot.com/2012/12/matriz-en-java.html" target="_blank">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/matriz-java-1.jpg" border="0" height="72" width="72">
+</a>
+</div>
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/12/matriz-en-java.html">Matrices en Java</a></div>
+<div class="item-snippet"> Un array en Java puede tener más de una 
+dimensión. El caso más general son los arrays bidimensionales también 
+llamados matrices  o tablas ....</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/07/arreglos-en-java-calcular-media.html">Java Ejercicios Básicos de Arrays Resueltos 1</a></div>
+<div class="item-snippet"> Relación Nº 1: Ejercicios 1 y 2  1. Calcular 
+la media de una serie de números que se leen por teclado.   Programa 
+Java que lea por teclado ...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/06/java-ejercicios-basicos-2.html">Java Ejercicios Básicos Resueltos 2</a></div>
+<div class="item-snippet">Java Ejercicios Básicos estructura secuencial 
+  Relación Nº 2: Ejercicios 4, 5, 6 y 7 Ejercicio 4: Programa que lea 
+una cantidad de grados c...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/04/estructuras-de-control.html">Estructuras de control en Java</a></div>
+<div class="item-snippet"> Las estructuras de control determinan la 
+secuencia de ejecución de las sentencias de un programa.&nbsp;     Las 
+estructuras de control se divide...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/04/metodos.html">Métodos en Java</a></div>
+<div class="item-snippet">    Un método en Java  es un conjunto de 
+instrucciones definidas dentro de una clase, que realizan una 
+determinada tarea y a las que podemos...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2013/07/ejemplos-expresiones-regulares-java-split.html">Ejemplos de Expresiones Regulares en Java</a></div>
+<div class="item-snippet"> Una expresión regular define un patrón de 
+búsqueda para cadenas de caracteres.   La podemos utilizar para 
+comprobar si una cadena contiene ...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-thumbnail">
+<a href="http://puntocomnoesunlenguaje.blogspot.com/2012/07/metodo-de-ordenacion-burbuja.html" target="_blank">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/metododelaburbuja.jpg" border="0" height="72" width="72">
+</a>
+</div>
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/07/metodo-de-ordenacion-burbuja.html">Algoritmos de ordenación. Metodo de la Burbuja</a></div>
+<div class="item-snippet"> El algoritmo de la burbuja  es uno de los 
+métodos de ordenación más conocidos y uno de los primeros que aprenden 
+los programadores.    Cons...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+<li>
+<div class="item-content">
+<div class="item-title"><a href="http://puntocomnoesunlenguaje.blogspot.com/2012/07/generacion-de-numeros-aleatorios-en-java.html">Generación de números aleatorios en Java</a></div>
+<div class="item-snippet"> Podemos generar números aleatorios  en Java 
+de dos formas distintas:     1. Utilizando el método estático random de 
+la clase Math: Math.ran...</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=PopularPosts&amp;widgetId=PopularPosts1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("PopularPosts1"));' target="configPopularPosts1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML4">
+<div class="widget-content">
+<div align="center">
+<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/deed.es_ES" rel="license"><img alt="Licencia de Creative Commons" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/88x31.png" style="center;border-width:0"></a><br><span property="dct:title" xmlns:dct="http://purl.org/dc/terms/">Programación Java</span>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=HTML&amp;widgetId=HTML4&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML4"));' target="configHTML4" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Translate" id="Translate1">
+<h2 class="title">Translate</h2>
+<div id="google_translate_element"><div style="" dir="ltr" class="skiptranslate goog-te-gadget"><div class="goog-te-gadget-simple" style="white-space: nowrap;" id=":0.targetLanguage"><img style="background-image: url(&quot;https://translate.googleapis.com/translate_static/img/te_ctrl3.gif&quot;); background-position: -65px 0px;" class="goog-te-gadget-icon" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cleardot.gif"><span style="vertical-align: middle;"><a href="javascript:void(0)" class="goog-te-menu-value"><span>Seleccionar idioma</span><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cleardot.gif" height="1" width="1"><span style="border-left: 1px solid rgb(187, 187, 187);">​</span><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/cleardot.gif" height="1" width="1"><span style="color: rgb(155, 155, 155);">▼</span></a></span></div></div></div>
+<script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        autoDisplay: 'true',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+<script src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/element.js"></script>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=Translate&amp;widgetId=Translate1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("Translate1"));' target="configTranslate1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Followers" id="Followers1">
+<h2 class="title">Seguidores</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<div><script gapi_processed="true" type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/plusone.js"></script>
+<div id="followers-iframe-container"><iframe src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/followers.xhtml" name="I0_1435345401401" id="I0_1435345401401" vspace="0" tabindex="0" style="" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<script type="text/javascript">
+    window.followersIframe = null;
+    function followersIframeOpen(url) {
+      gapi.load("gapi.iframes", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          window.followersIframe = gapi.iframes.getContext().openChild({
+            url: url,
+            where: document.getElementById("followers-iframe-container"),
+            messageHandlersFilter: gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
+            messageHandlers: {
+              '_ready': function(obj) {
+                window.followersIframe.getIframeEl().height = obj.height;
+              },
+              'reset': function() {
+                window.followersIframe.close();
+                followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d3756682660522124367\x26origin\x3dhttp://puntocomnoesunlenguaje.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjVjNWM1YyIGMjc0NGQ3KgZmZmZmZmYyBjAwMDAwMDoGNWM1YzVjQgYyNzQ0ZDdKBmEyYTJhMlIGMjc0NGQ3Wgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d3399081622761750118");
+              },
+              'open': function(url) {
+                window.followersIframe.close();
+                followersIframeOpen(url);
+              }
+            }
+          });
+        }
+      });
+    }
+    followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d3756682660522124367\x26origin\x3dhttp://puntocomnoesunlenguaje.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjVjNWM1YyIGMjc0NGQ3KgZmZmZmZmYyBjAwMDAwMDoGNWM1YzVjQgYyNzQ0ZDdKBmEyYTJhMlIGMjc0NGQ3Wgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d3399081622761750118");
+  </script></div>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=Followers&amp;widgetId=Followers1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("Followers1"));' target="configFollowers1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogList" id="BlogList1">
+<h2 class="title">Lenguaje C++</h2>
+<div class="widget-content">
+<div class="blog-list-container" id="BlogList1_container">
+<ul id="BlogList1_blogs">
+<li style="display: block;">
+<div class="blog-icon">
+</div>
+<div class="blog-content">
+<div class="blog-title">
+<a href="http://ejercicioscpp.blogspot.com/" target="_blank">
+Programacion C++</a>
+</div>
+<div class="item-content">
+<span class="item-title">
+<a href="http://ejercicioscpp.blogspot.com/2012/11/estructuras-de-control-en-c.html" target="_blank">
+Estructuras de Control en C++</a>
+</span>
+</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=BlogList&amp;widgetId=BlogList1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogList1"));' target="configBlogList1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div>
+</div></div>
+<table class="section-columns columns-2" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="sidebar section" id="sidebar-right-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="sidebar section" id="sidebar-right-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sidebar section" id="sidebar-right-3"></div>
+</aside>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<footer>
+<div class="footer-outer">
+<div class="footer-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot section" id="footer-1"><div class="widget HTML" id="HTML1">
+<h2 class="title">Licencia</h2>
+<div class="widget-content">
+<div align="left">
+<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/deed.es_ES" rel="license"><img alt="Licencia de Creative Commons" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/88x31.png" style="center;border-width:0"></a><br><span property="dct:title" xmlns:dct="http://purl.org/dc/terms/">Programación Java</span> by <a href="http://puntocomnoesunlenguaje.blogspot.com/2014/04/puntocomnoesunlenguaje.blogspot.com.es" property="cc:attributionName" rel="cc:attributionURL" xmlns:cc="http://creativecommons.org/ns#">Enrique García Hernández</a><br> Esta obra está bajo una licencia <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/deed.es_ES" rel="license">Creative Commons Reconocimiento-NoComercial-CompartirIgual 3.0 España License</a>.<br>Para reconocer la autoría debes poner el enlace <a href="http://puntocomnoesunlenguaje.blogspot.com.es/" rel="dct:source" xmlns:dct="http://purl.org/dc/terms/">http://puntocomnoesunlenguaje.blogspot.com.es</a>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=HTML&amp;widgetId=HTML1&amp;action=editWidget&amp;sectionId=footer-1" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' target="configHTML1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+<table class="section-columns columns-2" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot section" id="footer-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="foot section" id="footer-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class="foot section" id="footer-3"><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Con la tecnología de <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=3756682660522124367&amp;widgetType=Attribution&amp;widgetId=Attribution1&amp;action=editWidget&amp;sectionId=footer-3" onclick='return _WidgetManager._PopupConfig(document.getElementById("Attribution1"));' target="configAttribution1" title="Editar">
+<img alt="" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/icon18_wrench_allbkg.html" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div><iframe src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/blank.html" style="height: 0px; width: 0px; position: absolute;" name="google_top_static_frame" id="google_top_static_frame" frameborder="0"></iframe><iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/postmessageRelay.html" id="oauth2relay903034614" name="oauth2relay903034614"></iframe>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-37214683-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = (document.location.protocol == 'https:' ?
+                  'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/3998319842-widgets.html"></script>
+<script gapi_processed="true" type="text/javascript" src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/plusone.js"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV2";window['blogger_blog_id'] = '3756682660522124367';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d3756682660522124367','//puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html','3756682660522124367');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '3756682660522124367', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Programación Java', 'pageType': 'item', 'postId': '3399081622761750118', 'url': 'http://puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html', 'canonicalUrl': 'http://puntocomnoesunlenguaje.blogspot.com/2014/04/java-excepciones.html', 'canonicalHomepageUrl': 'http://puntocomnoesunlenguaje.blogspot.com/', 'homepageUrl': 'http://puntocomnoesunlenguaje.blogspot.com/', 'blogspotFaviconUrl': 'http://puntocomnoesunlenguaje.blogspot.com/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-37214683-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'Excepciones. Bloques try, catch, finally.', 'pageTitle': 'Programación Java: Excepciones. Bloques try, catch, finally.', 'metaDescription': '', 'encoding': 'UTF-8', 'locale': 'es', 'localeUnderscoreDelimited': 'es', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Programación Java - Atom\42 href\75\42http://puntocomnoesunlenguaje.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Programación Java - RSS\42 href\75\42http://puntocomnoesunlenguaje.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Programación Java - Atom\42 href\75\42http://www.blogger.com/feeds/3756682660522124367/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Programación Java - Atom\42 href\75\42http://puntocomnoesunlenguaje.blogspot.com/feeds/3399081622761750118/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'postImageThumbnailUrl': 'http://2.bp.blogspot.com/-tCviFatBC2g/U0Vuz_i3LsI/AAAAAAAAAWw/YUp0yPT4aYc/s72-c/java-excepciones-ejemplos.jpg', 'postImageUrl': 'http://2.bp.blogspot.com/-tCviFatBC2g/U0Vuz_i3LsI/AAAAAAAAAWw/YUp0yPT4aYc/s1600/java-excepciones-ejemplos.jpg', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'ieCssRetrofitLinks': '\74!--[if IE]\76\74script type\75\42text/javascript\42 src\75\42https://www.blogger.com/static/v1/jsbin/2235482369-ieretrofit.js\42\76\74/script\76\n\74![endif]--\076', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cda3ddef07a85452', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'content_padding': '0px', 'paging_background': 'transparent none no-repeat scroll top center', 'image_border_small_size': '2px', 'body_background_gradient_cap': 'none', 'tabs_selected_background_color': '#eeeeee', 'body_rule_color': '#f2f2f2', 'header_shadow_spread': '1px', 'header_shadow_offset_left': '-1px', 'header_padding': '30px', 'link_visited_color': '#949494', 'mobile_background_size': 'auto', 'post_title_font': 'normal normal 22px Verdana, Geneva, sans-serif', 'tabs_text_color': '#a2a2a2', 'date_header_margin': 'inherit', 'header_background_gradient': 'none', 'header_bottom_border_size': '1px', 'content_shadow_spread_webkit': '5px', 'header_shadow_offset_top': '-1px', 'mobile_button_color': '#ffffff', 'widget_title_font': 'normal bold 11px Verdana, Geneva, sans-serif', 'main_section_margin': '5px', 'body_background': '#ffffff none repeat scroll top left', 'keycolor': '#fafbfc', 'content_shadow_spread': '40px', 'image_background_color': '#ffffff', 'header_font': 'normal bold 70px Verdana, Geneva, sans-serif', 'header_background_color': '#ffffff', 'main_border_width': '0', 'main_padding': '5px', 'tabs_border_color': '#f2f2f2', 'image_text_color': '#5c5c5c', 'description_text_size': '100%', 'post_footer_background_color': '#fcfcfc', 'body_background_gradient_tile': 'none', 'page_width': 'auto', 'tabs_background_gradient': 'url(//www.blogblog.com/1kt/simple/gradients_light.png)', 'mobile_background_overlay': 'transparent none repeat scroll top left', 'main_padding_bottom': '30px', 'tabs_background_color': '#eeeeee', 'image_border_large_size': '5px', 'post_margin_bottom': '25px', 'body_background_override': '', 'tabs_margin_side': '30px', 'link_hover_color': '#4655ff', 'description_text_color': '#868686', 'body_text_color': '#5c5c5c', 'content_padding_horizontal': '0px', 'endSide': 'right', 'page_width_selector': '.region-inner', 'date_header_padding': 'inherit', 'post_footer_text_color': '#797979', 'startSide': 'left', 'date_header_color': '#5c5c5c', 'tabs_font': 'normal normal 10px Verdana, Geneva, sans-serif', 'post_footer_border_color': '#f2f2f2', 'body_font': 'normal normal 12px Verdana, Geneva, sans-serif', 'footer_bevel': '0', 'tabs_bevel_border_width': '1px', 'date_header_background_color': 'transparent', 'content_shadow_spread_ie': '10px', 'widget_title_text_color': '#000000', 'header_border_horizontalsize': '0', 'image_border_color': '#f2f2f2', 'tabs_border_width': '1px', 'content_background_color': '#ffffff', 'link_color': '#2744d7', 'header_text_color': '#4163cb', 'date_header_letterspacing': 'inherit', 'tabs_margin_top': '0', 'main_padding_top': '30px', 'header_border_size': '1px', 'tabs_selected_text_color': '#000000', 'content_background_color_selector': '.content-inner', 'body_background_color': '#ffffff', 'widget_alternate_text_color': '#a2a2a2'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'header2', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'crosscol', null, document.getElementById('PageList1'), {'title': 'Páginas', 'links': [{'href': 'http://puntocomnoesunlenguaje.blogspot.com/', 'title': 'Última entrada', 'isCurrentPage': false}, {'href': 'http://puntocomnoesunlenguaje.blogspot.com/p/teoria_7.html', 'title': 'Teoría', 'isCurrentPage': false, 'id': '3923439921854470918'}, {'href': 'http://puntocomnoesunlenguaje.blogspot.com/p/ejercicios.html', 'title': 'Ejercicios', 'isCurrentPage': false, 'id': '2596866517010781950'}, {'href': 'http://puntocomnoesunlenguaje.blogspot.com/p/blog-page.html', 'title': 'Ejercicios POO', 'isCurrentPage': false, 'id': '7437833909545060475'}, {'href': 'http://ejercicioscpp.blogspot.com/p/teoria.html', 'title': 'C++', 'isCurrentPage': false}], 'mobile': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/762084153-lbx__es.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/2392111094-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'sidebar-right-1', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'sidebar-right-1', null, document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar-right-1', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_TranslateView', new _WidgetInfo('Translate1', 'sidebar-right-1', null, document.getElementById('Translate1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebar-right-1', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogListView', new _WidgetInfo('BlogList1', 'sidebar-right-1', null, document.getElementById('BlogList1'), {'numItemsToShow': 0, 'totalItems': 1}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'footer-1', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', null, document.getElementById('Attribution1'), {'attribution': 'Con la tecnología de \74a href\75\47https://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+</script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="Programaci%C3%B3n%20Java:%20Excepciones.%20Bloques%20try,%20catch,%20finally._files/translate-32.png" height="20" width="20"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugiere una traducción mejor</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div style="display: none;" class="status-message"></div></div>
+
+<iframe style="visibility: visible; box-sizing: content-box; width: 739px; height: 263px; display: none;" class="goog-te-menu-frame skiptranslate" frameborder="0"></iframe></body></html>

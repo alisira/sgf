@@ -161,9 +161,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 					Integer idOpcion = vs.getIdOpcion(request);
 					expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
 					ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
-					GenericDAOImplHibernate.comenzarTransaccion();
-					expeResul = (Integer) expedienteDAO.guardar(expediente);
-					GenericDAOImplHibernate.finalizarTransaccion();
+					expeResul = (Integer) expedienteDAO.guardar(expediente);					
  		        	
  		        	Double montoTotal = 0.0;
 					

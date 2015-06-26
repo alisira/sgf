@@ -32,11 +32,7 @@ import sigefirrhh.struts.addons.Comun;
 public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements GenericDAO, Comun {
 
     private static SqlMapClient sqlMapper;
-    private static SqlMapClientTemplate sqlMapper2;
     private static SqlMapClientTemplate sqlMapClientTemplate = new SqlMapClientTemplate();
-    
-    
-    
     
     static Logger log = Logger.getLogger(MapaSQL.class.getName());	
 
@@ -45,9 +41,7 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
     private Integer estado;
 
     public GenericDAOImplHibernate() {
-    	try {  
-   		 
-    		
+    	try {    		
     		
   		  	Reader reader = Resources.getResourceAsReader("sigefirrhh/ibatis/conexion/db/SqlMapConfig.xml");	      	
   		  	sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
@@ -57,13 +51,6 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
   		  	sqlMapClientTemplate.setSqlMapClient(sqlMapper);
   		
   		  	reader.close(); 
-  		  	
-  		  	
-  		  	
-  		 
-  		  	
-  		  	
-  		  	
 
   	    } catch (IOException e) {
   	      throw new RuntimeException("Something bad happened while building the SqlMapClient instance." + e, e);
@@ -73,29 +60,12 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
     }
 
     @Override
-    public Object guardar(Object entity) throws SQLException, NestedSQLException  {
-    	
-    	
-	 	
-		//sqlMapper.startTransaction();
-		
-    	
-    	//sqlMapper.startTransaction();
+    public Object guardar(Object entity) throws SQLException, NestedSQLException  {    	
     	
     	int maxi = entity.getClass().getName().split("\\.").length - 1;
     	Integer valor;
-
     	
     	valor = (Integer) sqlMapClientTemplate.queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
-    	
-    	//session.commitTransaction();
-    	
-  	   	//valor = (Integer) sqlMapClientTemplate.queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
-    	
-  	  	//System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);
-  	   	
-  	  //sqlMapper.endTransaction();
-  	   	
 
     	return valor;
     }
@@ -110,27 +80,7 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 	@Override
 	public boolean validarAcceso(HttpServletRequest request, String funcion) {
 		return false;
-	}
-	
-	public static boolean comenzarTransaccion() throws SQLException{
-			
-		
-		sqlMapClientTemplate.setSqlMapClient(sqlMapper);
-		return true;
-	}
-	
-	public static boolean commitTransaccion() throws SQLException{
-		sqlMapper.commitTransaction();
-		return true;
-	}
-	
-	public static boolean finalizarTransaccion() throws SQLException{
-		sqlMapper.endTransaction();
-		sqlMapClientTemplate.setSqlMapClient(sqlMapper);
-		return true;
-	}
-	
-	
+	}		
     
     /*public List listar(Object entity)  {//Recuerda ponerlo en la interface
     	Session session = sessionFactory.getCurrentSession();
