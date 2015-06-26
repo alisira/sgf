@@ -12,6 +12,6 @@ import sigefirrhh.persistencia.modelo.CriterioBusqueda;
 import com.ibatis.common.jdbc.exception.NestedSQLException;
 
 public interface CompromisoInicialDetalleDAO extends GenericDAO {
-	public List<CompromisoInicialDetalle> buscarExt(CriterioBusqueda criterioBusqueda) throws PSQLException, Exception, SQLException,NestedSQLException;
+	public List<CompromisoInicialDetalle> buscarExt(CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException,NestedSQLException;
 	
 }

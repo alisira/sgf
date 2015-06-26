@@ -18,7 +18,9 @@ import com.ibatis.common.jdbc.exception.NestedSQLException;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
+import com.ibatis.sqlmap.client.SqlMapSession;
 
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import sigefirrhh.ibatis.conexion.db.MapaSQL;
@@ -30,19 +32,40 @@ import sigefirrhh.struts.addons.Comun;
 public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements GenericDAO, Comun {
 
     private static SqlMapClient sqlMapper;
+    private static SqlMapClientTemplate sqlMapper2;
+    private static SqlMapClientTemplate sqlMapClientTemplate = new SqlMapClientTemplate();
+    
+    
+    
+    
     static Logger log = Logger.getLogger(MapaSQL.class.getName());	
 
     private final static Logger LOGGER = Logger.getLogger(GenericDAOImplHibernate.class.getName());
+    
+    private Integer estado;
 
     public GenericDAOImplHibernate() {
     	try {  
    		 
-  		  Reader reader = Resources.getResourceAsReader("sigefirrhh/ibatis/conexion/db/SqlMapConfig.xml");	      	
-  		  sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
-  		  setSqlMapClient(sqlMapper);
-  		  reader.close(); 
+    		
+    		
+  		  	Reader reader = Resources.getResourceAsReader("sigefirrhh/ibatis/conexion/db/SqlMapConfig.xml");	      	
+  		  	sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
+  		  	setSqlMapClient(sqlMapper);
+  		  	
+  		  	sqlMapClientTemplate.setDataSource(sqlMapper.getDataSource());
+  		  	sqlMapClientTemplate.setSqlMapClient(sqlMapper);
+  		
+  		  	reader.close(); 
+  		  	
+  		  	
+  		  	
+  		 
+  		  	
+  		  	
+  		  	
 
-  	    } catch (IOException e) {	      	    	
+  	    } catch (IOException e) {
   	      throw new RuntimeException("Something bad happened while building the SqlMapClient instance." + e, e);
   	    }
 
@@ -50,22 +73,37 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
     }
 
     @Override
-    public Object guardar(Object entity) throws SQLException, NestedSQLException, Exception  {
+    public Object guardar(Object entity) throws SQLException, NestedSQLException  {
+    	
+    	
+	 	
+		//sqlMapper.startTransaction();
+		
+    	
+    	//sqlMapper.startTransaction();
     	
     	int maxi = entity.getClass().getName().split("\\.").length - 1;
     	Integer valor;
 
-  	   	valor = (Integer) getSqlMapClientTemplate().queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
     	
-  	  	//System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);  	   	
+    	valor = (Integer) sqlMapClientTemplate.queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
+    	
+    	//session.commitTransaction();
+    	
+  	   	//valor = (Integer) sqlMapClientTemplate.queryForObject("guardar"+entity.getClass().getName().split("\\.")[maxi], entity);
+    	
+  	  	//System.out.println("Clase: " + entity.getClass().getName().split("\\.")[maxi] + ", valor " + valor);
+  	   	
+  	  //sqlMapper.endTransaction();
+  	   	
 
     	return valor;
     }
 
 	@Override
-	public Object buscar(CriterioBusqueda entity, String clase) throws SQLException, Exception {
+	public Object buscar(CriterioBusqueda entity, String clase) throws SQLException {
 		
-		List lista = getSqlMapClient().queryForList("buscar"+clase, entity);
+		List lista = sqlMapClientTemplate.queryForList("buscar"+clase, entity);
         return lista;
 	}
 
@@ -73,6 +111,26 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 	public boolean validarAcceso(HttpServletRequest request, String funcion) {
 		return false;
 	}
+	
+	public static boolean comenzarTransaccion() throws SQLException{
+			
+		
+		sqlMapClientTemplate.setSqlMapClient(sqlMapper);
+		return true;
+	}
+	
+	public static boolean commitTransaccion() throws SQLException{
+		sqlMapper.commitTransaction();
+		return true;
+	}
+	
+	public static boolean finalizarTransaccion() throws SQLException{
+		sqlMapper.endTransaction();
+		sqlMapClientTemplate.setSqlMapClient(sqlMapper);
+		return true;
+	}
+	
+	
     
     /*public List listar(Object entity)  {//Recuerda ponerlo en la interface
     	Session session = sessionFactory.getCurrentSession();
@@ -235,4 +293,5 @@ public class GenericDAOImplHibernate extends SqlMapClientDaoSupport implements G
 		
 	}
 	*/
+	
 }

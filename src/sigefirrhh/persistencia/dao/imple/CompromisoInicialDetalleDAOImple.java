@@ -19,8 +19,7 @@ public class CompromisoInicialDetalleDAOImple extends GenericDAOImplHibernate im
     
 	@Override
 	public List<CompromisoInicialDetalle> buscarExt(
-			CriterioBusqueda criterioBusqueda) throws PSQLException,
-			Exception, SQLException, NestedSQLException {
+			CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException, NestedSQLException {
 		List<CompromisoInicialDetalle> lista = getSqlMapClient().queryForList("buscarCompromisoInicialDetalleExt", criterioBusqueda);
         return lista;
 		

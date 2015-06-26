@@ -19,13 +19,13 @@ public class ExpedienteDAOImple extends GenericDAOImplHibernate implements Exped
 	}
 
 	@Override
-	public List<Opcion> buscarExpedienteOpcion(CriterioBusqueda criterioBusqueda) throws PSQLException, Exception, SQLException, NestedSQLException {
+	public List<Opcion> buscarExpedienteOpcion(CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException, NestedSQLException {
 		List<Opcion> lista = getSqlMapClient().queryForList("buscarOpcionExpediente", criterioBusqueda);
         return lista;
 	}
 
 	@Override
-	public int actualizarExpediente(Expediente record) throws PSQLException, Exception, SQLException, NestedSQLException {
+	public int actualizarExpediente(Expediente record) throws PSQLException, SQLException, NestedSQLException {
 		Integer lista = (Integer) getSqlMapClientTemplate().queryForObject("actualizarExpediente", record);
 		if (lista==null) lista = 0;		
         return lista;

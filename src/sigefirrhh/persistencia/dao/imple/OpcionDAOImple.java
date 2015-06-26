@@ -35,15 +35,14 @@ public class OpcionDAOImple extends GenericDAOImplHibernate implements OpcionDAO
 	}
 
 	@Override
-	public List<Opcion> buscarOpcionExpediente(CriterioBusqueda criterioBusqueda) throws PSQLException, Exception, SQLException, NestedSQLException {
+	public List<Opcion> buscarOpcionExpediente(CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException, NestedSQLException {
 		List<Opcion> lista = getSqlMapClient().queryForList("buscarOpcionExpediente", criterioBusqueda);
         return lista;
 	}
 
 	@Override
 	public List<Opcion> buscarOpcionUsadoenExpediente(
-			CriterioBusqueda criterioBusqueda) throws PSQLException, Exception,
-			SQLException, NestedSQLException {
+			CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException, NestedSQLException {
 		List<Opcion> lista = getSqlMapClient().queryForList("buscarOpcionUsadoenExpediente", criterioBusqueda);
         return lista;
 	}	

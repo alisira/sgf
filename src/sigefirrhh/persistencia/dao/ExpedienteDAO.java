@@ -10,7 +10,7 @@ import com.ibatis.common.jdbc.exception.NestedSQLException;
 
 public interface ExpedienteDAO extends GenericDAO {		
 
-	public List<Opcion> buscarExpedienteOpcion (CriterioBusqueda criterio) throws PSQLException, Exception, SQLException,NestedSQLException;
-	public int actualizarExpediente(Expediente record) throws PSQLException, Exception, SQLException,NestedSQLException;	
+	public List<Opcion> buscarExpedienteOpcion (CriterioBusqueda criterio) throws PSQLException, SQLException, NestedSQLException;
+	public int actualizarExpediente(Expediente record) throws PSQLException, SQLException, NestedSQLException;	
 
 }

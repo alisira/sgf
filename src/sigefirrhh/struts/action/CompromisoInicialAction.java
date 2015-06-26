@@ -15,6 +15,7 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -29,6 +30,7 @@ import sigefirrhh.persistencia.dao.imple.CompromisoInicialDAOImple;
 import sigefirrhh.persistencia.dao.imple.CompromisoInicialDetalleDAOImple;
 import sigefirrhh.persistencia.dao.imple.ExpedienteDAOImple;
 import sigefirrhh.persistencia.dao.imple.GastoProyectadoDAOImple;
+import sigefirrhh.persistencia.dao.imple.GenericDAOImplHibernate;
 import sigefirrhh.persistencia.modelo.GastoProyectado;
 import sigefirrhh.sistema.ExcepcionSigefirrhh;
 import sigefirrhh.sistema.ValidadorSesion;
@@ -154,11 +156,14 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 					expediente.setIdUsuario(idUsuario);
 					expediente.setObservacion(formaPeti.getObservacion());
 					expediente.setIdOrganismo((int) org.getIdOrganismo());
+					
 					ValidadorSesion vs = new ValidadorSesion();
 					Integer idOpcion = vs.getIdOpcion(request);
 					expediente.setIdOpcion(idOpcion);//Buscar el id del proceso actual en la base de datos
-					ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();							
+					ExpedienteDAO expedienteDAO = new ExpedienteDAOImple();
+					GenericDAOImplHibernate.comenzarTransaccion();
 					expeResul = (Integer) expedienteDAO.guardar(expediente);
+					GenericDAOImplHibernate.finalizarTransaccion();
  		        	
  		        	Double montoTotal = 0.0;
 					

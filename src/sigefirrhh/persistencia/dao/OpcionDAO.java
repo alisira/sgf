@@ -9,7 +9,7 @@ import sigefirrhh.persistencia.modelo.Opcion;
 
 public interface OpcionDAO extends GenericDAO {		
 	
-	public List<Opcion> buscarOpcionExpediente (CriterioBusqueda criterio) throws PSQLException, Exception, SQLException,NestedSQLException;
-	public List<Opcion> buscarOpcionUsadoenExpediente (CriterioBusqueda criterioBusqueda) throws PSQLException, Exception, SQLException,NestedSQLException;
+	public List<Opcion> buscarOpcionExpediente (CriterioBusqueda criterio) throws PSQLException, SQLException,NestedSQLException;
+	public List<Opcion> buscarOpcionUsadoenExpediente (CriterioBusqueda criterioBusqueda) throws PSQLException, SQLException,NestedSQLException;
 	
 }

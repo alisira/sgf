@@ -40,7 +40,7 @@ public class CompromisoInicialDAOImple extends GenericDAOImplHibernate implement
 
 	
 	@Override
-	public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, Exception, SQLException, NestedSQLException {
+	public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, SQLException, NestedSQLException {
 		Integer lista = (Integer) getSqlMapClientTemplate().queryForObject("actualizarCompromisoInicial", record);
 		if (lista==null) lista = 0;		
         return lista;

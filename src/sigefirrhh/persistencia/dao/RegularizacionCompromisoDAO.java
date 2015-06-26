@@ -10,5 +10,5 @@ import com.ibatis.common.jdbc.exception.NestedSQLException;
 
 public interface RegularizacionCompromisoDAO extends GenericDAO {
 	
-	 //public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, Exception, SQLException,NestedSQLException;
+	 //public int actualizarCompromisoInicial(CompromisoInicial record) throws PSQLException, SQLException, NestedSQLException;
 }
