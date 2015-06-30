@@ -326,7 +326,7 @@ public ActionForward guardar(ActionMapping mapping, ActionForm form, HttpServlet
 					expediente.setAno(ano);
 					expediente.setEstatus(0);
 					expediente.setIdUsuario(idUsuario);
-					expediente.setObservacion(formaPeti.getObservacion());
+					expediente.setObservacion(forma.getObservacion());
 					expediente.setIdOrganismo((int) org.getIdOrganismo());
 					
 					ValidadorSesion vs = new ValidadorSesion();

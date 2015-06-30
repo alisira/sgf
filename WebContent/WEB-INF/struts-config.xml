@@ -82,7 +82,15 @@
         <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion" name="ParametrosBusquedaForm" input="/web/pdd/buscar_expediente.jsp" >
 			<forward name="apruebaNuevo" path="/web/pdd/buscar_expediente.jsp"/>            
            	<forward name="aprobarImprimir" path="/web/pdd/pdd.jsp"/>
-        </action>        
+        </action>
+        
+        <action path="/puntoDecision" type="sigefirrhh.struts.action.PuntoDecisionAction" parameter="accion" name="ParametrosBusquedaForm" input="/web/pdd/buscar_expediente.jsp" >
+			<forward name="apruebaNuevo" path="/web/pdd/buscar_expediente.jsp"/>            
+           	<forward name="aprobarImprimir" path="/web/pdd/pdd.jsp"/>
+        </action> 
+        
+        <action path="/controlAcceso" type="sigefirrhh.struts.action.ControlAccesoAction" parameter="accion" name="ParametrosBusquedaForm">			
+        </action>
 
     </action-mappings>
     

@@ -41,7 +41,10 @@ public class ParametrosBusquedaForm extends ActionForm{
 	private Integer decision;
 	private Integer idOpcion;
 	private String tituloApli;
-	
+	private String foto;
+	private String horaIni;
+	private String horaFin;
+	private String velocidad;
 	
 	public String getTituloApli() {
 		return tituloApli;
@@ -270,6 +273,30 @@ public class ParametrosBusquedaForm extends ActionForm{
 	
 	public void setFechaHasta(String fechaHasta) {
 		this.fechaHasta = fechaHasta;
+	}
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	public String getHoraIni() {
+		return horaIni;
+	}
+	public void setHoraIni(String horaIni) {
+		this.horaIni = horaIni;
+	}
+	public String getHoraFin() {
+		return horaFin;
+	}
+	public void setHoraFin(String horaFin) {
+		this.horaFin = horaFin;
+	}
+	public String getVelocidad() {
+		return velocidad;
+	}
+	public void setVelocidad(String velocidad) {
+		this.velocidad = velocidad;
 	}
 	
 }
