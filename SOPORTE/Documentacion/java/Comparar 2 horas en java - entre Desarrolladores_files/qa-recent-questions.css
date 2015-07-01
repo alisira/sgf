@@ -1,0 +1,75 @@
+/*
+*	Q2AM Jquery Ticker CSS
+*	
+*	Core css file for template and widget
+*	
+*	@author			Q2A Market
+*	@category		Core
+*	@Version: 		1.0
+*	
+*	@Q2A Version	1.5.2
+*
+*	Feel free to modify this file as per your work.
+*/
+
+div.qa-recent-q-list{
+	font-size:16px;
+	padding:0;
+	background:#f8f8f8;
+	border:1px solid #eee;
+}
+div.qa-recent-q-list-item{
+	padding:8px 20px;
+	border-bottom:1px solid #eee;
+	border-top:1px solid #fff;
+}
+div.qa-recent-q-list-item:first-child{
+	border-top:none;
+}
+div.qa-recent-q-list-item:last-child{
+	border-bottom:none;
+}
+div.qa-recent-q-list-item:hover{
+	background:#f5f5f5;
+}
+div.qa-recent-q-list-item a{
+
+}
+div.qa-recent-q-list-item span.qa-recent-votecount,div.qa-recent-q-list-item span.qa-recent-q-asker,div.qa-recent-q-list-item span.qa-recent-acount,div.qa-recent-q-list-item span.qa-recent-separator{
+	color:#aaa;
+	float:right;
+	margin-left:10px;
+	font-size:75%;
+}
+
+/*--[widget css]--*/
+ul.qa-recent-q-list{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+ul.qa-recent-q-list > li{
+	margin:0;
+	padding:5px 0px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+}
+ul.qa-recent-q-list > li:first-child{
+	margin:0;
+	padding:5px 0px;
+	border-top:none;
+}
+ul.qa-recent-q-list > li:last-child{
+	margin:0;
+	padding:5px 0px;
+	border-bottom:none;
+}
+ul.qa-recent-q-list > li a.qa-recent-widget-title{
+	display:block;
+	font-size:120%;	
+}
+
+.qa-recent-q-asker{
+	font-style:italic;
+}
+

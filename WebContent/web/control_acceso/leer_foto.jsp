@@ -5,23 +5,7 @@
 
 <%
 
-
-
-if (strlen($_POST['velocidad']) < 1) {
-    $velocidad = 220;    
-} else {
-    if (isset($_POST['velocidad'])) {
-        $velocidad = $_POST['velocidad'];    
-    } else {
-        $velocidad = 220;    
-    }
-}
-
-
-//echo $contexto[0];
-//echo $contexto[1];
-
-//echo 'epa';
+int velocidad = 200;
 
 %>
 
@@ -35,7 +19,8 @@ if (strlen($_POST['velocidad']) < 1) {
     <body onload="consultar();" >
         
         <div>        
-            <form name="form" action="/controlAcceso.do" method="POST" >
+            <form name="form" action="controlAcceso.do" method="POST" >
+            <input name="accion" value="nuevo" type="hidden">
                 <img id="foto" src="">
                 <label>Dia
                     <input id="dia" name="dia" value="<bean:write name="dia" />">
@@ -98,7 +83,7 @@ if (strlen($_POST['velocidad']) < 1) {
                 }
  
                 if(req!=null){
-                    req.onreadystatechange = procesarEventos;                
+                    req.onreadystatechange = procesarEventos;
                     //url = "leer_foto_1.php?archivo=<?php // echo $archivo ?>";
                     //url = "<?php //echo $_SERVER['REQUEST_SCHEME'] ?>://<?php //echo $_SERVER['SERVER_NAME'] ?><?php //echo $_SERVER['CONTEXT_PREFIX'] ?>leer_foto_1.php?archivo=<?php //echo $dia ?>";
                     con++;
