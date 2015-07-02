@@ -45,6 +45,7 @@ public class ParametrosBusquedaForm extends ActionForm{
 	private String horaIni;
 	private String horaFin;
 	private String velocidad;
+	private Integer indiceFoto;	
 	
 	public String getTituloApli() {
 		return tituloApli;
@@ -297,6 +298,12 @@ public class ParametrosBusquedaForm extends ActionForm{
 	}
 	public void setVelocidad(String velocidad) {
 		this.velocidad = velocidad;
+	}
+	public Integer getIndiceFoto() {
+		return indiceFoto;
+	}
+	public void setIndiceFoto(Integer indiceFoto) {
+		this.indiceFoto = indiceFoto;
 	}
 	
 }

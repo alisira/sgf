@@ -128,12 +128,12 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	        response.setContentType("text/xml");
 	        response.setHeader("Cache-Control", "n	o-cache");
 	        response.setStatus(HttpServletResponse.SC_OK);
-	        out.write("<root>");
+	        //out.write("<root>");
 
 	    	String archivo =  "video_" + forma.getFechaDesde();
 	        FileReader lector=new FileReader(archivo + ".log");
 	        BufferedReader contenido=new BufferedReader(lector);
-    		Integer max= 100;
+    		Integer indiceFoto= forma.getIndiceFoto() ;
     		String horaIni= forma.getHoraIni();
     		String horaFin= forma.getHoraFin();
 	        
@@ -154,11 +154,16 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 
 		        	//System.out.println(con + " " + sdf.parse(hora) + " HoraIni: " + sdf.parse(horaIni)+ " HoraFin: " + sdf.parse(horaFin));
 		        	
-		        	out.write("<foto>");        	
-					out.write(registro[1]);
-					out.write("</foto>");
+		        	System.out.println(indiceFoto + "-" + con);
 		        	
-		            if (max == con) {		                
+		            if (indiceFoto.equals(con)) {
+		            	
+		            	System.out.println(indiceFoto + "," + con );
+		            	
+		            	//out.write("<foto>");        	
+						//out.write(registro[1]);
+						//out.write("</foto>");
+		            	out.write(regTemp);
 		                break;
 		            }
 		            
@@ -187,7 +192,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 				out.write("</error>");		
 			}
 
-			out.write("</root>");
+			//out.write("</root>");
 			out.flush();
 		}
 		

@@ -13,7 +13,7 @@ int velocidad = 200;
 <html>   
     
     <head>        
-        <script src="js/jquery.js"></script>
+        <script src="/sigefirrhh/web/control_acceso/jquery-2.1.1.min.js"></script>
     </head>
     
     <body onload="consultar();" >
@@ -37,7 +37,7 @@ int velocidad = 200;
                     <input id="tiempo" name="tiempo" value="00:00:00">
                 </label>
                 <label>Velocidad
-                    <input id="velocidad" name="velocidad" value="<?php echo $velocidad;?>">
+                    <input id="velocidad" name="velocidad" value="1000">
                 </label>
                 <input type="submit" name="enviar">
             </form>
@@ -53,7 +53,7 @@ int velocidad = 200;
         var timerID = 0;
         timerID = setInterval("consultar()", latencia);
         var req = false;
-        var con = 0;
+        var indiceFoto = 0;
         var hora_ini = '<?php echo $hora_ini ?>';
         var hora_fin = '<?php echo $hora_fin ?>';
         var tiempo_actual = '';
@@ -71,7 +71,7 @@ int velocidad = 200;
              
             //$.get("leer_foto_1.php",{archivo:"<?php echo $dia ?>"},procesarEventos);
     
-            if (ciclos < 30000 && tiempo_actual != hora_fin ){
+            if (ciclos < 200 && tiempo_actual != hora_fin ){
                 //timerID = setInterval("enviar_foto()", tiempo);
                 //alert(hora_ini);
                 if (window.XMLHttpRequest){
@@ -84,14 +84,11 @@ int velocidad = 200;
  
                 if(req!=null){
                     req.onreadystatechange = procesarEventos;
-                    //url = "leer_foto_1.php?archivo=<?php // echo $archivo ?>";
-                    //url = "<?php //echo $_SERVER['REQUEST_SCHEME'] ?>://<?php //echo $_SERVER['SERVER_NAME'] ?><?php //echo $_SERVER['CONTEXT_PREFIX'] ?>leer_foto_1.php?archivo=<?php //echo $dia ?>";
-                    con++;
-                    //url = "<?php // echo $_SERVER['REQUEST_SCHEME'] ?>://<?php //echo $_SERVER['SERVER_NAME'] ?><?php //echo $_SERVER['CONTEXT_PREFIX'] ?>leer_foto_fecha.php?dia=<?php //echo $dia ?>&num="+con+"&hora_ini=<?php //echo $hora_ini ?>&hora_fin=<?php //echo $hora_fin ?>";
-                    url = "http://<?php echo $_SERVER['SERVER_NAME'] ?>/<?php echo $contexto ?>/leer_foto_fecha.php?dia=<?php echo $dia ?>&num="+con+"&hora_ini=<?php echo $hora_ini ?>&hora_fin=<?php echo $hora_fin ?>";
+                    indiceFoto++;
+                    url = "/sigefirrhh/controlAcceso.do?accion=leer&fechaDesde=12-09-2014&horaIni=01:51:36&horaFin=01:53:59&indiceFoto="+ indiceFoto;
                     
                     //alert(url);
-                    req.open("GET",url,true);
+                    req.open("POST",url,true);
                     req.send(null);
                 }
                 ciclos++;
@@ -103,29 +100,36 @@ int velocidad = 200;
 
         function procesarEventos(){
             
+            
             if (req.readyState==4 && req.status==200){
 
                 datos  = req.responseText;
+                //alert("datos 1" + datos);
+				
                 setTimeout(function(){},5);
                 
                 if (datos.length > 0){
                     resp = datos.split("|");
                     foto.src = resp[1];
+                    //alert("datos 2" + resp[1]);
                     tiempo.value = resp[0];
                     
                     //t.value = resp[1];
                     if (tiempo_actual == hora_fin){
+                    	//alert("datos 3" + resp[1]);
                         tiempo.value = resp[0]+ ' Terminado ';                        
                         clearInterval(timerID);
                     }
                     
-                    //controlLatencia(velocidad.value * 100);
+                    controlLatencia(velocidad.value * 100);
                     if (latencia != velocidad.value){
+                    	//alert("datos 4" + resp[1]);
                         clearInterval(timerID);
                         latencia = velocidad.value;
                         timerID = setInterval("consultar()", latencia);                        
                     }
-                     
+
+                    ///alert("datos 5" + resp[1]);
                     //consultar();
                     
                 }else{
