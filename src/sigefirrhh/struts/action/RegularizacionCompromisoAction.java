@@ -339,7 +339,7 @@ public ActionForward guardar(ActionMapping mapping, ActionForm form, HttpServlet
 					
 					CompromisoInicialDAO compromisoInicialDAO = new CompromisoInicialDAOImple();
 					CompromisoInicial compromisoInicial = new CompromisoInicial();
-					compromisoInicial = (CompromisoInicial ) compromisoInicial.llenarBean(compromisoInicial,formaPeti);						
+					compromisoInicial = (CompromisoInicial ) compromisoInicial.llenarBean(compromisoInicial,forma);						
 					compromisoInicial.setAno(ano);
 					compromisoInicial.setExpediente(expeResul);
 					compromisoInicial.setEstatus(0);

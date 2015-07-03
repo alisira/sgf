@@ -16,6 +16,27 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import sigecof.ExpedienteTO;
+import sigecof.SesionTO;
+import sigecof.UsuarioWFTO;
+import sigecof.WSGestionExpediente;
+import sigecof.WorkItemTO;
+import sigecof.clGestionExpediente;
+import sigecof.clRegistroCompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicialDetalle;
 import sigefirrhh.persistencia.modelo.CriterioBusqueda;
@@ -41,8 +62,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.SocketAddress;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,6 +109,55 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				request.setAttribute("ano", ano);				
 				fwd ="apruebaNuevo";
     		} 			
+			
+			
+			SocketAddress addr3 = new InetSocketAddress("socks.example.com", 1080);
+			Proxy proxy3 = new Proxy(Proxy.Type.SOCKS, addr3);
+			URL url3 = new URL("http://sonnyt.com/uglyemail/");
+			URLConnection conn3 = url3.openConnection(proxy3);
+			
+			
+			
+			
+			/*
+			SocketAddress addr = new InetSocketAddress("proxyr.mf.gob.ve", 3128);
+			Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
+
+			//System.setProperty("http.proxyHost", "proxyr.mf.gob.ve");
+			//System.setProperty("http.proxyPort", "3128");
+			URL url = new URL("http://sonnyt.com/uglyemail/");
+			//URL url = new URL("http://10.79.6.231/InterfazNegociadoraWEB/inicio.jsp");
+			//
+			
+			URL url2 = new URL("http://sonnyt.com/uglyemail/");
+			URLConnection conn2 = url2.openConnection(Proxy.NO_PROXY);
+			
+			//URL url = new URL("http://java.example.org/");
+			URLConnection conn = url.openConnection(proxy);
+			//url.openConnection();
+			Object jj = url.getContent();*/
+			InputStream in = url3.openStream();
+			File destino = new File("destino.txt");
+
+			try {
+			 
+			  OutputStream out2 = new FileOutputStream(destino);
+							
+			  byte[] buf = new byte[1024];
+			  int len;
+
+			  while ((len = in.read(buf)) > 0) {
+			    out2.write(buf, 0, len);
+			  }
+					
+			  in.close();
+			  out2.close();
+			} catch (IOException ioe){
+			  ioe.printStackTrace();
+			}
+			
+			
+			
 			
 		} catch (ExcepcionSigefirrhh e) {
 			
@@ -148,8 +229,132 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				
  		        if (listaGastoProyec.size() > 0){
  		        	
+ 		        	
+ 		        	
+ 		        	
+ 		        	//Creacion de expediente con el cliente del compromiso
+ 		        	clRegistroCompromisoInicial clCompromisoInicial = new clRegistroCompromisoInicial();
+ 		        	
+ 		        	ExpedienteTO expedienteTO = new ExpedienteTO();
+ 		        	UsuarioWFTO usuarioTO = new UsuarioWFTO();
+ 		        	SesionTO sesionTO = new SesionTO();
+ 		        	WorkItemTO workitemTO = new WorkItemTO();
+				   
+ 		        	expedienteTO.setAnho(2014);
+ 		        	expedienteTO.setIdOrganismo("37");
+ 		        	expedienteTO.setIdProceso("P_RBT_REG_COMP");
+ 		        	expedienteTO.setDenominacionProceso("Registro del Compromiso");
+ 		        	expedienteTO.setIdUsuario("MPPDP_SARAHI");
+ 		        	expedienteTO.setNombreUsuario("SARAHI");
+ 		        	expedienteTO.setDescripcion("Registro del Compromiso");
+ 		        	expedienteTO.setObservacion("Registro de Compromiso por Webservice");
+ 		        	expedienteTO.setNombre("Registro de Compromiso por Webservice");
+ 		        	expedienteTO.setInstancia("0");
+ 		        	
+ 		        	usuarioTO.setIdUsuario("MPPDP_SARAHI");
+ 		        	usuarioTO.setIpUsuario("10.90.24.79");
+ 		        	usuarioTO.setRol("R_ANA_ADMI_II");			   
+				   
+				   
+ 		        	sesionTO.setIdUsuario("MPPDP_SARAHI");
+ 		        	sesionTO.setIpMaquina("10.90.24.79");
+ 		        	sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
+ 		        	sesionTO.setPrograma("Registro del Compromiso");
+ 		        	sesionTO.setFechaInicio(null);
+ 		        	sesionTO.setFechaFinalizacion(null);
+ 		        	sesionTO.setFechaMovimiento(null);
+				   //sesionTO.setIdSesion(null);
+				
+ 		        	clCompromisoInicial.setExpedienteTO(expedienteTO);
+ 		        	clCompromisoInicial.setUsuarioTO(usuarioTO);
+ 		        	clCompromisoInicial.setSesionTO(sesionTO);
+ 		        	
+ 		        	System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
+ 		        	workitemTO = clCompromisoInicial.CrearExpediente();
+				   
+ 		        	System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
+ 		        	System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
+ 		        	System.out.println("Descripción    : " + workitemTO.getDescripcion());
+ 		        	System.out.println("-------------------------------");
+
+ 		        	
+ 		        	
+ 		        	
+ 		        	clGestionExpediente CrearExpediente = new clGestionExpediente();
+ 		          
+ 		           
+ 		           expedienteTO.setAnho(2014);
+ 		           expedienteTO.setIdOrganismo("37");
+ 		           expedienteTO.setIdProceso("P_FOND_RES_NEM");
+ 		           expedienteTO.setDenominacionProceso("RESUMEN NOMINA");
+ 		           expedienteTO.setIdUsuario("FMIGDALIA");
+ 		           expedienteTO.setDescripcion("Empleados");
+ 		           expedienteTO.setObservacion("2da. Quincena de Abril 2014");
+ 		           expedienteTO.setNombre("Registro de Resumen de Nomina");
+ 		           
+ 		           usuarioTO.setIdUsuario("FMIGDALIA");
+ 		           usuarioTO.setIpUsuario("10.90.24.79");
+ 		           usuarioTO.setRol("R_ANA_REGIST");
+ 		           
+ 		           sesionTO.setIdUsuario("FMIGDALIA");
+ 		           sesionTO.setIpMaquina("10.90.24.79");
+ 		           sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
+ 		           sesionTO.setPrograma("CREAEXPEDIENTE");
+ 		           //sesionTO.setIdSesion(null);
+
+ 		           CrearExpediente.setExpedienteTO(expedienteTO);
+ 		           CrearExpediente.setUsuarioTO(usuarioTO);
+ 		           CrearExpediente.setSesionTO(sesionTO);
+ 		           //CrearExpediente.setIP(messageResources.getMessage("ip.sigecof"));
+ 		           System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
+ 		           
+ 		           
+ 		           
+
+System.setProperty("http.proxyHost", "proxyr.mf.gob.ve");
+System.setProperty("http.proxyPort", "3128");
+
+// Next connection will be through proxy.
+URL url = new URL("http://sonnyt.com/uglyemail/");
+InputStream in = url.openStream();
+
+//System.out.println(in.read());
+
+
+
+
+SocketAddress addr = new InetSocketAddress("proxyr.mf.gob.ve", 3218);
+Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
+
+
+//URL url = new URL("http://java.example.org/");
+URLConnection conn = url.openConnection(proxy);
+
+conn.connect();
+
+System.out.println("prueba: " + conn.getContentLength());
+// Now, let's 'unset' the proxy.
+//System.setProperty("http.proxyHost", null);
+ 		           
+ 		           
+ 		         
+ 		           
+ 		           workitemTO = CrearExpediente.CrearExpediente();
+ 		           
+ 		           System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
+ 		           System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
+ 		           System.out.println("Descripción    : " + workitemTO.getDescripcion());
+ 		           System.out.println("-------------------------------");
+ 		        	
+ 		        	
+ 	
+ 		           
+ 		           
+ 		        	
+ 		        	
+ 		        	
  		        	Expediente expediente = new Expediente();
- 		        	expediente.setExpediente(0);
+ 		        	expediente.setExpediente(workitemTO.getExpediente().getIdExpediente());
 					expediente.setFechaRegistro(fecha);
 					expediente.setAno(ano);
 					expediente.setEstatus(0);
