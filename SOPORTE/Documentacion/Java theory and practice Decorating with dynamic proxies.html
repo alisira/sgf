@@ -1,0 +1,850 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="dj_gecko dj_contentbox" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Java theory and practice: Decorating with dynamic proxies</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/">
+<link rel="SHORTCUT ICON" href="http://www.ibm.com/favicon.ico">
+<meta name="DC.Rights" content="© Copyright&nbsp;IBM Corporation&nbsp;2005">
+<meta name="Keywords" content="Brian Goetz, Java Theory and Practice, dynamic proxy, proxy, InvocationHandler, Adapter, Decorator, RMI, tttjca">
+<meta name="DC.Date" scheme="iso8601" content="2005-08-30">
+<meta name="Source" content="v17 delivery:developerWorks">
+<meta name="Security" content="Public">
+<meta name="Abstract" content="The dynamic proxy facility, part of the java.lang.reflect package and added to the JDK in version 1.3, allows programs to create proxy objects, which can implement one or more known interfaces and dispatch calls to interface methods programmatically using reflection instead of using the built-in virtual method dispatch. This process allows implementations to 'intercept' method calls and reroute them or add functionality dynamically. This month, Brian Goetz explores several applications for dynamic proxies.">
+<meta name="Description" content="The dynamic proxy facility, part of the java.lang.reflect package and added to the JDK in version 1.3, allows programs to create proxy objects, which can implement one or more known interfaces and dispatch calls to interface methods programmatically using reflection instead of using the built-in virtual method dispatch. This process allows implementations to 'intercept' method calls and reroute them or add functionality dynamically. This month, Brian Goetz explores several applications for dynamic proxies.">
+<meta name="IBM.Effective" scheme="W3CDTF" content="2005-08-30">
+<meta name="Owner" content="developerWorks Content/Raleigh/IBM">
+<meta name="DC.Language" scheme="rfc1766" content="en">
+<meta name="IBM.SpecialPurpose" content="SP001">
+<meta name="IBM.Country" content="ZZ">
+<meta name="Robots" content="index,follow">
+<meta name="DC.Type" scheme="IBM_ContentClassTaxonomy" content="CT316">
+<meta name="DC.Subject" scheme="IBM_SubjectTaxonomy" content="TT300">
+<meta name="dW.ContentArea" content="1">
+<meta name="dW.Topic" content="263,16,34">
+
+<meta scheme="IBM_WTMCategory" name="IBM.WTMCategory" content="SOFDCJVAZZ">
+
+<!-- SITE MON : START (DO NOT DELETE) -->
+<!-- developerWorks monitoring token -->
+<!-- SITE MON : END (DO NOT DELETE) -->
+<link rel="canonical" href="http://www.ibm.com/developerworks/library/j-jtp08305/index.html">
+<!-- HEADER_SCRIPTS_AND_CSS_INCLUDE -->
+<link href="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/www.css" rel="stylesheet" title="www" type="text/css">
+<!--  Masthead/footer  -->
+<link href="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-mfN2015-01.css" rel="stylesheet" title="www" type="text/css">
+<link href="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-article-6.css" rel="stylesheet" title="www" type="text/css">
+<link href="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-common-features.css" rel="stylesheet" title="www" type="text/css">
+        <link href="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-bluemix-regbar.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+<script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/linkid.js" async="" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/analytics.js" async=""></script><script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/www.js">//</script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/eluminate_002.js" type="text/javascript"></script>
+<script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-www-v2.js">//</script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/Dialog.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/eluminate.js" type="text/javascript"></script>
+<script type="text/javascript">dojo.addOnLoad(function(){var dw_lang="en_US";var dw_source="dw";var dw_rb_cta="Runtimes, boilerplates, and services for Java development.";dojo.attr(dojo.byId("dw-regbar-vp"),"innerHTML",dw_rb_cta);var dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-2];if(dw_content=="library"){dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-1];dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-3]+"-"+dw_content.substring(0,dw_content.indexOf(".html"))}var lnkID="article-rbar-bmix-home-regbar";dojo.attr(dojo.query(".dw-regbar-btn")[0],"id",lnkID);var lnkHref=dojo.attr(dojo.byId(lnkID),"href")+"?lang="+dw_lang+"&ca="+dw_source+"-_-bluemix-_-"+dw_content+"-_-regbar-article";dojo.attr(dojo.byId(lnkID),"href",lnkHref);dojo.attr(dojo.byId(lnkID),"onclick","trkOBL('"+lnkHref+"','"+lnkID+"'); return false;");var dwRegbarShow=dojo.animateProperty({node:"dw-regbar",duration:1000,delay:1000,properties:{opacity:{start:0,end:1},top:0}});var ibmTopShow=dojo.animateProperty({node:"ibm-top",duration:1000,delay:1000,properties:{marginTop:{start:0,end:42}}});dwRegbarShow.play();ibmTopShow.play()})
+</script><script type="text/javascript">
+//  ibmweb.config.set({ sbs: { enabled: false }});
+</script>
+<!-- Continuous Feedback Survey (jpp 04/06/15 -->
+<script type="text/javascript">
+    ibmweb.config.set({
+    opinionlab: {
+    intercept: {
+    percent: 15,
+    start: "April 5 2015",
+    stop: "May 15 2015",
+    invitation: {
+    title: "Tell developerWorks what you think",
+    content: "We want your feedback to help us improve developerWorks. Please take a few minutes to complete our brief survey.",
+    yes_label: "Yes",
+    no_label: "No Thanks"
+    },
+    survey: {
+    type: "sg",
+    id: "s3/2048432/Tell-developerWorks-what-you-think",
+    width: 720,
+    height: 600
+    }
+    }
+    }
+    });
+</script>
+<script type="text/javascript">dojo.addOnLoad(function(){var dw_lang="en_US";var dw_source="dw";var dw_register="Sign up for a free Bluemix trial";var dw_connect="Connect with Bluemix developers";var dw_vp="Develop and deploy your next<br/>app on the IBM Bluemix<br/>cloud platform.";var dw_cta="Start your free trial";var dw_tile_alt="Develop and deploy your next app on the IBM Bluemix cloud platform. Start building for free.";var dw_videopr="It's never been easier<br/>to build and deploy your apps in the cloud.<br/>";var dw_videopr_cta="Start your free trial";var dw_campaign="bluemix";var dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-2];if(dw_content=="library"){dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-1];dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-3]+"-"+dw_content.substring(0,dw_content.indexOf(".html"))}var bluDevComURL="https://developer.ibm.com/bluemix/";var bluLink="https://www.bluemix.net/";var lnkID;var lnkIDd;var lnkIDt;var bLinkEnd;var bLinkTemp;var idTrkr=[];var idCnt;var artTop=dojo.query("div.ibm-col-1-1")[0];var artChildren=dojo.query(artTop).children();var edgy=false;if(dojo.hasClass(artChildren[0],"ibm-inset"))edgy=true;if((artChildren[0].nodeName=="H2")&&(dojo.hasClass(artChildren[1],"ibm-inset")))edgy=true;if(dojo.hasClass(artChildren[0],"codesection"))edgy=true;if((artChildren[0].nodeName=="H5")&&(dojo.hasClass(artChildren[1],"codesection")))edgy=true;if((artChildren[0].nodeName=="H5")&&(artChildren[1].width>=701))edgy=true;if(artChildren[1].width>=701)edgy=true;if(dojo.hasClass(artChildren[0],"ibm-data-table"))edgy=true;if((artChildren[0].nodeName=="H5")&&(dojo.hasClass(artChildren[1],"ibm-data-table")))edgy=true;if(!(edgy)){var sBarAB='<div class="dw-article-sidebar dw-bluemix" id="dwc-exp-a">'+'<img src="//dw1.s81c.com/developerworks/i/bluemix-graphic.png" height="64" width="64" alt=""/>'+'<p>'+dw_vp+'</p>'+'<p class="ibm-button-link-alternate dw-button-green">'+'<a id="tutc-sbar-bmix-home-btn-ABa" href="'+bluLink+'" class="dw-button-large">'+dw_cta+'</a></p></div>';dojo.place(sBarAB,artTop,"first")}dojo.forEach(dojo.query("#ibm-content-main a"),function(item,index){var dw_medium="article";var bLink=dojo.attr(item,"href");var linkClass=dojo.attr(item,"class");if((dojo.attr(item,"id")!=null)&&(dojo.attr(item,"id").indexOf("-sbar-")>-1))dw_medium="sidebar";if((dojo.attr(item,"id")!=null)&&(dojo.attr(item,"id").indexOf("-vpromo-")>-1))dw_medium="video-promotion";if(bLink&&(bLink.indexOf("//bluemix.net")>-1))bLink=bLink.replace("//bluemix.net","//www.bluemix.net");if(bLink&&(bLink.indexOf("//ace.ng.bluemix.net")>-1))bLink=bLink.replace("//ace.ng.bluemix.net","//www.bluemix.net");if(bLink&&(bLink.indexOf("//console.ng.bluemix.net")>-1))bLink=bLink.replace("//console.ng.bluemix.net","//www.bluemix.net");if(bLink&&((bLink.indexOf("//www.bluemix.net")>-1)||(bLink.indexOf("//www.ng.bluemix.net")>-1)||(bLink.indexOf("//hub.jazz.net")>-1))){bLinkEnd="";bLink=bLink.split("?");if((bLink[1])&&(bLink[1].indexOf("repository=")!=-1)){var deployBtn=true;bLink[0]=bLink[0]+"?"+bLink[1];bLink[1]=null}if((bLink[1])&&(bLink[1].indexOf("/")!=-1))bLinkEnd=bLink[1].substring(bLink[1].indexOf("/"));if(dojo.attr(item,"id")==null){bLinkTemp=bLink[0]+bLinkEnd;if(bLinkTemp.indexOf("bluemix")!=-1){lnkIDd="bmix";if(bLinkTemp.indexOf("/#/solutions")!=-1){lnkIDd=lnkIDd+"-solution"}else if(bLinkTemp.indexOf("/solutions")!=-1){lnkIDd=lnkIDd+"-solution"}else if(bLinkTemp.indexOf("/#/store")!=-1){lnkIDd=lnkIDd+"-service"}else if(bLinkTemp.indexOf("/catalog")!=-1){lnkIDd=lnkIDd+"-service"}else if(bLinkTemp.indexOf("/docs")!=-1){lnkIDd=lnkIDd+"-docs"}else{lnkIDd=lnkIDd+"-home"}}else{if((bLinkTemp.indexOf("//hub.jazz.net/git")>-1)||(bLinkTemp.indexOf("//hub.jazz.net/project")>-1)){lnkIDd=deployBtn?"devops-deploy":"devops-code"}else{lnkIDd=bLinkTemp.substring(bLinkTemp.indexOf("hub.jazz.net/")+13);lnkIDd=lnkIDd==""?"devops-home":"devops-"+lnkIDd.split("/")[0]}}if(dojo.attr(dojo.query(item).parent()[0],"class").indexOf("ibm-button")!=-1){lnkIDt="btn"}else{lnkIDt="txt"}}bLink=bLink[0];if(bLink.indexOf("//hub.jazz.net")>-1){if(!(deployBtn)&&((bLink.indexOf("//hub.jazz.net/git")>-1)||(bLink.indexOf("//hub.jazz.net/project")>-1))){bLink="https://login.jazz.net/psso/proxy/jazzregister?utm_source="+dw_source+"&utm_medium="+dw_medium+"&utm_content="+dw_content+"&utm_campaign="+dw_campaign+"&redirect_uri="+bLink}else{if(deployBtn){bLink=bLink+"&cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}else{bLink=bLink+"?utm_source="+dw_source+"&utm_campaign="+dw_campaign+"&utm_content="+dw_content+"&utm_medium="+dw_medium}}}else{if(bLink.indexOf("/#/")==-1){if(bLink.substring(bLink.length-7)=="/docs/#"){bLink=bLink.replace("/docs/#","/docs/"+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium)}else if(bLink.substring(bLink.length-5)=="/docs"){bLink=bLink.replace("/docs","/docs/"+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium)}else{bLink=bLink+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}}else{bLink=bLink.substring(0,bLink.indexOf("#"))+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium+bLink.substring(bLink.indexOf("#")-1)}}if(bLinkEnd)bLink=bLink+bLinkEnd;if(linkClass.indexOf("bluemix-home")==-1){if((bLink.indexOf("#")==-1)&&(bLink.indexOf("/solutions")==-1)&&(bLink.indexOf("/catalog")==-1)&&(bLink.indexOf("//www.bluemix.net/")!=-1)){bLink=bLink.replace("//www.bluemix.net/","//developer.ibm.com/sso/bmregistration");if(bLink.indexOf("http://")==0)bLink=bLink.replace("http://","https://");if(bLink.indexOf("//")==0)bLink=bLink.replace("//","https://");if(bLink.indexOf("?cm_mmc=")!=-1)bLink=bLink.replace("?cm_mmc=","?lang="+dw_lang+"&ca=")}if((bLink.indexOf("#")==-1)&&(bLink.indexOf("/solutions")==-1)&&(bLink.indexOf("//www.bluemix.net?")!=-1)){bLink=bLink.replace("//www.bluemix.net","//developer.ibm.com/sso/bmregistration");if(bLink.indexOf("http://")==0)bLink=bLink.replace("http://","https://");if(bLink.indexOf("//")==0)bLink=bLink.replace("//","https://");if(bLink.indexOf("?cm_mmc=")!=-1)bLink=bLink.replace("?cm_mmc=","?lang="+dw_lang+"&ca=")}}if((bLink.indexOf("#")!=-1)&&(bLink.indexOf("solutions")!=-1)){bLinkTemp=bLink.substring(0,bLink.indexOf("?"));bLink=bLink.substring(bLink.indexOf("/#/")+3,bLink.length);bLink=bLinkTemp+bLink;bLinkTemp=bLink.substring(0,bLink.indexOf("solution="));bLink=bLink.substring(bLink.indexOf("/solution=")+10,bLink.length);bLink=bLinkTemp+bLink;bLink=bLink+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}if((bLink.indexOf("#")!=-1)&&(bLink.indexOf("store")!=-1)){if(bLink.indexOf("&cloudOEPaneId=store")!=-1){bLinkTemp=bLink.split("&cloudOEPaneId=store");bLink=bLinkTemp[0]}bLinkTemp=bLink.substring(bLink.indexOf("serviceOfferingGuid=")+20,bLink.length);bLink=bLink.substring(0,bLink.indexOf(".net/")+5)+"catalog/"+bLinkTemp+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}if(dojo.attr(item,"id")==null){lnkID="tutc-main-"+lnkIDd+"-"+lnkIDt;idCnt=0;dojo.forEach(idTrkr,function(item,index){if(item.indexOf(lnkID)!=-1){idCnt++}});if(idCnt>0){lnkID=lnkID+"-"+idCnt}dojo.attr(item,"id",lnkID);idTrkr.push(lnkID)}else{lnkID=dojo.attr(item,"id")}dojo.attr(item,"href",bLink);dojo.attr(item,"onclick","trkOBL('"+bLink+"','"+lnkID+"'); return false;");}});var istndom=setInterval(function(){if(!!dojo.byId('ibm-social-tools')){var ibmsi=["print","email","digg","facebook","twitter","delicious","linkedin","stumble","googleplus"];dojo.forEach(ibmsi,function(item,index){var siHref=escape(dojo.attr(dojo.query("#ibm-social-tools .ibm-share-"+item)[0],"href"));var siID="ibmShare-B-"+item;siHref=siHref.replace(/%250A/g,"");siHref=siHref.replace(/%2520%2520/g,"");dojo.attr(dojo.query("#ibm-social-tools .ibm-share-"+item)[0],"onclick","trkOBL('"+siHref+"','"+siID+"');")});clearInterval(istndom)}},1000);var dwistndom=setInterval(function(){if(!!dojo.byId('dw-ibm-social-tools')){var dwibmsi=["facebook","twitter","linkedin","googleplus"];dojo.forEach(dwibmsi,function(item,index){var dwsiHref=escape(dojo.attr(dojo.query("#dw-ibm-social-tools .ibm-share-"+item)[0],"href"));var dwsiID="dwShare-B-"+item;dwsiHref=dwsiHref.replace(/%250A/g,"");dwsiHref=dwsiHref.replace(/%2520%2520/g,"");dojo.attr(dojo.query("#dw-ibm-social-tools .ibm-share-"+item)[0],"onclick","trkOBL('"+dwsiHref+"','"+dwsiID+"');");dojo.removeAttr(dojo.query("#dw-ibm-social-tools .ibm-share-"+item)[0],"target");dojo.attr(dojo.query("#dw-ibm-social-tools .ibm-share-"+item)[0],"href","javascript:void(0)")});clearInterval(dwistndom)}},1000);});</script><!-- LEADSPACE_STYLES -->
+
+<script charset="utf-8" id="dojoIoScript2" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/usen-utf8.js" type="text/javascript"></script><script charset="utf-8" id="dojoIoScript3" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/a.json" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/move.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/TimedMoveable.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/_CssStateMixin.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/_FormMixin.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/_DialogMixin.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/DialogUnderlay.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/ContentPane.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/common_002.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/TooltipDialog.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/Mover.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/Moveable.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/_ContentPaneResizeMixin.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/html.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/loading.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/common.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/autoscroll.js" charset="utf-8" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/_LayoutWidget.js" charset="utf-8" type="text/javascript"></script><script charset="utf-8" id="dojoIoScript4" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/ccf-intercept-whitelist.js" type="text/javascript"></script><script charset="utf-8" id="dojoIoScript5" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/profiling.js" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/mmcore.js" type="text/javascript"></script><script charset="utf-8" id="dojoIoScript6" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/shorten.js" type="text/javascript"></script><script charset="utf-8" id="dojoIoScript7" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/blackwhite_lists.asc" type="text/javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/50200000.js" type="text/javascript" language="javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/cookie-id.js" type="text/javascript" language="javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/rules_50200000.js" type="text/javascript" language="javascript"></script><script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dispatcher-v3.js" type="text/javascript" language="javascript"></script><script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/yahoo-min.js"></script><script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/cp-v3.js"></script><script charset="utf-8" type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/a" id="mmcore.1"></script><script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/json-min.js"></script></head>
+<body aria-busy="false" class="v17" id="ibm-com">
+<div style="opacity: 1; top: 0px;" id="dw-regbar" class="dw-home-band" aria-labelledby="dw-regbar-vp" role="complementary">
+    <div class="ibm-columns">
+        <div class="ibm-col-6-6">
+            <span id="dw-regbar-bluemix">IBM <strong>Bluemix</strong></span>
+            <span id="dw-regbar-vp">Runtimes, boilerplates, and services for Java development.</span>
+            <p class="ibm-button-link-alternate dw-button-green">
+                <a onclick="trkOBL('https://developer.ibm.com/sso/bmregistration?lang=en_US&amp;ca=dw-_-bluemix-_-j-jtp08305-_-regbar-article','article-rbar-bmix-home-regbar'); return false;" id="article-rbar-bmix-home-regbar" class="dw-button-large dw-regbar-btn" href="https://developer.ibm.com/sso/bmregistration?lang=en_US&amp;ca=dw-_-bluemix-_-j-jtp08305-_-regbar-article">Start your free trial</a>                
+            </p>               
+        </div>
+    </div> 
+</div>	<div style="margin-top: 42px;" id="ibm-top" class="ibm-landing-page ibm-no-scroll"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/ibm_logo_print.png" id="ibm-print-masthead" alt="IBM Print" height="15" width="43">
+
+<!-- MASTHEAD_BEGIN -->		
+<div role="banner" id="ibm-masthead">
+
+	<!-- TOP ROW -->    
+	<div id="dw-masthead-top-row">
+		<ul id="ibm-mast-options-dw" role="toolbar" aria-label="Masthead navigation">
+			<li id="dw-mast-top-4" role="presentation">
+				<a href="http://www.ibm.com/developerworks/" tabindex="0"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dwn-dw-badge.png" alt="dW" aria-label="dW" height="22" width="43"></a>
+			</li>
+			<li id="dw-mast-top-0" role="presentation">
+				<div id="dw-mast-signin">
+					<a id="dw-mf-signin-link" class="" href="http://www.ibm.com/developerworks/dwwi/jsp/ssologin.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2F&amp;lang=en_US&amp;a=dwmav" title="" tabindex="2">Sign in</a>
+					<span class="dw-mf-signin-spacer">|</span>
+					<a id="dw-mf-reg-link" class="" href="http://www.ibm.com/developerworks/dwwi/jsp/ssoregister.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2F&amp;lang=en_US&amp;a=dwmav" title="" tabindex="3">Register</a>
+				</div>        
+				<div id="dw-mast-auth-link" class="dw-mf-hide">
+					<a class="authenticated ibm-active" href="#" role="button" tabindex="2"></a>
+					<ul id="dw-mast-auth-menu" class="dw-mf-hide">
+						<li class="dw-mast-auth-menu-title" aria-hidden="true">developerWorks Community</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/profiles/html/myProfileView.do?lang=en" tabindex="3">My profile</a>
+						</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/groups/service/html/mycommunities?lang=en" tabindex="4">My communities</a>
+						</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/news/?lang=en" tabindex="5">Settings</a>
+						</li>
+						<li class="dw-mast-auth-menu-divider"><hr></li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a id="dw-mast-signout-link" href="http://www.ibm.com/developerworks/dwwi/jsp/ssologout.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2F&amp;a=dwmav" tabindex="6">Sign out</a>
+						</li>		                
+					</ul>
+				</div>
+			</li>
+			<li id="dw-mast-top-1">
+				<div></div>
+			</li>
+			<li id="dw-mast-top-3" role="presentation">
+				<a href="http://www.ibm.com/" tabindex="1">IBM</a>
+			</li>
+		</ul>
+	</div>
+
+    <!-- BOTTOM ROW -->
+	<div id="ibm-universal-nav-dw" aria-label="Site map">
+		<ul id="ibm-unav-links-dw">
+			<li id="ibm-unav-home-dwlogo">
+				<a href="http://www.ibm.com/developerworks/"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dwn-dw-wordmark.png" alt="developerWorks®" height="28" width="225"></a>
+			</li>
+		</ul>
+		<ul id="ibm-menu-links-dw" role="toolbar" aria-label="Site map">
+			<li id="dw-mast-nav-0" role="presentation"><a href="http://www.ibm.com/developerworks/topics/" tabindex="0">Technical topics</a></li>
+			<li id="dw-mast-nav-1" role="presentation"><a href="http://www.ibm.com/developerworks/downloads/" tabindex="0">Evaluation software</a></li>
+			<li id="dw-mast-nav-2" role="presentation"><a href="http://www.ibm.com/developerworks/community/index.html" tabindex="0">Community</a></li>
+			<li id="dw-mast-nav-3" role="presentation"><a href="http://www.ibm.com/developerworks/events/" tabindex="0">Events</a></li>
+		</ul>
+		<form id="ibm-search-form" action="//www.ibm.com/search/csass/search/" method="get" name="form1" aria-label="IBM developerWorks Search" role="search">
+			<p>
+				<label for="q"><span class="ibm-access">Search developerWorks</span></label>
+				<input id="q" name="q" value="Search developerWorks" maxlength="100" type="text">
+				<input name="sn" value="dw" type="hidden">
+				<input name="lang" value="en" type="hidden">
+				<input name="cc" value="US" type="hidden">
+				<input name="en" value="utf" type="hidden">
+				<input name="hpp" value="20" type="hidden">
+				<input name="dws" value="dw" type="hidden">
+				<input id="ibm-search" class="ibm-btn-search" value="Submit" type="submit">
+			</p>
+		</form>
+	</div>	
+  
+<div class="" aria-label="Social tools" role="navigation" style="display: block;" id="ibm-social-tools"><ul aria-label="Social tool list" role="toolbar"><li><a onclick="trkOBL('%23','ibmShare-B-print');" tabindex="0" role="button" dojoattrid="0" rel="print" href="#" title="Print this page" class="ibm-share-print">Print this page</a></li><li><a onclick="trkOBL('%23','ibmShare-B-email');" tabindex="-1" role="button" dojoattrid="1" rel="email" href="#" title="E-mail this page" class="ibm-share-email">E-mail this page</a></li><li><a onclick="trkOBL('http%3A//digg.com/submit%3Fphase%3D2%26url%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26title%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-digg');" tabindex="-1" role="button" dojoattrid="2" rel="digg" href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Digg" class="ibm-share-digg">Digg</a></li><li><a onclick="trkOBL('http%3A//www.facebook.com/sharer.php%3Fu%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26t%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-facebook');" tabindex="-1" role="button" dojoattrid="3" rel="facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;t=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Facebook" class="ibm-share-facebook">Facebook</a></li><li><a onclick="trkOBL('http%3A//twitter.com/%3Fstatus%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%2520-%2520Java%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-twitter');" tabindex="-1" role="button" dojoattrid="4" rel="twitter" href="http://twitter.com/?status=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html%20-%20Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Twitter" class="ibm-share-twitter">Twitter</a></li><li><a onclick="trkOBL('http%3A//delicious.com/post%3Furl%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26title%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-delicious');" tabindex="-1" role="button" dojoattrid="5" rel="delicious" href="http://delicious.com/post?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Delicious" class="ibm-share-delicious">Delicious</a></li><li><a onclick="trkOBL('http%3A//www.linkedin.com/shareArticle%3Fmini%3Dtrue%26url%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26title%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-linkedin');" tabindex="-1" role="button" dojoattrid="6" rel="linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Linked In" class="ibm-share-linkedin">Linked In</a></li><li><a onclick="trkOBL('http%3A//www.stumbleupon.com/submit%3Furl%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26title%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-stumble');" tabindex="-1" role="button" dojoattrid="7" rel="stumble" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Stumbleupon" class="ibm-share-stumble">Stumbleupon</a></li><li><a onclick="trkOBL('https%3A//plus.google.com/share%3Furl%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26t%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','ibmShare-B-googleplus');" tabindex="-1" role="button" dojoattrid="8" rel="googleplus" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;t=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Google+" class="ibm-share-googleplus">Google+</a></li></ul></div></div>
+<div id="fdiv" class="ibm-access"></div><!-- MASTHEAD_END -->
+	    
+<!-- LAYOUT -->
+<!-- LEADSPACE_BEGIN --> 
+<div role="main" id="ibm-access-cntr"><div id="ibm-leadspace-head">
+	<!-- LEADSPACE_BODY_BEGIN --> 
+	<div id="ibm-leadspace-body">
+		<!-- Navigation_Trail_BEGIN -->
+        <ul aria-label="Bread Crumbs" role="navigation" id="ibm-navigation-trail"><li><a href="http://www.ibm.com/developerworks/">developerWorks</a></li><li><a href="http://www.ibm.com/developerworks/topics/">Technical topics</a></li><li><a href="http://www.ibm.com/developerworks/java/">Java technology</a></li><li><a href="http://www.ibm.com/developerworks/java/library/">Technical library</a></li></ul>
+		<!-- END_Navigation_Trail -->
+			<!-- Title_Subtitle -->
+			<h1>Java theory and practice: Decorating with dynamic proxies</h1><p><em><span>Dynamic proxies are a convenient tool for building Decorators and Adapters</span></em></p>
+	</div>
+	<!-- LEADSPACE_BODY_END --> 
+	<!-- SUMMARY_BEGIN -->
+	<div id="dw-summary-area" class="dw-summary-columns">
+		<div class="ibm-col-6-4">
+		<p>The <em>dynamic proxy facility</em>, part of the <code>java.lang.reflect</code> package and added to the JDK in version 1.3, allows programs to create <em>proxy objects</em>,
+ which can implement one or more known interfaces and dispatch calls to 
+interface methods programmatically using reflection instead of using
+the built-in virtual method dispatch. This process allows 
+implementations to "intercept" method calls and reroute them or add 
+functionality dynamically.  This month, Brian Goetz explores several 
+applications for dynamic proxies.</p>
+		<p class="ibm-no-print ibm-ind-link">
+<a class="ibm-forward-link" href="http://www.ibm.com/developerworks/views/java/libraryview.jsp?search_by=practice:">View more content in this series</a> <span class="dw-summary-bar">|</span>
+			
+			<span id="nCmts"><span>3</span><img class="dw-cmts-arrow" alt="" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-cmts-arrow.png" height="7" width="7"> <a href="#icomments" class="dw-cmt-link">Comments</a></span>
+		</p>
+		    <div aria-hidden="true" id="dw-social-tools-container"><span class="dw-social-lead-in">Share:</span><div style="display: block;" id="dw-ibm-social-tools"><ul aria-label="Social tool list" role="toolbar"><li style="display: none;"><a tabindex="0" role="button" dojoattrid="0" rel="print" href="#" title="Print this page" class="ibm-share-print">Print this page</a></li><li style="display: none;"><a tabindex="-1" role="button" dojoattrid="1" rel="email" href="#" title="E-mail this page" class="ibm-share-email">E-mail this page</a></li><li style="display: none;"><a tabindex="-1" role="button" dojoattrid="2" rel="digg" href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Digg" class="ibm-share-digg">Digg</a></li><li><a onclick="trkOBL('http%3A//www.facebook.com/sharer.php%3Fu%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26t%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','dwShare-B-facebook');" tabindex="-1" role="button" dojoattrid="3" rel="facebook" href="javascript:void(0)" title="Facebook" class="ibm-share-facebook">Facebook</a></li><li><a onclick="trkOBL('http%3A//twitter.com/%3Fstatus%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%2520-%2520Java%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','dwShare-B-twitter');" tabindex="-1" role="button" dojoattrid="4" rel="twitter" href="javascript:void(0)" title="Twitter" class="ibm-share-twitter">Twitter</a></li><li style="display: none;"><a tabindex="-1" role="button" dojoattrid="5" rel="delicious" href="http://delicious.com/post?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Delicious" class="ibm-share-delicious">Delicious</a></li><li><a onclick="trkOBL('http%3A//www.linkedin.com/shareArticle%3Fmini%3Dtrue%26url%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26title%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','dwShare-B-linkedin');" tabindex="-1" role="button" dojoattrid="6" rel="linkedin" href="javascript:void(0)" title="Linked In" class="ibm-share-linkedin">Linked In</a></li><li style="display: none;"><a tabindex="-1" role="button" dojoattrid="7" rel="stumble" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2Findex.html&amp;title=Java%20theory%20and%20practice%3A%20Decorating%20with%20dynamic%20proxies" title="Stumbleupon" class="ibm-share-stumble">Stumbleupon</a></li><li><a onclick="trkOBL('https%3A//plus.google.com/share%3Furl%3Dhttp%253A%252F%252Fwww.ibm.com%252Fdeveloperworks%252Flibrary%252Fj-jtp08305%252Findex.html%26t%3DJava%2520theory%2520and%2520practice%253A%2520Decorating%2520with%2520dynamic%2520proxies','dwShare-B-googleplus');" tabindex="-1" role="button" dojoattrid="8" rel="googleplus" href="javascript:void(0)" title="Google+" class="ibm-share-googleplus">Google+</a></li></ul></div></div>
+		</div>
+		<div class="ibm-col-6-2 dw-toc-margin">
+			<p class="dw-summary-author"><a role="button" href="#authorN10020" class="ibm-popup-link" onclick="ibmweb.overlay.show('authorN10020',this);return false;">Brian Goetz</a> (<a href="mailto:brian@quiotix.com?subject=Decorating%20with%20dynamic%20proxies">brian@quiotix.com</a>), Principal Consultant, Quiotix</p>
+<div id="authorN10020" class="ibm-common-overlay"><div class="ibm-head"><p><a href="#close" class="ibm-common-overlay-close">Close [x]</a></p></div><div class="ibm-body"><div class="ibm-main"><div class="ibm-title"><!--this is where the h2 usually goes--></div><div class="ibm-container ibm-alternate"><div class="ibm-container-body">
+<p><!--.-->
+Brian Goetz has been a professional software developer for over 18 
+years. He is a Principal Consultant at Quiotix, a software development 
+and consulting firm located in Los Altos, California, and he serves on 
+several JCP Expert Groups. See Brian's <a href="http://www.briangoetz.com/pubs.html">published and upcoming articles</a> in popular industry publications.</p><br><br></div></div></div></div><div class="ibm-footer"><!----></div></div>
+			<p class="dw-summary-date">30 August 2005</p>
+			
+				<p>Also available in&nbsp;<a href="http://www.ibm.com/developerworks/ru/library/j-jtp08305/">Russian</a>&nbsp;<a href="http://www.ibm.com/developerworks/jp/java/library/j-jtp08305/">Japanese</a></p>
+
+			<div aria-hidden="true" class="ibm-container" id="dw-toc"><div class="ibm-container-body"><ul class="ibm-twisty"><li><a href="#toggle" class="ibm-twisty-trigger ibm-twisty-trigger-closed"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/c.gif" alt="+"></a><span class="ibm-twisty-head">Table of contents</span><div style="display: none;" class="ibm-twisty-body"><ul style="font-size:0.8em" class="ibm-link-list">
+<li><a class="ibm-anchor-down-em-link" href="#1.0">The Proxy pattern</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#2.0">The dynamic proxy mechanism</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#3.0">Dynamic proxies as Decorators</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#4.0">Performance costs</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#5.0">Conclusion</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#resources">Resources</a></li>
+<li><a class="ibm-anchor-down-em-link" href="#icomments">Comments</a></li></ul></div></li></ul></div></div>
+		</div>
+	</div>
+	<!-- SUMMARY_END -->
+</div><div id="ibm-pcon">
+
+<!-- BEGIN_IBM-CONTENT -->
+<div id="ibm-content">
+
+<!-- BEGIN_IBM-CONTENT-BODY -->
+<div id="ibm-content-body">
+
+<!-- BEGIN_IBM-CONTENT-MAIN -->
+<div id="ibm-content-main">
+
+<!-- 1_1_COLUMN_BEGIN -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1"><div class="dw-article-sidebar dw-bluemix" id="dwc-exp-a"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/bluemix-graphic.png" alt="" height="64" width="64"><p>Develop and deploy your next<br>app on the IBM Bluemix<br>cloud platform.</p><p class="ibm-button-link-alternate dw-button-green"><a onclick="trkOBL('https://developer.ibm.com/sso/bmregistration?lang=en_US&amp;ca=dw-_-bluemix-_-j-jtp08305-_-sidebar','tutc-sbar-bmix-home-btn-ABa'); return false;" id="tutc-sbar-bmix-home-btn-ABa" href="https://developer.ibm.com/sso/bmregistration?lang=en_US&amp;ca=dw-_-bluemix-_-j-jtp08305-_-sidebar" class="dw-button-large">Start your free trial</a></p></div>
+
+<p>Dynamic proxies provide an alternate, dynamic mechanism for
+implementing many common design patterns, including the Facade,
+Bridge, Interceptor, Decorator, Proxy (including remote and virtual
+proxies), and Adapter patterns. While all of these patterns can be
+easily implemented using ordinary classes instead of dynamic proxies,
+in many cases the dynamic proxy approach is more convenient and
+compact and can eliminate a lot of handwritten or generated classes.</p><h2 id="1.0">The Proxy pattern</h2><p>The Proxy pattern involves the creation of a "stub" or "surrogate"
+object, whose purpose is to accept requests and forward them to
+another object that actually does the work. The Proxy pattern is used
+by Remote Method Invocation (RMI) to make an object executing in
+another JVM appear like a local object; by Enterprise JavaBeans (EJB)
+to add remote invocation, security, and transaction demarcation; and
+by JAX-RPC Web services to make remote services appear as local
+objects. In each case, the behavior of a potentially remote object is
+defined by an interface, which by its nature admits multiple
+implementations. The caller cannot (for the most part) tell that they
+only hold a reference to a stub and not the real object because they
+both implement the same interface; the stub takes care of the work of
+finding the real object, marshalling the arguments, sending them to
+the real object, unmarshalling the return value, and returning it to
+the caller. Proxies can be used to provide remoting (as in RMI, EJB,
+and JAX-RPC), wrap objects with security policies (EJB), provide lazy
+loading for expensive objects (EJB Entity Beans), or add
+instrumentation such as logging.</p><p>In JDKs prior to 5.0, RMI stubs (and their counterpart, skeletons)
+were classes generated at compile time by the RMI compiler (rmic),
+which is part of the JDK tool set. For each remote interface, a stub
+(proxy) class is generated, which impersonates the remote object, and
+a skeleton object is also generated, which does the opposite job of
+the stub in the remote JVM -- it unmarshals the arguments and invokes
+the real object. Similarly, the JAX-RPC tools for Web services
+generate proxy classes for remote Web services that make them appear
+like local objects.</p><p>Whether the generated stub classes are generated as source code or
+bytecode, code generation still adds extra steps to the compilation
+process and introduces the potential for confusion because of a
+proliferation of similarly named classes. On the other hand, the
+dynamic proxy mechanism allows for the creation of a proxy object at
+run time without generating stub classes at compile time. In JDK 5.0
+and later, the RMI facility uses dynamic proxies instead of generated
+stubs, with the result being that RMI became easier to use.  Many J2EE
+containers also use dynamic proxies to implement EJBs.  EJB technology
+relies heavily on the use of interception to implement security and
+transaction demarcation; dynamic proxies simplify the implementation
+of interception by providing a central control flow path for all
+methods invoked on an interface.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-content" class="ibm-anchor-up-link">Back to top</a></p><h2 id="2.0">The dynamic proxy mechanism</h2><p>At the heart of the dynamic proxy mechanism is the
+<code>InvocationHandler</code> interface, shown in Listing 1. The job
+of an invocation handler is to actually perform the requested method
+invocation on behalf of a dynamic proxy. The invocation handler is
+passed a <code>Method</code> object (from the
+<code>java.lang.reflect</code> package) and the list of arguments to
+be passed to the method; in the simplest case, it could simply call
+the reflective method <code>Method.invoke()</code> and return the
+result.</p><h5 id="listing1">Listing 1. InvocationHandler interface</h5><div class="codesection"><pre class="displaycode">public interface InvocationHandler {
+    Object invoke(Object proxy, Method method, Object[] args)
+        throws Throwable;
+}</pre></div><p>Every proxy has an associated invocation handler that is called
+whenever one of the proxy's methods is called. In keeping with the
+general design principle that interfaces are for defining types and
+classes are for defining implementations, proxy objects can implement
+one or more interfaces, but not classes. Because proxy classes do not
+have accessible names, they cannot have constructors, so they must
+instead be created by factories. Listing 2 shows the simplest possible
+implementation of a dynamic proxy that implements the <code>Set</code>
+interface, and dispatches all <code>Set</code> methods (as well as all
+Object methods) to the encapsulated <code>Set</code> instance.</p><h5 id="listing2">Listing 2. Simple dynamic proxy that wraps a Set</h5><div class="codesection"><pre class="displaycode">public class SetProxyFactory {
+
+    public static Set getSetProxy(final Set s) {
+        return (Set) Proxy.newProxyInstance
+          (s.getClass().getClassLoader(),
+                new Class[] { Set.class },
+                new InvocationHandler() {
+                    public Object invoke(Object proxy, Method method, 
+                      Object[] args) throws Throwable {
+                        return method.invoke(s, args);
+                    }
+                });
+    }
+}</pre></div><p>The <code>SetProxyFactory</code> class contains one static factory
+method, <code>getSetProxy()</code>, which returns a dynamic proxy
+implementing <code>Set</code>. The proxy object really does implement
+<code>Set</code> -- the caller cannot tell (except by reflection) that
+the object returned is a dynamic proxy. The proxy returned by
+<code>SetProxyFactory</code> doesn't do anything other than dispatch
+the method to the <code>Set</code> instance passed into the factory
+method. While reflection code is often hard to read, there's so little
+going on here that it's not hard to follow to control flow -- whenever
+a method gets invoked on the <code>Set</code> proxy, it gets
+dispatched to the invocation handler, which simply reflectively
+invokes the desired method on the underlying wrapped object. Of
+course, a proxy that did absolutely nothing would be silly -- or would
+it?</p><h3 id="2.1">Do-nothing adapters</h3><p>There actually is a good use for a do-nothing wrapper such as
+<code>SetProxyFactory</code> -- it can be used to safely narrow an
+object reference to a specific interface (or set of interfaces) in
+such a way that the caller cannot upcast the reference, making it
+safer to pass object references to untrusted code such as plug-ins or
+callbacks. Listing 3 contains a set of class definitions that
+implement a typical callback scenario; you'll see how dynamic proxies
+can more conveniently replace an Adapter pattern that is commonly
+implemented by hand (or by code generation wizards provided by IDEs).</p><h5 id="listing3">Listing 3. Typical callback scenario</h5><div class="codesection"><pre class="displaycode">public interface ServiceCallback {
+    public void doCallback();
+}
+
+public interface Service {
+    public void serviceMethod(ServiceCallback callback);
+}
+
+public class ServiceConsumer implements ServiceCallback {
+    private Service service;
+
+    ...
+    public void someMethod() {
+        ...
+        service.serviceMethod(this);
+    }
+}</pre></div><p>The <code>ServiceConsumer</code> class implements
+<code>ServiceCallback</code> (which is often a convenient way to
+support callbacks) and passes the <code>this</code> reference to
+<code>serviceMethod()</code> as the callback reference. The problem
+with this approach is there's nothing stopping the
+<code>Service</code> implementation from upcasting the
+<code>ServiceCallback</code> to <code>ServiceConsumer</code> and
+calling methods that the <code>ServiceConsumer</code> doesn't intend
+the <code>Service</code> to call. Sometimes you don't care about this
+risk -- but sometimes you do. If you do, you could make the callback
+object an inner class, or write a do-nothing adapter class (see
+<code>ServiceCallbackAdapter</code> in Listing 4) and wrap the
+<code>ServiceConsumer</code> with the
+<code>ServiceCallbackAdapter</code>. The
+<code>ServiceCallbackAdapter</code> prevents the <code>Service</code> from
+upcasting the <code>ServiceCallback</code> to a
+<code>ServiceConsumer</code>.</p><h5 id="listing4">Listing 4. Adapter class that safely narrows an object to an interface so it cannot be upcast by malicious code</h5><div class="codesection"><pre class="displaycode">public class ServiceCallbackAdapter implements ServiceCallback {
+    private final ServiceCallback cb;
+
+    public ServiceCallbackAdapter(ServiceCallback cb) {
+        this.cb = cb;
+    }
+
+    public void doCallback() {
+        cb.doCallback();
+    }
+}</pre></div><p>Writing adapter classes such as <code>ServiceCallbackAdapter</code> is
+simple but tedious. You have to write a forwarding method for each
+method in the wrapped interface. In the case of
+<code>ServiceCallback</code>, there was only one method to implement,
+but some interfaces, such as the Collections or JDBC interfaces,
+contain dozens of methods. Modern IDEs 
+reduce the amount of work involved in writing an adapter class by
+providing a "Delegate Methods" wizard, but you still have to write one
+adapter class for each interface you want to wrap, and there is
+something unsatisfying about classes that contain only generated
+code. It seems like there should be a way to express the "do-nothing
+narrowing adapter pattern" more compactly.</p><h3 id="2.2">A generic adapter class</h3><p>The <code>SetProxyFactory</code> class in <a href="#listing2">Listing 2</a> is certainly more
+compact than the equivalent adapter class for the <code>Set</code>
+interface, but it still only works for one interface:
+<code>Set</code>. But by using generics, you can easily create a
+generic proxy factory that can do the same for any interface, as shown
+in Listing 5. It is almost identical to <code>SetProxyFactory</code>,
+but it can work for any interface. Now you never have to write a
+narrowing adapter class again! If you want to create a proxy object
+that safely narrows an object to interface <code>T</code>, simply invoke
+<code>getProxy(T.class,object)</code>, and you've got one, without
+the extra baggage of a pile of adapter classes.</p><h5 id="listing5">Listing 5. Generic narrowing adapter factory class</h5><div class="codesection"><pre class="displaycode">public class GenericProxyFactory {
+
+    public static&lt;T&gt; T getProxy(Class&lt;T&gt; intf, 
+      final T obj) {
+        return (T) 
+          Proxy.newProxyInstance(obj.getClass().getClassLoader(),
+                new Class[] { intf },
+                new InvocationHandler() {
+                    public Object invoke(Object proxy, Method method, 
+                      Object[] args) throws Throwable {
+                        return method.invoke(obj, args);
+                    }
+                });
+    }
+}</pre></div><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-content" class="ibm-anchor-up-link">Back to top</a></p><h2 id="3.0">Dynamic proxies as Decorators</h2><p>Of course, the dynamic proxy facility can do a lot more than simply
+narrow the type of an object to a specific interface. It is only a
+short leap from the simple narrowing adapter in <a href="#listing2">Listing 2</a> and 
+<a href="#listing5">Listing 5</a> to
+the Decorator pattern, where the proxy wraps invocations with
+additional functionality, such as security checks or logging. Listing
+6 shows a logging <code>InvocationHandler</code>, which writes a log
+message showing the method invoked, the arguments passed, and the
+return value, in addition to simply invoking the method on the desired
+target object. With the exception of the reflective
+<code>invoke()</code> call, all the code here is simply part of
+generating the debugging message -- and there's still not that much of
+it. The code for the proxy factory method is almost identical to
+<code>GenericProxyFactory</code>, except that it uses a
+<code>LoggingInvocationHandler</code> instead of the anonymous
+invocation handler.</p><h5 id="listing6">Listing 6. Proxy-based Decorator that generates debug logging for each method call</h5><div class="codesection"><pre class="displaycode">    private static class LoggingInvocationHandler&lt;T&gt; 
+      implements InvocationHandler {
+        final T underlying;
+
+        public LoggingHandler(T underlying) {
+            this.underlying = underlying;
+        }
+
+        public Object invoke(Object proxy, Method method, 
+          Object[] args) throws Throwable {
+            StringBuffer sb = new StringBuffer();
+            sb.append(method.getName()); sb.append("(");
+            for (int i=0; args != null &amp;&amp; i&lt;args.length; i++) {
+                if (i != 0)
+                    sb.append(", ");
+                sb.append(args[i]);
+            }
+            sb.append(")");
+            Object ret = <strong>method.invoke</strong>(underlying, args);
+            if (ret != null) {
+                sb.append(" -&gt; "); sb.append(ret);
+            }
+            System.out.println(sb);
+            return ret;
+        }
+    }</pre></div><p>If you wrap a <code>HashSet</code> with a logging proxy and execute
+the following simple test program:</p><div class="codesection"><pre class="displaycode">    Set s = newLoggingProxy(Set.class, new HashSet());
+    s.add("three");
+    if (!s.contains("four"))
+        s.add("four");
+    System.out.println(s);</pre></div><p>You get the following output:</p><div class="codesection"><pre class="displaycode">  add(three) -&gt; true
+  contains(four) -&gt; false
+  add(four) -&gt; true
+  toString() -&gt; [four, three]
+  [four, three]</pre></div><p>This approach is a nice, easy way to add a
+ debugging wrapper around an object. It is certainly a lot easier (and 
+more generic) than generating a
+delegating class and manually creating a lot of <code>println()</code>
+statements. I could take this approach a lot further; instead of
+generating the debugging output unconditionally, the proxy could
+instead consult a dynamic configuration store (initialized from a
+configuration file, and that could be dynamically modified by a JMX
+<code>MBean</code>) to determine whether to actually generate the debugging
+statements, perhaps even on a class-by-class or instance-by-instance
+basis.</p><p>At this point, I expect the AOP fans in the audience to be
+practically bursting with "But that's what AOP is
+good for!"  And it is, but there is more than one way
+to solve any given problem -- and just because a technology can 
+solve a problem doesn't mean it is the best solution.
+In any case, the dynamic proxy approach has the advantage of working
+entirely within the bounds of "Pure Java," and not every shop uses (or
+should use) AOP.</p><h3 id="3.1">Dynamic proxies as adapters</h3><p>Proxies can also be used as true adapters, providing a view of an
+object that exports a different interface than the underlying object
+implements. The invocation handler need not dispatch every method call
+to the same underlying object; it could examine the name and dispatch
+different methods to different objects. As an example, suppose you
+have a set of JavaBeans interfaces for representing persistent entities
+(<code>Person</code>, <code>Company</code>, and
+<code>PurchaseOrder</code>) that specify getters and setters for
+properties, and you are writing a persistence layer that maps database
+records to objects implementing these interfaces. Rather than writing
+or generating a class for each interface, you might instead have one
+generic JavaBeans-style proxy class, which stores properties in a Map
+instead.</p><p>Listing 7 shows a dynamic proxy that examines the name of the called
+method and implements getter and setter methods directly by
+consulting or modifying the property map. This one proxy class can now
+implement objects of multiple JavaBeans-style interfaces.</p><h5 id="listing7">Listing 7. Dynamic proxy class that dispatches getters and setters to a Map</h5><div class="codesection"><pre class="displaycode">public class JavaBeanProxyFactory {
+    private static class JavaBeanProxy implements InvocationHandler {
+        Map&lt;String, Object&gt; properties = new HashMap&lt;String, 
+          Object&gt;();
+
+        public JavaBeanProxy(Map&lt;String, Object&gt; properties) {
+            this.properties.putAll(properties);
+        }
+
+        public Object invoke(Object proxy, Method method, 
+          Object[] args) 
+          throws Throwable {
+            String meth = method.getName();
+            if (meth.startsWith("get")) {
+                String prop = meth.substring(3);
+                Object o = properties.get(prop);
+                if (o != null &amp;&amp; !method.getReturnType().isInstance(o))
+                    throw new ClassCastException(o.getClass().getName() + 
+                      " is not a " + method.getReturnType().getName());
+                return o;
+            }
+            else if (meth.startsWith("set")) {
+                // Dispatch setters similarly
+            }
+            else if (meth.startsWith("is")) {
+                // Alternate version of get for boolean properties
+            }
+            else {
+                // Can dispatch non get/set/is methods as desired
+            }
+        }
+    }
+
+    public static&lt;T&gt; T getProxy(Class&lt;T&gt; intf,
+      Map&lt;String, Object&gt; values) {
+        return (T) Proxy.newProxyInstance
+          (JavaBeanProxyFactory.class.getClassLoader(),
+                new Class[] { intf }, new JavaBeanProxy(values));
+    }
+}</pre></div><p>While there is some potential loss of type-safety because reflection works in terms of <code>Object</code>, the getter handling in
+JavaBeanProxyFactory "bakes in" some of the extra type-checking
+needed, as I do here with the <code>isInstance()</code> check for getters.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-content" class="ibm-anchor-up-link">Back to top</a></p><h2 id="4.0">Performance costs</h2><p>As
+ you've seen, dynamic proxies have the potential to simplify a lot of
+code -- not only can they replace a lot of generated code, but one
+proxy class can replace multiple classes of handwritten or generated
+code. What is the cost?  There is probably some performance cost because
+ of dispatching methods reflectively instead of using the built-in
+virtual method dispatch. In the very early JDKs, reflection
+performance was poor (as was the performance of nearly everything else
+in early JDKs), but reflection has gotten a lot faster in the last 10
+years.</p><p>Without getting into the subject of benchmark construction, I wrote a
+simple, unscientific test program that loops, stuffing data into a
+<code>Set</code>, randomly inserting, looking up, and removing
+elements from the <code>Set</code>. I ran it with three
+<code>Set</code> implementations: an unadorned <code>HashSet</code>, a
+handwritten <code>Set</code> adapter that simply forwards all methods
+to an underlying <code>HashSet</code>, and a proxy-based
+<code>Set</code> adapter that also simply forwards all methods to an
+underlying <code>HashSet</code>. Each loop iteration generated several
+random numbers and performed one or more <code>Set</code>
+operations. The handwritten adapter generated only a few percent of
+performance overhead compared to the raw <code>HashSet</code>
+(presumably because of effective inline caching at the JVM level and
+branch prediction at the hardware level); the proxy adapter was
+measurably slower than the raw <code>HashSet</code>, but the overhead
+was less than a factor of two.</p><p>My conclusion from this experiment is that for the
+vast majority of cases, the proxy approach performs well enough even
+for lightweight methods, and as the operations being proxied become
+more heavyweight (such as remote method calls or methods that use
+serialization, perform IO, or fetch data from a database), the proxy
+overhead will effectively approach zero. While there certainly will be
+cases where the proxy approach introduces unacceptable performance
+overhead, these are likely to constitute the minority of situations.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-content" class="ibm-anchor-up-link">Back to top</a></p><h2 id="5.0">Conclusion</h2><p>Dynamic proxies are a powerful and underutilized tool in
+implementing many design patterns, including Proxy, Decorator, and
+Adapter. Proxy-based implementations of these patterns are easy to
+write, harder to get wrong, and lend themselves to greater genericness;
+in many cases, one dynamic proxy class can serve as a Decorator or
+Proxy for all interfaces, rather than having to write a static class
+for each interface. For all but the most performance-critical
+applications, the dynamic proxy approach may be preferable to the
+handwritten or machine-generated stub approach.</p><!--CMA ID: 92661--><!--Site ID: 1--><!--XSLT stylesheet used to transform this file:
+        dw-document-html-7.0.xsl-->
+
+
+</div>
+</div>
+<!-- 1_1_COLUMN_END -->
+
+<!-- SPLIT_COLUMNS_BEGIN -->
+<div class="ibm-columns">
+
+<!-- 6_4_COLUMN_BEGIN -->
+<div class="ibm-col-6-4">
+
+<h2 id="resources" class="ibm-rule">Resources</h2><h3 class="dw-resources-category-heading">Learn</h3><ul class="ibm-bullet-list"><li>"<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=109017">Object Adapter based on Dynamic Proxy</a>" (Heinz Kabutz, Artima Developer, May 2005): Explore the use of dynamic proxies to implement common design patterns.</li><li>"<a href="http://www.ibm.com/developerworks/java/library/j-ejb1203.html?n-j-1252">EJB best practices: The limits of delegation</a>"
+ (Brett McLaughlin, developerWorks, December 2002): Learn how dynamic 
+proxies can simplify the use of the business delegate pattern.</li><li><a href="http://www.ibm.com/developerworks/webservices/library/ws-jsrart/index.html">Build interoperable Web services with JSR-109</a>"
+ (Jeffrey Liu and Yen Lu, developerWorks, August 2003): Find out how 
+JSR-109 supports the use of dynamic proxies for Web Services endpoints, 
+simplifying Web Services development.</li></ul><h3 class="dw-resources-category-heading">Get products and technologies</h3><ul class="ibm-bullet-list"><li><a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Proxy.html">JProxy Javadoc</a>: Details and explanation for the JProxy class.</li></ul><h3 class="dw-resources-category-heading">Discuss</h3><ul class="ibm-bullet-list"><li><a href="http://www.ibm.com/developerworks/blogs/">developerWorks blogs</a>: Get involved in the developerWorks community.</li></ul>
+
+<!-- INLINE_COMMENTS_BEGIN -->
+<h2 id="icomments" class="ibm-alternate-rule ibm-no-print">Comments</h2>
+    
+<div class="ibm-no-print" id="dw-icomments-container">	
+	<div id="threadShow"><img style="display: none;" id="imgPlHdr" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/animated-progress-38x38c.gif" alt=""><div id="cmtTog" style=""><div class="ibm-container ibm-alternate-two dw-commentbox dw-noborder"><div class="ibm-container-body dw-commentbox dw-noborder"><p id="signInSect"> <a onclick="var e=arguments[0] || window.event; dwsi.siInst &amp;&amp; dwsi.siInst.showSignIn(); if (e.stopPropagation){ e.stopPropagation();} else { e.cancelBubble = true; } e.preventDefault &amp;&amp; e.preventDefault(); return false;" href="#">Sign in</a> or <a href="http://www.ibm.com/developerworks/dwwi/jsp/ssoregister.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Flibrary%2Fj-jtp08305%2F%23icomments&amp;lang=en&amp;a=dwmav">register</a>  to leave a comment.</p><p id="cmtHead"><label for="newCmt"><strong>Add comment:</strong></label></p><p>Note: HTML elements are not supported within comments.</p><div id="infoCmt"></div><form focus="name" enctype="multipart/form-data" method="post" action="" name="form" class="ibm-column-form ibm-styled-form"><p class="6-4-textarea"><textarea rows="5" name="newCmt" id="newCmt" class="dw-inoperable" disabled="disabled"></textarea><br></p><span class="ibm-input-group"><input value="1" name="comment_notification" id="comment_notification" disabled="disabled" type="checkbox"><label id="notifyText" class="ibm-form-note dw-btn-cancel-sec" for="comment_notification">Notify me when a comment is added</label></span><span class="ibm-form-note dw-btn-cancel-sec notifySection" id="maxCharsCount"><span id="charCount">1000</span> characters left</span><p class="ibm-buttons-row"><input value="Submit" name="postCmt" id="postCmt" class="ibm-btn-sec ibm-btn-small ibm-disabled" disabled="disabled" type="button"></p></form></div></div><div class="ibm-alternate-rule"><hr></div><div id="topControl" class="ibm-container ibm-alternate-two dw-comment-totals" style=""><div class="ibm-container-body"><form id="selectComments" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>Total comments (<span id="numCmts">3</span>)</strong></span><span class="dw-how-many-comments-label" style="display:none" id="dropdownCmts"><label for="howManyComments"><strong>Show:</strong></label>&nbsp;<select name="comments" id="howManyComments" class="dw-how-many-comments"><option selected="selected" value="recent">Most recent comments </option></select><input class="ibm-btn-go" name="ibm-go" value="Go" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/short-btn.gif" alt="Go" type="image"><br></span></p></form></div></div><div id="cmtSect"><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>good article...</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">Posted by <a href="https://www.ibm.com/developerworks/community/profiles/user/Amit%20M">Amit M</a> on 26 August 2013</p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=en&amp;referingURL=http://www.ibm.com/developerworks/library/j-jtp08305/&amp;mymessage=Comment:%20good%20article...%0DPosted%20by%20Amit%20M%20on%2026%20August%202013%0D%0D---%20Add%20any%20comments%20below%20this%20line%20---" target="_self">Report abuse</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>In
+ C# it's possible to create dynamic proxies with RealProxy class from 
+any class, not just classes with implementing interface. I wonder if 
+there's work around in java to write dynamic proxy implementing class's 
+own methods, not just some interface?</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">Posted by <a href="https://www.ibm.com/developerworks/community/profiles/user/mattire">mattire</a> on 22 January 2013</p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=en&amp;referingURL=http://www.ibm.com/developerworks/library/j-jtp08305/&amp;mymessage=Comment:%20In%20C%23%20it%27s%20possible%20to%20create%20dynamic%20proxies%20with%20RealProxy%20class%20from%20any%20class%2C%20not%20just%20classes%20with%20implementing%20interface.%20I%20wonder%20if%20there%27s%20work%20around%20in%20java%20to%20write%20dynamic%20proxy%20implementing%20class%27s%20own%20methods%2C%20not%20just%20some%20interface%3F%0DPosted%20by%20mattire%20on%2022%20January%202013%0D%0D---%20Add%20any%20comments%20below%20this%20line%20---" target="_self">Report abuse</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>Dynamic
+ proxies are great if you don't mind the fact that calling methods 
+through Method.invoke is 40 to 50 times slower than calling the methods 
+directly. I think I'll stick to generated delegate classes, thank you.</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">Posted by <a href="https://www.ibm.com/developerworks/community/profiles/user/fakeid">fakeid</a> on 14 June 2011</p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=en&amp;referingURL=http://www.ibm.com/developerworks/library/j-jtp08305/&amp;mymessage=Comment:%20Dynamic%20proxies%20are%20great%20if%20you%20don%27t%20mind%20the%20fact%20that%20calling%20methods%20through%20Method.invoke%20is%2040%20to%2050%20times%20slower%20than%20calling%20the%20methods%20directly.%20I%20think%20I%27ll%20stick%20to%20generated%20delegate%20classes%2C%20thank%20you.%0DPosted%20by%20fakeid%20on%2014%20June%202011%0D%0D---%20Add%20any%20comments%20below%20this%20line%20---" target="_self">Report abuse</a></p><div class="dw-clear-both"></div></div></div></div></div></div></div><div id="bottomControl" class="ibm-container ibm-alternate-two dw-comment-totals" style="display:none"><div class="ibm-container-body"><form id="selectComments2" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>Total comments (<span id="numCmts2">3</span>)</strong></span><span class="dw-how-many-comments-label" style="display:none" id="dropdownCmts2"><label for="howManyComments2"><strong>Show:</strong></label>&nbsp;<select name="comments" id="howManyComments2" class="dw-how-many-comments"><option selected="selected" value="recent">Most recent comments </option></select><input class="ibm-btn-go" name="ibm-go" value="Go" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/short-btn.gif" alt="Go" type="image"><br></span></p></form></div></div></div>
+</div>
+<!-- Sign in OVERLAY STARTS HERE -->
+    
+<!-- Sign in OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="signin_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="#" onclick="dwsi.siInst.clearForm();">Close [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+ <div class="ibm-title">
+<h2>developerWorks: Sign in</h2>
+<div id="ibm-overlay-error-signin" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">Required fields are indicated with an asterisk (<span class="ibm-required">*</span>).</p> 
+<form class="ibm-column-form" id="sFormId" action="" method="post" name="sForm" onsubmit="return false;">
+<p><label for="ibmid">IBM ID:<span class="ibm-required">*</span></label><span><input aria-required="true" name="ibm-id" id="ibmid" size="25" class="required" onkeypress="dwsi.siInst.handleEP(event,this.form);" type="text"><br><a onclick="window.location='/developerworks/dwwi/DWAuthRouter?m=reg&amp;d='+encodeURIComponent(location.protocol + '//' + location.hostname + location.pathname + '#icomments'); return false;" href="#" class="ibm-forward-link">Need an IBM ID?</a> <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/dwwi/jsp/WSHelp.jsp?lang=en_US">Forgot your IBM ID?</a></span>   
+</p> 
+<p><label for="password">Password:<span class="ibm-required">*</span></label><span><input name="password" id="password" size="25" value="" class="required" onkeypress="dwsi.siInst.handleEP(event,this.form);" type="password"><br><a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=forgot&amp;lang=en_US&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(dwsi.siInst.getAuthUrl())+'%3Fm%3Dloginpage%26lang%3Den_US%26d%3D'+encodeURIComponent(location.href);})();">Forgot your password?</a><br><a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=chpw&amp;lang=en_US&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(location.href);})();">Change your password</a></span></p> 
+<p class="dw-perm-box">
+	<span><input id="perm" name="perm_name" type="checkbox"><label for="perm"> Keep me signed in.</label></span>
+</p>
+<p>By clicking <strong>Submit</strong>, you agree to the <a href="https://www.ibm.com/developerworks/community/terms/">developerWorks terms of use</a>.</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="Submit" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="Cancel" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide('signin_overlay');return false;" type="button"></p>
+</div>
+</form>
+<div class="ibm-overlay-rule"><hr></div>
+<p>The first time you sign into developerWorks, a profile is created for you.  <strong>Information
+ in your profile (your name, country/region, and company name) is 
+displayed to the public and will accompany any content you post, unless 
+you opt to hide your company name</strong>.  You may update your IBM account at any time.</p>
+<div><p class="dw-c-overlay-secure">All information submitted is secure.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+<!-- Display name OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="displayname_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="#" onclick="dwsi.siInst.clearForm();">Close [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+<div class="ibm-title">
+<h2>Choose your display name</h2><br><br>
+<div id="ibm-overlay-error-dname" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">The first time you sign in to 
+developerWorks, a profile is created for you, so you need to choose a 
+display name.  Your display name accompanies the content you post on 
+developerWorks.</p>
+<p><strong>Please choose a display name between 3-31 characters</strong>. Your display name must be unique in the developerWorks community and should not be your email address for privacy reasons.</p>
+<p class="ibm-overlay-intro">Required fields are indicated with an asterisk (<span class="ibm-required">*</span>).</p> 
+<form id="dFormId" method="post" action="" name="dForm" onsubmit="return false;" class="ibm-column-form">
+<p><label for="displayname">Display name:<span class="ibm-required">*</span></label><span><input aria-required="true" name="displayname" id="displayname" size="25" onkeypress="dwsi.siInst.handleEP(event,this.form);" type="text"></span><span class="ibm-form-note">(Must be between 3 – 31 characters.)</span>
+</p>
+<p>By clicking <strong>Submit</strong>, you agree to the <a href="https://www.ibm.com/developerworks/community/terms/">developerWorks terms of use</a>.</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="Submit" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="Cancel" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide('displayname_overlay');return false;" type="button"></p>
+</div>
+</form>
+<div class="ibm-overlay-rule"><hr></div>
+<div><p class="dw-c-overlay-secure">All information submitted is secure.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+
+
+<!-- INLINE_COMMENTS_END -->
+
+</div>
+<!-- 6_4_COLUMN_END -->
+
+<!-- 6_2_COLUMN_BEGIN -->
+<div class="ibm-col-6-2">
+
+<!-- Next_Steps -->
+<!-- Dig_Deeper -->
+
+<!-- DIG_DEEPER_START -->
+<h2 class="ibm-rule">Dig deeper into Java technology on developerWorks</h2>
+<ul class="ibm-link-list">
+	<li class="ibm-first"><a href="http://www.ibm.com/developerworks/java/" class="ibm-forward-link">Overview</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/newto/" class="ibm-forward-link">New to Java programming</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/library/" class="ibm-forward-link">Technical library (tutorials and more)</a></li>
+	<li><a href="https://www.ibm.com/developerworks/community/forums/html/category?id=33333333-0000-0000-0000-000000000010" class="ibm-forward-link">Forums</a></li>
+	<li><a href="https://www.ibm.com/developerworks/community/blogs/home/search?lang=en&amp;t=blog&amp;f=all&amp;q=Java" class="ibm-forward-link">Blogs</a></li>
+	<li><a href="https://www.ibm.com/developerworks/community/groups/service/html/allcommunities?search=Java" class="ibm-forward-link">Communities</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/find/downloads/" class="ibm-forward-link">Downloads and products</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/find/projects/" class="ibm-forward-link">Open source projects</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/find/standards/" class="ibm-forward-link">Standards</a></li>
+	<li><a href="http://www.ibm.com/developerworks/java/find/events/" class="ibm-forward-link">Events</a></li>
+</ul>
+<!-- DIG_DEEPER_END -->
+<!-- Promotion_Module -->
+    
+<!-- PROMOTION_MODULE_START -->
+<div class="ibm-alternate-rule"><hr></div>
+<ul class="ibm-portrait-module-list">
+
+<li><a role="presentation" tabindex="-1" class="" href="https://developer.ibm.com/bluemix/"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/sm-f-bluemixdev60.png" alt="" height="60" width="60"></a>
+<h3><a class="ibm-feature-link" href="https://developer.ibm.com/bluemix/">Bluemix Developers Community</a></h3>
+<p>Get samples, articles, product docs, and community resources to help build, deploy, and manage your cloud apps.</p>
+</li>  
+<li><a role="presentation" tabindex="-1" class="" href="http://ibmdeveloperworks.mkt6741.com/dWdWWeeklyNewsletterSubscriptionPage/"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/sm-f-dwnewsletters60.png" alt="" height="60" width="60"></a>
+<h3><a class="ibm-feature-link" href="http://ibmdeveloperworks.mkt6741.com/dWdWWeeklyNewsletterSubscriptionPage/">developerWorks Weekly Newsletter</a></h3>
+<p>Keep up with the best and latest technical info to help you tackle your development challenges.</p></li>
+<!-- <li><img height="60" width="60" src="//www.ibm.com/developerworks/i/sm-f-dwlabs60.png" alt=""/>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/labs/?ca=dti-tiles-labs">developerWorks Labs</a></h3>
+<p>Experiment with new directions in software development.</p></li> -->     
+<li><a onclick="trkOBL('https://hub.jazz.net/?utm_source=dw&amp;utm_campaign=bluemix&amp;utm_content=j-jtp08305&amp;utm_medium=article','tutc-main-devops-home-txt'); return false;" id="tutc-main-devops-home-txt" role="presentation" tabindex="-1" class="" href="https://hub.jazz.net/?utm_source=dw&amp;utm_campaign=bluemix&amp;utm_content=j-jtp08305&amp;utm_medium=article"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/sm-f-jazzhub2.png" alt="" height="60" width="60"></a>
+<h3><a onclick="trkOBL('https://hub.jazz.net/?utm_source=dw&amp;utm_campaign=bluemix&amp;utm_content=j-jtp08305&amp;utm_medium=article','tutc-main-devops-home-txt-1'); return false;" id="tutc-main-devops-home-txt-1" class="ibm-feature-link" href="https://hub.jazz.net/?utm_source=dw&amp;utm_campaign=bluemix&amp;utm_content=j-jtp08305&amp;utm_medium=article">DevOps Services</a></h3>
+<p>Software development in the cloud.  Register today to create a project.</p></li>
+<li><a role="presentation" tabindex="-1" class="" href="http://www.ibm.com/developerworks/downloads/?ca=dti-tiles-evaluate"><img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/sm-f-evaluationsoftware60.png" alt="" height="60" width="60"></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/downloads/?ca=dti-tiles-evaluate">IBM evaluation software</a></h3>
+<p>Evaluate IBM software and solutions, and transform challenges into opportunities.</p></li>
+</ul>
+<!-- PROMOTION_MODULE_END -->
+</div>
+<!-- 6_2_COLUMN_END -->
+
+</div>
+<!-- SPLIT_COLUMNS_END -->
+
+<!-- BOTTOM_BACK_TO_TOP -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1">
+	<div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-content" class="ibm-anchor-up-link">Back to top</a></p>
+</div>
+</div>
+
+<!-- Rating_Meta_BEGIN -->
+<!--Rating_Meta_BEGIN--><div class="metavalue">static.content.url=http://www.ibm.com/developerworks/js/artrating/</div><div class="metavalue">SITE_ID=1</div><div class="metavalue">Zone=Java technology</div><div class="metavalue">ArticleID=92661</div><div class="metavalue">ArticleTitle=Java theory and practice: Decorating with dynamic proxies</div><div class="metavalue">publish-date=08302005</div><script language="javascript" type="text/javascript">document.write('<div class="metavalue">url='+location.href.replace(/</g,  '%3C')+'</div>');</script><div class="metavalue">url=http://www.ibm.com/developerworks/library/j-jtp08305/</div><!--Rating_Meta_END-->
+<!-- Rating_Meta_END -->
+
+</div>
+<!-- END_IBM_CONTENT_MAIN -->
+
+</div>
+<!-- END_IBM_CONTENT_BODY -->
+
+</div>
+<!-- END_IBM_CONTENT -->
+
+</div></div>
+<!-- LEADSPACE_END -->
+
+
+<!-- END_IBM_PCON -->
+<!-- FOOTER_BEGIN -->
+<div aria-label="Footer" id="ibm-footer"><!-- IBM footer container; disabled --></div>
+
+<div id="ibm-footer-module-dwwrapper" role="contentinfo" aria-label="developerWorks Footer">
+
+<div id="ibm-footer-module-dw">
+	<div class="dw-footer-columns">
+		<div class="dw-footer-col-6-1">
+			<ul>
+				<li><a href="http://www.ibm.com/developerworks/aboutdw/" tabindex="0">About</a></li>
+				<li><a href="https://www.ibm.com/developerworks/feedback" tabindex="0">Help</a></li>
+				<li><a href="http://www.ibm.com/developerworks/aboutdw/contacts.html" tabindex="0">Contact us</a></li>
+				<li><a href="https://www.ibm.com/developerworks/ideas" tabindex="0">Submit content</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-2">
+			<ul>
+				<li><a href="http://www.ibm.com/developerworks/feeds/" tabindex="0">Feeds</a></li>
+				<li><a href="http://www.ibm.com/developerworks/newsletter/" tabindex="0">Newsletters</a></li>
+				<li><a class="ibm-twitter-link" href="http://twitter.com/developerWorks" target="_blank" tabindex="0">Follow</a></li>
+				<li><a class="ibm-facebook-link" href="http://www.facebook.com/developerworks" target="_blank" tabindex="0">Like</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-3">
+			<ul>
+				<li><a href="https://www.ibm.com/developerworks/community/report/" tabindex="0">Report abuse</a></li>
+				<li><a href="https://www.ibm.com/developerworks/community/terms/use/" tabindex="0">Terms of use</a></li>
+				<li><a href="https://www.ibm.com/developerworks/community/terms/thirdparty/" tabindex="0">Third party notice</a></li>
+				<li><a href="http://www.ibm.com/privacy/" tabindex="0">IBM privacy</a></li>
+				<li><a href="http://www.ibm.com/accessibility/" tabindex="0">IBM accessibility</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-4">
+			<ul>
+				<li><a href="http://www.ibm.com/ibm/university/academic/pub/page/academic_initiative" tabindex="0">Faculty</a></li>
+				<li><a href="http://asmarterplanet.com/studentsfor/" tabindex="0">Students</a></li>
+				<li><a href="http://www.ibm.com/isv/" tabindex="0">Business Partners</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-5">
+			<ul>
+				<li class="dw-footer-lang-head">Select a language:</li>
+				<li><a href="http://www.ibm.com/developerworks/" tabindex="0">English</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/" tabindex="0" lang="zh">中文</a></li>
+				<li><a href="http://www.ibm.com/developerworks/jp/" tabindex="0" lang="ja">日本語</a></li>
+				<li><a href="http://www.ibm.com/developerworks/ru/" tabindex="0" lang="ru">Русский</a></li>
+				<li><a href="http://www.ibm.com/developerworks/br/" tabindex="0" lang="pt">Português (Brasil)</a></li>
+				<li><a href="http://www.ibm.com/developerworks/ssa/" tabindex="0" lang="es">Español</a></li>
+				<li><a href="http://www.ibm.com/developerworks/vn/" tabindex="0" lang="vi">Việt</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-6">
+			<img src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dwn-ibm-logo-v17.png" alt="IBM®" height="46" width="223">
+			<img class="dw-preload" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/ibm_sprite_social_blue_ON.png" alt="" height="1" width="1">
+			<img class="dw-preload" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/arrow-down-active.gif" alt="" height="1" width="1">			
+		</div>
+	</div>
+</div>
+
+</div><!-- FOOTER_END -->
+
+<!-- END_IBM-TOP -->
+</div>
+
+<!-- SCRIPTS_INCLUDE_BEGIN -->
+<script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-comments.js">//</script>
+<script type="text/javascript" language="JavaScript">
+		dojo.ready(function(){
+		rBHash = typeof rBHash == "undefined" ? {} : rBHash;
+		rBHash['viperLang'] = 'en';
+		rBHash['urlLang'] = 'en';
+		rBHash['dwwi2Lang'] = 'en_US';
+		rBHash['appCode'] = 'dwmav';
+		rBHash['signoutUrl'] = (location.host.toLowerCase() === "www.ibm.com" || location.host.toLowerCase() === "developer.ibm.com") ? 'http://www.ibm.com/developerworks/' : ''; 
+		dwsi.siInst = new dwweb.dynnav.dwsi();
+		dwsi.siInst.initSI();		
+
+		// construct the comment widget
+		dwc && new dwc.comments('threadShow','95%',5,'nCmts','icomments');
+		});
+</script>
+<script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-41146412-3','auto');ga('require','linkid','linkid.js');var dcdate="2005-08-30";ga('set','dimension1',dcdate);var dw_canonical="http://www.ibm.com/developerworks/library/j-jtp08305/index.html";dw_canonical=dw_canonical.substring(dw_canonical.indexOf(".ibm.com")+8);ga('send','pageview',{'page':dw_canonical,'dimension1':dcdate});var trkOBL=function(url,id){id=id.split("-");if(id[0].indexOf("Share")>-1){var cat="Share from toolbar";if(id[0]=="dwShare")cat="Share from summary";var act="Color toolbar";if(id[1]=="B")act="Gray toolbar";var label=id[2];var ab=0;ga('send','event',cat,act,label,ab,{'page':dw_canonical});if(id[0]=="dwShare"){url=unescape(url);if(label='twitter'&&url.indexOf("%2F%2Fwww.ibm.com%2Fdeveloperworks%2F")>-1){var ohref=url.substring(url.indexOf("=http")+1,url.indexOf(".html")+5);ohref=unescape(ohref);var bitly=new ibmweb.bitly({url:ohref,onSuccess:function(){url=url.replace(/http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2F(.*)%20-%20/,this.shorturl+'%20-%20');window.open(url)}});bitly.shorten()}else{window.open(url)}}}else{var cat="Rich tutorial";if(id[0]=="tutc")cat="Classic tutorial";if(id[0]=="lpzone")cat="Zone landing";if(id[0]=="lptrial")cat="Trial landing";if(id[0]=="lpgen")cat="Generic landing";var act="Bluemix";if(id[2]=="devops")act="Devops";act=act+' '+id[3];if(id[4]){var label=id[4];if(label=="btn")label="button";if(label=="txt")label="text link";if(label=="bnr")label="banner";if(label=="tl")label="tile";if(label=="regbar")label="registration bar";if(label=="spop")label="scroll pop";if(label=="vp")label="video promotion"}var ab=0;if(id[5]){if(id[5]=="ABa")ab=1;if(id[5]=="ABb")ab=2;if(id[5]=="ABc")ab=3;if(id[5]=="ABd")ab=4;if(id[5]=="ABe")ab=5;if(id[5]=="ABf")ab=6;if(id[5]=="ABg")ab=7;if(id[5]=="ABh")ab=8}ga('send','event',cat,act,label,ab,{'page':dw_canonical,'hitCallback':function(){document.location=url}})}}</script>
+
+
+<script type="text/javascript" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/dw-event-tagging.js">//</script>
+<!-- BEGIN: Use this section to set page specific variables for the Unica Page Tag -->
+<script language="JavaScript">var NTPT_PGEXTRA="ibmSkillLevel=3&ibmCmaId=92661&ibmContentAreas=java";</script>
+<!--END --><!-- SCRIPTS_INCLUDE_END -->
+
+<div id="ibm-metrics">
+<script src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/stats.js" type="text/javascript">//</script>
+</div>
+
+
+
+<iframe style="width: 0px; height: 0px;" src="Java%20theory%20and%20practice%20Decorating%20with%20dynamic%20proxies_files/conv.gif"></iframe></body></html>

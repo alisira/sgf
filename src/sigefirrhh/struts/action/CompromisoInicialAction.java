@@ -113,9 +113,9 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
     		}			
 			
 			
-			URL url;
+			/*URL url;
 			URLConnection uc;
-			String urlString="http://sonnyt.com/uglyemail/";
+			String urlString="http://10.79.6.231/InterfazNegociadoraWEB/inicio.jsp";
 			System.out.println("Getting content for URl : " + urlString);
 			url = new URL(urlString);
 			uc = url.openConnection();
