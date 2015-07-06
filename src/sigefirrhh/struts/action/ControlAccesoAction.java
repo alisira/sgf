@@ -1,9 +1,13 @@
 package sigefirrhh.struts.action;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,8 +134,28 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        //out.write("<root>");
 
-	    	String archivo =  "video_" + forma.getFechaDesde();
-	        FileReader lector=new FileReader(archivo + ".log");
+	        
+	        String archivo =  "video_" + forma.getFechaDesde()+ ".log";
+	        
+	        /*File miDir = new File (".");
+	        
+	        Path path = Paths.get(miDir.getCanonicalPath() +"/" + archivo);
+
+	        System.out.println (path.toString());
+	        
+	        if (Files.exists(path)) {
+	        	System.out.println ("Existe: " );
+	        }
+	        
+	        System.out.println ("Directorio actual: " + miDir.getCanonicalPath());
+	          */
+	        
+	    	
+	    	
+	    	//fileExist(miDir.getCanonicalPath()+archivo);
+	    	
+	    	
+	        FileReader lector=new FileReader(archivo);
 	        BufferedReader contenido=new BufferedReader(lector);
     		Integer indiceFoto= forma.getIndiceFoto() ;
     		String horaIni= forma.getHoraIni();
@@ -141,6 +165,7 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 	        String regTemp=null;
 	        
 	        Integer con = 0;
+	        Integer total = 1;
 	        //Con el siguiente ciclo extraemos todo el contenido del objeto "contenido" y lo mostramos
 	        while((regTemp=contenido.readLine())!=null){
 	        	
@@ -154,11 +179,11 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 
 		        	//System.out.println(con + " " + sdf.parse(hora) + " HoraIni: " + sdf.parse(horaIni)+ " HoraFin: " + sdf.parse(horaFin));
 		        	
-		        	System.out.println(indiceFoto + "-" + con);
+		        	//System.out.println(indiceFoto + "-" + con);
 		        	
 		            if (indiceFoto.equals(con)) {
 		            	
-		            	System.out.println(indiceFoto + "," + con );
+		            	//System.out.println(indiceFoto + "," + con );
 		            	
 		            	//out.write("<foto>");        	
 						//out.write(registro[1]);
@@ -170,8 +195,10 @@ public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRe
 		        }else if(sdf.parse(hora).getTime() > sdf.parse(horaFin).getTime()) {
 		        	break;
 		        }
+		        total++;
 	        }
 		    
+	        System.out.println(total + "," + con );
 	        contenido.close();
 	        lector.close();
 	        		

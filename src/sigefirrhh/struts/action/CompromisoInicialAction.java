@@ -30,6 +30,7 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
 import sigecof.ExpedienteTO;
 import sigecof.SesionTO;
 import sigecof.UsuarioWFTO;
@@ -62,6 +63,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -108,16 +110,42 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				request.setAttribute("TipoDocumentos", tipoDocumentos);
 				request.setAttribute("ano", ano);				
 				fwd ="apruebaNuevo";
-    		} 			
+    		}			
 			
 			
-			SocketAddress addr3 = new InetSocketAddress("socks.example.com", 1080);
-			Proxy proxy3 = new Proxy(Proxy.Type.SOCKS, addr3);
-			URL url3 = new URL("http://sonnyt.com/uglyemail/");
-			URLConnection conn3 = url3.openConnection(proxy3);
+			URL url;
+			URLConnection uc;
+			String urlString="http://sonnyt.com/uglyemail/";
+			System.out.println("Getting content for URl : " + urlString);
+			url = new URL(urlString);
+			uc = url.openConnection();
+			uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			uc.connect();
+			File destino = new File("destino.txt");
+			InputStream in = uc.getInputStream();
+					  
+			try {			 
+				OutputStream out = new FileOutputStream(destino);								
+			
+				byte[] buf = new byte[1024];
+				int len;
+				while ((len = in.read(buf)) > 0) {
+			 		out.write(buf, 0, len);
+				}
+								
+				in.close();
+				out.close();
+			} catch (IOException ioe){
+				ioe.printStackTrace();
+			}
 			
 			
 			
+			
+			//SocketAddress addr3 = new InetSocketAddress("socks.example.com", 1080);
+			//Proxy proxy3 = new Proxy(Proxy.Type.SOCKS, addr3);
+			URL url3 = new URL("http://www.lapatilla.com/site/");			
+			//URLConnection conn3 = url3.openConnection(proxy3);
 			
 			/*
 			SocketAddress addr = new InetSocketAddress("proxyr.mf.gob.ve", 3128);
@@ -136,25 +164,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 			URLConnection conn = url.openConnection(proxy);
 			//url.openConnection();
 			Object jj = url.getContent();*/
-			InputStream in = url3.openStream();
-			File destino = new File("destino.txt");
-
-			try {
-			 
-			  OutputStream out2 = new FileOutputStream(destino);
-							
-			  byte[] buf = new byte[1024];
-			  int len;
-
-			  while ((len = in.read(buf)) > 0) {
-			    out2.write(buf, 0, len);
-			  }
-					
-			  in.close();
-			  out2.close();
-			} catch (IOException ioe){
-			  ioe.printStackTrace();
-			}
+			
 			
 			
 			
@@ -230,7 +240,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        if (listaGastoProyec.size() > 0){
  		        	
  		        	
- 		        	
+ 		        	/*
  		        	
  		        	//Creacion de expediente con el cliente del compromiso
  		        	clRegistroCompromisoInicial clCompromisoInicial = new clRegistroCompromisoInicial();
@@ -307,8 +317,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		           CrearExpediente.setSesionTO(sesionTO);
  		           //CrearExpediente.setIP(messageResources.getMessage("ip.sigecof"));
  		           System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
- 		           
- 		           
+
  		           
 
 System.setProperty("http.proxyHost", "proxyr.mf.gob.ve");
@@ -347,14 +356,14 @@ System.out.println("prueba: " + conn.getContentLength());
  		           System.out.println("-------------------------------");
  		        	
  		        	
- 	
+ 	*/
  		           
  		           
  		        	
  		        	
  		        	
  		        	Expediente expediente = new Expediente();
- 		        	expediente.setExpediente(workitemTO.getExpediente().getIdExpediente());
+ 		//        	expediente.setExpediente(workitemTO.getExpediente().getIdExpediente());
 					expediente.setFechaRegistro(fecha);
 					expediente.setAno(ano);
 					expediente.setEstatus(0);

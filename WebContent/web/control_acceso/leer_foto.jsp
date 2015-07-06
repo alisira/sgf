@@ -37,7 +37,7 @@ int velocidad = 200;
                     <input id="tiempo" name="tiempo" value="00:00:00">
                 </label>
                 <label>Velocidad
-                    <input id="velocidad" name="velocidad" value="1000">
+                    <input id="velocidad" name="velocidad" value="220">
                 </label>
                 <input type="submit" name="enviar">
             </form>
@@ -71,7 +71,7 @@ int velocidad = 200;
              
             //$.get("leer_foto_1.php",{archivo:"<?php echo $dia ?>"},procesarEventos);
     
-            if (ciclos < 200 && tiempo_actual != hora_fin ){
+            if (ciclos < 300 && tiempo_actual != hora_fin ){
                 //timerID = setInterval("enviar_foto()", tiempo);
                 //alert(hora_ini);
                 if (window.XMLHttpRequest){
@@ -85,7 +85,7 @@ int velocidad = 200;
                 if(req!=null){
                     req.onreadystatechange = procesarEventos;
                     indiceFoto++;
-                    url = "/sigefirrhh/controlAcceso.do?accion=leer&fechaDesde=12-09-2014&horaIni=01:51:36&horaFin=01:53:59&indiceFoto="+ indiceFoto;
+                    url = "/sigefirrhh/controlAcceso.do?accion=leer&fechaDesde=12-09-2014&horaIni=01:59:36&horaFin=02:01:59&indiceFoto="+ indiceFoto;
                     
                     //alert(url);
                     req.open("POST",url,true);
