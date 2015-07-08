@@ -1,5 +1,7 @@
 package sigefirrhh.struts.action;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.*;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.util.MessageResources;
@@ -11,6 +13,8 @@ import sigecof.clRegistroCompromisoInicial;
 import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.CompromisoInicialDTO;
 */
+
+
 
 
 
@@ -90,6 +94,7 @@ import sigefirrhh.base.estructura.Organismo;
 public class CompromisoInicialAction extends DispatchAction implements Serializable, Comun {
 
 	private static final long serialVersionUID = 6333610918451615896L;	
+	protected final Log logger = LogFactory.getLog(getClass());
 	HttpSession session = null;
 	String fwd = null;	
 	PrintWriter out = null;	
@@ -112,10 +117,12 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				fwd ="apruebaNuevo";
     		}			
 			
+			URL url3 = new URL("http://www.lapatilla.com/site/");			
 			
-			/*URL url;
+			URL url;
 			URLConnection uc;
-			String urlString="http://10.79.6.231/InterfazNegociadoraWEB/inicio.jsp";
+			//String urlString="http://10.79.6.231/InterfazNegociadoraWEB/inicio.jsp";
+			String urlString="http://www.lapatilla.com/site/";
 			System.out.println("Getting content for URl : " + urlString);
 			url = new URL(urlString);
 			uc = url.openConnection();
@@ -144,7 +151,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 			
 			//SocketAddress addr3 = new InetSocketAddress("socks.example.com", 1080);
 			//Proxy proxy3 = new Proxy(Proxy.Type.SOCKS, addr3);
-			URL url3 = new URL("http://www.lapatilla.com/site/");			
+			//URL url3 = new URL("http://www.lapatilla.com/site/");			
 			//URLConnection conn3 = url3.openConnection(proxy3);
 			
 			/*
@@ -181,9 +188,8 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        	fwd = e.toString();	
 	        }			
 			
-		} catch (Exception e) {			
-			System.out.println("Error Grave: " + this.getClass().getName() + " a las " + hora);
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(null, e);			
 			request.setAttribute("mensaje", messageResources.getMessage("errors.aplicacion"));
     		fwd = "respuestaProceso";		
 		}

@@ -1,1 +1,0 @@
-Drupal.locale = { 'pluralFormula': function($n) { return Number(($n!=1)); }, 'strings': { "Select all rows in this table": "Seleccionar todas las filas de esta tabla", "Deselect all rows in this table": "Quitar la selección a todas las filas de esta tabla" } };

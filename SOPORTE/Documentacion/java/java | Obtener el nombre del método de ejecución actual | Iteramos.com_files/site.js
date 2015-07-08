@@ -1,1 +1,0 @@
-$(window).load(function(){window.setTimeout(function(){$('.gif-container img').each(function(){var img_url=$(this).attr('src').replace('.jpg','.gif');$(this).attr('src',img_url);});},1000);});
