@@ -35,11 +35,16 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+
+
+import sigecof.DisponibilidadPresupuestariaDTO;
 import sigecof.ExpedienteTO;
 import sigecof.SesionTO;
 import sigecof.UsuarioWFTO;
 import sigecof.WSGestionExpediente;
 import sigecof.WorkItemTO;
+import sigecof.clDisponibilidadPresupuestaria;
 import sigecof.clGestionExpediente;
 import sigecof.clRegistroCompromisoInicial;
 import sigefirrhh.persistencia.modelo.CompromisoInicial;
@@ -76,6 +81,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
@@ -117,12 +123,12 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				fwd ="apruebaNuevo";
     		}			
 			
-			URL url3 = new URL("http://www.lapatilla.com/site/");			
+			//URL url3 = new URL("http://www.lapatilla.com/site/");			
 			
 			URL url;
 			URLConnection uc;
-			//String urlString="http://10.79.6.231/InterfazNegociadoraWEB/inicio.jsp";
-			String urlString="http://www.lapatilla.com/site/";
+			String urlString="http://10.79.6.232/documentation.html";
+			//String urlString="http://www.lapatilla.com/site/";
 			System.out.println("Getting content for URl : " + urlString);
 			url = new URL(urlString);
 			uc = url.openConnection();
@@ -145,6 +151,46 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 			} catch (IOException ioe){
 				ioe.printStackTrace();
 			}
+			
+			
+			
+			
+			
+			/*
+			
+	        DisponibilidadPresupuestariaDTO disponibilidad = new DisponibilidadPresupuestariaDTO();
+	        clDisponibilidadPresupuestaria consulta = new clDisponibilidadPresupuestaria();
+	              
+	     consulta.setId_organismo("45");
+	        consulta.setCod_unidad_administ("00012");
+	        consulta.setCod_Unidad_Ejecutora("00008");
+	        consulta.setAnho_fiscal(2014);
+	        consulta.setFuente_Financiamiento("1");
+	        consulta.setCategoria_Presupuestaria("450001001");
+	        consulta.setObjeto_Gasto("403190100");
+	        consulta.setId_organismo("60");
+	        consulta.setCod_unidad_administ("60006");
+	        consulta.setCod_Unidad_Ejecutora("60014");
+	        consulta.setAnho_fiscal(2011);
+	        consulta.setFuente_Financiamiento("1");
+	        consulta.setCategoria_Presupuestaria("600001001");
+	        consulta.setObjeto_Gasto("401070300");
+	        
+	        //consulta.setObjeto_Gasto("401.01.01.00");
+	        consulta.setDisponibilidad_Imputacion(BigDecimal.ZERO);
+	        consulta.setp_Disponibilidad_Partida(BigDecimal.ZERO);
+	        
+	        //String url = consulta.getUrl();
+	        disponibilidad = consulta.EjecuteConsulta();
+	        
+	        //System.out.println("Url = " + url);
+	        System.out.println("Disponibilidad Imputacion = " + disponibilidad.getDisponibilidadImputacion());
+	        System.out.println("Disponibilidad Partida    = " + disponibilidad.getDisponibilidadPartida());
+	        System.out.println("Estatus de la operacón = " + disponibilidad.getEstatus());
+	        System.out.println("Fin de la aplicacion");
+			
+			*/
+			
 			
 			
 			
@@ -246,123 +292,89 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        if (listaGastoProyec.size() > 0){
  		        	
  		        	
- 		        	/*
- 		        	
- 		        	//Creacion de expediente con el cliente del compromiso
- 		        	clRegistroCompromisoInicial clCompromisoInicial = new clRegistroCompromisoInicial();
- 		        	
- 		        	ExpedienteTO expedienteTO = new ExpedienteTO();
- 		        	UsuarioWFTO usuarioTO = new UsuarioWFTO();
- 		        	SesionTO sesionTO = new SesionTO();
- 		        	WorkItemTO workitemTO = new WorkItemTO();
-				   
- 		        	expedienteTO.setAnho(2014);
- 		        	expedienteTO.setIdOrganismo("37");
- 		        	expedienteTO.setIdProceso("P_RBT_REG_COMP");
- 		        	expedienteTO.setDenominacionProceso("Registro del Compromiso");
- 		        	expedienteTO.setIdUsuario("MPPDP_SARAHI");
- 		        	expedienteTO.setNombreUsuario("SARAHI");
- 		        	expedienteTO.setDescripcion("Registro del Compromiso");
- 		        	expedienteTO.setObservacion("Registro de Compromiso por Webservice");
- 		        	expedienteTO.setNombre("Registro de Compromiso por Webservice");
- 		        	expedienteTO.setInstancia("0");
- 		        	
- 		        	usuarioTO.setIdUsuario("MPPDP_SARAHI");
- 		        	usuarioTO.setIpUsuario("10.90.24.79");
- 		        	usuarioTO.setRol("R_ANA_ADMI_II");			   
-				   
-				   
- 		        	sesionTO.setIdUsuario("MPPDP_SARAHI");
- 		        	sesionTO.setIpMaquina("10.90.24.79");
- 		        	sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
- 		        	sesionTO.setPrograma("Registro del Compromiso");
- 		        	sesionTO.setFechaInicio(null);
- 		        	sesionTO.setFechaFinalizacion(null);
- 		        	sesionTO.setFechaMovimiento(null);
-				   //sesionTO.setIdSesion(null);
-				
- 		        	clCompromisoInicial.setExpedienteTO(expedienteTO);
- 		        	clCompromisoInicial.setUsuarioTO(usuarioTO);
- 		        	clCompromisoInicial.setSesionTO(sesionTO);
- 		        	
- 		        	System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
- 		        	workitemTO = clCompromisoInicial.CrearExpediente();
-				   
- 		        	System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
- 		        	System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
- 		        	System.out.println("Descripción    : " + workitemTO.getDescripcion());
- 		        	System.out.println("-------------------------------");
 
- 		        	
- 		        	
- 		        	
- 		        	clGestionExpediente CrearExpediente = new clGestionExpediente();
- 		          
- 		           
- 		           expedienteTO.setAnho(2014);
- 		           expedienteTO.setIdOrganismo("37");
- 		           expedienteTO.setIdProceso("P_FOND_RES_NEM");
- 		           expedienteTO.setDenominacionProceso("RESUMEN NOMINA");
- 		           expedienteTO.setIdUsuario("FMIGDALIA");
- 		           expedienteTO.setDescripcion("Empleados");
- 		           expedienteTO.setObservacion("2da. Quincena de Abril 2014");
- 		           expedienteTO.setNombre("Registro de Resumen de Nomina");
- 		           
- 		           usuarioTO.setIdUsuario("FMIGDALIA");
- 		           usuarioTO.setIpUsuario("10.90.24.79");
- 		           usuarioTO.setRol("R_ANA_REGIST");
- 		           
- 		           sesionTO.setIdUsuario("FMIGDALIA");
- 		           sesionTO.setIpMaquina("10.90.24.79");
- 		           sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
- 		           sesionTO.setPrograma("CREAEXPEDIENTE");
- 		           //sesionTO.setIdSesion(null);
-
- 		           CrearExpediente.setExpedienteTO(expedienteTO);
- 		           CrearExpediente.setUsuarioTO(usuarioTO);
- 		           CrearExpediente.setSesionTO(sesionTO);
- 		           //CrearExpediente.setIP(messageResources.getMessage("ip.sigecof"));
- 		           System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
-
- 		           
-
-System.setProperty("http.proxyHost", "proxyr.mf.gob.ve");
-System.setProperty("http.proxyPort", "3128");
-
-// Next connection will be through proxy.
-URL url = new URL("http://sonnyt.com/uglyemail/");
-InputStream in = url.openStream();
-
-//System.out.println(in.read());
-
-
-
-
-SocketAddress addr = new InetSocketAddress("proxyr.mf.gob.ve", 3218);
-Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
-
-
-//URL url = new URL("http://java.example.org/");
-URLConnection conn = url.openConnection(proxy);
-
-conn.connect();
-
-System.out.println("prueba: " + conn.getContentLength());
-// Now, let's 'unset' the proxy.
-//System.setProperty("http.proxyHost", null);
- 		           
- 		           
+ 		         clRegistroCompromisoInicial CrearExpediente = new clRegistroCompromisoInicial();
+ 		         ExpedienteTO expedienteTO = new ExpedienteTO();
+ 		         UsuarioWFTO usuarioTO = new UsuarioWFTO();
+ 		         SesionTO sesionTO = new SesionTO();
+ 		         WorkItemTO workitemTO = new WorkItemTO();
  		         
- 		           
- 		           workitemTO = CrearExpediente.CrearExpediente();
- 		           
- 		           System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
- 		           System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
- 		           System.out.println("Descripción    : " + workitemTO.getDescripcion());
- 		           System.out.println("-------------------------------");
+ 		         expedienteTO.setAnho(2014);
+ 		         expedienteTO.setIdOrganismo("37");
+ 		         expedienteTO.setIdProceso("P_RBT_REG_COMP");
+ 		         expedienteTO.setDenominacionProceso("Registro del Compromiso");
+ 		         expedienteTO.setIdUsuario("MPPDP_SARAHI");
+ 		         expedienteTO.setNombreUsuario("SARAHI");
+ 		         expedienteTO.setDescripcion("Registro del Compromiso");
+ 		         expedienteTO.setObservacion("Registro de Compromiso por Webservice");
+ 		         expedienteTO.setNombre("Registro de Compromiso por Webservice");
+ 		         expedienteTO.setInstancia("0");
+ 		         usuarioTO.setIdUsuario("MPPDP_SARAHI");
+ 		         usuarioTO.setIpUsuario("10.90.24.79");
+ 		         usuarioTO.setRol("R_ANA_ADMI_II");
+ 		         
+ 		         
+ 		         
+ 		         sesionTO.setIdUsuario("MPPDP_SARAHI");
+ 		         sesionTO.setIpMaquina("10.90.24.79");
+ 		         sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
+ 		         sesionTO.setPrograma("Registro del Compromiso");
+ 		         sesionTO.setFechaInicio(null);
+ 		         sesionTO.setFechaFinalizacion(null);
+ 		         sesionTO.setFechaMovimiento(null);
+ 		         //sesionTO.setIdSesion(null);
+
+ 		         CrearExpediente.setExpedienteTO(expedienteTO);
+ 		         CrearExpediente.setUsuarioTO(usuarioTO);
+ 		         CrearExpediente.setSesionTO(sesionTO);
+ 		         System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
+ 		         workitemTO = CrearExpediente.CrearExpediente();
+ 		         
+ 		         System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
+ 		         System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
+ 		         System.out.println("Descripción    : " + workitemTO.getDescripcion());
+ 		         System.out.println("-------------------------------");
+ 
+   
+				workitemTO = CrearExpediente.CrearExpediente();
+				   
+				System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
+				System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
+				System.out.println("Descripción    : " + workitemTO.getDescripcion());
+				System.out.println("-------------------------------");
+
  		        	
- 		        	
- 	*/
+   
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
+ 		           
  		           
  		           
  		        	

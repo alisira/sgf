@@ -1,1 +1,0 @@
-__tcb68837({ "status_code": 200, "status_txt": "OK", "data": { "long_url": "http:\/\/www.ibm.com\/developerworks\/library\/j-jtp08305\/index.html", "url": "http:\/\/ibm.co\/1kC0C7H", "hash": "1kC0C7H", "global_hash": "1kC0C7I", "new_hash": 0 } })
