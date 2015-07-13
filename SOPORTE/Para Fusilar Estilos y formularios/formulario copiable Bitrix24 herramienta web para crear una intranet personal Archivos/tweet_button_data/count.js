@@ -1,1 +1,0 @@
-/**/__twttr.receiveCount({"count":8,"url":"http:\/\/www.rlsgeek.com\/9667\/bitrix24-herramienta-web-para-crear-una-intranet-personal\/"});

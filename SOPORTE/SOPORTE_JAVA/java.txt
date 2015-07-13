@@ -54,12 +54,18 @@ Field[] campos = exp.getClass().getFields();
 
 --Obtener la url completa que hace el request
 	request.getHeader("referer")
+	
 --Obtener la url sin la aplicacion
-	request.getRequestURI()	
+	request.getRequestURI()
+	Ejemplo: /springapp/views/plantilla.jsp
+	      	
 --Obtener la url del servlet
 	request.getServletPath()
-
-sigefirrhh/base/ubicacion/Pais.jsf
+	Ejemplo: /views/plantilla.jsp
+	
+--Obtener el root de la aplicacion
+	request.getContextPath()
+	Ejemplo: /springapp
 
 
 --Guardar contenido de una pagina en un archivo

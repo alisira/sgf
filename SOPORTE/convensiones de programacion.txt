@@ -1,0 +1,7 @@
+Los nombres de clases comienzan con mayúsculas (camel cased). Ejemplos: Carro, LecheCondensada, Pokemon, TelefonoCelular.
+
+Los métodos comienzan con minúsculas (camel cased). Ejemplos: calcularPromedio(), reemplazarCaracteresInvalidos(), enviarSaldo().
+
+Las variables, comienzan con minúsculas (camel cased). Ejemplos: pesoMaximo, alturaMinimaPermitida, color. 
+
+Las constantes tienen todas las letras en mayúsculas (palabras separadas con _). PORCENTAJE_IMPUESTO, PI, PUNTO_INICIAL.
