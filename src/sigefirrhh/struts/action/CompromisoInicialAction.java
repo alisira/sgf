@@ -38,8 +38,11 @@ import sigecof.CompromisoInicialDTO;
 
 
 
+
+import sigecof.CompromisoInicialDTO;
 import sigecof.DisponibilidadPresupuestariaDTO;
 import sigecof.ExpedienteTO;
+import sigecof.ImputacionesCompromisoInicialDTO;
 import sigecof.SesionTO;
 import sigecof.UsuarioWFTO;
 import sigecof.WSGestionExpediente;
@@ -107,7 +110,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	MessageResources messageResources = null;
 	
 	public ActionForward nuevo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-						
+					
 		
 		messageResources = getResources(request);		
     		
@@ -125,7 +128,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 			
 			//URL url3 = new URL("http://www.lapatilla.com/site/");			
 			
-			URL url;
+			/*URL url;
 			URLConnection uc;
 			String urlString="http://10.79.6.232/documentation.html";
 			//String urlString="http://www.lapatilla.com/site/";
@@ -152,33 +155,34 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 				ioe.printStackTrace();
 			}
 			
+			*/
 			
 			
 			
 			
-			/*
 			
 	        DisponibilidadPresupuestariaDTO disponibilidad = new DisponibilidadPresupuestariaDTO();
 	        clDisponibilidadPresupuestaria consulta = new clDisponibilidadPresupuestaria();
 	              
-	     consulta.setId_organismo("45");
-	        consulta.setCod_unidad_administ("00012");
-	        consulta.setCod_Unidad_Ejecutora("00008");
+	     consulta.setId_organismo("37");
+	        consulta.setCod_unidad_administ("00011");
+	        consulta.setCod_Unidad_Ejecutora("00024");
 	        consulta.setAnho_fiscal(2014);
 	        consulta.setFuente_Financiamiento("1");
-	        consulta.setCategoria_Presupuestaria("450001001");
-	        consulta.setObjeto_Gasto("403190100");
-	        consulta.setId_organismo("60");
+	        consulta.setCategoria_Presupuestaria("370001001");
+	        consulta.setObjeto_Gasto("401010100");
+	        
+	        /*consulta.setId_organismo("60");
 	        consulta.setCod_unidad_administ("60006");
 	        consulta.setCod_Unidad_Ejecutora("60014");
 	        consulta.setAnho_fiscal(2011);
 	        consulta.setFuente_Financiamiento("1");
 	        consulta.setCategoria_Presupuestaria("600001001");
-	        consulta.setObjeto_Gasto("401070300");
+	        consulta.setObjeto_Gasto("401070300");*/
 	        
 	        //consulta.setObjeto_Gasto("401.01.01.00");
-	        consulta.setDisponibilidad_Imputacion(BigDecimal.ZERO);
-	        consulta.setp_Disponibilidad_Partida(BigDecimal.ZERO);
+	        //consulta.setDisponibilidad_Imputacion(BigDecimal.ZERO);
+	        //consulta.setp_Disponibilidad_Partida(BigDecimal.ZERO);
 	        
 	        //String url = consulta.getUrl();
 	        disponibilidad = consulta.EjecuteConsulta();
@@ -189,7 +193,7 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
 	        System.out.println("Estatus de la operacón = " + disponibilidad.getEstatus());
 	        System.out.println("Fin de la aplicacion");
 			
-			*/
+			
 			
 			
 			
@@ -293,26 +297,25 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		        	
  		        	
 
- 		         clRegistroCompromisoInicial CrearExpediente = new clRegistroCompromisoInicial();
- 		         ExpedienteTO expedienteTO = new ExpedienteTO();
- 		         UsuarioWFTO usuarioTO = new UsuarioWFTO();
- 		         SesionTO sesionTO = new SesionTO();
- 		         WorkItemTO workitemTO = new WorkItemTO();
+ 		        	clRegistroCompromisoInicial crearExpediente = new clRegistroCompromisoInicial();
+ 		        	ExpedienteTO expedienteTO = new ExpedienteTO();
+ 		        	UsuarioWFTO usuarioTO = new UsuarioWFTO();
+ 		        	SesionTO sesionTO = new SesionTO();
+ 		        	WorkItemTO workitemTO = new WorkItemTO();
  		         
- 		         expedienteTO.setAnho(2014);
- 		         expedienteTO.setIdOrganismo("37");
- 		         expedienteTO.setIdProceso("P_RBT_REG_COMP");
- 		         expedienteTO.setDenominacionProceso("Registro del Compromiso");
- 		         expedienteTO.setIdUsuario("MPPDP_SARAHI");
- 		         expedienteTO.setNombreUsuario("SARAHI");
- 		         expedienteTO.setDescripcion("Registro del Compromiso");
- 		         expedienteTO.setObservacion("Registro de Compromiso por Webservice");
- 		         expedienteTO.setNombre("Registro de Compromiso por Webservice");
- 		         expedienteTO.setInstancia("0");
- 		         usuarioTO.setIdUsuario("MPPDP_SARAHI");
- 		         usuarioTO.setIpUsuario("10.90.24.79");
- 		         usuarioTO.setRol("R_ANA_ADMI_II");
- 		         
+					expedienteTO.setAnho(2014);
+					expedienteTO.setIdOrganismo("37");
+					expedienteTO.setIdProceso("P_RBT_REG_COMP");
+					expedienteTO.setDenominacionProceso("Registro del Compromiso");
+					expedienteTO.setIdUsuario("MPPDP_SARAHI");
+					expedienteTO.setNombreUsuario("SARAHI");
+					expedienteTO.setDescripcion("Registro del Compromiso");
+					expedienteTO.setObservacion("Registro de Compromiso por Webservice");
+					expedienteTO.setNombre("Registro de Compromiso por Webservice");
+					expedienteTO.setInstancia("0");
+					usuarioTO.setIdUsuario("MPPDP_SARAHI");
+					usuarioTO.setIpUsuario("10.90.24.79");
+					usuarioTO.setRol("R_ANA_ADMI_II");
  		         
  		         
  		         sesionTO.setIdUsuario("MPPDP_SARAHI");
@@ -324,30 +327,81 @@ public class CompromisoInicialAction extends DispatchAction implements Serializa
  		         sesionTO.setFechaMovimiento(null);
  		         //sesionTO.setIdSesion(null);
 
- 		         CrearExpediente.setExpedienteTO(expedienteTO);
- 		         CrearExpediente.setUsuarioTO(usuarioTO);
- 		         CrearExpediente.setSesionTO(sesionTO);
+ 		        crearExpediente.setExpedienteTO(expedienteTO);
+ 		        crearExpediente.setUsuarioTO(usuarioTO);
+ 		        crearExpediente.setSesionTO(sesionTO);
+ 		        crearExpediente.setIP("10.90.24.73");
+ 		        crearExpediente.setPuerto("8080");
+ 		         
  		         System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
- 		         workitemTO = CrearExpediente.CrearExpediente();
+ 		         workitemTO = crearExpediente.CrearExpediente();
  		         
  		         System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
  		         System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
  		         System.out.println("Descripción    : " + workitemTO.getDescripcion());
  		         System.out.println("-------------------------------");
- 
-   
-				workitemTO = CrearExpediente.CrearExpediente();
-				   
-				System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
-				System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
-				System.out.println("Descripción    : " + workitemTO.getDescripcion());
-				System.out.println("-------------------------------");
 
  		        	
    
  		           
  		           
- 		           
+ 		        clRegistroCompromisoInicial Ci = new clRegistroCompromisoInicial();
+ 		        CompromisoInicialDTO CiDTO = new CompromisoInicialDTO();
+ 		        ArrayList<ImputacionesCompromisoInicialDTO> ImpCiDTO = new ArrayList<ImputacionesCompromisoInicialDTO>();
+ 		        ImputacionesCompromisoInicialDTO registro = new ImputacionesCompromisoInicialDTO();
+ 		        Ci.setAnho_fiscal(2014);
+ 		        Ci.setCod_Sigecof("37");
+ 		        Ci.setCod_unidad_administ("00011");
+ 		        Ci.setPersid_cuentadante(13863);
+ 		        Ci.setTipo_pago(3);
+ 		        Ci.setTipo_fondo(3);
+ 		        Ci.setTipo_documento(47);
+ 		        Ci.setNumero_documento("1005");
+ 		        Ci.setOrigen_presupuestario("S");
+ 		        Ci.setObservacion("Registro de compromiso realizado por el Webservice");
+ 		        Ci.setGaceta_credito_adicional(null);
+ 		        Ci.setDecreto_credito_adicional(null);
+ 		        Ci.setFecha_credito_adicional(null);
+ 		        Ci.setGaceta_rectificacion(null);
+ 		        Ci.setDecreto_rectificacion(null);
+ 		        Ci.setFecha_rectificacion(null);
+ 		        Ci.setNumero_expediente(workitemTO.getExpediente().getIdExpediente());
+ 		        //Ci.setNumero_compromiso(null);
+ 		        
+ 		            
+ 		        ImpCiDTO = new ArrayList<ImputacionesCompromisoInicialDTO>();
+ 		        registro.setFuenteFinanciamiento("1");
+ 		        registro.setCodUnidadEjecutora("00024");
+ 		        registro.setCategoriaPresupuestaria("370001001");
+ 		        registro.setObjetoGasto("401030100");
+ 		        registro.setMonto(BigDecimal.valueOf(3000));
+ 		        ImpCiDTO.add(registro);
+ 		        
+ 		        registro = new ImputacionesCompromisoInicialDTO();
+ 		        registro.setFuenteFinanciamiento("1");
+ 		        registro.setCodUnidadEjecutora("00024");
+ 		        registro.setCategoriaPresupuestaria("370001001");
+ 		        registro.setObjetoGasto("401020100");
+ 		        registro.setMonto(BigDecimal.valueOf(3000));
+ 		        ImpCiDTO.add(registro);
+ 		        
+ 		        registro = new ImputacionesCompromisoInicialDTO();
+ 		        registro.setFuenteFinanciamiento("1");
+ 		        registro.setCodUnidadEjecutora("00024");
+ 		        registro.setCategoriaPresupuestaria("370001001");
+ 		        registro.setObjetoGasto("401010100");
+ 		        registro.setMonto(BigDecimal.valueOf(3000));
+ 		        ImpCiDTO.add(registro);
+ 		        
+ 		        Ci.setDetalles_compromiso(ImpCiDTO);
+ 		        System.out.println("Se va a llamar a la clase cliente de Registro de Compromiso, Expediente " + Ci.getNumero_expediente());
+ 		        CiDTO = Ci.RegistroCompromiso();
+ 		        
+ 		        System.out.println("Numero Expediente: " + CiDTO.getNumeroExpediente());
+ 		        System.out.println("Numero Compromiso: " + CiDTO.getNumeroCompromiso());
+ 		        System.out.println("-------------------------------");
+ 		        System.out.println("Fue Guardado? " + CiDTO.getDetallesCompromiso().get(0).isGuardado());
+ 		        System.out.println("Mensaje: " + CiDTO.getDetallesCompromiso().get(0).getMensajeRta()); 
  		           
  		           
  		           
