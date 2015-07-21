@@ -1,0 +1,584 @@
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
+import java.math.BigDecimal;
+import sigecof.clRegularizacionCompromisoInicial;
+import sigecof.CompromisoInicialDTO;
+import sigecof.ImputacionesCompromisoInicialDTO;
+import java.util.ArrayList;
+import sigecof.ExpedienteTO;
+import sigecof.SesionTO;
+import sigecof.UsuarioWFTO;
+import sigecof.WorkItemTO;
+
+import java.util.ArrayList;
+import java.math.BigDecimal;
+import sigecof.clResumenNomina;
+import sigecof.ResumenNominaDTO;
+import sigecof.ImputacionesResNominaDTO;
+import sigecof.EjercicioPresupuestarioTO;
+import sigecof.Uadto;
+import sigecof.OrganismoTO;
+import sigecof.TipoFondoTO;
+import sigecof.TipoNominaTO;
+import sigecof.TipoDocumentoTO;
+import sigecof.FuenteFinanciamientoTO;
+import sigecof.Uejto;
+import sigecof.Uejlto;
+import sigecof.CategoriaPresupuestariaTO;
+import sigecof.ObjetoGastoTO;
+import sigecof.ControlDivisasTO;
+import sigecof.ExpedienteTO;
+import sigecof.SesionTO;
+import sigecof.UsuarioWFTO;
+import sigecof.WorkItemTO;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+
+
+import sigecof.clResumenNominaRendicion;
+import sigecof.ResumenRendicionNominaDTO;
+import sigecof.RetencionesRendNominaDTO;
+import sigecof.ImputacionesRendNominaDTO;
+
+import sigecof.EjercicioPresupuestarioTO;
+import sigecof.OrganismoTO;
+import sigecof.CompromisoTO;
+import sigecof.CausadoTO;
+import sigecof.Uadto;
+import sigecof.Uejto;
+import sigecof.Uejlto;
+import sigecof.PersonaTO;
+import sigecof.TipoPagoTO;
+import sigecof.TipoFondoTO;
+import sigecof.CategoriaPresupuestariaTO;
+import sigecof.ObjetoGastoTO;
+import sigecof.FuenteFinanciamientoTO;
+import sigecof.RetencionTO;
+import sigecof.TipoRetencionTO;
+import sigecof.HistoricoCausadoTO;
+import sigecof.SesionTO;
+import sigecof.TipoDocumentoTO;
+import sigecof.ExpedienteTO;
+import sigecof.UsuarioWFTO;
+import sigecof.WorkItemTO;
+import sigecof.ControlDivisasTO;
+import sigecof.TipoMonedaTO;
+import sigecof.ConceptoPagoTO;
+import sigecof.CuentaTO;
+import sigecof.TipoPasivoTO;
+import sigecof.EnteReceptorTO;
+import sigecof.ReglaRetencionTO;
+
+    private static void PDD_Compromiso() {
+        clRegistroCompromisoInicial PDDCompromiso = new clRegistroCompromisoInicial();
+        Boolean Resulta;
+        PDDCompromiso.setAnho_fiscal(2014);
+        PDDCompromiso.setCod_Sigecof("37");
+        PDDCompromiso.setNumero_expediente(4263);
+        PDDCompromiso.setEstatus(1);
+        Resulta = PDDCompromiso.PDDCompromiso();
+        System.out.println("PDD Compromiso = " + Resulta);
+    }
+   
+    private  static Integer Crear_Expediente() {
+        clRegistroCompromisoInicial CrearExpediente = new clRegistroCompromisoInicial();
+        ExpedienteTO expedienteTO = new ExpedienteTO();
+        UsuarioWFTO usuarioTO = new UsuarioWFTO();
+        SesionTO sesionTO = new SesionTO();
+        WorkItemTO workitemTO = new WorkItemTO();
+        
+        expedienteTO.setAnho(2014);
+        expedienteTO.setIdOrganismo("37");
+        expedienteTO.setIdProceso("P_RBT_REG_COMP");
+        expedienteTO.setDenominacionProceso("Registro del Compromiso");
+        expedienteTO.setIdUsuario("MPPDP_SARAHI");
+        expedienteTO.setNombreUsuario("SARAHI");
+        expedienteTO.setDescripcion("Registro del Compromiso");
+        expedienteTO.setObservacion("Registro de Compromiso por Webservice");
+        expedienteTO.setNombre("Registro de Compromiso por Webservice");
+        expedienteTO.setInstancia("0");
+        usuarioTO.setIdUsuario("MPPDP_SARAHI");
+        usuarioTO.setIpUsuario("10.90.24.79");
+        usuarioTO.setRol("R_ANA_ADMI_II");
+        
+        sesionTO.setIdUsuario("MPPDP_SARAHI");
+        sesionTO.setIpMaquina("10.90.24.79");
+        sesionTO.setMaquina("DESARROLLO WEBSERVICE DIGEMAFE");
+        sesionTO.setPrograma("Registro del Compromiso");
+        sesionTO.setFechaInicio(null);
+        sesionTO.setFechaFinalizacion(null);
+        sesionTO.setFechaMovimiento(null);
+        //sesionTO.setIdSesion(null);
+
+        CrearExpediente.setExpedienteTO(expedienteTO);
+        CrearExpediente.setUsuarioTO(usuarioTO);
+        CrearExpediente.setSesionTO(sesionTO);
+        CrearExpediente.setIP("10.90.24.73");
+        CrearExpediente.setPuerto("8080");
+        
+        System.out.println("Se va a llamar a la clase cliente de CrearExpediente ");
+        workitemTO = CrearExpediente.CrearExpediente();
+        
+        System.out.println("Numero Expediente: " + workitemTO.getExpediente().getIdExpediente());
+        System.out.println("Numero WorkItem: " + workitemTO.getIdWorkItem());
+        System.out.println("Descripción    : " + workitemTO.getDescripcion());
+        System.out.println("-------------------------------");
+        return workitemTO.getExpediente().getIdExpediente();
+    }
+
+
+    private  static void Regulariza_Compromiso() {
+        clRegularizacionCompromisoInicial Ci = new clRegularizacionCompromisoInicial();
+        CompromisoInicialDTO CiDTO = new CompromisoInicialDTO();
+        ArrayList<ImputacionesCompromisoInicialDTO> ImpCiDTO = new ArrayList<ImputacionesCompromisoInicialDTO>();
+        ImputacionesCompromisoInicialDTO registro = new ImputacionesCompromisoInicialDTO();
+        Ci.setAnho_fiscal(2014);
+        Ci.setCod_Sigecof("37");
+        Ci.setCod_unidad_administ("00011");
+        Ci.setPersid_cuentadante(13863);
+        Ci.setTipo_pago(3);
+        Ci.setTipo_fondo(3);
+        Ci.setTipo_documento(47);
+        Ci.setNumero_documento("1002");
+        Ci.setOrigen_presupuestario("S");
+        Ci.setObservacion("Registro de compromiso realizado por el Webservice");
+        Ci.setGaceta_credito_adicional(null);
+        Ci.setDecreto_credito_adicional(null);
+        Ci.setFecha_credito_adicional(null);
+        Ci.setGaceta_rectificacion(null);
+        Ci.setDecreto_rectificacion(null);
+        Ci.setFecha_rectificacion(null);
+        Ci.setNumero_expediente(Crear_Expediente());
+        Ci.setNumero_compromiso(1997);
+        
+        //Ci.setNumero_compromiso(null);
+                   
+        ImpCiDTO = new ArrayList<ImputacionesCompromisoInicialDTO>();
+        registro.setFuenteFinanciamiento("1");
+        registro.setCodUnidadEjecutora("00024");
+        registro.setCategoriaPresupuestaria("370001001");
+        registro.setObjetoGasto("401030100");
+        registro.setMonto(BigDecimal.valueOf(-500));
+        ImpCiDTO.add(registro);
+        
+        registro = new ImputacionesCompromisoInicialDTO();
+        registro.setFuenteFinanciamiento("1");
+        registro.setCodUnidadEjecutora("00024");
+        registro.setCategoriaPresupuestaria("370001001");
+        registro.setObjetoGasto("401020100");
+        registro.setMonto(BigDecimal.valueOf(200));
+        ImpCiDTO.add(registro);
+        
+        registro = new ImputacionesCompromisoInicialDTO();
+        registro.setFuenteFinanciamiento("1");
+        registro.setCodUnidadEjecutora("00024");
+        registro.setCategoriaPresupuestaria("370001001");
+        registro.setObjetoGasto("401010100");
+        registro.setMonto(BigDecimal.valueOf(0));
+        ImpCiDTO.add(registro);
+        
+        Ci.setDetalles_compromiso(ImpCiDTO);
+        System.out.println("Se va a llamar a la clase cliente de Registro de Compromiso, Expediente " + Ci.getNumero_expediente());
+        CiDTO = Ci.RegistroCompromiso();
+        
+        System.out.println("Numero Expediente: " + CiDTO.getNumeroExpediente());
+        System.out.println("Numero Compromiso: " + CiDTO.getNumeroCompromiso());
+        System.out.println("-------------------------------");
+        System.out.println("Fue Guardado? " + CiDTO.getDetallesCompromiso().get(0).isGuardado());
+        System.out.println("Mensaje: " + CiDTO.getDetallesCompromiso().get(0).getMensajeRta());
+    }
+
+
+
+    public static ImputacionesResNominaDTO registro = new ImputacionesResNominaDTO();
+    public static ArrayList<ImputacionesResNominaDTO> detalle = new ArrayList<ImputacionesResNominaDTO>();
+    public static ResumenNominaDTO maestro = new ResumenNominaDTO();
+    //public static SolicitudFondoTO maestro2 = new SolicitudFondoTO();
+    public static Integer i;
+
+    private static  void Resumen_Nomina()
+    {    
+        //BigDecimal cm = 0;
+        //Scanner in = new Scanner(System.in);
+        Integer numero;
+        String Categoria;
+        Number number;
+        BigDecimal big;
+        Integer Expediente = Crear_Expediente();
+        clResumenNomina metodo = new clResumenNomina();
+
+        EjercicioPresupuestarioTO ejercicioPresupuestario = new EjercicioPresupuestarioTO();
+        ejercicioPresupuestario.setAnho(2014);
+        maestro.setEjercicioPresupuestario(ejercicioPresupuestario);
+        OrganismoTO organismo = new OrganismoTO();
+        organismo.setIdOrganismo("37");
+        maestro.setOrganismo(organismo);
+        Uadto UnidadAdministradora = new Uadto();
+        UnidadAdministradora.setIdUEJ("00011");
+        maestro.setUad(UnidadAdministradora);
+        TipoFondoTO tipofondo = new TipoFondoTO();
+        tipofondo.setIdTipoFondo(3);
+        maestro.setTipoFondo(tipofondo);
+        TipoDocumentoTO tipodocumento = new TipoDocumentoTO();
+        tipodocumento.setIdTipoDocumento(48);
+        TipoNominaTO tiponomina = new TipoNominaTO();
+        tiponomina.setIdTipoNomina(2);
+        tiponomina.setTipoFondo(tipofondo);
+        tiponomina.setTipoDocumento(tipodocumento);
+        maestro.setTipoNomina(tiponomina);
+        ControlDivisasTO controldivisas = new ControlDivisasTO();
+        controldivisas.setEjercicioPresupuestario(ejercicioPresupuestario);
+        controldivisas.setOrganismo(organismo);
+        controldivisas.setDivisas("N");
+        maestro.setControlDivisas(controldivisas);
+        maestro.setCodigoMoneda("VEB");
+        maestro.setMes(9);
+        maestro.setObservacion("OBSERVACIONES NOMINA PRUEBA");
+        maestro.setTipoDocumento(tipodocumento);
+        maestro.setExpediente(Expediente);
+        maestro.setWorkItem(1);
+/*************************************************************/  
+        i = 1;
+        Detalles_Nomina("00024","370001001","01","401010100",1,BigDecimal.valueOf(48000),2014, Expediente, 1); i++;
+/*      
+        Detalles_Nomina("00011","370001001","01","401010100",1,Double.valueOf(Integer.toString(35000)),Expediente); i++;
+        Detalles_Nomina("00051","370001001","01","401010100",1,Double.valueOf(Integer.toString(22000)),Expediente); i++;
+        Detalles_Nomina("00063","370001001","01","401010100",1,Double.valueOf(Integer.toString(15000)),Expediente); i++;
+        Detalles_Nomina("00032","370001001","01","401010100",1,Double.valueOf(Integer.toString(8000)),Expediente);
+       
+        
+           for (i=0;i<detalle.size();i++) {
+            
+             registro = detalle.get(i);
+             System.out.println("Registro " + i + " - " + registro.getMensajeRta() + " | " + registro.getFuente_Financiamiento() + " | " + registro.getCod_unidad_ejecutora() + " | " + registro.getCategoria_Presupuestaria());
+           }
+ */          
+/**************************************************************/       
+        
+        System.out.println("Se va a llamar al Webservice pasando parametros" );
+        
+        maestro.setDetalleSolicitudFondo(detalle);
+        
+        metodo.setParametro1(maestro);
+        
+        maestro = metodo.EjecutaConsulta();
+        
+        System.out.println("Numero de registros devueltos: ");
+        //detalle = maestro.getDetalleSolicitudFondo();
+/*          for (int i=0;i<detalle.size();i++) {
+              
+             registro = detalle.get(i);
+             System.out.println("Registro " + i + " - " + registro.getMensajeRta() + "/" + registro.getFuente_Financiamiento() + "/" + registro.getCod_unidad_ejecutora() + "/" + registro.getCategoria_Presupuestaria() + "/" + registro.getGuardado() + "/" + registro.getMensajeRta());
+           }
+        System.out.println("Fin ");
+ */       
+/**************************************************************/   
+    }
+    
+    private  static void Detalles_Nomina(String UnidadEjecutora, 
+                                         String CategoriaPresupuestaria, 
+                                         String FuenteFinanciamiento,
+                                         String ObjetoGasto,
+                                         Integer Periodo,
+                                         BigDecimal Monto,
+                                         Integer Anho_Fiscal,
+                                         Integer Expediente,
+                                         Integer WorkItem) {
+            registro = new ImputacionesResNominaDTO();           
+            Integer FF;
+            FF = Integer.valueOf(FuenteFinanciamiento);
+            FuenteFinanciamientoTO fuenteFinanciamiento = new FuenteFinanciamientoTO();
+            fuenteFinanciamiento.setIdFuenteFin(FuenteFinanciamiento);
+            fuenteFinanciamiento.setIdFuenteFinanciamiento(FF);
+            registro.setFuenteFinanciamiento(fuenteFinanciamiento);
+            Uejto unidadejecutora = new Uejto();
+            unidadejecutora.setIdUEJ(UnidadEjecutora);
+            registro.setUej(unidadejecutora);
+            Uejlto unidadejecutoralocal = new Uejlto();
+            unidadejecutoralocal.setIdUEJ(UnidadEjecutora);
+            registro.setUejlto(unidadejecutoralocal);
+            CategoriaPresupuestariaTO categoriaPresupuestaria = new CategoriaPresupuestariaTO();
+            categoriaPresupuestaria.setIdCategoria(CategoriaPresupuestaria);
+            registro.setCategoriaPresupuestaria(categoriaPresupuestaria);
+            ObjetoGastoTO objetogasto = new ObjetoGastoTO();
+            objetogasto.setIdObjetoGasto(ObjetoGasto);
+            registro.setObjetoGasto(objetogasto);
+            registro.setMonto(Monto);
+            registro.setPeriodo(Periodo);
+            EjercicioPresupuestarioTO ejercicioPresupuestario = new EjercicioPresupuestarioTO();
+            ejercicioPresupuestario.setAnho(Anho_Fiscal);
+            registro.setEjercicioPresupuestario(ejercicioPresupuestario);
+            registro.setExpediente(ObjetoGasto);
+            registro.setExpediente(String.valueOf(Expediente));
+            registro.setWorkitem(WorkItem);
+            detalle.add(registro);
+            System.out.println("registro detalle No. " + i);
+        
+    }
+
+
+    private  static void Registra_Causado() {
+        clResumenNominaRendicion CausarNomina = new clResumenNominaRendicion();
+        ResumenRendicionNominaDTO resumenTO = new ResumenRendicionNominaDTO();
+        ArrayList<RetencionesRendNominaDTO> retencionesTO = new ArrayList<RetencionesRendNominaDTO>();
+        ArrayList<ImputacionesRendNominaDTO> imputacionesTO = new ArrayList<ImputacionesRendNominaDTO>();
+        RetencionesRendNominaDTO registroRetenciones = new RetencionesRendNominaDTO();
+        ImputacionesRendNominaDTO registroImputaciones = new ImputacionesRendNominaDTO();
+        HistoricoCausadoTO historicoTO = new HistoricoCausadoTO();
+        
+        
+        EjercicioPresupuestarioTO ejercicioPresupuestarioTO = new EjercicioPresupuestarioTO();
+        ejercicioPresupuestarioTO.setAnho(2014);
+        ejercicioPresupuestarioTO.setEstado("E");       // String 
+        ejercicioPresupuestarioTO.setEtapa(1);          // Integer
+        OrganismoTO organismoTO = new OrganismoTO();
+        organismoTO.setIdOrganismo("37");
+        Uadto uadto = new Uadto();
+        uadto.setIdUEJ("00011");
+        
+        TipoPagoTO tipoPagoTO = new TipoPagoTO();
+        tipoPagoTO.setIdTipoPago(3);
+        TipoFondoTO tipoFondoTO = new TipoFondoTO();
+        tipoFondoTO.setIdTipoFondo(3);
+        PersonaTO personaTO = new PersonaTO();
+        personaTO.setIdPersona(13863);
+        EnteReceptorTO enteReceptor = new EnteReceptorTO();
+        
+        CompromisoTO compromisoTO = new CompromisoTO();
+        compromisoTO.setIdCompromiso(1997);
+        compromisoTO.setOrganismo(organismoTO);
+        compromisoTO.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        compromisoTO.setUad(uadto);
+        compromisoTO.setTipoPago(tipoPagoTO);
+        compromisoTO.setTipoFondo(tipoFondoTO);
+        compromisoTO.setPersona(personaTO);
+        compromisoTO.setEnteReceptor(null);
+               
+        resumenTO.setCompromiso(compromisoTO);
+        resumenTO.setUnidadAdministradora(uadto);
+        resumenTO.setUnidadPagadora(uadto);
+        resumenTO.setBeneficiario(personaTO);
+        resumenTO.setTipopago(tipoPagoTO);
+        resumenTO.setTipofondo(tipoFondoTO);
+        resumenTO.setFechaPago("01/06/2014");
+        
+        
+        Integer expediente = Crear_Expediente();
+        //Integer expediente = 4166;
+        resumenTO.setExpediente(expediente);
+        resumenTO.setWorkitem(1);
+        resumenTO.setMedioPago(0);
+       
+        
+        resumenTO.setBeneInstFinanciera("003");  // InstitucionFinancieraTO
+        CuentaTO cuentaTO = new CuentaTO();
+        cuentaTO.setNumero("0001-0001-01-0101000001");
+        resumenTO.setBeneNumeroCuenta(cuentaTO);    // CuentaTO
+        resumenTO.setAutorizado(null);          // PersonaTO
+        resumenTO.setAutoInstFinanciera(null);  // InstitucionFinanciaraTO
+        resumenTO.setAutoNumeroCuenta(null);    // CuentaTO
+        TipoPasivoTO tipoPasivo = new TipoPasivoTO();
+        tipoPasivo.setIdTipoPasivo(1);
+        resumenTO.setTipopasivo(tipoPasivo);          // TipoPasivoTO
+        resumenTO.setEstaPagado(true);
+        //resumenTO.setCodigoEnteReceptor("A0216");  // String
+        resumenTO.setCodigoEnteReceptor(null);  // String
+        resumenTO.setEsExcluidoIva(true);
+        resumenTO.setExcepcionRetencionID(0);    // Integer
+        resumenTO.setAlicuota(BigDecimal.valueOf(100)); // BigDecimal
+        Integer TipoDocumento = 47;
+        String NumeroDocumento = "1005";
+        String Observacion = "Rendicion Causado Nomina Webservice";
+        resumenTO.setObservacion(Observacion);
+        
+        System.out.println("Se va a instanciar CausadoTO");
+        CausadoTO causadoTO = new CausadoTO();
+        System.out.println("Ya se instancio CausadoTO");
+        causadoTO.setId(0);  
+        causadoTO.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        causadoTO.setOrganismo(organismoTO);
+        causadoTO.setIdExpediente(expediente);
+        
+        System.out.println("Ya se instancio CausadoTO");
+        historicoTO.setCausado(causadoTO);
+        TipoDocumentoTO tipoDocumento = new TipoDocumentoTO();
+        tipoDocumento.setIdTipoDocumento(47);
+        historicoTO.setTipoDocumento(tipoDocumento);
+        historicoTO.setExpediente(expediente);
+        resumenTO.setHistoricoCausado(historicoTO);
+        
+        ControlDivisasTO controldivisas = new ControlDivisasTO();
+        controldivisas.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        controldivisas.setOrganismo(organismoTO);
+        controldivisas.setDivisas("N");
+        resumenTO.setControlDivisas(controldivisas);
+        TipoMonedaTO monedaTO = new TipoMonedaTO();
+        monedaTO.setCodigoMoneda("VEB");
+        
+        resumenTO.setTipoMoneda(monedaTO);
+        ConceptoPagoTO conceptoTO = new ConceptoPagoTO();
+        conceptoTO.setIdConceptoPago(1);
+        resumenTO.setConceptoPago(conceptoTO);
+        
+        resumenTO.setStdvId(0);
+        
+// a partir de aqui se definen los registros de detalle
+        registroImputaciones = new ImputacionesRendNominaDTO();
+        registroImputaciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroImputaciones.setOrganismo(organismoTO);
+        Uejto unidadEjecutora = new Uejto();
+        unidadEjecutora.setIdUEJ("00024");
+        registroImputaciones.setUej(unidadEjecutora);
+        Uejlto unidadEjecutoraLocal = new Uejlto();
+        unidadEjecutoraLocal.setIdUEJ("00024");
+        registroImputaciones.setUejlto(unidadEjecutoraLocal);
+        CategoriaPresupuestariaTO categoria = new CategoriaPresupuestariaTO();
+        categoria.setIdCategoria("370001001");
+        registroImputaciones.setCategoriaPresupuestaria(categoria);
+        ObjetoGastoTO objetoGasto = new ObjetoGastoTO();
+        objetoGasto.setIdObjetoGasto("401010100");
+        registroImputaciones.setObjetoGasto(objetoGasto);
+        FuenteFinanciamientoTO fuenteFinanciamiento = new FuenteFinanciamientoTO();
+        fuenteFinanciamiento.setIdFuenteFinanciamiento(1);
+        registroImputaciones.setFuenteFinanciamiento(fuenteFinanciamiento);
+        registroImputaciones.setMonto(BigDecimal.valueOf(10));
+        registroImputaciones.setExpediente(Integer.toString(expediente));
+        registroImputaciones.setWorkitem(1);
+        
+        imputacionesTO.add(registroImputaciones);
+        
+        registroImputaciones = new ImputacionesRendNominaDTO();
+        registroImputaciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroImputaciones.setOrganismo(organismoTO);
+        unidadEjecutora = new Uejto();
+        unidadEjecutora.setIdUEJ("00024");
+        registroImputaciones.setUej(unidadEjecutora);
+        unidadEjecutoraLocal = new Uejlto();
+        unidadEjecutoraLocal.setIdUEJ("00024");
+        registroImputaciones.setUejlto(unidadEjecutoraLocal);
+        categoria = new CategoriaPresupuestariaTO();
+        categoria.setIdCategoria("370001001");
+        registroImputaciones.setCategoriaPresupuestaria(categoria);
+        objetoGasto = new ObjetoGastoTO();
+        objetoGasto.setIdObjetoGasto("401020100");
+        registroImputaciones.setObjetoGasto(objetoGasto);
+        fuenteFinanciamiento = new FuenteFinanciamientoTO();
+        fuenteFinanciamiento.setIdFuenteFinanciamiento(1);
+        registroImputaciones.setFuenteFinanciamiento(fuenteFinanciamiento);
+        registroImputaciones.setMonto(BigDecimal.valueOf(10));
+        registroImputaciones.setExpediente(Integer.toString(expediente));
+        registroImputaciones.setWorkitem(1);
+        imputacionesTO.add(registroImputaciones);
+        
+        registroImputaciones = new ImputacionesRendNominaDTO();
+        registroImputaciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroImputaciones.setOrganismo(organismoTO);
+        unidadEjecutora = new Uejto();
+        unidadEjecutora.setIdUEJ("00024");
+        registroImputaciones.setUej(unidadEjecutora);
+        unidadEjecutoraLocal = new Uejlto();
+        unidadEjecutoraLocal.setIdUEJ("00024");
+        registroImputaciones.setUejlto(unidadEjecutoraLocal);        
+        categoria = new CategoriaPresupuestariaTO();
+        categoria.setIdCategoria("370001001");
+        registroImputaciones.setCategoriaPresupuestaria(categoria);
+        objetoGasto = new ObjetoGastoTO();
+        objetoGasto.setIdObjetoGasto("401030100");
+        registroImputaciones.setObjetoGasto(objetoGasto);
+        fuenteFinanciamiento = new FuenteFinanciamientoTO();
+        fuenteFinanciamiento.setIdFuenteFinanciamiento(1);
+        registroImputaciones.setFuenteFinanciamiento(fuenteFinanciamiento);
+        registroImputaciones.setMonto(BigDecimal.valueOf(10));
+        registroImputaciones.setExpediente(Integer.toString(expediente));
+        registroImputaciones.setWorkitem(1);
+        imputacionesTO.add(registroImputaciones);
+        
+        System.out.println("Tamaño arreglo Imputaciones " + imputacionesTO.size());
+        System.out.println("Unidad ejecutora " + imputacionesTO.get(0).getUejlto().getIdUEJ());
+        System.out.println("Expediente " + imputacionesTO.get(0).getExpediente());
+        
+// A partir de aqui de definen los registros de retenciones
+        registroRetenciones = new RetencionesRendNominaDTO();
+        registroRetenciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroRetenciones.setOrganismo(organismoTO);
+        registroRetenciones.setExpediente(expediente);
+        registroRetenciones.setWorkitem(1);
+        TipoRetencionTO tipoRetencion = new TipoRetencionTO();
+        tipoRetencion.setIdTipoRetencion(2);
+        registroRetenciones.setTipoRetencion(tipoRetencion);
+        RetencionTO retencion = new RetencionTO();
+        retencion.setIdRetencion(5);
+        retencion.setTipoRetencion(tipoRetencion);
+        retencion.setOrganismo(organismoTO);
+        retencion.setTipoRetencion(tipoRetencion);
+        retencion.setWorkitem(1);
+        registroRetenciones.setRetencion(retencion);
+        registroRetenciones.setBeneficiario(personaTO);
+        ReglaRetencionTO reglaRetencion = new ReglaRetencionTO();
+        reglaRetencion.setIdReglaRetencion(0);
+        registroRetenciones.setReglaRetencion(reglaRetencion);
+        retencionesTO.add(registroRetenciones);
+        
+        registroRetenciones = new RetencionesRendNominaDTO();
+        registroRetenciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroRetenciones.setOrganismo(organismoTO);
+        registroRetenciones.setExpediente(expediente);
+        registroRetenciones.setWorkitem(1);
+        tipoRetencion = new TipoRetencionTO();
+        tipoRetencion.setIdTipoRetencion(4);
+        registroRetenciones.setTipoRetencion(tipoRetencion);
+        retencion = new RetencionTO();
+        retencion.setIdRetencion(10);
+        retencion.setOrganismo(organismoTO);
+        retencion.setTipoRetencion(tipoRetencion);
+        retencion.setWorkitem(1);
+        registroRetenciones.setRetencion(retencion);
+        registroRetenciones.setBeneficiario(personaTO);
+        registroRetenciones.setMonto(BigDecimal.valueOf(1));
+        reglaRetencion = new ReglaRetencionTO();
+        reglaRetencion.setIdReglaRetencion(0);
+        registroRetenciones.setReglaRetencion(reglaRetencion);
+        retencionesTO.add(registroRetenciones);
+        
+        registroRetenciones = new RetencionesRendNominaDTO();
+        registroRetenciones.setEjercicioPresupuestario(ejercicioPresupuestarioTO);
+        registroRetenciones.setOrganismo(organismoTO);
+        registroRetenciones.setExpediente(expediente);
+        registroRetenciones.setWorkitem(1);
+        tipoRetencion = new TipoRetencionTO();
+        tipoRetencion.setIdTipoRetencion(7);
+        registroRetenciones.setTipoRetencion(tipoRetencion);
+        retencion = new RetencionTO();
+        retencion.setIdRetencion(13);
+        retencion.setOrganismo(organismoTO);
+        retencion.setTipoRetencion(tipoRetencion);
+        retencion.setWorkitem(1);
+        
+        registroRetenciones.setRetencion(retencion);
+        registroRetenciones.setBeneficiario(personaTO);
+        registroRetenciones.setMonto(BigDecimal.valueOf(1));
+        reglaRetencion = new ReglaRetencionTO();
+        reglaRetencion.setIdReglaRetencion(0);
+        registroRetenciones.setReglaRetencion(reglaRetencion);
+        retencionesTO.add(registroRetenciones);
+        
+        CausarNomina.setResumenRendicionDTO(resumenTO);
+        CausarNomina.setImputacionesRendicionDTO(imputacionesTO);
+        CausarNomina.setRetencionesRendicionDTO(retencionesTO);
+              
+        
+        System.out.println("Se va a llamar al Cliente clResumenNominaRendicion");
+        resumenTO = CausarNomina.CausarNomina();
+        
+        System.out.println("Numero Expediente: " + resumenTO.getExpediente());
+        System.out.println("Numero Causado   : " + resumenTO.getCompromiso().getCausado().getId());
+        System.out.println("Observacion      : " + resumenTO.getObservacion());
+        System.out.println("-------------------------------");
+
+    }    
+
