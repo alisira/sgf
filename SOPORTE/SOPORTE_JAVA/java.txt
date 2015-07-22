@@ -1,3 +1,11 @@
+--Obtener el root donde se guardan las clases de la aplicacion web
+this.getClass().getClassLoader().getResource("").getPath()
+Ejemplo: file:/opt/proyecto/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/controlacceso/WEB-INF/classes/
+
+--Obtener la ruta donde se encuentra la clase en ejecucion
+this.getClass().getProtectionDomain().getCodeSource().getLocation();
+Ejemplo: file:/opt/proyecto/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/controlacceso/WEB-INF/classes/com/mf/springapp/web/InicioController.class
+
 --Funcion para recorrer e imprimir el request header
 private Map<String, String> getHeadersInfo() {
  
